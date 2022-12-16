@@ -1,3 +1,4 @@
+from click import UUID
 from django.db import models
 from django.conf import settings
 
@@ -13,6 +14,7 @@ class NightOutModel(models.Model):
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="createdNightOuts")
     title = models.CharField(max_length=40, )
+    uuid = models.UUIDField(primary_key=True, default=UUID.uuid4, editable=False)
     description = models.CharField(max_length=200, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)

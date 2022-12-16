@@ -39,6 +39,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+@permission_classes((IsAuthenticated,))
 class UserView(CreateAPIView):
     serializer_class = UserSerializer
 

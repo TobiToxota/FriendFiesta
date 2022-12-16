@@ -15,9 +15,7 @@ from dotenv import load_dotenv
 import os
 import googlemaps
 
-
 from nightout.models import NightOutModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote
-
 
 User = get_user_model()
 
@@ -37,8 +35,10 @@ class NightOutList(APIView):
         nightouts = NightOutModel.objects.filter(
             creator=request.user).distinct() | NightOutModel.objects.filter(participants__user=request.user).distinct()
         nightouts = nightouts.order_by(Case(When(phase="finished", then=Value(0)),
-                                            When(phase="votingPhase", then=Value(1)),
-                                            When(phase="planningPhase", then=Value(2)),
+                                            When(phase="votingPhase",
+                                                 then=Value(1)),
+                                            When(phase="planningPhase",
+                                                 then=Value(2)),
                                             When(phase="datePhase", then=Value(3))))
         serializer = NightOutSerializer(nightouts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -176,31 +176,6 @@ class PatchParticipantDate(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@permission_classes((IsAuthenticated,))
-class fetchGooglePlaces(APIView):
-    """Fetch for one Place via Google API and return the data"""
-
-    def get(self, request, query, format=None):
-
-        response = map_client.find_place(input=query, fields=[
-                                         'name', 'rating', 'photos', 'formatted_address', 'types'], input_type='textquery')
-
-        # check if the response is valid
-        if response['status'] == 'OK':
-
-            photo = map_client.places_photo(
-                photo_reference=response['candidates'][0]['photos'][0]['photo_reference'], max_height=150, max_width=150)
-
-            print(photo.gi_frame.f_locals['self'].url)
-
-            response['candidates'][0]['photos'][0]['photo_reference'] = photo.gi_frame.f_locals['self'].url
-
-            return Response(response['candidates'][0], status=status.HTTP_200_OK)
-
-        # if the response is not valid return a 404
-        return Response({"message": "The Google Places API returned an error."}, status=status.HTTP_404_NOT_FOUND)
 
 
 @permission_classes((IsAuthenticated,))
