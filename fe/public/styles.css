@@ -1,0 +1,17 @@
+html {
+    background-color: #3e8ed0 !important;
+}
+
+html,
+body,
+.root {
+    background-color: #3e8ed0;
+    min-height: 100vh;
+}
+
+@media only screen and (min-width: 1200px) {
+    .navbar {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
