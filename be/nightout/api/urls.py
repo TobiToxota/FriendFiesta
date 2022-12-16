@@ -7,7 +7,6 @@ urlpatterns = [
     path('participant/', views.AddParticipant.as_view()), 
     path('datesuggestion/', views.AddDateSuggestion.as_view()),
     path('participantdate/', views.PatchParticipantDate.as_view()),
-    path('places/<str:query>/', views.fetchGooglePlaces.as_view()),
     path('suggestion/<int:pk>/', views.GetSuggestionView.as_view()),
     path('suggestion/', views.CreateSuggestionView.as_view()),
     path('suggestion/entrys/', views.NewEntrySuggestionView.as_view()),
