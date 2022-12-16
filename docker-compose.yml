@@ -28,7 +28,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./fe/src:/fe/src
+      - ./fe:/fe
     env_file:
       - ./.env.dev
       
