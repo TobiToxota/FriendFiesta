@@ -2,49 +2,36 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import CreateAPIView
-from .serializer import RegisterSerializer, UserSerializer
+from .serializer import RegisterSerializer, UserSerializer, LoginSerializer
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+from knox.models import AuthToken
 
 
-def get_token_for_user(user):
-    refresh = RefreshToken.for_user(user)
+class LoginView(CreateAPIView):
+    serializer_class = LoginSerializer
 
-    return {
-        'access': str(refresh.access_token),
-        'refresh': str(refresh),
-    }
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
 
+        response = {
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
+        }
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Add custom claims
-        token["username"] = user.username
-        token["avatarStyle"] = user.avatarStyle
-        token["avatarIteration"] = user.avatarIteration
-        token["name"] = user.name
-        token["email"] = user.email
-        # ...
-
-        return token
-
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
+        return Response(response, status=status.HTTP_200_OK)
 
 
 @permission_classes((IsAuthenticated,))
 class UserView(CreateAPIView):
     serializer_class = UserSerializer
 
+    # get the user data
+
     def get(self, request):
-        serializer = UserSerializer(request.user)
+        serializer = UserSerializer(self.request.user)
         return Response(serializer.data)
 
     # create a put request which changes the user data
@@ -63,11 +50,10 @@ class RegistrationView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        tokens = get_token_for_user(serializer.instance)
+        user = serializer.save()
         response = {
-            "refresh": tokens["refresh"],
-            "access": tokens["access"],
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": AuthToken.objects.create(user)[1]
         }
 
         return Response(response, status=status.HTTP_201_CREATED)

@@ -1,0 +1,3 @@
+==> 2022-12-16 16:04:14 <==
+# cmd: /opt/conda/bin/conda create --override-channels --yes --prefix /workspaces/ltshangout/be/envs/default --channel defaults
+# conda version: 22.9.0

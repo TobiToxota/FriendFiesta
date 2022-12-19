@@ -14,6 +14,10 @@ from pathlib import Path
 
 from datetime import timedelta
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -42,8 +46,8 @@ INSTALLED_APPS = [
     'nightout.apps.NightoutConfig',
     'base.apps.BaseConfig',
     'rest_framework',
-    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'knox'
 ]
 
 MIDDLEWARE = [
@@ -60,7 +64,7 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
 
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'knox.auth.TokenAuthentication',
     )
 
 }
@@ -130,7 +134,6 @@ DATABASES = {
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
-
 
 
 # Password validation
