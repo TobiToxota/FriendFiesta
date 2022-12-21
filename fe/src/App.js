@@ -3,8 +3,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/accounts/Login";
+import Register from "./pages/accounts/Register";
 
 function App() {
   return (
@@ -14,9 +14,7 @@ function App() {
           <Route
             path="/"
             element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
+              <PrivateRoute element={<Home/>} />
             }
           />
           <Route element={<Register />} path="/register" />

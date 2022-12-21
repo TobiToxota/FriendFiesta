@@ -12,15 +12,11 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
   // create the state
   let [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
+    localStorage.getItem("token")
+      ? JSON.parse(localStorage.getItem("token"))
       : null
   );
-  let [userFromToken, setUserFromToken] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? jwt_decode(localStorage.getItem("authTokens"))
-      : null
-  );
+
   let [userData, setUser] = useState(() =>
     localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -40,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
 
     // get the token from the api
-    let response = await fetch(process.env.REACT_APP_API_URL + "token/", {
+    let response = await fetch(process.env.REACT_APP_API_URL + "login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,8 +52,8 @@ export const AuthProvider = ({ children }) => {
     // if the response is ok, save the token in the local storage
     if (response.status === 200) {
       setAuthTokens(data);
-      setUserFromToken(jwt_decode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
+      getUserData(data.token)
+      localStorage.setItem("token", JSON.stringify(data));
       navigate("/");
     } else {
       // if the response is not ok, show the error
@@ -126,8 +122,8 @@ export const AuthProvider = ({ children }) => {
 
       // put the tokens in the local storage
       setAuthTokens(data);
-      setUserFromToken(jwt_decode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
+      setUser(getUserData(data.token))
+      localStorage.setItem("token", JSON.stringify(data));
       navigate("/");
     } else {
       // if the response is not ok, show the error
@@ -136,18 +132,25 @@ export const AuthProvider = ({ children }) => {
   };
 
   // define the logoutUser function
-  let logoutUser = () => {
+  let logoutUser = async () => {
+    await fetch(process.env.REACT_APP_API_URL + "logout/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${authTokens?.token}`,
+      }
+    });
     setAuthTokens(null);
-    setUserFromToken(null);
-    localStorage.removeItem("authTokens");
+    localStorage.removeItem("token");
     navigate("/login/");
   };
 
   let updateToken = async () => {
-    let response = await fetch(process.env.REACT_APP_API_URL+ "refresh/", {
+    let response = await fetch(process.env.REACT_APP_API_URL + "token/refresh/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": ""
       },
       body: JSON.stringify({
         refresh: authTokens?.refresh,
@@ -177,7 +180,7 @@ export const AuthProvider = ({ children }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authTokens?.access}`,
+        Authorization: `Token ${authTokens?.token}`,
       },
     });
 
@@ -228,7 +231,7 @@ export const AuthProvider = ({ children }) => {
       }
     }, fourMinutes);
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authTokens, loading]);
 
   // return the Authcontext with the contextData and the children

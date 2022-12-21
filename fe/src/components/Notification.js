@@ -1,16 +1,18 @@
 /** @format */
 
-import React from "react";
+import React, {useState} from "react";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
 const Notificaton = ({ msg, onExit }) => {
   let { loginstatus, setloginstatus } = useContext(AuthContext);
   let { registerstatus, setregisterstatus } = useContext(AuthContext);
+  let  [error, setError]  = useState(false)
 
   const handleClose = () => {
     setloginstatus(false);
     setregisterstatus(false);
+    setError(null);
   };
 
   return (
