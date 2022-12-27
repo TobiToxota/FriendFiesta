@@ -8,7 +8,7 @@ import Notification from "../../components/Notification";
 function Login() {
   // create the login function
   let { loginUser } = useContext(AuthContext);
-  let { loginstatus } = useContext(AuthContext);
+  let { message, setMessage } = useContext(AuthContext);
 
   return (
     <section className="hero is-info is-fullheight">
@@ -64,8 +64,8 @@ function Login() {
           <Link to="/register">
             <p className="is-family-code is-size-5">Register</p>
           </Link>
-          {loginstatus && (
-            <Notification msg={"Your password or email is incorrect"} />
+          {message && (
+            <Notification msg={"Your password or email is incorrect"} onExit={() => setMessage(null)} />
           )}
         </div>
       </div>

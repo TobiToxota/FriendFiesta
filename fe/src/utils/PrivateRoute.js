@@ -6,9 +6,9 @@ import AuthContext from "../context/AuthContext";
 
 // a private route is a route that only allows access to the user if they are logged in
 const PrivateRoute = ({children, ...rest}) => {
-    let {user} = useContext(AuthContext)
+    let {userData} = useContext(AuthContext)
     return(
-        <Route {...rest}>{!user ? <Navigate to="/login" /> :   children}</Route>
+        <Route {...rest}>{!userData ? <Navigate to="/login" /> :   children}</Route>
     )
 }
 

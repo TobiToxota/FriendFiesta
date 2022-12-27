@@ -7,8 +7,7 @@ import Notification from "../../components/Notification";
 
 function Register() {
 
-  let { registerstatus } = useContext(AuthContext);
-  let { registerUser } = useContext(AuthContext);
+  let { message, Register } = useContext(AuthContext);
 
   return (
     <section className="hero is-info is-fullheight">
@@ -16,7 +15,7 @@ function Register() {
         <div className="login-container">
           <p className="title">Register</p>
           <p className="subtitle">Welcome to ltshangout</p>
-          <form onSubmit={registerUser}>
+          <form onSubmit={Register}>
             <div className="field">
               <p className="control has-icons-left has-icons-right">
                 <input
@@ -88,7 +87,7 @@ function Register() {
             <p className="is-family-code">You allready have an account?</p>
             <Link to="/login"><p className="is-family-code is-size-5">Login</p></Link>
           </form>
-          {registerstatus && (
+          {message && (
             <Notification msg={"Your password or email is incorrect"} />
           )}
         </div>
