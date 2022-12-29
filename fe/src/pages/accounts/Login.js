@@ -64,7 +64,7 @@ function Login() {
             <p className="is-family-code is-size-5">Register</p>
           </Link>
           {message && (
-            <Notification msg={"Your password or email is incorrect"} onExit={() => setMessage(null)} />
+            <Notification msg={message} onExit={() => setMessage(null)} />
           )}
         </div>
       </div>

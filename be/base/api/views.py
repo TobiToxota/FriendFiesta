@@ -50,21 +50,21 @@ class RegistrationView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=False)
 
-        try:
-            user = serializer.save()
-            response = {
-                "user": UserSerializer(user, context=self.get_serializer_context()).data,
-                "token": AuthToken.objects.create(user)[1]
-            }
-            return Response(response, status=status.HTTP_201_CREATED)
+        if serializer.is_valid():
+            try:
+                user = serializer.save()
+                response = {
+                    "user": UserSerializer(user, context=self.get_serializer_context()).data,
+                    "token": AuthToken.objects.create(user)[1]
+                }
+                return Response(response, status=status.HTTP_201_CREATED)
 
-        except IntegrityError:
-            return Response({"error": "Duplicate key value violates unique constraint"}, status=400)
+            except IntegrityError:
+                return Response({"message": "username or email allready not available. Please try a new one."}, status=400)
 
-        
-
+        else:
+            return Response({'message': 'Something is wrong'})
 
 @api_view(["GET"])
 def getRoutes(request):

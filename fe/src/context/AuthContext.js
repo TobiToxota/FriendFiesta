@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   );
   let [message, setMessage] = useState(null);
   let [userData, setUserData] = useState(null);
+  let [loading, setLoading] = useState(true);
 
   // get a Navigator to send the user to the right page
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     if (response.status === 200) {
       return data['token']
     } else {
-      setMessage(data['non_field_errors'][0])
+      setMessage(Object.values(data)[0])
       return null
     }
   }
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   // define the loginUser function
   let LoginUser = async (e) => {
     e.preventDefault();
-    const token = getTokenFromBackend(e)
+    const token = await getTokenFromBackend(e)
     setToken(token)
     localStorage.setItem('token', token);
     getUserData(token)
@@ -58,7 +59,7 @@ export const AuthProvider = ({ children }) => {
   // define the registerUser function
   let Register = async (e) => {
     e.preventDefault();
-    const token = RegisterUser(e)
+    const token = await RegisterUser(e)
     setToken(token)
     localStorage.removeItem('token');
     getUserData(token)
@@ -86,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     if (response.status === 201) {
       return data['token']
     } else {
-      setMessage(data['non_field_errors'][0])
+      setMessage(Object.values(data)[0])
       return null
     }
   };
@@ -100,7 +101,7 @@ export const AuthProvider = ({ children }) => {
 
   // get the user Data from the user api
   let getUserData = async () => {
-    let response = await fetch(process.env.REACT_APP_API_URL + "user/", {
+    let response = await fetch(process.env.REACT_APP_API_URL + "user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +120,18 @@ export const AuthProvider = ({ children }) => {
       setMessage(data['message'])
       LogoutUser();
     }
+
+    if (loading) {
+      setLoading(false)
+    }
   };
+
+  useEffect(() => {
+    if (token) {
+      getUserData()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, token])
 
   // put in the contextData
   let contextData = {
@@ -133,10 +145,11 @@ export const AuthProvider = ({ children }) => {
     getUserData: getUserData,
   };
 
+
   // return the Authcontext with the contextData and the children
   return (
     <AuthContext.Provider value={contextData}>
-      {children}
+      {loading ? null : children}
     </AuthContext.Provider>
   );
 };

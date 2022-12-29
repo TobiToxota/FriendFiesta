@@ -8,10 +8,12 @@ import AuthContext from "../context/AuthContext";
 const PrivateRoute = ({ children }) => {
 
     // get the user from the context
-    let {user} = useContext(AuthContext);
+    let {userData} = useContext(AuthContext);
+
+    console.log(userData)
   
     // check if there is a user
-    if (user != null) {
+    if (userData != null) {
   
       // if there is a user, return the children aka the route
       return children;

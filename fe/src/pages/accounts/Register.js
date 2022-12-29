@@ -88,7 +88,7 @@ function Register() {
             <Link to="/login"><p className="is-family-code is-size-5">Login</p></Link>
           </form>
           {message && (
-            <Notification msg={"Your password or email is incorrect"} onExit={() => setMessage(null)} />
+            <Notification msg={message} onExit={() => setMessage(null)} />
           )}
         </div>
       </div>
