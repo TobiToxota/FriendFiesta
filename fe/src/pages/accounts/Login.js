@@ -7,8 +7,7 @@ import Notification from "../../components/Notification";
 
 function Login() {
   // create the login function
-  let { loginUser } = useContext(AuthContext);
-  let { message, setMessage } = useContext(AuthContext);
+  let { loginUser, message, setMessage  } = useContext(AuthContext);
 
   return (
     <section className="hero is-info is-fullheight">

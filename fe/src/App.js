@@ -12,9 +12,11 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route
-            path="/"
+           exact path="/"
             element={
-              <PrivateRoute element={<Home/>} />
+              <PrivateRoute>
+                <Home></Home>
+              </PrivateRoute>
             }
           />
           <Route element={<Register />} path="/register" />

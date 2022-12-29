@@ -2,9 +2,6 @@ from django.urls import path
 from . import views
 from knox import views as knox_views
 
-from rest_framework_simplejwt.views import (
-    TokenRefreshView,
-)
 
 urlpatterns = [
     path("", views.getRoutes, name="getRoutes"),

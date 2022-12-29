@@ -57,7 +57,6 @@ export const AuthProvider = ({ children }) => {
 
   // define the registerUser function
   let Register = async (e) => {
-    debugger;
     e.preventDefault();
     const token = RegisterUser(e)
     setToken(token)
@@ -87,7 +86,7 @@ export const AuthProvider = ({ children }) => {
     if (response.status === 201) {
       return data['token']
     } else {
-      setMessage(data['message'])
+      setMessage(data['non_field_errors'][0])
       return null
     }
   };

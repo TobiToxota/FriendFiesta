@@ -7,7 +7,7 @@ import Notification from "../../components/Notification";
 
 function Register() {
 
-  let { message, Register } = useContext(AuthContext);
+  let { message, Register, setMessage } = useContext(AuthContext);
 
   return (
     <section className="hero is-info is-fullheight">
@@ -88,7 +88,7 @@ function Register() {
             <Link to="/login"><p className="is-family-code is-size-5">Login</p></Link>
           </form>
           {message && (
-            <Notification msg={"Your password or email is incorrect"} />
+            <Notification msg={"Your password or email is incorrect"} onExit={() => setMessage(null)} />
           )}
         </div>
       </div>
