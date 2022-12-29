@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 from knox import views as knox_views
 
-
 urlpatterns = [
     path("", views.getRoutes, name="getRoutes"),
     path("login/", views.LoginView.as_view(), name="login"),

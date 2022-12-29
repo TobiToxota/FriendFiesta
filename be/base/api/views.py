@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -49,14 +50,20 @@ class RegistrationView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        response = {
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": AuthToken.objects.create(user)[1]
-        }
+        serializer.is_valid(raise_exception=False)
 
-        return Response(response, status=status.HTTP_201_CREATED)
+        try:
+            user = serializer.save()
+            response = {
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
+                "token": AuthToken.objects.create(user)[1]
+            }
+            return Response(response, status=status.HTTP_201_CREATED)
+
+        except IntegrityError:
+            return Response({"error": "Duplicate key value violates unique constraint"}, status=400)
+
+        
 
 
 @api_view(["GET"])

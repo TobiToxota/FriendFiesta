@@ -91,7 +91,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-
   // define the logoutUser function
   let LogoutUser = async () => {
     setToken(null);
