@@ -65,10 +65,10 @@ export const AuthProvider = ({ children }) => {
     getUserData(token)
   };
 
+  // register the user on the api
   let RegisterUser = async (e) => {
     e.preventDefault();
 
-    // register the user on the api
     let response = await fetch(process.env.REACT_APP_API_URL + "register/", {
       method: "POST",
       headers: {
@@ -126,6 +126,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // With every change of token and loading and a given token the usedata should be fetched and put in context
   useEffect(() => {
     if (token) {
       getUserData()
@@ -144,7 +145,6 @@ export const AuthProvider = ({ children }) => {
     setMessage: setMessage,
     getUserData: getUserData,
   };
-
 
   // return the Authcontext with the contextData and the children
   return (

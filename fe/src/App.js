@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 
-import Home from "./pages/Home";
+import Home from "./pages/CreateNightOutPage";
 import Login from "./pages/accounts/Login";
 import Register from "./pages/accounts/Register";
 
@@ -15,7 +15,7 @@ function App() {
            exact path="/"
             element={
               <PrivateRoute>
-                <Home></Home>
+                <Home />
               </PrivateRoute>
             }
           />
