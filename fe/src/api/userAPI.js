@@ -21,4 +21,33 @@ let getUserData = async (token) => {
     }
 };
 
-export default getUserData;
+/* This function fetches the backend with am event 
+and registers a user in the database */
+let registerUser = async (e) => {
+    e.preventDefault();
+
+    let response = await fetch(process.env.REACT_APP_API_URL + "register/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: e.target.username.value,
+        email: e.target.email.value,
+        password: e.target.password.value,
+      }),
+    });
+
+    let data = await response.json();
+
+    // response is ok, return the token
+    if (response.status === 201) {
+      return data['token']
+
+    // some error, return the error
+    } else {
+      return Object.values(data)[0]
+    }
+}
+
+export {getUserData, registerUser}
