@@ -2,7 +2,6 @@
 
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 // create the context
 const AuthContext = createContext();
 
@@ -20,6 +19,41 @@ export const AuthProvider = ({ children }) => {
 
   // get a Navigator to send the user to the right page
   const navigate = useNavigate();
+
+  // get the user Data from the user api
+  let getUserData = async () => {
+    let response = await fetch(process.env.REACT_APP_API_URL + "user", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+
+    let data = await response.json();
+
+    if (response.status === 200) {
+      // put the user data into the state
+      setUserData(data);
+      if (loading) {
+        setLoading(false)
+      }
+    } else {
+      // if there is a problem, log out the user
+      setMessage(data['message'])
+      LogoutUser();
+      if (loading) {
+        setLoading(false)
+      }
+    }
+  };
+
+  // With every change of token and loading and a given token the usedata should be fetched and put in context
+  useEffect(() => {
+      getUserData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, token])
+
 
   const getTokenFromBackend = async (e) => {
     e.preventDefault();
@@ -53,7 +87,6 @@ export const AuthProvider = ({ children }) => {
     const token = await getTokenFromBackend(e)
     setToken(token)
     localStorage.setItem('token', token);
-    getUserData(token)
   };
 
   // define the registerUser function
@@ -62,7 +95,6 @@ export const AuthProvider = ({ children }) => {
     const token = await RegisterUser(e)
     setToken(token)
     localStorage.removeItem('token');
-    getUserData(token)
   };
 
   // register the user on the api
@@ -98,41 +130,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     navigate("/login/");
   };
-
-  // get the user Data from the user api
-  let getUserData = async () => {
-    let response = await fetch(process.env.REACT_APP_API_URL + "user", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    });
-
-    let data = await response.json();
-
-    if (response.status === 200) {
-      // put the user data into the state
-      setUserData(data);
-      localStorage.setItem("user", JSON.stringify(data));
-    } else {
-      // if there is a problem, log out the user
-      setMessage(data['message'])
-      LogoutUser();
-    }
-
-    if (loading) {
-      setLoading(false)
-    }
-  };
-
-  // With every change of token and loading and a given token the usedata should be fetched and put in context
-  useEffect(() => {
-    if (token) {
-      getUserData()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, token])
 
   // put in the contextData
   let contextData = {

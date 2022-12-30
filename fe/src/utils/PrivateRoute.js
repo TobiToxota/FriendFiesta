@@ -18,7 +18,6 @@ const PrivateRoute = ({ children }) => {
       // if there is a user, return the children aka the route
       return children;
     } else {
-  
       // if there is no user, bring him back to login
       return <Navigate to="/login/" />;
     }

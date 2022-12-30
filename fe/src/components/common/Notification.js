@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 
 const Notificaton = ({ msg, onExit }) => {
 

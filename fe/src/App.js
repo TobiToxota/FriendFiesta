@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 
-import Home from "./pages/CreateNightOutPage";
+import CreateNightOutPage from "./pages/CreateNightOutPage";
 import Login from "./pages/accounts/Login";
 import Register from "./pages/accounts/Register";
 
@@ -12,11 +12,9 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route
-           exact path="/"
+           path="/"
             element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
+              <PrivateRoute children={<CreateNightOutPage/>}/>
             }
           />
           <Route element={<Register />} path="/register" />
