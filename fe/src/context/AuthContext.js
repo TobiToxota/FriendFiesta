@@ -2,6 +2,8 @@
 
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import getUserData from "../api/userAPI";
+
 // create the context
 const AuthContext = createContext();
 
@@ -21,36 +23,49 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // get the user Data from the user api
-  let getUserData = async () => {
-    let response = await fetch(process.env.REACT_APP_API_URL + "user", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    });
+  // let getUserData = async () => {
+  //   let response = await fetch(process.env.REACT_APP_API_URL + "user", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Token ${token}`,
+  //     },
+  //   });
 
-    let data = await response.json();
+  //   let data = await response.json();
 
-    if (response.status === 200) {
-      // put the user data into the state
-      setUserData(data);
-      if (loading) {
-        setLoading(false)
-      }
-    } else {
-      // if there is a problem, log out the user
-      setMessage(data['message'])
-      LogoutUser();
-      if (loading) {
-        setLoading(false)
-      }
-    }
-  };
+  //   if (response.status === 200) {
+  //     // put the user data into the state
+  //     setUserData(data);
+  //     if (loading) {
+  //       setLoading(false)
+  //     }
+  //   } else {
+  //     // if there is a problem, log out the user
+  //     setMessage(data['message'])
+  //     LogoutUser();
+  //     if (loading) {
+  //       setLoading(false)
+  //     }
+  //   }
+  // };
 
   // With every change of token and loading and a given token the usedata should be fetched and put in context
   useEffect(() => {
-      getUserData()
+    getUserData(token).then(data => {
+      if (Object.keys(data.length > 1)) {
+        setUserData(data)
+        if (loading) {
+          setLoading(false)
+        }
+      } else {
+        setMessage(data['message'])
+        LogoutUser();
+        if (loading) {
+          setLoading(false)
+        }
+      }
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, token])
 
