@@ -22,34 +22,6 @@ export const AuthProvider = ({ children }) => {
   // get a Navigator to send the user to the right page
   const navigate = useNavigate();
 
-  // get the user Data from the user api
-  // let getUserData = async () => {
-  //   let response = await fetch(process.env.REACT_APP_API_URL + "user", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Token ${token}`,
-  //     },
-  //   });
-
-  //   let data = await response.json();
-
-  //   if (response.status === 200) {
-  //     // put the user data into the state
-  //     setUserData(data);
-  //     if (loading) {
-  //       setLoading(false)
-  //     }
-  //   } else {
-  //     // if there is a problem, log out the user
-  //     setMessage(data['message'])
-  //     LogoutUser();
-  //     if (loading) {
-  //       setLoading(false)
-  //     }
-  //   }
-  // };
-
   // With every change of token and loading and a given token the usedata should be fetched and put in context
   useEffect(() => {
     getUserData(token).then(data => {
