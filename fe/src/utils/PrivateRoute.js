@@ -9,8 +9,6 @@ const PrivateRoute = ({ children }) => {
 
     // get the user from the context
     let {userData} = useContext(AuthContext);
-
-    console.log(userData)
   
     // check if there is a user
     if (userData != null) {
