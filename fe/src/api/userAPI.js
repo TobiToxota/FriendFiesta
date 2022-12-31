@@ -52,4 +52,31 @@ let registerUser = async (e) => {
     }
 }
 
-export { getUserData, registerUser }
+/* This function fetches the backend with an event 
+and checks if the user has an account and password is right. If so, it will return a token. */
+let getTokenFromBackend = async (e) => {
+    e.preventDefault();
+
+    // get the token from the api
+    let response = await fetch(process.env.REACT_APP_API_URL + "login/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: e.target.username.value,
+            password: e.target.password.value,
+        }),
+    });
+
+    let data = await response.json();
+
+    // if the response is ok return the token otherweise return null
+    if (response.status === 200) {
+        return data
+    } else {
+        return data
+    }
+}
+
+export { getUserData, registerUser, getTokenFromBackend }
