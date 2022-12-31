@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import getUserData from "../api/userAPI";
+import { getUserData, registerUser } from "../api/userAPI";
 
 // create the context
 const AuthContext = createContext();
@@ -24,20 +24,26 @@ export const AuthProvider = ({ children }) => {
 
   // With every change of token and loading and a given token the usedata should be fetched and put in context
   useEffect(() => {
-    getUserData(token).then(data => {
-      if (Object.keys(data.length > 1)) {
-        setUserData(data)
-        if (loading) {
-          setLoading(false)
+    if (token) {
+      getUserData(token).then(data => {
+        if (Object.keys(data.length > 1)) {
+          setUserData(data)
+          if (loading) {
+            setLoading(false)
+          }
+        } else {
+          setMessage(data['message'])
+          LogoutUser();
+          if (loading) {
+            setLoading(false)
+          }
         }
-      } else {
-        setMessage(data['message'])
-        LogoutUser();
-        if (loading) {
-          setLoading(false)
-        }
+      })
+    } else {
+      if (loading) {
+        setLoading(false)
       }
-    })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, token])
 
@@ -79,37 +85,44 @@ export const AuthProvider = ({ children }) => {
   // define the registerUser function
   let Register = async (e) => {
     e.preventDefault();
-    const token = await RegisterUser(e)
-    setToken(token)
-    localStorage.removeItem('token');
+    registerUser(e).then(data => {
+      if (Object.keys(data)[1] === "token") {
+        setToken(data.token)
+        setUserData(data.user)
+        localStorage.setItem('token', data.token);
+      } else {
+        console.log(data)
+        setMessage(data.message)
+      }
+    })
   };
 
-  // register the user on the api
-  let RegisterUser = async (e) => {
-    e.preventDefault();
+  // // register the user on the api
+  // let RegisterUser = async (e) => {
+  //   e.preventDefault();
 
-    let response = await fetch(process.env.REACT_APP_API_URL + "register/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: e.target.username.value,
-        email: e.target.email.value,
-        password: e.target.password.value,
-      }),
-    });
+  //   let response = await fetch(process.env.REACT_APP_API_URL + "register/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       username: e.target.username.value,
+  //       email: e.target.email.value,
+  //       password: e.target.password.value,
+  //     }),
+  //   });
 
-    let data = await response.json();
+  //   let data = await response.json();
 
-    // response is ok
-    if (response.status === 201) {
-      return data['token']
-    } else {
-      setMessage(Object.values(data)[0])
-      return null
-    }
-  };
+  //   // response is ok
+  //   if (response.status === 201) {
+  //     return data['token']
+  //   } else {
+  //     setMessage(Object.values(data)[0])
+  //     return null
+  //   }
+  // };
 
   // define the logoutUser function
   let LogoutUser = async () => {
