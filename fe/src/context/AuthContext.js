@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { getUserData, registerUser, getTokenFromBackend } from "../api/userAPI";
 
 // create the context
@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
   let [userData, setUserData] = useState(null);
   let [loading, setLoading] = useState(true);
 
-  // get a Navigator to send the user to the right page
   const navigate = useNavigate();
 
   // With every change of token and loading and a given token the usedata should be fetched and put in context
@@ -53,12 +52,16 @@ export const AuthProvider = ({ children }) => {
     getTokenFromBackend(e).then(data => {
       if (Object.keys(data)[1] === "token") {
         setToken(data.token)
+        setUserData(data.user)
         localStorage.setItem('token', data.token);
       } else {
         setMessage(Object.values(data)[0])
         return null
       }
     })
+    if (token && userData) {
+      navigate('/')
+    }
   };
 
   // Register a user on the database
@@ -82,7 +85,6 @@ export const AuthProvider = ({ children }) => {
   let LogoutUser = async () => {
     setToken(null);
     localStorage.removeItem('token');
-    navigate("/login/");
   };
 
   // put in the contextData
