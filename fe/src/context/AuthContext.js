@@ -84,6 +84,7 @@ export const AuthProvider = ({ children }) => {
     logoutUser(token)
     setToken(null);
     localStorage.removeItem('token');
+    window.location.reload(false)
   };
 
   // put in the contextData

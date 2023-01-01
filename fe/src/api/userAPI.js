@@ -80,7 +80,7 @@ let getTokenFromBackend = async (e) => {
 /* This function fetches the backend with an token 
 and logs the user out on the backend */
 let logoutUser = async (token) => {
-    let response = await fetch(process.env.REACT_APP_API_URL + "logout/", {
+    let response = await fetch(process.env.REACT_APP_API_URL + "logout", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

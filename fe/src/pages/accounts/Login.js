@@ -7,7 +7,7 @@ import Notification from "../../components/common/Notification";
 
 function Login() {
   // create the login function
-  let { loginUser, message, setMessage, userData } = useContext(AuthContext);
+  let { loginUser, message, setMessage, userData, logout } = useContext(AuthContext);
 
   return (
     <section className="hero is-info is-fullheight">
@@ -73,7 +73,8 @@ function Login() {
             : <>
               <button
                 className="button is-success is-rounded"
-                value="Logout">
+                value="Logout"
+                onClick={logout}>
                 Logout
               </button>
             </>}
