@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 
-import CreateNightOutPage from "./pages/CreateNightOutPage";
+import CreateNightOutPage from "./pages/nightOut/CreateNightOutPage";
 import Login from "./pages/accounts/Login";
 import Register from "./pages/accounts/Register";
 
