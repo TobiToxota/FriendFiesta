@@ -15,3 +15,17 @@ body,
       padding-right: 20px;
     }
   }
+
+  @keyframes fadeIn {
+    0% {
+      border-radius: 60px;
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s;
+  }

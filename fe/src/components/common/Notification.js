@@ -1,8 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
-import { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import React from "react";
 
 const Notificaton = ({ msg, onExit }) => {
 

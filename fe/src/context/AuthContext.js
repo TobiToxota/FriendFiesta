@@ -54,14 +54,12 @@ export const AuthProvider = ({ children }) => {
         setToken(data.token)
         setUserData(data.user)
         localStorage.setItem('token', data.token);
+        navigate('/')
       } else {
         setMessage(Object.values(data)[0])
         return null
       }
     })
-    if (token && userData) {
-      navigate('/')
-    }
   };
 
   // Register a user on the database
@@ -72,7 +70,7 @@ export const AuthProvider = ({ children }) => {
         setToken(data.token)
         setUserData(data.user)
         localStorage.setItem('token', data.token);
-        return
+        navigate('/')
       } else {
         console.log(data)
         setMessage(data.message)
