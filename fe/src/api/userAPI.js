@@ -88,8 +88,6 @@ let logoutUser = async (token) => {
         }
     })
 
-    let data = await response.json();
-
     if (response.status === 204) {
         return {
             "message": "User successfully logged out"
