@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { getUserData, registerUser, getTokenFromBackend } from "../api/userAPI";
+import { getUserData, registerUser, getTokenFromBackend, logoutUser } from "../api/userAPI";
 
 // create the context
 const AuthContext = createContext();
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
           }
         } else {
           setMessage(data['message'])
-          LogoutUser();
+          logout();
           if (loading) {
             setLoading(false)
           }
@@ -80,7 +80,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   // define the logoutUser function
-  let LogoutUser = async () => {
+  let logout = async () => {
+    logoutUser(token)
     setToken(null);
     localStorage.removeItem('token');
   };
@@ -90,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     userData: userData,
     token: token,
     loginUser: LoginUser,
-    logoutUser: LogoutUser,
+    logout: logout,
     Register: Register,
     message: message,
     setMessage: setMessage,
