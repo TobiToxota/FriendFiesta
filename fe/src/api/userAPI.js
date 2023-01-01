@@ -13,12 +13,10 @@ let getUserData = async (token) => {
 
     if (response.status === 200) {
         // return the userdata
-        console.log(data)
         return data
 
     } else {
-        // if there is a problem, log out the user
-        console.log(data)
+
         return data
     }
 };
@@ -79,4 +77,28 @@ let getTokenFromBackend = async (e) => {
     }
 }
 
-export { getUserData, registerUser, getTokenFromBackend }
+/* This function fetches the backend with an token 
+and logs the user out on the backend */
+let logoutUser = async (token) => {
+    let response = await fetch(process.env.REACT_APP_API_URL + "logout/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+        }
+    })
+
+    let data = await response.json();
+
+    if (response.status === 204) {
+        return {
+            "message": "User successfully logged out"
+        }
+    } else {
+        return {
+            "message": "There was a problem logging out the user"
+        }
+    }
+}
+
+export { getUserData, registerUser, getTokenFromBackend, logoutUser }
