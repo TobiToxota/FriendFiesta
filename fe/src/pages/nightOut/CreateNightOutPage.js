@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Header from "../../components/layout/HeaderComponent";
 
 import CreateNightOutComponent from "../../components/features/CreateNightOutComponent";
