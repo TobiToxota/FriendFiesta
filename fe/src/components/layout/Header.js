@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 // local imports
 import AuthContext from "../../context/AuthContext";
-import useScreenSize from "../../utils/ScreenSize"
+import useScreenSize from "../../hooks/ScreenSize"
 
 const Header = () => {
     // get the user from the context
@@ -81,13 +81,13 @@ const Header = () => {
                 :
                 <div id="hamburgerMenu" className="navbar-menu fade-in" style={{ display: "block" }}>
                     <div className="navbar-end">
-                        <a className="navbar-item" id="navbarItem" href="/about">
+                        <a className="navbar-item has-text-right" id="navbarItem" href="/about">
                             Your Nightouts
                         </a>
-                        <a className="navbar-item" id="navbarItem" href="/path">
+                        <a className="navbar-item has-text-right" id="navbarItem" href="/path">
                             User
                         </a>
-                        <a className="navbar-item" id="navbarItem" href="/blog">
+                        <a className="navbar-item has-text-right" id="navbarItem" href="/blog">
                             Logout
                         </a>
                     </div>

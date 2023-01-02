@@ -28,7 +28,7 @@ body,
 }
 
 .fade-in {
-  animation: fadeIn 0.3s;
+  animation: fadeIn 0.4s;
 }
 
 #hamburgerMenu {
@@ -43,4 +43,5 @@ body,
 
 #navbarItem:hover {
   background-color: #3489d0 !important;
+  animation: fadeIn 0.6s;
 }
