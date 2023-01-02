@@ -1,31 +1,46 @@
 html {
-    background-color: #3e8ed0 !important;
+  background-color: #3e8ed0 !important;
 }
 
 html,
 body,
 .root {
-    background-color: #3e8ed0;
-    min-height: 100vh;
+  background-color: #3e8ed0;
+  min-height: 100vh;
 }
 
 @media only screen and (min-width: 1200px) {
-    .navbar {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
+  .navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    border-radius: 60px;
+    opacity: 0;
   }
 
-  @keyframes fadeIn {
-    0% {
-      border-radius: 60px;
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  100% {
+    opacity: 1;
   }
+}
 
-  .fade-in {
-    animation: fadeIn 0.3s;
-  }
+.fade-in {
+  animation: fadeIn 0.3s;
+}
+
+#hamburgerMenu {
+  background-color: #3e8ed0 !important;
+  box-shadow: none !important;
+  color: white !important;
+}
+
+#navbarItem {
+  color: white !important;
+}
+
+#navbarItem:hover {
+  background-color: #3489d0 !important;
+}

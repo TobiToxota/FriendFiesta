@@ -8,10 +8,10 @@ import AuthContext from "../context/AuthContext";
 const PrivateRoute = ({ children }) => {
 
     // get the user from the context
-    let {userData, logout} = useContext(AuthContext);
+    let {userData} = useContext(AuthContext);
 
     // check if token is invalid
-    if (userData.detail === "Invalid token") {
+    if (userData != null && userData.detail === "Invalid token") {
 
       // if the token is invalid, we just need to remove the token from the storage
       localStorage.removeItem('token');
