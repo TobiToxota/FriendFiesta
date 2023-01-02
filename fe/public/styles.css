@@ -45,3 +45,14 @@ body,
   background-color: #3489d0 !important;
   animation: fadeIn 0.6s;
 }
+
+/*  */
+.loader {
+  border: 1.0vw solid #f3f3f3 !important;
+  border-radius: 50%;
+  border-top: 1.0vw solid #3e8ed0 !important;
+  width: 15vw!important;
+  height: 15vw!important;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 0.5s linear infinite;
+}
