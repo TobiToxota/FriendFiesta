@@ -1,7 +1,9 @@
+/* background-color for whole Application */
 html {
   background-color: #3e8ed0 !important;
 }
 
+/* background-color for whole Application */
 html,
 body,
 .root {
@@ -9,6 +11,7 @@ body,
   min-height: 100vh;
 }
 
+/* Padding for Header on Desktop */
 @media only screen and (min-width: 1200px) {
   .navbar {
     padding-left: 20px;
@@ -16,6 +19,7 @@ body,
   }
 }
 
+/* Fade In Animation */
 @keyframes fadeIn {
   0% {
     border-radius: 60px;
@@ -31,6 +35,7 @@ body,
   animation: fadeIn 0.4s;
 }
 
+/* START: Everything for the Hamburger Menu on Mobile */
 #hamburgerMenu {
   background-color: #3e8ed0 !important;
   box-shadow: none !important;
@@ -45,8 +50,9 @@ body,
   background-color: #3489d0 !important;
   animation: fadeIn 0.6s;
 }
+/* END: Everything for the Hamburger Menu on Mobile */ 
 
-/*  */
+/* style for the SpinnerComponent */
 .loader {
   border: 1.0vw solid #f3f3f3 !important;
   border-radius: 50%;
