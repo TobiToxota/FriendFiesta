@@ -29,48 +29,44 @@ const Header = () => {
                     <span aria-hidden="true" />
                 </button>
             </div>
-
             <div id="navMenu" className="navbar-menu">
                 <div className="navbar-end">
-                    <div className="navbar-item">
-                        <div className="buttons">
-                            <div id="loggedIn" className="is-inline-flex">
-                                <button className="button is-light is-rounded" id="avatar">
-                                    <Link to="/user">
-                                        <span className="icon">
-                                            <img
-                                                src={`https://avatars.dicebear.com/api/${userData.avatarStyle}/${userData.username}+${userData.avatarIteration}.svg`}
-                                                alt=""
-                                            />
-                                        </span>
-                                    </Link>
-                                </button>
-
-                                <div>
-                                    <a
-                                        className="button is-light is-rounded mr-2"
-                                        href="/nightoutlist">
-                                        <span className="icon">
-                                            <i className="fa-solid fa-list-ul" />
-                                        </span>
-                                        <p className="is-size-7">Your NightOuts</p>
-                                    </a>
-                                </div>
-
-                                <div onClick={logout}>
-                                    <button className="button is-light is-rounded">
-                                        <span className="icon">
-                                            <i className="fa-solid fa-person-running" />
-                                        </span>
-                                        <span>LogOut</span>
-                                    </button>
-                                </div>
-                            </div>
+                    <div id="loggedIn" className="is-inline-flex">
+                        <div className="navbar-item p-1">
+                            <button className="button is-light is-rounded" id="avatar">
+                                <Link to="/user">
+                                    <span className="icon">
+                                        <img
+                                            src={`https://avatars.dicebear.com/api/${userData.avatarStyle}/${userData.username}+${userData.avatarIteration}.svg`}
+                                            alt=""
+                                        />
+                                    </span>
+                                </Link>
+                            </button>
+                        </div>
+                        <div className="navbar-item p-1">
+                            <button
+                                className="button is-light is-rounded"
+                                href="/nightoutlist">
+                                <span className="icon">
+                                    <i className="fa-solid fa-list-ul" />
+                                </span>
+                                <p className="is-size-7">Your NightOuts</p>
+                            </button>
+                        </div>
+                        <div className="navbar-item p-1">
+                            <button className="button is-light is-rounded" onClick={logout}>
+                                <span className="icon">
+                                    <i className="fa-solid fa-person-running" />
+                                </span>
+                                <span>LogOut</span>
+                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </nav>
+
+                </div >
+            </div >
+        </nav >
     );
 };
 
