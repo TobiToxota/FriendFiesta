@@ -62,3 +62,12 @@ body,
   -webkit-animation: spin 1s linear infinite; /* Safari */
   animation: spin 0.5s linear infinite;
 }
+
+/* style for the WelcomeComponent */
+#main-container {
+  border-radius: 100px;
+  max-width: 1200px !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+}

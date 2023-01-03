@@ -14,7 +14,7 @@ const CreateNightOutComponent = ({ userData, setCreation }) => {
                 className="notification is-light is-rounded"
                 style={{ marginTop: "25vh", borderRadius: 15 }}>
                 <i
-                    className="fa-solid fa-xmark fa-xl"
+                    className="fa-solid fa-xmark fa-xl is-clickable"
                     id="x"
                     onClick={() => setCreation(false)}
                 />
@@ -27,18 +27,18 @@ const CreateNightOutComponent = ({ userData, setCreation }) => {
                                 alt=""
                                 width={35}
                             />
-                            <label className="label is-size-5 roboto has-text-centered is-inline-block">
+                            <label className="label is-size-5 has-text-centered is-inline-block">
                                 {userData.username}´s next nightout
                             </label>
                         </div>
                     </div>
                     <div className="field is-justify-content-center">
-                        <label className="label is-size-3 roboto">
+                        <label className="label is-size-3 is-size-4-touch has-text-centered">
                             A nice title for your next Nightout?
                         </label>
                         <div className="control">
                             <input
-                                className="input roboto-plain"
+                                className="input"
                                 type="text"
                                 placeholder="Title"
                                 name="title"
@@ -48,7 +48,7 @@ const CreateNightOutComponent = ({ userData, setCreation }) => {
                     <div className="field has-addons">
                         <p className="control">
                             <input
-                                className="input is-size-7-mobile roboto-plain"
+                                className="input is-size-7-mobile"
                                 type="number"
                                 placeholder="# of People"
                                 name="numberOfPersons"
@@ -57,7 +57,7 @@ const CreateNightOutComponent = ({ userData, setCreation }) => {
                             />
                         </p>
                         <p className="control">
-                            <button className="button is-static roboto is-size-7-mobile">
+                            <button className="button is-static is-size-7-mobile">
                                 # of Persons (You can add or remove later)
                             </button>
                         </p>

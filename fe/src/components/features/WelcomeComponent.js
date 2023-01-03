@@ -16,13 +16,13 @@ const WelcomeComponent = ({ userData, setCreation }) => {
                 <img src="/logo_light.png" alt="" width={200} />
             </div>
             <div className="container is-flex is-vcentered is-justify-content-center mb-1 mt-4">
-                <h1 className="title is-2 roboto-plain has-text-centered" style={{ color: "white" }}>
+                <h1 className="title is-2 roboto-plain has-text-centered is-size-4-touch" style={{ color: "white" }}>
                     Welcome {userData.username}
                 </h1>
             </div>
             <div className="container is-flex is-vcentered is-justify-content-center">
                 <h2
-                    className="subtitle mb-5 has-text-centered"
+                    className="subtitle mb-5 has-text-centered is-size-6-touch"
                     style={{ color: "white" }}>
                     Here you can plan your nightout with your friends, collegues or
                     family.
@@ -35,7 +35,7 @@ const WelcomeComponent = ({ userData, setCreation }) => {
                     <span className="icon">
                         <i className="fa-solid fa-users" />
                     </span>
-                    <span className="ml-1">Create a new Nightout</span>
+                    <span className="ml-1 is-size-5-touch">Create a new Nightout</span>
                 </button>
             </div>
         </div>
