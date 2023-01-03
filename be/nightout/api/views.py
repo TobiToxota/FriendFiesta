@@ -1,4 +1,3 @@
-from dataclasses import fields
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -8,7 +7,6 @@ from rest_framework import status
 from .serializer import NightOutSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
-from django.db import models
 from django.db.models import Case, When, Value
 from django.core import serializers
 from dotenv import load_dotenv
@@ -25,7 +23,6 @@ apiKey = os.getenv('REACT_APP_PLACES_API')
 
 # initialize the google maps client
 map_client = googlemaps.Client(apiKey)
-
 
 @permission_classes((IsAuthenticated,))
 class NightOutList(APIView):
