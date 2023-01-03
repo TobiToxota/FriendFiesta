@@ -2,44 +2,77 @@ import React from "react"
 
 import { useSwipeInFromLeft } from "../../hooks/animations/animations"
 
-const WelcomeComponent = ({ userData, setCreation }) => {
+const CreateNightOutComponent = ({ userData, setCreation }) => {
 
-    // animation
-    useSwipeInFromLeft(WelcomeComponent, "#addcontainer-button")
+    useSwipeInFromLeft(CreateNightOutComponent, "#main-container")
 
     return (
         <div
-            className="container is-widescreen is-fluid active visible"
-            id="addcontainer-button"
-            style={{ marginTop: "25vh" }}>
-            <div className="container is-flex is-vcentered is-justify-content-center mb-1">
-                <img src="/logo_light.png" alt="" width={200} />
-            </div>
-            <div className="container is-flex is-vcentered is-justify-content-center mb-1 mt-4">
-                <h1 className="title is-2 roboto-plain" style={{ color: "white" }}>
-                    Welcome {userData.username}
-                </h1>
-            </div>
-            <div className="container is-flex is-vcentered is-justify-content-center">
-                <h2
-                    className="subtitle mb-5 has-text-centered"
-                    style={{ color: "white" }}>
-                    Here you can plan your nightout with your friends, collegues or
-                    family.
-                </h2>
-            </div>
-            <div className="container is-flex is-vcentered is-justify-content-center">
-                <button
-                    className="button is-info is-light is-large is-rounded"
-                    id="createButton" onClick={() => setCreation(true)}>
-                    <span className="icon">
-                        <i className="fa-solid fa-users" />
-                    </span>
-                    <span className="ml-1">Create a new Nightout</span>
-                </button>
+            className="container is-fluid active is-rounded"
+            id="main-container">
+            <div
+                className="notification is-light is-rounded"
+                style={{ marginTop: "25vh", borderRadius: 15 }}>
+                <i
+                    className="fa-solid fa-xmark fa-xl"
+                    id="x"
+                    onClick={() => setCreation(false)}
+                />
+                <form onSubmit={console.log("@TODO:")}>
+                    <div className="field is-justify-content-center">
+                        <div className="container has-text-centered">
+                            <img
+                                className="image is-inline mr-2"
+                                src={`https://avatars.dicebear.com/api/${userData.avatarStyle}/${userData.username}+${userData.avatarIteration}.svg`}
+                                alt=""
+                                width={35}
+                            />
+                            <label className="label is-size-5 roboto has-text-centered is-inline-block">
+                                {userData.username}´s next nightout
+                            </label>
+                        </div>
+                    </div>
+                    <div className="field is-justify-content-center">
+                        <label className="label is-size-3 roboto">
+                            A nice title for your next Nightout?
+                        </label>
+                        <div className="control">
+                            <input
+                                className="input roboto-plain"
+                                type="text"
+                                placeholder="Title"
+                                name="title"
+                            />
+                        </div>
+                    </div>
+                    <div className="field has-addons">
+                        <p className="control">
+                            <input
+                                className="input is-size-7-mobile roboto-plain"
+                                type="number"
+                                placeholder="# of People"
+                                name="numberOfPersons"
+                                min={0}
+                                max={25}
+                            />
+                        </p>
+                        <p className="control">
+                            <button className="button is-static roboto is-size-7-mobile">
+                                # of Persons (You can add or remove later)
+                            </button>
+                        </p>
+                    </div>
+                    <div className="has-text-centered">
+                        <button
+                            className="button is-info is-rounded center"
+                            style={{ margin: "auto" }}>
+                            Create your Nightout
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     )
 }
 
-export default WelcomeComponent
+export default CreateNightOutComponent;
