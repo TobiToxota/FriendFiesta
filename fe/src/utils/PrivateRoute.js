@@ -18,7 +18,6 @@ const PrivateRoute = ({ children }) => {
     logout()
     return <Navigate to="/login/" />;
   }
-
   // check if there is a user
   if (userData != null) {
 

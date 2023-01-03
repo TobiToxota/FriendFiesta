@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Header from "../../components/layout/HeaderComponent";
 
 import CreateNightOutComponent from "../../components/features/CreateNightOutComponent";
@@ -7,12 +7,18 @@ import SpinnerComponent from "../../components/common/SpinnerComponent";
 
 function CreateNightOutPage() {
     let { userData } = useContext(AuthContext)
+    let [creation, setCreation] = useState(false)
 
     if (userData) {
         return (
             <>
                 <Header></Header>
-                <CreateNightOutComponent userData={userData}></CreateNightOutComponent>
+                {!creation ?
+                    <CreateNightOutComponent userData={userData} setCreation={setCreation}></CreateNightOutComponent>
+                    :
+                    <>
+                    </>
+                }
             </>
         )
     } else {
