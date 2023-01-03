@@ -1,6 +1,11 @@
 import React from "react"
 
+import { useSwipeInFromLeft } from "../../hooks/animations/animations"
+
 const CreateNightOutComponent = ({ userData, setCreation }) => {
+
+    // animation
+    useSwipeInFromLeft(CreateNightOutComponent, "#addcontainer-button")
 
     return (
         <div
