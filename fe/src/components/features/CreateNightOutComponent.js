@@ -45,23 +45,6 @@ const CreateNightOutComponent = ({ userData, setCreation }) => {
                             />
                         </div>
                     </div>
-                    <div className="field has-addons">
-                        <p className="control">
-                            <input
-                                className="input is-size-7-mobile"
-                                type="number"
-                                placeholder="# of People"
-                                name="numberOfPersons"
-                                min={0}
-                                max={25}
-                            />
-                        </p>
-                        <p className="control">
-                            <button className="button is-static is-size-7-mobile">
-                                # of Persons (You can add or remove later)
-                            </button>
-                        </p>
-                    </div>
                     <div className="has-text-centered">
                         <button
                             className="button is-info is-rounded center"
