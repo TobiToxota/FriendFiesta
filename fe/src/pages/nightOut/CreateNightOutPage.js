@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Header from "../../components/layout/HeaderComponent";
 
-import CreateNightOutComponent from "../../components/features/CreateNightOutComponent";
+import WelcomeComponent from "../../components/features/CreateNightOutComponent";
 import AuthContext from "../../context/AuthContext";
 import SpinnerComponent from "../../components/common/SpinnerComponent";
 
@@ -14,7 +14,7 @@ function CreateNightOutPage() {
             <>
                 <Header></Header>
                 {!creation ?
-                    <CreateNightOutComponent userData={userData} setCreation={setCreation}></CreateNightOutComponent>
+                    <WelcomeComponent userData={userData} setCreation={setCreation}></WelcomeComponent>
                     :
                     <>
                     </>
