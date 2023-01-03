@@ -16,7 +16,7 @@ const WelcomeComponent = ({ userData, setCreation }) => {
                 <img src="/logo_light.png" alt="" width={200} />
             </div>
             <div className="container is-flex is-vcentered is-justify-content-center mb-1 mt-4">
-                <h1 className="title is-2 roboto-plain" style={{ color: "white" }}>
+                <h1 className="title is-2 roboto-plain has-text-centered" style={{ color: "white" }}>
                     Welcome {userData.username}
                 </h1>
             </div>
