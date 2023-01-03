@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 import { useSwipeInFromLeft } from "../../hooks/animations/animations"
 import { createNightOut } from "../../api/nightOutAPI"
@@ -12,6 +12,22 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
 
+    // calling the createNightOut and setting the error or success message
+    async function handleSubmit(e) {
+        e.preventDefault()
+
+        try {
+            const result = await createNightOut(e, token)
+            if (result.success) {
+                setSuccess(result.success)
+            } else {
+                setError(result.error)
+            }
+        } catch (err) {
+            setError(err.message)
+        }
+    }
+
     return (
         <div
             className="container is-fluid active is-rounded"
@@ -24,7 +40,7 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
                     id="x"
                     onClick={() => setCreation(false)}
                 />
-                <form onSubmit={(e) => createNightOut(e, token)}>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="field is-justify-content-center">
                         <div className="container has-text-centered">
                             <img
