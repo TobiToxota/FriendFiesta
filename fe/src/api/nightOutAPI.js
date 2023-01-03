@@ -3,7 +3,7 @@ let createNightOut = async (e, token) => {
     e.preventDefault()
 
     // Error Handling
-    if (e.target.nightOutName.value.length < 2) {
+    if (e.target.title.value.length < 2) {
         return ({ "error": "Please enter a title, or at least 2 characters." })
     }
 
@@ -11,10 +11,10 @@ let createNightOut = async (e, token) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Token ${token}`
+            Authorization: `token ${token}`
         },
         body: JSON.stringify({
-            title: e.target.nightOutName.value
+            title: e.target.title.value
         }),
     });
     let data = await response.json()

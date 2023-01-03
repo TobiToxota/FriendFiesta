@@ -7,8 +7,8 @@ import AuthContext from "../../context/AuthContext";
 import SpinnerComponent from "../../components/common/SpinnerComponent";
 
 function CreateNightOutPage() {
-    let { userData } = useContext(AuthContext)
-    let [creation, setCreation] = useState(false)
+    const { userData, token } = useContext(AuthContext)
+    const [creation, setCreation] = useState(false)
 
     if (userData) {
         return (
@@ -17,7 +17,7 @@ function CreateNightOutPage() {
                 {!creation ?
                     <WelcomeComponent userData={userData} setCreation={setCreation}></WelcomeComponent>
                     :
-                    <CreateNightOutComponent userData={userData} setCreation={setCreation}></CreateNightOutComponent>
+                    <CreateNightOutComponent userData={userData} setCreation={setCreation} token={token}></CreateNightOutComponent>
                 }
             </>
         )

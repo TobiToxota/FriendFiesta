@@ -1,10 +1,16 @@
-import React from "react"
+import React, {useState} from "react"
 
 import { useSwipeInFromLeft } from "../../hooks/animations/animations"
+import { createNightOut } from "../../api/nightOutAPI"
 
-const CreateNightOutComponent = ({ userData, setCreation }) => {
+const CreateNightOutComponent = ({ userData, setCreation, token }) => {
 
+    // animation
     useSwipeInFromLeft(CreateNightOutComponent, "#main-container")
+
+    // a state for success and error message of api call
+    const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(null)
 
     return (
         <div
@@ -18,7 +24,7 @@ const CreateNightOutComponent = ({ userData, setCreation }) => {
                     id="x"
                     onClick={() => setCreation(false)}
                 />
-                <form onSubmit={console.log("@TODO:")}>
+                <form onSubmit={(e) => createNightOut(e, token)}>
                     <div className="field is-justify-content-center">
                         <div className="container has-text-centered">
                             <img

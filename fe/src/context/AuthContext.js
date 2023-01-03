@@ -10,14 +10,14 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-  let [token, setToken] = useState(() =>
+  const [token, setToken] = useState(() =>
     localStorage.getItem("token")
       ? localStorage.getItem("token")
       : null
   );
-  let [message, setMessage] = useState(null);
-  let [userData, setUserData] = useState(null);
-  let [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
