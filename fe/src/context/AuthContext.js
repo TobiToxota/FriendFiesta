@@ -81,9 +81,9 @@ export const AuthProvider = ({ children }) => {
 
   // define the logoutUser function
   let logout = async () => {
+    localStorage.removeItem('token');
     logoutUser(token)
     setToken(null);
-    localStorage.removeItem('token');
     window.location.reload(false)
   };
 
