@@ -6,10 +6,11 @@ const useCreateNightOut = (token) => {
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState("");
 
-    async function createNightOut (title) {
+    async function createNightOut (e) {
+        e.preventDefault()
 
         // Error Handling
-        if (title < 2) {
+        if (e.target.title.value < 2) {
             setError('Please enter a title, or at least 2 characters.')
             return { data, success, error }
         }
@@ -21,7 +22,7 @@ const useCreateNightOut = (token) => {
                 Authorization: `token ${token}`
             },
             body: JSON.stringify({
-                title: title
+                title: e.target.title.value
             }),
         });
         let thisData = await response.json()
@@ -35,7 +36,7 @@ const useCreateNightOut = (token) => {
             setData(thisData)
         }
     }
-    return {data, error, success, createNightOut}
+    return {data, error, setError, success, createNightOut}
 }
 
 export { useCreateNightOut }

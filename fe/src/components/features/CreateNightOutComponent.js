@@ -9,7 +9,7 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
     // animation
     useSwipeInFromLeft(CreateNightOutComponent, "#main-container")
 
-    const { createNightOut, data, success, error } = useCreateNightOut(token)
+    const { createNightOut, success, error, setError } = useCreateNightOut(token)
     const [title, setTitle] = useState(null)
 
     return (
@@ -38,29 +38,31 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
                         </label>
                     </div>
                 </div>
-                <div className="field is-justify-content-center">
-                    <label className="label is-size-3 is-size-4-touch has-text-centered">
-                        A nice title for your next Nightout?
-                    </label>
-                    <div className="control">
-                        <input
-                            className="input"
-                            type="text"
-                            placeholder="Title"
-                            name="title"
-                            onChange={(e) => setTitle({ ...title, title: e.target.value })}
-                        />
+                <form onSubmit={(e) => createNightOut(e)}>
+                    <div className="field is-justify-content-center">
+                        <label className="label is-size-3 is-size-4-touch has-text-centered">
+                            A nice title for your next Nightout?
+                        </label>
+                        <div className="control">
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Title"
+                                name="title"
+                                onChange={(e) => setTitle({ ...title, title: e.target.value })}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="has-text-centered">
-                    <button
-                        className="button is-info is-rounded center"
-                        style={{ margin: "auto" }}
-                        onClick={() => createNightOut(title.title)}>
-                        Create your Nightout
-                    </button>
-                </div>
-
+                    <div className="has-text-centered">
+                        <button
+                            className="button is-info is-rounded center"
+                            style={{ margin: "auto" }}>
+                            Create your Nightout
+                        </button>
+                    </div>
+                </form>
+                {error && <NotificationComponent onExit={() => setError("")} msg={error}/>}
+                {success && <NotificationComponent onExit={() => setError("")} msg={success} backgroundColor={"#48c78e"} color={"white"}/>}
             </div>
         </div>
     )
