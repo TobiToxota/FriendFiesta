@@ -11,14 +11,8 @@ let getUserData = async (token) => {
 
     let data = await response.json();
 
-    if (response.status === 200) {
-        // return the userdata
-        return data
+    return data
 
-    } else {
-
-        return data
-    }
 };
 
 /* This function fetches the backend with an event 
@@ -40,14 +34,7 @@ let registerUser = async (e) => {
 
     let data = await response.json();
 
-    // response is ok, return the token
-    if (response.status === 201) {
-        return data
-
-        // some error, return the error
-    } else {
-        return data
-    }
+    return data
 }
 
 /* This function fetches the backend with an event 
@@ -69,12 +56,8 @@ let getTokenFromBackend = async (e) => {
 
     let data = await response.json();
 
-    // if the response is ok return the token otherweise return null
-    if (response.status === 200) {
-        return data
-    } else {
-        return data
-    }
+    return data
+
 }
 
 /* This function fetches the backend with an token 

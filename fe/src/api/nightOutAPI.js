@@ -1,35 +1,41 @@
+import { useState } from "react"
+
 /* this function fetches the backend and creates a nightOut Object in the database */
-let createNightOut = async (e, token) => {
-    e.preventDefault()
+const useCreateNightOut = (token) => {
+    const [data, setData] = useState(null);
+    const [success, setSuccess] = useState(null);
+    const [error, setError] = useState("");
 
-    // Error Handling
-    if (e.target.title.value.length < 2) {
-        return ({ "error": "Please enter a title, or at least 2 characters." })
+    async function createNightOut (title) {
+
+        // Error Handling
+        if (title < 2) {
+            setError('Please enter a title, or at least 2 characters.')
+            return { data, success, error }
+        }
+
+        let response = await fetch(process.env.REACT_APP_API_URL + "nightoutlist/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `token ${token}`
+            },
+            body: JSON.stringify({
+                title: title
+            }),
+        });
+        let thisData = await response.json()
+
+        // check the response
+        if (response.status === 201) {
+            setSuccess('Your nightout is created.')
+            setData(thisData)
+        } else {
+            setError('Something went wrong')
+            setData(thisData)
+        }
     }
-
-    let response = await fetch(process.env.REACT_APP_API_URL + "nightoutlist/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `token ${token}`
-        },
-        body: JSON.stringify({
-            title: e.target.title.value
-        }),
-    });
-    let data = await response.json()
-
-    // check the response
-    if (response.status === 201) {
-        return ({
-            "success": "Your nightOut was created.",
-            "uuid": data.uuid
-        })
-    } else {
-        return ({
-            "error": "Something went wrong."
-        })
-    }
+    return {data, error, success, createNightOut}
 }
 
-export {createNightOut}
+export { useCreateNightOut }
