@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import Countdown from "react-countdown-simple";
 
 import { useSwipeInFromLeft } from "../../hooks/animations/animations"
 import { useCreateNightOut } from "../../hooks/api/nightOutAPI"
@@ -9,8 +10,11 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
     // animation
     useSwipeInFromLeft(CreateNightOutComponent, "#main-container")
 
+    // requisition for Countdown
+    document.getElementById("root")
+
+    // get the useCreateNightOutHook
     const { createNightOut, success, error, setError } = useCreateNightOut(token)
-    const [title, setTitle] = useState(null)
 
     return (
         <div
@@ -49,7 +53,6 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
                                 type="text"
                                 placeholder="Title"
                                 name="title"
-                                onChange={(e) => setTitle({ ...title, title: e.target.value })}
                             />
                         </div>
                     </div>
@@ -61,8 +64,17 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
                         </button>
                     </div>
                 </form>
-                {error && <NotificationComponent onExit={() => setError("")} msg={error}/>}
-                {success && <NotificationComponent onExit={() => setError("")} msg={success} backgroundColor={"#48c78e"} color={"white"}/>}
+                {error && <NotificationComponent onExit={() => setError("")} msg={error} />}
+                {success && <NotificationComponent msg={success} backgroundColor={"#48c78e"} color={"white"} children={<Countdown
+                    targetDate={new Date(
+                        new Date().setSeconds(new Date().getSeconds() + 3)
+                    ).toISOString()}
+                    renderer={({ days, hours, minutes, seconds }) => (
+                        <div style={{color: "white"}}>
+                             You will get redirected in {seconds} Seconds 🚀
+                        </div>
+                    )}
+                />}></NotificationComponent>}
             </div>
         </div>
     )

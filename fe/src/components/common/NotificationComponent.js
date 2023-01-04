@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const NotificatonComponent = ({ msg, onExit, backgroundColor, color }) => {
+const NotificatonComponent = ({ msg, onExit, backgroundColor, color, children }) => {
 
   return (
       <div
@@ -10,6 +10,8 @@ const NotificatonComponent = ({ msg, onExit, backgroundColor, color }) => {
         style={{ width: "60%", borderRadius: "12px", backgroundColor: backgroundColor, color: color }}>
         <button className="delete" onClick={onExit} />
         {msg}
+        <br></br>
+        {children}
       </div>
   );
 };
