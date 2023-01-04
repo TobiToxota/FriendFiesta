@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 
 import { useSwipeInFromLeft } from "../../hooks/animations/animations"
-import { useCreateNightOut } from "../../api/nightOutAPI"
+import { useCreateNightOut } from "../../hooks/api/nightOutAPI"
+import NotificationComponent from "../common/NotificationComponent"
 
 const CreateNightOutComponent = ({ userData, setCreation, token }) => {
 
