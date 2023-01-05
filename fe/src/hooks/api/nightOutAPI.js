@@ -10,8 +10,13 @@ const useCreateNightOut = (token) => {
         e.preventDefault()
 
         // Error Handling
-        if (e.target.title.value < 2) {
+        if (e.target.title.value.length < 2) {
             setError('Please enter a title, or at least 2 characters.')
+            return { data, success, error }
+        }
+
+        if (e.target.title.value.length > 39) {
+            setError('Ensure that your title has not more than 40 characters.')
             return { data, success, error }
         }
 

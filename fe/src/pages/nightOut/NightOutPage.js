@@ -14,9 +14,6 @@ const NightOutPage = () => {
     const { uuid } = useParams()
     const { nightOut, success, error, setError, loading } = useGetNightOut(token, uuid)
 
-    if (!loading) {
-        console.log(userData)
-    }
     return (
 
         <>
