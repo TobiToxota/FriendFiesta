@@ -29,7 +29,7 @@ const useSwipeInFromTop = (component, target) => {
 }
 
 /* This function lets two targets (part of progress bar) animate fill in and fade in*/
-const progressAnimation = (percentage, targetOne, targetTwo) {
+const useProgressAnimation = (percentage, targetOne, targetTwo) => {
   useEffect(() => {
     anime({
       targets: targetOne,
@@ -44,9 +44,10 @@ const progressAnimation = (percentage, targetOne, targetTwo) {
       duration: 1500,
       easing: "easeInOutExpo",
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [percentage]);
 }
 
 
 
-export { useSwipeInFromLeft, useSwipeInFromTop, progressAnimation }
+export { useSwipeInFromLeft, useSwipeInFromTop, useProgressAnimation }

@@ -1,20 +1,18 @@
-import { useState } from "react"
-
-import { progressAnimation } from "../../hooks/animations/animations"
+import { useProgressAnimation } from "../../hooks/animations/animations"
 
 const ProgressComponent = (percentage) => {
 
-    progressAnimation(percentage, ".progress", "#progressText",)
+    useProgressAnimation(percentage, ".progress", "#progressText",)
 
     const createText = (percentage) => {
         if (percentage === 25) {
-            return (<p className="roboto is-inline ml-2">This Nightout is currently in the finding-a-date phase</p>);
+            return (<p className="is-inline ml-2">This Nightout is currently in the finding-a-date phase</p>);
         } else if (percentage === 50) {
-            return (<p className="roboto is-inline ml-2">This Nightout is currently in the planning phase</p>)
+            return (<p className="is-inline ml-2">This Nightout is currently in the planning phase</p>)
         } else if (percentage === 75) {
-            return (<p className="roboto is-inline ml-2">This Nightout is currently in the voting phase</p>)
+            return (<p className="is-inline ml-2">This Nightout is currently in the voting phase</p>)
         } else if (percentage === 100) {
-            return (<p className="roboto is-inline ml-2">You finished the planning of your Nightout! Enjoy it!</p>)
+            return (<p className="is-inline ml-2">You finished the planning of your Nightout! Enjoy it!</p>)
         }
     }
 
@@ -33,5 +31,6 @@ const ProgressComponent = (percentage) => {
             </div>
         </div>
     )
-
 }
+
+export default ProgressComponent;
