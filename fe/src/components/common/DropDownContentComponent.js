@@ -4,7 +4,7 @@ const DropDownContentComponent = ({ title, content, icon, style, width, inline }
             <div className="dropdown-trigger ">
                 {!style && (
                     <button
-                        className="button is-rounded is-info"
+                        className="button is-rounded is-info is-size-7-touch"
                         aria-haspopup="true"
                         aria-controls="dropdown-menu4">
                         <span className="icon is-small">

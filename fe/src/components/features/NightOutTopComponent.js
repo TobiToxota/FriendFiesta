@@ -14,7 +14,7 @@ const NightOutTopDateComponent = ({ nightOut, userData }) => {
         <div
           className="notification is-light is-rounded main-nightout-container fade-in"
           style={{ marginTop: "8vh", borderRadius: 15, minHeight: "150px" }}>
-          <h3 className="subtitle is-3 mb-2">Title: {nightOut.title}</h3>
+          <h3 className="subtitle is-3 mb-2 is-size-4-touch">Title: {nightOut.title}</h3>
           <ProgressComponent percentage={25}></ProgressComponent>
           <div id="creator" className="mt-2 is-inline-block is-vcentered is-flex">
             <button className="button is-info is-rounded p-2">
@@ -26,7 +26,7 @@ const NightOutTopDateComponent = ({ nightOut, userData }) => {
               <p className="roboto-plain"></p>
             </button>
             <p
-              className="roboto is-inline-flex ml-2 pb-2"
+              className="roboto is-inline-flex ml-2 pb-2 is-size-6-touch"
               style={{ verticalAlign: "bottom" }}>
               {nightOut.creator.username !== userData.username
                 ? nightOut.creator.username + " has created this NightOut"
@@ -45,11 +45,12 @@ const NightOutTopDateComponent = ({ nightOut, userData }) => {
               title="Participants"
               icon={"fa-solid fa-user-astronaut"}></DropDownContentComponent>
             <button
-              className="button is-success is-rounded ml-1"
+              className="button is-success is-rounded ml-1 is-size-7-touch"
               onClick={() => setAddParticipant(true)}>
               <span className="icon is-small">
                 <i className="fa-solid fa-plus" />
               </span>
+              <p>Add Participant</p>
             </button>
             {addParticipantHandler ? (
               <form
@@ -58,7 +59,7 @@ const NightOutTopDateComponent = ({ nightOut, userData }) => {
                 <div className="field is-inline">
                   <div className="control is-inline">
                     <input
-                      className="input is-inline is-rounded"
+                      className="input is-inline is-rounded is-size-7-touch margin-top-mobile"
                       type="email"
                       placeholder="Enter email"
                       style={{ width: "161px" }}
@@ -73,7 +74,8 @@ const NightOutTopDateComponent = ({ nightOut, userData }) => {
                     </button>
                   </div>
                   <button
-                    className="button is-danger is-rounded is-small mt-1 ml-1">
+                    className="button is-danger is-rounded is-small mt-1 ml-1"
+                    onClick={() => setAddParticipant(false)}>
                     cancel
                   </button>
                 </div>
