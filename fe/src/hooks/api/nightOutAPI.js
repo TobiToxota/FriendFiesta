@@ -6,7 +6,7 @@ const useCreateNightOut = (token) => {
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState("");
 
-    async function createNightOut (e) {
+    async function createNightOut(e) {
         e.preventDefault()
 
         // Error Handling
@@ -32,15 +32,41 @@ const useCreateNightOut = (token) => {
             setSuccess('Your nightout is beeing created')
             setData(thisData)
             // send user to the new nightout
-            setTimeout(function() {window.location.href = "/nightout/" + thisData.uuid;}, 3050)
+            setTimeout(function () { window.location.href = "/nightout/" + thisData.uuid; }, 3050)
         } else {
             setError('Something went wrong')
             setData(thisData)
         }
     }
-    return {data, error, setError, success, createNightOut}
+    return { data, error, setError, success, createNightOut }
 }
 
+/* this custom hook fetches the bakend for the data of the nighOut */
+const useGetNightOut = (token) => {
+    const [data, setData] = useState(null)
+    const [success, setSuccess] = useState(null)
+    const [error, setError] = useState(null)
 
+    async function getNightOut(uuid) {
 
-export { useCreateNightOut }
+        let response = await fetch(`process.env.REACT_APP_API_URL${"nightout/"}${uuid}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `token ${token}`
+            }
+        });
+        let thisData = await response.json()
+
+        if (response.status === 200) {
+            setData(thisData)
+            setSuccess('Nightout Loaded')
+        } else {
+            setError('You are not participating in this nightOut') //TODO: Check Errors
+            setData(thisData)
+        }
+    }
+    return { data, error, setError, success, getNightOut }
+}
+
+export { useCreateNightOut, useGetNightOut }
