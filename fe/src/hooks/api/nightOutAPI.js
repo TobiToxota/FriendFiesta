@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 /* this custom hook fetches the backend and creates a nightOut Object in the database */
 const useCreateNightOut = (token) => {
@@ -42,7 +42,7 @@ const useCreateNightOut = (token) => {
 }
 
 /* this custom hook fetches the bakend for the data of the nighOut */
-const useGetNightOut = (token) => {
+const useGetNightOut = (token, uuid) => {
     const [data, setData] = useState(null)
     const [success, setSuccess] = useState(null)
     const [error, setError] = useState(null)
@@ -62,11 +62,16 @@ const useGetNightOut = (token) => {
             setData(thisData)
             setSuccess('Nightout Loaded')
         } else {
-            setError('You are not participating in this nightOut') //TODO: Check Errors
+            setError('You are not participating in this nightOut')
             setData(thisData)
         }
     }
-    return { data, error, setError, success, getNightOut }
+
+    useEffect(() => {
+        getNightOut(uuid)
+    })
+
+    return { data, error, setError, success }
 }
 
 export { useCreateNightOut, useGetNightOut }

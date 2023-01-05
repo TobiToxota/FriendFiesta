@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import Header from "../../components/layout/HeaderComponent";
 
+import Header from "../../components/layout/HeaderComponent";
 import WelcomeComponent from "../../components/features/WelcomeComponent";
 import CreateNightOutComponent from "../../components/features/CreateNightOutComponent";
 import AuthContext from "../../context/AuthContext";
 import SpinnerComponent from "../../components/common/SpinnerComponent";
 
-function CreateNightOutPage() {
+const CreateNightOutPage = () => {
     const { userData, token } = useContext(AuthContext)
     const [creation, setCreation] = useState(false)
 

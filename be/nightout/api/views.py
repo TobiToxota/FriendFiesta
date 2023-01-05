@@ -59,14 +59,14 @@ class NightOut(APIView):
     """Get a single nightout, edit it or delete it"""
 
     # try to get the object, if not possible return 404
-    def get_object(self, pk, request):
+    def get_object(self, uuid, request):
 
         # get the user
         user = User.objects.get(pk=request.user.id)
 
         # get the nightout
         try:
-            nightout = NightOutModel.objects.get(pk=pk)
+            nightout = NightOutModel.objects.get(uuid=uuid)
         except NightOutModel.DoesNotExist:
             raise Http404
 
@@ -76,8 +76,8 @@ class NightOut(APIView):
         else:
             return None
 
-    def get(self, request, pk, format=None):
-        nightout = self.get_object(pk, request)
+    def get(self, request, uuid, format=None):
+        nightout = self.get_object(uuid, request)
 
         if nightout == None:
             return Response({"message": "You are not invited to this NightOut, ask someone to invite you."}, status=status.HTTP_404_NOT_FOUND)
