@@ -1,13 +1,13 @@
 import NightOutTopComponent from "../components/features/NightOutTopComponent";
 
 /* this function gets a phase as prop and returns the needed collection of components */
-const nightOutPhaseReturner = (nightOut, refreshNightOut) => {
+const nightOutPhaseReturner = (nightOut, userData) => {
     if (nightOut.phase === "datePhase") {
       return (
         <>
           <NightOutTopComponent
             nightOut={nightOut}
-            refreshNightOut={refreshNightOut}
+            userData={userData}
           />
         </>
       );

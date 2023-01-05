@@ -1,11 +1,14 @@
 import React from "react";
 
-const NightOutTopComponent = (nightOut, refreshNightOut) => {
+import ProgressComponent from "../common/ProgressComponent";
+import DropDownContentComponent from "../common/DropDownContentComponent";
+
+const NightOutTopComponent = ({nightOut, userData}) => {
 
     return (
         <>
           <h3 className="subtitle is-3 mb-2">Title: {nightOut.title}</h3>
-          <Progress percentage={25}></Progress>
+          <ProgressComponent percentage={25}></ProgressComponent>
           <div id="creator" className="mt-2 is-inline-block is-vcentered is-flex">
             <button className="button is-info is-rounded p-2">
               <img
@@ -24,7 +27,7 @@ const NightOutTopComponent = (nightOut, refreshNightOut) => {
             </p>
           </div>
           <div className="mt-2">
-            <DropDownContent
+            <DropDownContentComponent
               content={
                 <ul style={{ listStyle: "none" }}>
                   {nightOut.participants.map((participant) => (
@@ -33,7 +36,7 @@ const NightOutTopComponent = (nightOut, refreshNightOut) => {
                 </ul>
               }
               title="Participants"
-              icon={"fa-solid fa-user-astronaut"}></DropDownContent>
+              icon={"fa-solid fa-user-astronaut"}></DropDownContentComponent>
             <button
               className="button is-success is-rounded ml-1"
               onClick={() => setAddParticipant(true)}>

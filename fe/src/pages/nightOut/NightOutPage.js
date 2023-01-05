@@ -14,20 +14,23 @@ const NightOutPage = () => {
     const { uuid } = useParams()
     const { nightOut, success, error, setError, loading } = useGetNightOut(token, uuid)
 
+    if (!loading) {
+        console.log(userData)
+    }
     return (
 
         <>
             {loading ?
                 <>
-                    <Header/>
-                    <SpinnerComponent/>>
+                    <Header />
+                    <SpinnerComponent />>
                 </>
-                : 
+                :
                 <>
-                <Header/>
-                {nightOutPhaseReturner(nightOut)}
+                    <Header />
+                    {nightOutPhaseReturner(nightOut, userData)}
                 </>
-                }
+            }
         </>
     )
 }
