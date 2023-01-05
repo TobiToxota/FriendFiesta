@@ -81,15 +81,15 @@ const Header = () => {
                 :
                 <div id="hamburgerMenu" className="navbar-menu fade-in" style={{ display: "block" }}>
                     <div className="navbar-end">
-                        <a className="navbar-item has-text-right" id="navbarItem" href="/about">
-                            Your Nightouts
-                        </a>
-                        <a className="navbar-item has-text-right" id="navbarItem" href="/path">
-                            User
-                        </a>
-                        <a className="navbar-item has-text-right" id="navbarItem" href="/blog">
+                        <Link to={"/nightoutlist"}><p className="navbar-item has-text-right" id="navbarItem">
+                            Your NightOuts
+                        </p></Link>
+                        <Link to={"/user"}><p className="navbar-item has-text-right" id="navbarItem">
+                            Edit your profile
+                        </p></Link>
+                        <Link to={"/logout"}><p className="navbar-item has-text-right" id="navbarItem">
                             Logout
-                        </a>
+                        </p></Link>
                     </div>
                 </div>
             }

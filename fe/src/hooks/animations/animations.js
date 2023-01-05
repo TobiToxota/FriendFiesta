@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 
 /* This function lets an target (id or classname) fly in from the left when the component changes or gets rendered*/
-let useSwipeInFromLeft = (component, target) => {
+const useSwipeInFromLeft = (component, target) => {
 
   useEffect(() => {
     anime({
@@ -16,16 +16,37 @@ let useSwipeInFromLeft = (component, target) => {
 }
 
 /* This function lets an target (id or classname) fly in from the bottom when the component changes or gets rendered*/
-let useSwipeInFromTop = (component, target) => {
-  
+const useSwipeInFromTop = (component, target) => {
+
   useEffect(() => {
     anime({
       targets: target,
       translateY: [-500, 0],
       duration: 1000,
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [component])
 }
 
-export { useSwipeInFromLeft, useSwipeInFromTop }
+/* This function lets two targets (part of progress bar) animate fill in and fade in*/
+const progressAnimation = (percentage, targetOne, targetTwo) {
+  useEffect(() => {
+    anime({
+      targets: targetOne,
+      value: [0, percentage],
+      duration: 1000,
+      easing: "easeInOutExpo",
+    });
+
+    anime({
+      targets: targetTwo,
+      opacity: [0, 1],
+      duration: 1500,
+      easing: "easeInOutExpo",
+    });
+  }, [percentage]);
+}
+
+
+
+export { useSwipeInFromLeft, useSwipeInFromTop, progressAnimation }

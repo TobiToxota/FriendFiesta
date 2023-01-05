@@ -49,7 +49,7 @@ const useGetNightOut = (token, uuid) => {
 
     async function getNightOut(uuid) {
 
-        let response = await fetch(`process.env.REACT_APP_API_URL${"nightout/"}${uuid}`, {
+        let response = await fetch(process.env.REACT_APP_API_URL + "nightout/" + uuid , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -69,7 +69,8 @@ const useGetNightOut = (token, uuid) => {
 
     useEffect(() => {
         getNightOut(uuid)
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[uuid, token])
 
     return { data, error, setError, success }
 }
