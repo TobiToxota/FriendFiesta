@@ -80,3 +80,5 @@ const NightOutTopComponent = (nightOut, refreshNightOut) => {
         </>
       );
 }
+
+export default NightOutTopComponent;

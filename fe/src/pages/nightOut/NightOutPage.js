@@ -5,6 +5,7 @@ import AuthContext from "../../context/AuthContext";
 import SpinnerComponent from "../../components/common/SpinnerComponent";
 import Header from "../../components/layout/HeaderComponent";
 import { useGetNightOut } from "../../hooks/api/nightOutAPI";
+import nightOutPhaseReturner from "../../utils/nightOutPhaseReturner";
 
 const NightOutPage = () => {
 
