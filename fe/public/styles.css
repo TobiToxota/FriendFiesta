@@ -73,3 +73,10 @@ body,
   padding-right: 15px;
   margin-bottom: 20px;
 }
+
+/* make the main nightout container better visible on mobile */
+@media screen and (max-width: 900px) {
+  .main-nightout-container {
+    padding: 8px !important;
+  }
+}
