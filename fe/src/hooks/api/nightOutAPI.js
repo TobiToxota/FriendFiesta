@@ -43,9 +43,10 @@ const useCreateNightOut = (token) => {
 
 /* this custom hook fetches the bakend for the data of the nighOut */
 const useGetNightOut = (token, uuid) => {
-    const [data, setData] = useState(null)
+    const [nightOut, setNightOut] = useState(null)
     const [success, setSuccess] = useState(null)
     const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     async function getNightOut(uuid) {
 
@@ -59,11 +60,13 @@ const useGetNightOut = (token, uuid) => {
         let thisData = await response.json()
 
         if (response.status === 200) {
-            setData(thisData)
+            setNightOut(thisData)
             setSuccess('Nightout Loaded')
+            setLoading(false)
         } else {
             setError('You are not participating in this nightOut')
-            setData(thisData)
+            setNightOut(thisData)
+            setLoading(false)
         }
     }
 
@@ -72,7 +75,7 @@ const useGetNightOut = (token, uuid) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[uuid, token])
 
-    return { data, error, setError, success }
+    return { nightOut, error, setError, success, loading }
 }
 
 export { useCreateNightOut, useGetNightOut }

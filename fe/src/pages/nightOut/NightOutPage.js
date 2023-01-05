@@ -12,13 +12,24 @@ const NightOutPage = () => {
     // get userData, token, params and nightOutData
     const { userData, token } = useContext(AuthContext)
     const { uuid } = useParams()
-    const {data, success, error, setError } = useGetNightOut(token, uuid)
+    const { nightOut, success, error, setError, loading } = useGetNightOut(token, uuid)
 
     return (
+
         <>
-        <Header></Header>
+            {loading ?
+                <>
+                    <Header/>
+                    <SpinnerComponent/>>
+                </>
+                : 
+                <>
+                <Header/>
+                {nightOutPhaseReturner(nightOut)}
+                </>
+                }
         </>
     )
-}   
+}
 
 export default NightOutPage
