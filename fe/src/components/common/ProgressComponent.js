@@ -1,11 +1,14 @@
 import { useProgressAnimation } from "../../hooks/animations/animations"
 
-const ProgressComponent = (percentage) => {
+const ProgressComponent = ({percentage}) => {
 
     useProgressAnimation(percentage, ".progress", "#progressText",)
 
+    console.log(percentage)
+
     const createText = (percentage) => {
         if (percentage === 25) {
+            console.log("running")
             return (<p className="is-inline ml-2">This Nightout is currently in the finding-a-date phase</p>);
         } else if (percentage === 50) {
             return (<p className="is-inline ml-2">This Nightout is currently in the planning phase</p>)
