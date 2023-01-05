@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Countdown from "react-countdown-simple";
 
 import { useSwipeInFromLeft } from "../../hooks/animations/animations"
@@ -9,9 +9,6 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
 
     // animation
     useSwipeInFromLeft(CreateNightOutComponent, "#main-container")
-
-    // requisition for Countdown
-    document.getElementById("root")
 
     // get the useCreateNightOutHook
     const { createNightOut, success, error, setError } = useCreateNightOut(token)
@@ -64,14 +61,18 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
                         </button>
                     </div>
                 </form>
+
+                {/* Error and success notifications */}
                 {error && <NotificationComponent onExit={() => setError("")} msg={error} />}
-                {success && <NotificationComponent msg={success} backgroundColor={"#48c78e"} color={"white"} children={<Countdown
+                {success && <NotificationComponent msg={success} backgroundColor={"#48c78e"} color={"white"} children={
+                    // get a Countdown
+                    <Countdown
                     targetDate={new Date(
                         new Date().setSeconds(new Date().getSeconds() + 3)
                     ).toISOString()}
                     renderer={({ days, hours, minutes, seconds }) => (
                         <div style={{color: "white"}}>
-                             You will get redirected in {seconds} Seconds 🚀
+                             You will get redirected in {seconds} seconds 🚀
                         </div>
                     )}
                 />}></NotificationComponent>}

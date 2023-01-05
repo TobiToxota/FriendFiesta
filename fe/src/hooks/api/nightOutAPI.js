@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { Navigate } from "react-router-dom";
 
-/* this function fetches the backend and creates a nightOut Object in the database */
+/* this custom hook fetches the backend and creates a nightOut Object in the database */
 const useCreateNightOut = (token) => {
     const [data, setData] = useState(null);
     const [success, setSuccess] = useState(null);
@@ -32,7 +31,6 @@ const useCreateNightOut = (token) => {
         if (response.status === 201) {
             setSuccess('Your nightout is beeing created')
             setData(thisData)
-            
             // send user to the new nightout
             setTimeout(function() {window.location.href = "/nightout/" + thisData.uuid;}, 3050)
         } else {
@@ -42,5 +40,7 @@ const useCreateNightOut = (token) => {
     }
     return {data, error, setError, success, createNightOut}
 }
+
+
 
 export { useCreateNightOut }
