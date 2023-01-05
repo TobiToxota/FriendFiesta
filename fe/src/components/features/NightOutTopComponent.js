@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ProgressComponent from "../common/ProgressComponent";
 import DropDownContentComponent from "../common/DropDownContentComponent";
 
-const NightOutTopComponent = ({ nightOut, userData }) => {
+const NightOutTopDateComponent = ({ nightOut, userData }) => {
   const [addParticipantHandler, setAddParticipant] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ const NightOutTopComponent = ({ nightOut, userData }) => {
             <p
               className="roboto is-inline-flex ml-2 pb-2"
               style={{ verticalAlign: "bottom" }}>
-              {nightOut.creator.username != userData.username
+              {nightOut.creator.username !== userData.username
                 ? nightOut.creator.username + " has created this NightOut"
                 : "You created this NightOut"}
             </p>
@@ -38,7 +38,7 @@ const NightOutTopComponent = ({ nightOut, userData }) => {
               content={
                 <ul style={{ listStyle: "none" }}>
                   {nightOut.participants.map((participant) => (
-                    <li>{participant.user.username}</li>
+                    <li key={participant.id}>{participant.user.username}</li>
                   ))}
                 </ul>
               }
@@ -88,4 +88,4 @@ const NightOutTopComponent = ({ nightOut, userData }) => {
   );
 }
 
-export default NightOutTopComponent;
+export default NightOutTopDateComponent;

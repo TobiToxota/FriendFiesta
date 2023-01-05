@@ -27,7 +27,7 @@ const DropDownContentComponent = ({ title, content, icon, style, width, inline }
                     className="dropdown-content dropdown-border has-text-centered"
                     style={{ backgroundColor: "#3e8ed0" }}>
                     <div className="dropdown-item">
-                        <p className="dropdown-content">{content}</p>
+                        <div className="dropdown-content">{content}</div>
                     </div>
                 </div>
             </div>

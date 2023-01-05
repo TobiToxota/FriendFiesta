@@ -80,3 +80,16 @@ body,
     padding: 15px !important;
   }
 }
+
+/* styles for the dropdown content component*/
+.dropdown-content {
+  color: white;
+  background-color: #3e8ed0 !important;
+  box-shadow: none !important;
+  font-size: smaller;
+}
+
+.dropdown-border {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px !important;
+}
