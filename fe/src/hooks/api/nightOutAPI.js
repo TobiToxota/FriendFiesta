@@ -66,7 +66,7 @@ const useGetNightOut = (token, uuid) => {
 
         if (response.status === 200) {
             setNightOut(thisData)
-            setSuccess('Nightout Loaded')
+            setSuccess('Nightout loaded')
             setLoading(false)
         } else {
             setError('You are not participating in this nightOut')
@@ -80,7 +80,43 @@ const useGetNightOut = (token, uuid) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[uuid, token])
 
-    return { nightOut, error, setError, success, loading }
+    return { getNightOut, nightOut, error, setError, success, loading }
 }
 
-export { useCreateNightOut, useGetNightOut }
+/* this custom hook fetches the bakend for all nightouts that a user is participating in */
+const useGetNightOutList = (token) => {
+    const [nightOutList, setNightOutList] = useState(null);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const getNightOutList = async () => {
+        let response = await fetch(process.env.REACT_APP_API_URL + "nightoutlist/", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `token ${token}`
+            }
+        })
+        let thisData = await response.json()
+
+        if (response.status === 200) {
+            setNightOutList(thisData)
+            setSuccess('Nightoutlist loaded')
+            setLoading(false)
+        } else {
+            setError('Something went wrong')
+            setNightOutList(thisData)
+            setLoading(false)
+        }
+    };
+    useEffect(() => {
+        getNightOutList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token])
+
+    return {getNightOutList, nightOutList, error, success, loading}
+}
+
+
+export { useCreateNightOut, useGetNightOut, useGetNightOutList }
