@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+/** @format */
+
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import AuthContext from "../../context/AuthContext";
@@ -8,28 +10,26 @@ import { useGetNightOut } from "../../hooks/api/nightOutAPI";
 import nightOutPhaseReturner from "../../utils/nightOutPhaseReturner";
 
 const NightOutPage = () => {
-
     // get userData, token, params and nightOutData
-    const { userData, token } = useContext(AuthContext)
-    const { uuid } = useParams()
-    const { nightOut, error, loading } = useGetNightOut(token, uuid)
+    const { userData, token } = useContext(AuthContext);
+    const { uuid } = useParams();
+    const { nightOut, loading } = useGetNightOut(token, uuid);
 
     return (
-
         <>
-            {loading ?
+            {loading ? (
                 <>
                     <HeaderComponent />
                     <SpinnerComponent />
                 </>
-                :
+            ) : (
                 <>
                     <HeaderComponent />
                     {nightOutPhaseReturner(nightOut, userData)}
                 </>
-            }
+            )}
         </>
-    )
-}
+    );
+};
 
-export default NightOutPage
+export default NightOutPage;
