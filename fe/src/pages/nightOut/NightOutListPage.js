@@ -25,9 +25,13 @@ const NightOutListPage = () => {
       ) : (
         <>
           <HeaderComponent />
-          {nightOutList.map((nightOut, index) => (
-            <NightOutListComponent nightOut={nightOut} key={index} />
-          ))}
+          <div className="container mt-6">
+            <div class="p-4 columns is-centered is-flex-wrap-wrap has-text-centered">
+              {nightOutList.map((nightOut, index) => (
+                <NightOutListComponent nightOut={nightOut} key={index} />
+              ))}
+            </div>
+          </div>
         </>
       )}
     </>

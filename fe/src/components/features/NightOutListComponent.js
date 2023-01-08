@@ -6,9 +6,9 @@ import { getPhaseForNightOutListComponent, getColorForNightOutListComponent } fr
 
 const NightOutListComponent = ({ nightOut }) => {
   return (
-    <Link to={`/nightout/${nightOut.id}`}>
+    <Link to={`/nightout/${nightOut.uuid}`}>
       <div
-        className="box m-1 img-shadow fade-in"
+        className="box m-1 shadow fade-in"
         id="margin-mobile2"
         style={{
           backgroundColor: getColorForNightOutListComponent(nightOut),

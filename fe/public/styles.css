@@ -101,3 +101,22 @@ body,
     margin-top: 4px;
   }
 }
+
+/* margin left and right for mobiule */
+@media screen and (max-width: 768px) {
+  #margin-mobile2 {
+    margin-left: 12vw !important;
+    margin-right: 12vw !important;
+  }
+}
+
+/* black title for nightoutlistpage */
+#blackTitle {
+  color: #330033 !important;
+  margin-bottom: 4px!important;
+}
+
+/* shadow */
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px!important;
+}
