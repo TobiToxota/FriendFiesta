@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import AuthContext from "../../context/AuthContext";
 import SpinnerComponent from "../../components/common/SpinnerComponent";
-import Header from "../../components/layout/HeaderComponent";
+import HeaderComponent from "../../components/layout/HeaderComponent";
 import { useGetNightOut } from "../../hooks/api/nightOutAPI";
 import nightOutPhaseReturner from "../../utils/nightOutPhaseReturner";
 
@@ -19,12 +19,12 @@ const NightOutPage = () => {
         <>
             {loading ?
                 <>
-                    <Header />
+                    <HeaderComponent />
                     <SpinnerComponent />
                 </>
                 :
                 <>
-                    <Header />
+                    <HeaderComponent />
                     {nightOutPhaseReturner(nightOut, userData)}
                 </>
             }

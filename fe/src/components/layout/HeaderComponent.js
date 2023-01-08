@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import useScreenSize from "../../hooks/ScreenSize"
 
-const Header = () => {
+const HeaderComponent = () => {
     // get the user from the context
     let { logout, userData } = useContext(AuthContext);
     let [hamburger, setHamburger] = useState(false);
@@ -97,4 +97,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default HeaderComponent;
