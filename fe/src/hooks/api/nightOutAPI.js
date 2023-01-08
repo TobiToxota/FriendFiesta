@@ -118,5 +118,4 @@ const useGetNightOutList = (token) => {
     return {getNightOutList, nightOutList, error, success, loading}
 }
 
-
 export { useCreateNightOut, useGetNightOut, useGetNightOutList }
