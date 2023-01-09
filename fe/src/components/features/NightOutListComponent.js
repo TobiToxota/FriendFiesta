@@ -9,13 +9,13 @@ import {
 import { useFading } from "../../hooks/animations/animations.js";
 
 const NightOutListComponent = ({ nightOut}) => {
-  useFading('#margin-mobile2')
+  useFading('#nightoutlist-component')
 
   return (
     <Link to={`/nightout/${nightOut.uuid}`}>
       <div
         className="box m-1 shadow"
-        id="margin-mobile2"
+        id="nightoutlist-component"
         style={{
           backgroundColor: getColorForNightOutListComponent(nightOut),
           color: "black",

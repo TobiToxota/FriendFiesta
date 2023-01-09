@@ -26,7 +26,7 @@ const NightOutListPage = () => {
         <>
           <HeaderComponent />
           <div className="container mt-6" id="wholeList">
-          <h1 className="has-text-centered squarepeg is-size-2-touch" style={{color: 'white'}}>Your Nightouts:</h1>
+          <h1 className="has-text-centered squarepeg is-size-2-touch fade-in" style={{color: 'white'}}>Your Nightouts:</h1>
             <div className="p-4 columns is-centered is-flex-wrap-wrap has-text-centered">
               {nightOutList.map((nightOut, index) => (
                 <div id={1} key={index}>

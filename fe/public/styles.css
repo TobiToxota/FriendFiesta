@@ -114,9 +114,13 @@ body,
   }
 }
 
+#nightoutlist-component:hover {
+  background-color: #17f4d3 !important;
+}
+
 /* margin left and right for mobiule */
 @media screen and (max-width: 768px) {
-  #margin-mobile2 {
+  #nightoutlist-component {
     margin-left: 12vw !important;
     margin-right: 12vw !important;
   }

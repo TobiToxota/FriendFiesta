@@ -53,8 +53,9 @@ const useFading = (target) => {
     anime({
       targets: target,
       opacity: [0, 1],
-      duration: 2000,
+      duration: 200,
       delay: anime.stagger(30),
+      easing: 'easeInOutQuad'
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
