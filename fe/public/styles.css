@@ -20,6 +20,7 @@ body,
 /* squarepeg font class*/
 .squarepeg {
   font-family: "Square Peg" !important;
+  font-size: 60px !important;
 }
 
 /* Padding for Header on Desktop */

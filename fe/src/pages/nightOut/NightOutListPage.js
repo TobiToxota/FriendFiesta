@@ -12,7 +12,7 @@ import NightOutListComponent from "../../components/features/NightOutListCompone
 
 const NightOutListPage = () => {
   // get userData, token and nightOutlist
-  const { token, userData } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { nightOutList, loading } = useGetNightOutList(token);
 
   return (
@@ -26,7 +26,7 @@ const NightOutListPage = () => {
         <>
           <HeaderComponent />
           <div className="container mt-6" id="wholeList">
-          <h1 className="subtitle is-1 has-text-centered squarepeg" style={{color: 'white'}}>Your Nightouts:</h1>
+          <h1 className="has-text-centered squarepeg is-size-2-touch" style={{color: 'white'}}>Your Nightouts:</h1>
             <div className="p-4 columns is-centered is-flex-wrap-wrap has-text-centered">
               {nightOutList.map((nightOut, index) => (
                 <div id={1} key={index}>
