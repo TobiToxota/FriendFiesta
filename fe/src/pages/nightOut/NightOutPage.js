@@ -25,7 +25,7 @@ const NightOutPage = () => {
             ) : (
                 <>
                     <HeaderComponent />
-                    {nightOutPhaseReturner(nightOut, userData)}
+                    {nightOutPhaseReturner(nightOut, userData, token)}
                 </>
             )}
         </>

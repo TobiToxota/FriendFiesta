@@ -7,7 +7,6 @@ const ProgressComponent = ({percentage}) => {
 
     const createText = (percentage) => {
         if (percentage === 25) {
-            console.log("running")
             return (<p className="is-inline ml-2 is-size-7-touch">This Nightout is currently in the finding-a-date phase</p>);
         } else if (percentage === 50) {
             return (<p className="is-inline ml-2 is-size-7-touch">This Nightout is currently in the planning phase</p>)

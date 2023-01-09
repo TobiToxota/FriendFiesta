@@ -165,4 +165,4 @@ const useAddParticipantToNightOut = (token, uuid) => {
   return { addParticipantToNightOut, error, success, data };
 };
 
-export { useCreateNightOut, useGetNightOut, useGetNightOutList };
+export { useCreateNightOut, useGetNightOut, useGetNightOutList, useAddParticipantToNightOut };

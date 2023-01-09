@@ -1,22 +1,28 @@
+/** @format */
+
 import React, { useState } from "react";
 
 import ProgressComponent from "../common/ProgressComponent";
 import DropDownContentComponent from "../common/DropDownContentComponent";
+import { useAddParticipantToNightOut } from "../../hooks/api/nightOutAPI";
 
-const NightOutTopDateComponent = ({ nightOut, userData }) => {
+const NightOutTopDateComponent = ({ nightOut, userData, token }) => {
   const [addParticipantHandler, setAddParticipant] = useState(false);
+  const {addParticipantToNightOut, error, success, data } = useAddParticipantToNightOut(token, nightOut.uuid)
 
   return (
     <>
-      <div
-        className="container is-fluid active is-rounded"
-        id="main-container">
+      <div className="container is-fluid active is-rounded" id="main-container">
         <div
           className="notification is-light is-rounded main-nightout-container fade-in"
           style={{ marginTop: "8vh", borderRadius: 15, minHeight: "150px" }}>
-          <h3 className="subtitle is-3 mb-2 is-size-4-touch">Title: {nightOut.title}</h3>
+          <h3 className="subtitle is-3 mb-2 is-size-4-touch">
+            Title: {nightOut.title}
+          </h3>
           <ProgressComponent percentage={25}></ProgressComponent>
-          <div id="creator" className="mt-2 is-inline-block is-vcentered is-flex">
+          <div
+            id="creator"
+            className="mt-2 is-inline-block is-vcentered is-flex">
             <button className="button is-info is-rounded p-2">
               <img
                 src={`https://avatars.dicebear.com/api/${nightOut.creator.avatarStyle}/${userData.username}+${nightOut.creator.avatarIteration}.svg`}
@@ -53,9 +59,7 @@ const NightOutTopDateComponent = ({ nightOut, userData }) => {
               <p>Add Participant</p>
             </button>
             {addParticipantHandler ? (
-              <form
-                className="is-inline ml-1 fade-in"
-                id="addParticipantForm">
+              <form className="is-inline ml-1 fade-in" id="addParticipantForm">
                 <div className="field is-inline">
                   <div className="control is-inline">
                     <input
@@ -81,13 +85,12 @@ const NightOutTopDateComponent = ({ nightOut, userData }) => {
                 </div>
               </form>
             ) : null}
-            <div>
-            </div>
+            <div></div>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default NightOutTopDateComponent;
