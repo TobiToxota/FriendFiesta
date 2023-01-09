@@ -2,9 +2,8 @@ import { useProgressAnimation } from "../../hooks/animations/animations"
 
 const ProgressComponent = ({percentage}) => {
 
+    // animation
     useProgressAnimation(percentage, ".progress", "#progressText",)
-
-    console.log(percentage)
 
     const createText = (percentage) => {
         if (percentage === 25) {

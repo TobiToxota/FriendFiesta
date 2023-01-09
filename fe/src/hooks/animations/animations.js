@@ -1,11 +1,11 @@
-import anime from "animejs"
-import { useEffect } from "react";
+/** @format */
 
+import anime from "animejs";
+import { useEffect, useLayoutEffect } from "react";
 
 /* This function lets an target (id or classname) fly in from the left when the component changes or gets rendered*/
 const useSwipeInFromLeft = (component, target) => {
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     anime({
       targets: target,
       translateX: [-500, 0],
@@ -13,20 +13,19 @@ const useSwipeInFromLeft = (component, target) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [component]);
-}
+};
 
 /* This function lets an target (id or classname) fly in from the bottom when the component changes or gets rendered*/
 const useSwipeInFromTop = (component, target) => {
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     anime({
       targets: target,
       translateY: [-500, 0],
       duration: 1000,
-    })
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [component])
-}
+  }, [component]);
+};
 
 /* This function lets two targets (part of progress bar) animate fill in and fade in*/
 const useProgressAnimation = (percentage, targetOne, targetTwo) => {
@@ -44,10 +43,27 @@ const useProgressAnimation = (percentage, targetOne, targetTwo) => {
       duration: 1500,
       easing: "easeInOutExpo",
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [percentage]);
-}
+};
 
+/* This function lets an array of divs fade in slowly behind each other */
+const useFading = (target) => {
+  useLayoutEffect(() => {
+    anime({
+      targets: target,
+      opacity: [0, 1],
+      duration: 2000,
+      delay: anime.stagger(30),
+    });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  });
+};
 
-export { useSwipeInFromLeft, useSwipeInFromTop, useProgressAnimation }
+export {
+  useSwipeInFromLeft,
+  useSwipeInFromTop,
+  useProgressAnimation,
+  useFading,
+};

@@ -2,13 +2,19 @@
 
 import { Link } from "react-router-dom";
 
-import { getPhaseForNightOutListComponent, getColorForNightOutListComponent } from "../../utils/nightOutListComponentUtils.js";
+import {
+  getPhaseForNightOutListComponent,
+  getColorForNightOutListComponent,
+} from "../../utils/nightOutListComponentUtils.js";
+import { useFading } from "../../hooks/animations/animations.js";
 
-const NightOutListComponent = ({ nightOut }) => {
+const NightOutListComponent = ({ nightOut}) => {
+  useFading('#margin-mobile2')
+
   return (
     <Link to={`/nightout/${nightOut.uuid}`}>
       <div
-        className="box m-1 shadow fade-in"
+        className="box m-1 shadow"
         id="margin-mobile2"
         style={{
           backgroundColor: getColorForNightOutListComponent(nightOut),
@@ -36,4 +42,4 @@ const NightOutListComponent = ({ nightOut }) => {
   );
 };
 
-export default NightOutListComponent
+export default NightOutListComponent;
