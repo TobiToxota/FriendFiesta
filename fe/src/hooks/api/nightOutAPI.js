@@ -162,7 +162,7 @@ const useAddParticipantToNightOut = (token, uuid) => {
       setData(thisData);
     }
   };
-  return { addParticipantToNightOut, error, success, data };
+  return { addParticipantToNightOut, error, success, data, setError, setSuccess };
 };
 
 export { useCreateNightOut, useGetNightOut, useGetNightOutList, useAddParticipantToNightOut };

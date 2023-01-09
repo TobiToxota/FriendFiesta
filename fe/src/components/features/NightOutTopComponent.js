@@ -4,11 +4,13 @@ import React, { useState } from "react";
 
 import ProgressComponent from "../common/ProgressComponent";
 import DropDownContentComponent from "../common/DropDownContentComponent";
+import NotificatonComponent from "../common/NotificationComponent";
 import { useAddParticipantToNightOut } from "../../hooks/api/nightOutAPI";
 
 const NightOutTopDateComponent = ({ nightOut, userData, token }) => {
   const [addParticipantHandler, setAddParticipant] = useState(false);
-  const {addParticipantToNightOut, error, success, data } = useAddParticipantToNightOut(token, nightOut.uuid)
+  const { addParticipantToNightOut, error, success, data, setSuccess, setError } =
+    useAddParticipantToNightOut(token, nightOut.uuid);
 
   return (
     <>
@@ -59,7 +61,10 @@ const NightOutTopDateComponent = ({ nightOut, userData, token }) => {
               <p>Add Participant</p>
             </button>
             {addParticipantHandler ? (
-              <form className="is-inline ml-1 fade-in" id="addParticipantForm" onSubmit={(e) => addParticipantToNightOut(e)}>
+              <form
+                className="is-inline ml-1 fade-in"
+                id="addParticipantForm"
+                onSubmit={(e) => addParticipantToNightOut(e)}>
                 <div className="field is-inline">
                   <div className="control is-inline">
                     <input
@@ -83,6 +88,8 @@ const NightOutTopDateComponent = ({ nightOut, userData, token }) => {
                     cancel
                   </button>
                 </div>
+                {error && <NotificatonComponent msg={error} onExit={() => setError(null)}></NotificatonComponent>}
+                {success && <NotificatonComponent msg={success} backgroundColor={"#48c78e"} color={"white"} onExit={() => setSuccess(null)}></NotificatonComponent>}
               </form>
             ) : null}
             <div></div>
