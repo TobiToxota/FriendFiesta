@@ -14,7 +14,7 @@ const NightOutListComponent = ({ nightOut}) => {
   return (
     <Link to={`/nightout/${nightOut.uuid}`}>
       <div
-        className="box m-1 shadow"
+        className="box m-1"
         id="nightoutlist-component"
         style={{
           backgroundColor: getColorForNightOutListComponent(nightOut),

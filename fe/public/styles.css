@@ -105,6 +105,7 @@ body,
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px !important;
 }
+
 /* END: styles for the dropdown content component*/
 
 /* margin top for mobile */
@@ -115,7 +116,12 @@ body,
 }
 
 #nightoutlist-component:hover {
-  background-color: #17f4d3 !important;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px !important;
+  transition: 0.3s;
+}
+
+#nightoutlist-component {
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px !important;
 }
 
 /* margin left and right for mobiule */
@@ -129,10 +135,10 @@ body,
 /* black title for nightoutlistpage */
 #blackTitle {
   color: #330033 !important;
-  margin-bottom: 4px!important;
+  margin-bottom: 4px !important;
 }
 
 /* shadow */
 .shadow {
-  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px!important;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px !important;
 }
