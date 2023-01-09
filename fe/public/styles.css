@@ -11,6 +11,17 @@ body,
   min-height: 100vh;
 }
 
+/* get the squarepeg fontface*/
+@font-face {
+  font-family: "square-peg";
+  src: url("SquarePeg-Regular.ttf") format("truetype");
+}
+
+/* squarepeg font class*/
+.squarepeg {
+  font-family: "Square Peg" !important;
+}
+
 /* Padding for Header on Desktop */
 @media only screen and (min-width: 1200px) {
   .navbar {
