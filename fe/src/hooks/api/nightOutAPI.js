@@ -146,7 +146,7 @@ const useAddParticipantToNightOut = (token, uuid) => {
         Authorization: `token ${token}`,
       },
       body: JSON.stringify({
-        nightout: uuid,
+        nightOut: uuid,
         user: e.target.email.value,
       }),
     });

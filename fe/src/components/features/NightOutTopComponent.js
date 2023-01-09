@@ -59,7 +59,7 @@ const NightOutTopDateComponent = ({ nightOut, userData, token }) => {
               <p>Add Participant</p>
             </button>
             {addParticipantHandler ? (
-              <form className="is-inline ml-1 fade-in" id="addParticipantForm">
+              <form className="is-inline ml-1 fade-in" id="addParticipantForm" onSubmit={(e) => addParticipantToNightOut(e)}>
                 <div className="field is-inline">
                   <div className="control is-inline">
                     <input
