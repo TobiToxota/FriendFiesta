@@ -7,15 +7,19 @@ import DatePicker from "react-date-picker";
 // local imports
 import { getCheckBoxStatus } from "../../../utils/nightOutDateFinderUtils";
 
-
-const DateFinderComponent = ({ nightOut, refreshNightOut, token, userData }) => {
+const DateFinderComponent = ({
+  nightOut,
+  refreshNightOut,
+  token,
+  userData,
+}) => {
   // states for the datePicker
   const [datePicker, setDatePicker] = useState(false);
   const [value, onChange] = useState(new Date());
 
   return (
     <>
-      <h3 className="subtitle is-3 mb-2 mt-4">
+      <h3 className="subtitle is-4 is-size-5-touch mb-2 mt-4">
         Find a date for your NightOut:
       </h3>
       <button
@@ -28,15 +32,15 @@ const DateFinderComponent = ({ nightOut, refreshNightOut, token, userData }) => 
       </button>
       {datePicker && (
         <>
-          <button
+          <span
             className="button is-warning is-rounded ml-1"
-            id="date-buttons">
-            <DatePicker
-              onChange={onChange}
-              value={value}
-              style={{ border: "none !important" }}
-            />
-          </button>
+            id="date-buttons"
+            children={<DatePicker
+                onChange={onChange}
+                value={value}
+                style={{ border: "none !important" }}
+              />}>
+          </span>
           <form className="fade-in is-inline" id="addDateForm">
             <div className="control is-inline ml-1">
               <button
@@ -64,8 +68,8 @@ const DateFinderComponent = ({ nightOut, refreshNightOut, token, userData }) => 
           style={{}}>
           <thead>
             <tr>
-              <th className="roboto " style={{ fontWeight: 400 }}>
-                Participants
+              <th style={{ fontWeight: 400 }}>
+                Participants:
               </th>
               {nightOut.suggestedDates.map((date) => (
                 <th
@@ -88,8 +92,8 @@ const DateFinderComponent = ({ nightOut, refreshNightOut, token, userData }) => 
             <tfoot>
               <tr>
                 <td className="is-vcentered" style={{ paddingRight: "0px" }}>
-                  <p className="roboto-plain" style={{ fontSize: "15px" }}>
-                    Submit a date
+                  <p className="has-text-weight-medium is-size-5 is-size-6-touch">
+                    Submit a date:
                   </p>
                 </td>
                 {nightOut.suggestedDates.map((date) => (
@@ -119,7 +123,7 @@ const DateFinderComponent = ({ nightOut, refreshNightOut, token, userData }) => 
                       alt=""
                       width={30}
                     />
-                    <p className="roboto-plain">{participant.user.username}</p>
+                    <p>{participant.user.username}</p>
                   </button>
                 </td>
                 {nightOut.participantDates.map(
