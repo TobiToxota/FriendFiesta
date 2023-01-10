@@ -10,7 +10,6 @@ const NotificatonComponent = ({
   children,
   animated,
 }) => {
-
   // animate the progress countdown
   const [progress, setProgress] = useState(100);
   useEffect(() => {
@@ -38,7 +37,7 @@ const NotificatonComponent = ({
       {msg}
       <br></br>
       {children}
-      {animated && (
+      {animated ? (
         <>
           {backgroundColor ? (
             <progress
@@ -66,6 +65,8 @@ const NotificatonComponent = ({
             </progress>
           )}
         </>
+      ) : (
+        <div className="mb-2"></div>
       )}
     </div>
   );
