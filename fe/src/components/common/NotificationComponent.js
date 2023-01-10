@@ -41,7 +41,7 @@ const NotificatonComponent = ({
         <>
           {backgroundColor ? (
             <progress
-              className="mt-4 progress is-link is-small is-relative "
+              className="mt-4 progress is-link is-small"
               value={progress}
               max="100"
               style={{
@@ -53,7 +53,7 @@ const NotificatonComponent = ({
             </progress>
           ) : (
             <progress
-              className="mt-4 progress is-link is-small mb-0 is-relative "
+              className="mt-4 progress is-link is-small"
               value={progress}
               max="100"
               style={{

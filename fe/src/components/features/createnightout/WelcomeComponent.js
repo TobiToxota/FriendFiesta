@@ -1,6 +1,6 @@
 import React from "react"
 
-import { useSwipeInFromTop } from "../../hooks/animations/animations"
+import { useSwipeInFromTop } from "../../../hooks/animations/animations"
 
 const WelcomeComponent = ({ userData, setCreation }) => {
 

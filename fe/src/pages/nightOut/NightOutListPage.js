@@ -9,7 +9,7 @@ import HeaderComponent from "../../components/layout/HeaderComponent";
 import SpinnerComponent from "../../components/common/SpinnerComponent";
 import AuthContext from "../../context/AuthContext";
 import { useGetNightOutList } from "../../hooks/api/nightOutAPI";
-import NightOutListComponent from "../../components/features/NightOutListComponent";
+import NightOutListComponent from "../../components/features/nightoutlist/NightOutListComponent";
 
 const NightOutListPage = () => {
   // get userData, token and nightOutlist

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import {
   getPhaseForNightOutListComponent,
   getColorForNightOutListComponent,
-} from "../../utils/nightOutListComponentUtils.js";
-import { useFading } from "../../hooks/animations/animations.js";
+} from "../../../utils/nightOutListComponentUtils.js.js";
+import { useFading } from "../../../hooks/animations/animations.js";
 
 const NightOutListComponent = ({ nightOut}) => {
   useFading('#nightoutlist-component')
