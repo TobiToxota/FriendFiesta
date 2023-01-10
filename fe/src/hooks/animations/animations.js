@@ -54,6 +54,7 @@ const useFading = (target) => {
       targets: target,
       opacity: [0, 1],
       borderRadius: [30, 15],
+      translateX: [0, 3, -3, 0],
       duration: 300,
       delay: anime.stagger(30),
       easing: 'easeInOutQuad'

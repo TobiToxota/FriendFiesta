@@ -23,6 +23,11 @@ body,
   font-size: 60px !important;
 }
 
+.squarepeg-onlyfont {
+  font-family: "Square Peg" !important;
+}
+/* END: squarepeg font class*/
+
 /* Padding for Header on Desktop */
 @media only screen and (min-width: 1200px) {
   .navbar {
