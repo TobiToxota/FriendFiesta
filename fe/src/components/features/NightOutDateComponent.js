@@ -1,7 +1,9 @@
 /** @format */
 
+// packages import
 import React, { useState } from "react";
 
+// local imports
 import ProgressComponent from "../common/ProgressComponent";
 import DropDownContentComponent from "../common/DropDownContentComponent";
 import NotificatonComponent from "../common/NotificationComponent";
@@ -102,7 +104,6 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
                 )}
               </form>
             ) : null}
-            <div></div>
           </div>
         </div>
       </div>

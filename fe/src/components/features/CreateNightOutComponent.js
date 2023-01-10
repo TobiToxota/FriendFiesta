@@ -70,7 +70,7 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
                     targetDate={new Date(
                         new Date().setSeconds(new Date().getSeconds() + 3)
                     ).toISOString()}
-                    renderer={({ days, hours, minutes, seconds }) => (
+                    renderer={({ seconds }) => (
                         <div style={{color: "white"}}>
                              You will get redirected in {seconds} seconds 🚀
                         </div>

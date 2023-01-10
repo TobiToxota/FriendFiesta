@@ -17,6 +17,7 @@ const useCreateNightOut = (token) => {
       return { data, success, error };
     }
 
+    // Error Handling
     if (e.target.title.value.length > 39) {
       setError("Ensure that your title has not more than 40 characters.");
       return { data, success, error };
@@ -160,11 +161,17 @@ const useAddParticipantToNightOut = (token, uuid, getNightOut) => {
       setError(
         "It seems like the person you want to add, is allready participating in this Nightout."
       );
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
       setData(thisData);
     } else {
       setError(
         "It seems like the person you want to add, doesnt have an account. Ask him to create one."
       );
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
       setData(thisData);
     }
   };
