@@ -88,8 +88,18 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
                     cancel
                   </button>
                 </div>
-                {error && <NotificatonComponent msg={error} onExit={() => setError(null)}></NotificatonComponent>}
-                {success && <NotificatonComponent msg={success} backgroundColor={"#48c78e"} color={"white"} onExit={() => setSuccess(null)}></NotificatonComponent>}
+                {error && (
+                  <NotificatonComponent
+                    msg={error}
+                    onExit={() => setError(null)}></NotificatonComponent>
+                )}
+                {success && (
+                  <NotificatonComponent
+                    msg={success}
+                    backgroundColor={"#48c78e"}
+                    color={"white"}
+                    onExit={() => setSuccess(null)}></NotificatonComponent>
+                )}
               </form>
             ) : null}
             <div></div>

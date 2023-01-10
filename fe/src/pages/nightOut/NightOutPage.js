@@ -10,26 +10,26 @@ import { useGetNightOut } from "../../hooks/api/nightOutAPI";
 import nightOutPhaseReturner from "../../utils/nightOutPhaseReturner";
 
 const NightOutPage = () => {
-    // get userData, token, params and nightOutData
-    const { userData, token } = useContext(AuthContext);
-    const { uuid } = useParams();
-    const { nightOut, getNightOut, loading } = useGetNightOut(token, uuid);
+  // get userData, token, params and nightOutData
+  const { userData, token } = useContext(AuthContext);
+  const { uuid } = useParams();
+  const { nightOut, getNightOut, loading } = useGetNightOut(token, uuid);
 
-    return (
+  return (
+    <>
+      {loading ? (
         <>
-            {loading ? (
-                <>
-                    <HeaderComponent />
-                    <SpinnerComponent />
-                </>
-            ) : (
-                <>
-                    <HeaderComponent />
-                    {nightOutPhaseReturner(nightOut, getNightOut, userData, token)}
-                </>
-            )}
+          <HeaderComponent />
+          <SpinnerComponent />
         </>
-    );
+      ) : (
+        <>
+          <HeaderComponent />
+          {nightOutPhaseReturner(nightOut, getNightOut, userData, token)}
+        </>
+      )}
+    </>
+  );
 };
 
 export default NightOutPage;

@@ -40,7 +40,11 @@ const NightOutListPage = () => {
                   You are not participating in a Nightout. Create one or ask
                   your friends to invite you.
                 </h2>
-                <Link to={'/'}><button class="mt-5 button is-primary is-rounded is-large">Create a Nightout</button></Link>
+                <Link to={"/"}>
+                  <button class="mt-5 button is-primary is-rounded is-large">
+                    Create a Nightout
+                  </button>
+                </Link>
               </div>
             ) : (
               <div className="p-4 columns is-centered is-flex-wrap-wrap has-text-centered">
