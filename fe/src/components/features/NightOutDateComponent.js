@@ -10,7 +10,7 @@ import { useAddParticipantToNightOut } from "../../hooks/api/nightOutAPI";
 const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
   const [addParticipantHandler, setAddParticipant] = useState(false);
   const { addParticipantToNightOut, error, success, setSuccess, setError } =
-    useAddParticipantToNightOut(token, nightOut.uuid);
+    useAddParticipantToNightOut(token, nightOut.uuid, getNightOut);
 
   return (
     <>
