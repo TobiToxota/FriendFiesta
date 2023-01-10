@@ -93,6 +93,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
                 {error && (
                   <NotificatonComponent
                     msg={error}
+                    animated={true}
                     onExit={() => setError(null)}></NotificatonComponent>
                 )}
                 {success && (
@@ -100,6 +101,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
                     msg={success}
                     backgroundColor={"#48c78e"}
                     color={"white"}
+                    animated={true}
                     onExit={() => setSuccess(null)}></NotificatonComponent>
                 )}
               </form>

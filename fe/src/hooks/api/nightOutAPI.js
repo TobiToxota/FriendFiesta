@@ -45,7 +45,7 @@ const useCreateNightOut = (token) => {
       // send user to the new nightout
       setTimeout(function () {
         window.location.href = "/nightout/" + thisData.uuid;
-      }, 3050);
+      }, 5000);
     } else {
       setError("Something went wrong");
       setData(thisData);
@@ -167,7 +167,7 @@ const useAddParticipantToNightOut = (token, uuid, getNightOut) => {
       setData(thisData);
     } else {
       setError(
-        "It seems like the person you want to add, doesnt have an account. Ask him to create one."
+        "A user with that email does not exist. Or your friend did not create an account. Try again or ask your friend to create an account."
       );
       setTimeout(() => {
         setError(false);
