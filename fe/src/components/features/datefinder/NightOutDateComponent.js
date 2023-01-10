@@ -8,6 +8,7 @@ import ProgressComponent from "../../common/ProgressComponent";
 import DropDownContentComponent from "../../common/DropDownContentComponent";
 import NotificatonComponent from "../../common/NotificationComponent";
 import { useAddParticipantToNightOut } from "../../../hooks/api/nightOutAPI";
+import DateFinderComponent from "./DateFinderComponent";
 
 const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
   const [addParticipantHandler, setAddParticipant] = useState(false);
@@ -107,6 +108,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
               </form>
             ) : null}
           </div>
+          <DateFinderComponent nightOut={nightOut} userData={userData}></DateFinderComponent>
         </div>
       </div>
     </>

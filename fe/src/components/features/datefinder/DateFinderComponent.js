@@ -125,7 +125,7 @@ const DateFinderComponent = ({ nightOut, refreshNightOut, token, userData }) => 
                 {nightOut.participantDates.map(
                   (participantDate) =>
                     participantDate.participant.id === participant.id &&
-                    getCheckBoxStatus(participantDate, userData, addParticipantDate)
+                    getCheckBoxStatus(participantDate, userData)
                 )}
               </tr>
             ))}
