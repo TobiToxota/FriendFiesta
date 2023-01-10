@@ -1,12 +1,13 @@
-import NightOutTopDateComponent from "../components/features/NightOutTopComponent";
+import NightOutDateComponent from "../components/features/NightOutDateComponent";
 
 /* this function gets a phase as prop and returns the needed collection of components */
-const nightOutPhaseReturner = (nightOut, userData, token) => {
+const nightOutPhaseReturner = (nightOut, getNightOut, userData, token) => {
     if (nightOut.phase === "datePhase") {
       return (
         <>
-          <NightOutTopDateComponent
+          <NightOutDateComponent
             nightOut={nightOut}
+            getNightOut={getNightOut}
             userData={userData}
             token={token}
           />

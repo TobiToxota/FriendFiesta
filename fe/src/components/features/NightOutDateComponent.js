@@ -7,9 +7,9 @@ import DropDownContentComponent from "../common/DropDownContentComponent";
 import NotificatonComponent from "../common/NotificationComponent";
 import { useAddParticipantToNightOut } from "../../hooks/api/nightOutAPI";
 
-const NightOutTopDateComponent = ({ nightOut, userData, token }) => {
+const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
   const [addParticipantHandler, setAddParticipant] = useState(false);
-  const { addParticipantToNightOut, error, success, data, setSuccess, setError } =
+  const { addParticipantToNightOut, error, success, setSuccess, setError } =
     useAddParticipantToNightOut(token, nightOut.uuid);
 
   return (
@@ -100,4 +100,4 @@ const NightOutTopDateComponent = ({ nightOut, userData, token }) => {
   );
 };
 
-export default NightOutTopDateComponent;
+export default NightOutDateComponent;

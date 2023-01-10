@@ -155,11 +155,16 @@ const useAddParticipantToNightOut = (token, uuid) => {
     if (response.status === 201) {
       setSuccess("Participant successfully added to your Nightout.");
       setData(thisData);
-    } else {
+    } else if (response.status === 409) {
       setError(
-        "It seems like the person you want to add, doesnt have an account. Ask him to create one."
+        "It seems like the person you want to add, is allready participating in this Nightout."
       );
       setData(thisData);
+    } else {
+        setError(
+            "It seems like the person you want to add, doesnt have an account. Ask him to create one."
+          );
+          setData(thisData);
     }
   };
   return { addParticipantToNightOut, error, success, data, setError, setSuccess };
