@@ -1,9 +1,14 @@
 /** @format */
 
+// package imports
 import React, { useState } from "react";
 import DatePicker from "react-date-picker";
 
-const DateFinder = ({ nightOut, refreshNightOut, token, userData }) => {
+// local imports
+import { getCheckBoxStatus } from "../../../utils/nightOutDateFinderUtils";
+
+
+const DateFinderComponent = ({ nightOut, refreshNightOut, token, userData }) => {
   // states for the datePicker
   const [datePicker, setDatePicker] = useState(false);
   const [value, onChange] = useState(new Date());
@@ -120,7 +125,7 @@ const DateFinder = ({ nightOut, refreshNightOut, token, userData }) => {
                 {nightOut.participantDates.map(
                   (participantDate) =>
                     participantDate.participant.id === participant.id &&
-                    getCheckBoxStatus(participantDate)
+                    getCheckBoxStatus(participantDate, userData, addParticipantDate)
                 )}
               </tr>
             ))}
@@ -130,3 +135,5 @@ const DateFinder = ({ nightOut, refreshNightOut, token, userData }) => {
     </>
   );
 };
+
+export default DateFinderComponent;
