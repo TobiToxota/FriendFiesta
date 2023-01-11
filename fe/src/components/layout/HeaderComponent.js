@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 // local imports
 import AuthContext from "../../context/AuthContext";
-import useScreenSize from "../../hooks/ScreenSize";
+import useScreenSize from "../../hooks/utilHooks/ScreenSize";
 
 const HeaderComponent = () => {
   // get the user from the context
