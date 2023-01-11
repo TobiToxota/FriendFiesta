@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import ProgressComponent from "../../common/ProgressComponent";
 import DropDownContentComponent from "../../common/DropDownContentComponent";
 import NotificatonComponent from "../../common/NotificationComponent";
-import { useAddParticipantToNightOut } from "../../../hooks/api/nightOutAPI";
+import { useAddParticipantToNightOut } from "../../../hooks/api/participantAPI";
 import DateFinderComponent from "./DateFinderComponent";
 
 const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
