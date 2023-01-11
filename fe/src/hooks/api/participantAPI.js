@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 /* this custom hook fetches the backend to add an user to a nightout as a participant*/
-const useAddParticipantToNightOut = (token, uuid, getNightOut) => {
+const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
     const [data, setData] = useState(null)
@@ -33,7 +33,7 @@ const useAddParticipantToNightOut = (token, uuid, getNightOut) => {
             setTimeout(() => {
                 setSuccess(false)
             }, 5000)
-            getNightOut(uuid)
+            refreshNightOut(uuid)
         } else if (response.status === 409) {
             setError(
                 'It seems like the person you want to add, is allready participating in this Nightout.'
@@ -63,7 +63,7 @@ const useAddParticipantToNightOut = (token, uuid, getNightOut) => {
 }
 
 /* this custom hook fetches the backend to add an datesuggestion to a nightout */
-const useAddDateSuggestionToNightOut = (token, uuid, getNightOut) => {
+const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
     const [data, setData] = useState(null)
@@ -90,7 +90,7 @@ const useAddDateSuggestionToNightOut = (token, uuid, getNightOut) => {
                 'Your suggested date was successfully added to this Nightout'
             )
             setData(thisData)
-            getNightOut()
+            refreshNightOut()
             setTimeout(() => {
                 setSuccess(false)
             }, 5000)
@@ -116,7 +116,7 @@ const useAddDateSuggestionToNightOut = (token, uuid, getNightOut) => {
 }
 
 /* this custom hook fetches the backend to add an  to a nightout */
-const useAddParticipantDateToNightOut = (token, uuid, getNightOut) => {
+const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
     const [error, setError] = useState(null)
     const [working, setWorking] = useState(false)
     const [data, setData] = useState(null)
@@ -146,7 +146,7 @@ const useAddParticipantDateToNightOut = (token, uuid, getNightOut) => {
                 setData(thisData)
                 setTimeout(() => {
                     setWorking(false)
-                    getNightOut()
+                    refreshNightOut()
                 }, 5000)
             } else if (
                 response.status === 400 ||
@@ -184,7 +184,7 @@ const useAddParticipantDateToNightOut = (token, uuid, getNightOut) => {
                 setData(thisData)
                 setTimeout(() => {
                     setWorking(false)
-                    getNightOut()
+                    refreshNightOut()
                 }, 5000)
             } else if (
                 response.status === 400 ||
