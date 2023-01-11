@@ -7,7 +7,7 @@ const getCheckBoxStatus = (participantDate, userData, addParticipantDate) => {
     if (participantDate.participant.user.id === userData.id) {
         return (
             <td key={participantDate.id} className="has-text-centered">
-                <label className="checkbox fade-in2">
+                <label className="checkbox fade-in">
                     <input
                         type="checkbox"
                         value={participantDate.id}
@@ -20,7 +20,7 @@ const getCheckBoxStatus = (participantDate, userData, addParticipantDate) => {
     } else {
         return (
             <td key={participantDate.id} className="has-text-centered">
-                <label className="checkbox fade-in2">
+                <label className="checkbox fade-in">
                     <input
                         type="checkbox"
                         value={participantDate.id}

@@ -8,6 +8,7 @@ import DatePicker from 'react-date-picker'
 import { getCheckBoxStatus } from '../../../utils/nightOutDateFinderUtils'
 import { useAddDateSuggestionToNightOut } from '../../../hooks/api/participantAPI'
 import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
+import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
 
 const DateFinderComponent = ({
     nightOut,
@@ -20,7 +21,7 @@ const DateFinderComponent = ({
     const [value, onChange] = useState(new Date())
 
     // get the hooks for addDate and addParticipantDate
-    const {addDatesuggestion, error, success} = useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
+    const {addDateSuggestion, error, success} = useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
 
     return (
         <>
@@ -49,12 +50,13 @@ const DateFinderComponent = ({
                             />
                         }
                     ></span>
-                    <form className="fade-in is-inline" id="addDateForm">
+                    <div className="fade-in is-inline" id="addDateForm">
                         <div className="control is-inline ml-1">
                             <button
                                 className="button is-info is-rounded is-small mt-1 margin-top-mobile"
                                 type="submit"
                                 id="date-buttons-two"
+                                onClick={() => addDateSuggestion(createDateFromDatePicker(value))}
                             >
                                 add
                             </button>
@@ -68,18 +70,18 @@ const DateFinderComponent = ({
                         >
                             cancel
                         </button>
-                    </form>
+                    </div>
                     {/* TODO:{errormsg ? <Notificaton msg={errormsg} onExit={onExit} /> : null} */}
                 </>
             )}
             <div className="table-container mt-2" id="datetable">
                 <table
-                    className="table is-narrow is-fullwidth datefinder-table mt-2"
+                    className="table is-narrow datefinder-table mt-2"
                     style={{}}
                 >
                     <thead>
                         <tr>
-                            <th style={{ fontWeight: 400 }}>Participants:</th>
+                            <th className='is-size-6-touch' style={{ fontWeight: 400 }}>Participants:</th>
                             {nightOut.suggestedDates.map((date) => (
                                 <th
                                     className="roboto is-vcentered has-text-centered"
@@ -116,10 +118,10 @@ const DateFinderComponent = ({
                                 {nightOut.suggestedDates.map((date) => (
                                     <td
                                         key={date.id}
-                                        className="has-text-centered fade-in2"
+                                        className="has-text-centered"
                                     >
                                         <button
-                                            className="button is-info is-rounded is-small"
+                                            className="button is-info is-rounded is-small fade-in"
                                             value={date.id}
                                             onClick={() => {}}
                                         >

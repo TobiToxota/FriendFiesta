@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-/* this custom hook fetches the backend to add an user to a nightout as a participant*/
+/** this custom hook fetches the backend to add an user to a nightout as a participant*/
 const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
@@ -62,7 +62,7 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
     }
 }
 
-/* this custom hook fetches the backend to add an datesuggestion to a nightout */
+/** this custom hook fetches the backend to add an datesuggestion to a nightout */
 const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
@@ -90,7 +90,7 @@ const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
                 'Your suggested date was successfully added to this Nightout'
             )
             setData(thisData)
-            refreshNightOut()
+            refreshNightOut(uuid)
             setTimeout(() => {
                 setSuccess(false)
             }, 5000)
@@ -115,7 +115,7 @@ const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
     }
 }
 
-/* this custom hook fetches the backend to add an  to a nightout */
+/** this custom hook fetches the backend to add an  to a nightout */
 const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
     const [error, setError] = useState(null)
     const [working, setWorking] = useState(false)
@@ -146,7 +146,7 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setData(thisData)
                 setTimeout(() => {
                     setWorking(false)
-                    refreshNightOut()
+                    refreshNightOut(uuid)
                 }, 5000)
             } else if (
                 response.status === 400 ||

@@ -108,7 +108,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
               </form>
             ) : null}
           </div>
-          <DateFinderComponent nightOut={nightOut} userData={userData}></DateFinderComponent>
+          <DateFinderComponent nightOut={nightOut} userData={userData} token={token} refreshNightOut={getNightOut}></DateFinderComponent>
         </div>
       </div>
     </>
