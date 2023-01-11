@@ -81,7 +81,7 @@ const DateFinderComponent = ({
                 >
                     <thead>
                         <tr>
-                            <th className='is-size-6-touch' style={{ fontWeight: 400 }}>Participants:</th>
+                            <th className='has-text-weight-medium is-size-5 is-size-6-touch' style={{ fontWeight: 400 }}>Participants:</th>
                             {nightOut.suggestedDates.map((date) => (
                                 <th
                                     className="roboto is-vcentered has-text-centered"
@@ -144,13 +144,13 @@ const DateFinderComponent = ({
                         {nightOut.participants.map((participant) => (
                             <tr key={participant.id}>
                                 <td>
-                                    <button className="button is-info is-rounded p-2 is-small">
+                                    <button className="button is-info is-rounded p-4 is-small">
                                         <img
                                             src={`https://avatars.dicebear.com/api/${participant.user.avatarStyle}/${participant.user.username}+${participant.user.avatarIteration}.svg`}
                                             alt=""
                                             width={30}
                                         />
-                                        <p>{participant.user.username}</p>
+                                        <p className='mr-1 ml-1'>{participant.user.username}</p>
                                     </button>
                                 </td>
                                 {nightOut.participantDates.map(
