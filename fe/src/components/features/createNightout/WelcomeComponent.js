@@ -24,7 +24,7 @@ const WelcomeComponent = ({ userData, setCreation }) => {
                 <h2
                     className="subtitle mb-5 has-text-centered is-size-6-touch"
                     style={{ color: "white" }}>
-                    Here you can plan your nightout with your friends, collegues or
+                    Here you can plan your Nightout with your friends, collegues or
                     family.
                 </h2>
             </div>

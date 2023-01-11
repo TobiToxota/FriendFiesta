@@ -24,6 +24,7 @@ apiKey = os.getenv('REACT_APP_PLACES_API')
 # initialize the google maps client
 map_client = googlemaps.Client(apiKey)
 
+
 @permission_classes((IsAuthenticated,))
 class NightOutList(APIView):
     """Get all nightouts the user is owning or participating in or create a new nightout"""
@@ -124,6 +125,14 @@ class AddParticipant(APIView):
         serializer = ParticipantSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=userObject, nightOut=nightoutObject)
+
+            # if the Participant is added we need to add all current datesuggestions as participantdates
+            dateSuggestions = DateSuggestion.objects.filter(
+                nightOut=request.data['nightOut'])
+            for date in dateSuggestions:
+                ParticipantDate.objects.create(
+                    participant=serializer.instance, suggestedDate=date, nightOut=nightoutObject)
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
