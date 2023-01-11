@@ -110,4 +110,93 @@ const useAddDateSuggestionToNightOut = (token, uuid, getNightOut) => {
   };
 };
 
-export { useAddParticipantToNightOut, useAddDateSuggestionToNightOut };
+/* this custom hook fetches the backend to add an  to a nightout */
+const useAddParticipantDateToNightOut = (token, uuid, getNightOut) => {
+  const [error, setError] = useState(null);
+  const [working, setWorking] = useState(false);
+  const [data, setData] = useState(null);
+
+  const addParticipantDate = async (e) => {
+    e.preventDefault();
+    setWorking(true);
+
+    if (e.target.checked) {
+      let response = await fetch(
+        process.env.REACT_APP_API_URL + "participantdate/",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "Application/json",
+            Authorization: `token ${token}`,
+          },
+          body: JSON.stringify({
+            pk: e.target.value,
+            commit: true,
+          }),
+        }
+      );
+      let thisData = await response.json();
+
+      if (response.status === 200) {
+        setData(thisData);
+        setTimeout(() => {
+          setWorking(false);
+          getNightOut();
+        }, 5000);
+      } else if (
+        response.status === 400 ||
+        response.status === 409 ||
+        response.status === 404
+      ) {
+        setError(data.message);
+        setTimeout(() => {
+          setWorking(false);
+        }, 5000);
+      } else {
+        setError("Something went wrong");
+        setTimeout(() => {
+          setWorking(false);
+        }, 5000);
+      }
+    } else {
+      let response = await fetch(
+        process.env.REACT_APP_API_URL + "participantdate/",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "Application/json",
+            Authorization: `token ${token}`,
+          },
+          body: JSON.stringify({
+            pk: e.target.value,
+            commit: false,
+          }),
+        }
+      );
+      let thisData = await response.json();
+
+      if (response.status === 200) {
+        setData(thisData);
+        setTimeout(() => {
+          setWorking(false);
+          getNightOut();
+        }, 5000);
+      } else if (
+        response.status === 400 ||
+        response.status === 409 ||
+        response.status === 404
+      ) {
+        setError(data.message);
+        setTimeout(() => {
+          setWorking(false);
+        }, 5000);
+      } else {
+        setError("Something went wrong");
+        setTimeout(() => {
+          setWorking(false);
+        }, 5000);
+      }
+    }
+  };
+};
+export { useAddParticipantToNightOut, useAddDateSuggestionToNightOut, useAddParticipantDateToNightOut };

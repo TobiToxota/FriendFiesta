@@ -3,8 +3,8 @@
 import React, { useContext, useState } from "react";
 
 import Header from "../../components/layout/HeaderComponent";
-import WelcomeComponent from "../../components/features/createnightout/WelcomeComponent";
-import CreateNightOutComponent from "../../components/features/createnightout/CreateNightOutComponent";
+import WelcomeComponent from "../../components/features/createNightout/WelcomeComponent";
+import CreateNightOutComponent from "../../components/features/createNightout/CreateNightOutComponent";
 import AuthContext from "../../context/AuthContext";
 import SpinnerComponent from "../../components/common/SpinnerComponent";
 
