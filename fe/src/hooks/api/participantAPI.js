@@ -27,7 +27,7 @@ const useAddParticipantToNightOut = (token, uuid, getNightOut) => {
         setSuccess("Participant successfully added to your Nightout.");
         setData(thisData);
         setTimeout(() => {
-            setError(false);
+            setSuccess(false);
           }, 5000);
         getNightOut(uuid);
       } else if (response.status === 409) {
@@ -57,5 +57,12 @@ const useAddParticipantToNightOut = (token, uuid, getNightOut) => {
       setSuccess,
     };
   };
+
+  /* this custom hook fetches the backend to add an datesuggestion to a nightout */
+  const useAddDateSuggestionToNightOut = (token, uuid, getNightOut) => {
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+    const [data, setData] = useState(null);
+  }
 
   export {useAddParticipantToNightOut}

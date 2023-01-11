@@ -33,7 +33,7 @@ const DateFinderComponent = ({
       {datePicker && (
         <>
           <span
-            className="button is-warning is-rounded ml-1"
+            className="button is-warning is-rounded ml-1 margin-top-mobile"
             id="date-buttons"
             children={<DatePicker
                 onChange={onChange}
@@ -44,14 +44,14 @@ const DateFinderComponent = ({
           <form className="fade-in is-inline" id="addDateForm">
             <div className="control is-inline ml-1">
               <button
-                className="button is-info is-rounded is-small mt-1 "
+                className="button is-info is-rounded is-small mt-1 margin-top-mobile"
                 type="submit"
                 id="date-buttons-two">
                 add
               </button>
             </div>
             <button
-              className="button is-danger is-rounded is-small mt-1 ml-1"
+              className="button is-danger is-rounded is-small mt-1 ml-1 margin-top-mobile"
               onClick={() => {
                 setDatePicker(false);
               }}

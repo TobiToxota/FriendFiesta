@@ -212,6 +212,7 @@ td {
   font: inherit;
   box-sizing: content-box;
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 .react-date-picker__inputGroup__input::-webkit-outer-spin-button,
 .react-date-picker__inputGroup__input::-webkit-inner-spin-button {
