@@ -51,7 +51,7 @@ const useCreateNightOut = (token) => {
       // send user to the new nightout
       setTimeout(function () {
         window.location.href = "/nightout/" + thisData.uuid;
-      }, 5000);
+      }, 4800);
     } else {
       setError("Something went wrong");
       setData(thisData);

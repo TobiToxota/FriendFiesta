@@ -41,7 +41,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
               style={{ verticalAlign: "bottom" }}>
               {nightOut.creator.username !== userData.username
                 ? nightOut.creator.username + " has created this NightOut"
-                : "You created this NightOut"}
+                : "You created this Nightout"}
             </p>
           </div>
           <div className="mt-2">

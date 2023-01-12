@@ -9,6 +9,7 @@ import { getCheckBoxStatus } from '../../../utils/nightOutDateFinderUtils'
 import { useAddDateSuggestionToNightOut } from '../../../hooks/api/participantAPI'
 import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
 import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
+import NotificatonComponent from '../../common/NotificationComponent'
 
 const DateFinderComponent = ({
     nightOut,
@@ -21,12 +22,15 @@ const DateFinderComponent = ({
     const [value, onChange] = useState(new Date())
 
     // get the hooks for addDate and addParticipantDate
-    const {addDateSuggestion, error, success} = useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
+    const { addDateSuggestion, dateError, setDateError, success, setSuccess } =
+        useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
+    const { addParticiPantDateToNightOut, participantError, working } =
+        useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
 
     return (
         <>
             <h3 className="subtitle is-4 is-size-5-touch mb-2 mt-4">
-                Find a date for your NightOut:
+                Find a date for your Nightout:
             </h3>
             <button
                 className="button is-success is-rounded ml-1"
@@ -56,7 +60,11 @@ const DateFinderComponent = ({
                                 className="button is-info is-rounded is-small mt-1 margin-top-mobile"
                                 type="submit"
                                 id="date-buttons-two"
-                                onClick={() => addDateSuggestion(createDateFromDatePicker(value))}
+                                onClick={() =>
+                                    addDateSuggestion(
+                                        createDateFromDatePicker(value)
+                                    )
+                                }
                             >
                                 add
                             </button>
@@ -72,6 +80,16 @@ const DateFinderComponent = ({
                         </button>
                     </div>
                     {/* TODO:{errormsg ? <Notificaton msg={errormsg} onExit={onExit} /> : null} */}
+                    {success && (
+                        <>
+                            <NotificatonComponent
+                                msg={success}
+                                animated={true}
+                                onExit={() => setSuccess()}
+                            ></NotificatonComponent>
+                        </>
+                    )}
+                    {dateError && <NotificatonComponent msg={dateError} onExit={() => setDateError()} animated={true}/>}
                 </>
             )}
             <div className="table-container mt-2" id="datetable">
@@ -81,7 +99,12 @@ const DateFinderComponent = ({
                 >
                     <thead>
                         <tr>
-                            <th className='has-text-weight-medium is-size-5 is-size-6-touch' style={{ fontWeight: 400 }}>Participants:</th>
+                            <th
+                                className="has-text-weight-medium is-size-5 is-size-6-touch"
+                                style={{ fontWeight: 400 }}
+                            >
+                                Participants:
+                            </th>
                             {nightOut.suggestedDates.map((date) => (
                                 <th
                                     className="roboto is-vcentered has-text-centered"
@@ -150,7 +173,9 @@ const DateFinderComponent = ({
                                             alt=""
                                             width={30}
                                         />
-                                        <p className='mr-1 ml-1'>{participant.user.username}</p>
+                                        <p className="mr-1 ml-1">
+                                            {participant.user.username}
+                                        </p>
                                     </button>
                                 </td>
                                 {nightOut.participantDates.map(

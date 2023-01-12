@@ -32,7 +32,7 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
             setData(thisData)
             setTimeout(() => {
                 setSuccess(false)
-            }, 5000)
+            }, 4800)
             refreshNightOut(uuid)
         } else if (response.status === 409) {
             setError(
@@ -40,7 +40,7 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
             )
             setTimeout(() => {
                 setError(false)
-            }, 5000)
+            }, 4800)
             setData(thisData)
         } else {
             setError(
@@ -48,7 +48,7 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
             )
             setTimeout(() => {
                 setError(false)
-            }, 5000)
+            }, 4800)
             setData(thisData)
         }
     }
@@ -64,9 +64,9 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
 
 /** this custom hook fetches the backend to add an datesuggestion to a nightout */
 const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
-    const [error, setError] = useState(null)
+    const [dateError, setDateError] = useState(null)
     const [success, setSuccess] = useState(null)
-    const [data, setData] = useState(null)
+    const [dateSuggestionData, setDateSuggestionData] = useState(null)
 
     const addDateSuggestion = async (date) => {
         let response = await fetch(
@@ -89,37 +89,39 @@ const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
             setSuccess(
                 'Your suggested date was successfully added to this Nightout'
             )
-            setData(thisData)
+            setDateSuggestionData(thisData)
             refreshNightOut(uuid)
             setTimeout(() => {
                 setSuccess(false)
-            }, 5000)
+            }, 4800)
         } else if (response.status === 400 || response.status === 409) {
-            setData(thisData)
-            setError(thisData.message)
+            setDateSuggestionData(thisData)
+            setDateError(thisData.message)
             setTimeout(() => {
-                setError(false)
-            }, 5000)
+                setDateError(false)
+            }, 4800)
         } else {
-            setError('Something went wrong')
+            setDateError('Something went wrong')
             setTimeout(() => {
-                setError(false)
-            }, 5000)
+                setDateError(false)
+            }, 4800)
         }
     }
     return {
         addDateSuggestion,
-        error,
+        dateError,
+        setDateError,
         success,
-        data,
+        setSuccess,
+        dateSuggestionData,
     }
 }
 
 /** this custom hook fetches the backend to add an  to a nightout */
 const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
-    const [error, setError] = useState(null)
+    const [participantError, setParticipantError] = useState(null)
     const [working, setWorking] = useState(false)
-    const [data, setData] = useState(null)
+    const [participantDateData, setParticipantDateData] = useState(null)
 
     const addParticipantDate = async (e) => {
         e.preventDefault()
@@ -143,25 +145,25 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
             let thisData = await response.json()
 
             if (response.status === 200) {
-                setData(thisData)
+                setParticipantDateData(thisData)
                 setTimeout(() => {
                     setWorking(false)
                     refreshNightOut(uuid)
-                }, 5000)
+                }, 4800)
             } else if (
                 response.status === 400 ||
                 response.status === 409 ||
                 response.status === 404
             ) {
-                setError(data.message)
+                setParticipantError(participantDateData.message)
                 setTimeout(() => {
                     setWorking(false)
-                }, 5000)
+                }, 4800)
             } else {
-                setError('Something went wrong')
+                setParticipantError('Something went wrong')
                 setTimeout(() => {
                     setWorking(false)
-                }, 5000)
+                }, 4800)
             }
         } else {
             let response = await fetch(
@@ -181,29 +183,34 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
             let thisData = await response.json()
 
             if (response.status === 200) {
-                setData(thisData)
+                setParticipantDateData(thisData)
                 setTimeout(() => {
                     setWorking(false)
                     refreshNightOut()
-                }, 5000)
+                }, 4800)
             } else if (
                 response.status === 400 ||
                 response.status === 409 ||
                 response.status === 404
             ) {
-                setError(data.message)
+                setParticipantError(participantDateData.message)
                 setTimeout(() => {
                     setWorking(false)
-                }, 5000)
+                }, 4800)
             } else {
-                setError('Something went wrong')
+                setParticipantError('Something went wrong')
                 setTimeout(() => {
                     setWorking(false)
-                }, 5000)
+                }, 4800)
             }
         }
     }
-    return { addParticipantDate, error, working, data }
+    return {
+        addParticipantDate,
+        participantError,
+        working,
+        participantDateData,
+    }
 }
 export {
     useAddParticipantToNightOut,
