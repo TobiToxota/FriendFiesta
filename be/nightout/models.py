@@ -41,6 +41,9 @@ class DateSuggestion(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['date']
+
     def __str__(self):
         return str(self.date) + " - " + str(self.nightOut.title) + " - " + str(self.nightOut.creator.username)
 
@@ -71,7 +74,7 @@ class ParticipantDate(models.Model):
     commit = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['participant']
+        ordering = ['suggestedDate']
 
     def __str__(self):
         return str(self.date) + " - " + str(self.participant.user.username) + " - " + str(self.participant.nightOut.title)
