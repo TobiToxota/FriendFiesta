@@ -24,7 +24,7 @@ const DateFinderComponent = ({
     // get the hooks for addDate and addParticipantDate
     const { addDateSuggestion, dateError, setDateError, success, setSuccess } =
         useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
-    const { addParticiPantDateToNightOut, participantError, working } =
+    const { addParticipantDateToNightOut, participantError, working } =
         useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
 
     return (
@@ -89,7 +89,13 @@ const DateFinderComponent = ({
                             ></NotificatonComponent>
                         </>
                     )}
-                    {dateError && <NotificatonComponent msg={dateError} onExit={() => setDateError()} animated={true}/>}
+                    {dateError && (
+                        <NotificatonComponent
+                            msg={dateError}
+                            onExit={() => setDateError()}
+                            animated={true}
+                        />
+                    )}
                 </>
             )}
             <div className="table-container mt-2" id="datetable">
@@ -183,8 +189,10 @@ const DateFinderComponent = ({
                                         participantDate.participant.id ===
                                             participant.id &&
                                         getCheckBoxStatus(
+                                            addParticipantDateToNightOut,
                                             participantDate,
-                                            userData
+                                            userData,
+                                            working
                                         )
                                 )}
                             </tr>

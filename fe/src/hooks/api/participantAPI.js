@@ -123,7 +123,7 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
     const [working, setWorking] = useState(false)
     const [participantDateData, setParticipantDateData] = useState(null)
 
-    const addParticipantDate = async (e) => {
+    const addParticipantDateToNightOut = async (e) => {
         e.preventDefault()
         setWorking(true)
 
@@ -149,7 +149,7 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setTimeout(() => {
                     setWorking(false)
                     refreshNightOut(uuid)
-                }, 4800)
+                }, 2500)
             } else if (
                 response.status === 400 ||
                 response.status === 409 ||
@@ -158,12 +158,12 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setParticipantError(participantDateData.message)
                 setTimeout(() => {
                     setWorking(false)
-                }, 4800)
+                }, 2500)
             } else {
                 setParticipantError('Something went wrong')
                 setTimeout(() => {
                     setWorking(false)
-                }, 4800)
+                }, 2500)
             }
         } else {
             let response = await fetch(
@@ -186,8 +186,8 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setParticipantDateData(thisData)
                 setTimeout(() => {
                     setWorking(false)
-                    refreshNightOut()
-                }, 4800)
+                    refreshNightOut(uuid)
+                }, 2500)
             } else if (
                 response.status === 400 ||
                 response.status === 409 ||
@@ -196,17 +196,19 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setParticipantError(participantDateData.message)
                 setTimeout(() => {
                     setWorking(false)
-                }, 4800)
+                    refreshNightOut(uuid)
+                }, 2500)
             } else {
                 setParticipantError('Something went wrong')
                 setTimeout(() => {
                     setWorking(false)
-                }, 4800)
+                    refreshNightOut(uuid)
+                }, 2500)
             }
         }
     }
     return {
-        addParticipantDate,
+        addParticipantDateToNightOut,
         participantError,
         working,
         participantDateData,

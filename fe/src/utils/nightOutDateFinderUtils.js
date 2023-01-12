@@ -3,8 +3,13 @@
  *
  * @format
  */
-const getCheckBoxStatus = (participantDate, userData, addParticipantDate) => {
-    if (participantDate.participant.user.id === userData.id) {
+const getCheckBoxStatus = (
+    addParticipantDateToNightOut,
+    participantDate,
+    userData,
+    working
+) => {
+    if (participantDate.participant.user.id === userData.id && !working) {
         return (
             <td key={participantDate.id} className="has-text-centered">
                 <label className="checkbox fade-in">
@@ -12,11 +17,13 @@ const getCheckBoxStatus = (participantDate, userData, addParticipantDate) => {
                         type="checkbox"
                         value={participantDate.id}
                         checked={participantDate.commit}
-                        onChange={addParticipantDate}
+                        onChange={(e) => addParticipantDateToNightOut(e)}
                     />
                 </label>
             </td>
         )
+    } else if (working) {
+        return <td key={participantDate.id} className="has-text-centered"></td>
     } else {
         return (
             <td key={participantDate.id} className="has-text-centered">
