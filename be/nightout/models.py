@@ -133,9 +133,9 @@ class Notification(models.Model):
     )
 
     creator = models.ForeignKey(
-        Participant, on_delete=models.CASCADE, related_name="createdNotifications")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="createdNotifications")
     receiver = models.ForeignKey(
-        Participant, on_delete=models.CASCADE, related_name="receivedNotifications")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="receivedNotifications")
     nightout = models.ForeignKey(
         NightOutModel, on_delete=models.CASCADE, related_name="notificationsOnNightout")
     createdAt = models.DateTimeField(auto_now_add=True)
