@@ -10,4 +10,4 @@ const createDateFromDatePicker = (value) => {
     return date
 }
 
-export { CheckBoxComponent, createDateFromDatePicker }
+export { createDateFromDatePicker }

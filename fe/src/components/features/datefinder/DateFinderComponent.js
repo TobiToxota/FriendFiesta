@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import DatePicker from 'react-date-picker'
 
 // local imports
-import { getCheckBoxStatus } from '../../../utils/nightOutDateFinderUtils'
 import { useAddDateSuggestionToNightOut } from '../../../hooks/api/participantAPI'
 import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
 import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
@@ -25,7 +24,7 @@ const DateFinderComponent = ({
     // get the hooks for addDate and addParticipantDate
     const { addDateSuggestion, dateError, setDateError, success, setSuccess } =
         useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
-    const { addParticipantDateToNightOut, participantError, working } =
+    const { addParticipantDateToNightOut, working } =
         useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
 
     return (
