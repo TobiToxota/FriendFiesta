@@ -100,7 +100,7 @@ const DateFinderComponent = ({
                     )}
                 </>
             )}
-            <div className="table-container mt-2" id="datetable">
+            <div className="table-container mt-2 mb-2" id="datetable">
                 <table
                     className="table is-narrow datefinder-table mt-2"
                     style={{}}
@@ -115,7 +115,8 @@ const DateFinderComponent = ({
                             </th>
                             {nightOut.suggestedDates.map((date) => (
                                 <th
-                                    className="roboto is-vcentered has-text-centered fade-in" id='date-head'
+                                    className="roboto is-vcentered has-text-centered fade-in"
+                                    id="date-head"
                                     key={date.id}
                                 >
                                     <p
@@ -151,8 +152,10 @@ const DateFinderComponent = ({
                                     className="is-vcentered"
                                     style={{ paddingRight: '0px' }}
                                 >
-                                    <p className="is-size-5 is-size-6-touch"
-                                    style={{ fontWeight: 200 }}>
+                                    <p
+                                        className="is-size-5 is-size-6-touch"
+                                        style={{ fontWeight: 200 }}
+                                    >
                                         Submit a date:
                                     </p>
                                 </td>
@@ -217,26 +220,25 @@ const DateFinderComponent = ({
                         ))}
                     </tbody>
                 </table>
-                {nightOut.creator.id !== userData.id && (
-                    <div className="has-text-centered mt-3">
-                        <p className="subtitle mb-1">
-                            You want this Nightout to be in the next phase?
-                        </p>
-                        <p className="ml-2 has-text-centered">
-                            Only the Creator of the Nightout can submit a date
-                            and bring the Nightout to the planning phase.
-                        </p>
-                        <button className="button is-link is-rounded mt-2">
-                            <span className="icon is-small">
-                                <i className="fa-solid fa-bell"></i>
-                            </span>
-                            <span className="is-size-7">
-                                Send a reminder
-                            </span>
-                        </button>
-                    </div>
-                )}
             </div>
+            {nightOut.creator.id !== userData.id && (
+                <div className="has-text-centered">
+                    <p className="subtitle mb-1">
+                        You want this Nightout to be in the next phase?
+                    </p>
+                    <p className="ml-2 has-text-centered">
+                        Only the Creator of the Nightout can submit a date and
+                        bring the Nightout to the planning phase.<br></br>
+                        But you can remind him:
+                    </p>
+                    <button className="button is-link is-rounded mt-2">
+                        <span className="icon is-small">
+                            <i className="fa-solid fa-bell"></i>
+                        </span>
+                        <span className="is-size-7">Send a reminder</span>
+                    </button>
+                </div>
+            )}
         </>
     )
 }
