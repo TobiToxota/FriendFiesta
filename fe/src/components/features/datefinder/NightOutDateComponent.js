@@ -9,11 +9,15 @@ import DropDownContentComponent from "../../common/DropDownContentComponent";
 import NotificatonComponent from "../../common/NotificationComponent";
 import { useAddParticipantToNightOut } from "../../../hooks/api/participantAPI";
 import DateFinderComponent from "./DateFinderComponent";
+import { useSwipeInFromTop } from "../../../hooks/animations/animations";
 
 const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
   const [addParticipantHandler, setAddParticipant] = useState(false);
   const { addParticipantToNightOut, error, success, setSuccess, setError } =
     useAddParticipantToNightOut(token, nightOut.uuid, getNightOut);
+  
+  // animation
+  useSwipeInFromTop(NightOutDateComponent, '#main-container')
 
   return (
     <>
