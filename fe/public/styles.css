@@ -169,9 +169,14 @@ td {
 }
 
 td:hover {
-  background-color: #3ec48821;
+  background-color: #3e42c40a;
   transition: 0.3s;
   border-radius: 80px;
+}
+
+#date-head {
+  background-color: #3e57c411;
+  border-radius: 200px;
 }
 
 

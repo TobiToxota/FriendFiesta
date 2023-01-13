@@ -108,14 +108,14 @@ const DateFinderComponent = ({
                     <thead>
                         <tr>
                             <th
-                                className="has-text-weight-medium is-size-5 is-size-6-touch is-vcentered"
-                                style={{ fontWeight: 400 }}
+                                className="is-size-5 is-size-6-touch is-vcentered"
+                                style={{ fontWeight: 200 }}
                             >
                                 Participants
                             </th>
                             {nightOut.suggestedDates.map((date) => (
                                 <th
-                                    className="roboto is-vcentered has-text-centered"
+                                    className="roboto is-vcentered has-text-centered fade-in" id='date-head'
                                     key={date.id}
                                 >
                                     <p
