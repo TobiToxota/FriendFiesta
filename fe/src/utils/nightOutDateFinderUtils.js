@@ -18,12 +18,11 @@ const getCheckBoxStatus = (
                         value={participantDate.id}
                         checked={participantDate.commit}
                         onChange={(e) => addParticipantDateToNightOut(e)}
+                        onClick={(this) => change}
                     />
                 </label>
             </td>
         )
-    } else if (working) {
-        return <td key={participantDate.id} className="has-text-centered"></td>
     } else {
         return (
             <td key={participantDate.id} className="has-text-centered">
