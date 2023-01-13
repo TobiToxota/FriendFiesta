@@ -108,7 +108,7 @@ const DateFinderComponent = ({
                     <thead>
                         <tr>
                             <th
-                                className="has-text-weight-medium is-size-5 is-size-6-touch"
+                                className="has-text-weight-medium is-size-5 is-size-6-touch is-vcentered"
                                 style={{ fontWeight: 400 }}
                             >
                                 Participants
@@ -117,9 +117,17 @@ const DateFinderComponent = ({
                                 <th
                                     className="roboto is-vcentered has-text-centered"
                                     key={date.id}
-                                >
+                                ><p
+                                className="is-size-5"
+                                style={{
+                                    fontSize: '14px',
+                                    fontWeight: 200,
+                                }}
+                            >
+                                {date.weekday}
+                            </p>
                                     <p
-                                        className="roboto-plain"
+                                        className=""
                                         style={{
                                             fontSize: '14px',
                                             fontWeight: 200,
