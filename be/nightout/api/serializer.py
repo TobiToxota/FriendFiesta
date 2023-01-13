@@ -15,11 +15,18 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 
 class DateSuggestionSerializer(serializers.ModelSerializer):
+
     user = UserSerializer(read_only=True)
+    weekday = serializers.SerializerMethodField()
 
     class Meta:
         model = DateSuggestion
         fields = '__all__'
+
+    def get_weekday(self, obj):
+        weekDaysMapping = ("Mon.", "Tue.", "Wed.",
+                           "Thu.", "Fri.", "Sat.", "Sun.")
+        return weekDaysMapping[obj.date.weekday()]
 
     def create(self, validated_data):
         return DateSuggestion.objects.create(**validated_data)
@@ -45,7 +52,8 @@ class EntrySuggestionSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return PlanEntry.objects.create(**validated_data)
 
-class SuggestionVoteSerializer(serializers.ModelSerializer): 
+
+class SuggestionVoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SuggestionVote
@@ -53,6 +61,7 @@ class SuggestionVoteSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return SuggestionVote.objects.create(**validated_data)
+
 
 class PlanSuggestionSerializer(serializers.ModelSerializer):
     planEntries = EntrySuggestionSerializer(many=True, read_only=True)
@@ -66,6 +75,7 @@ class PlanSuggestionSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return PlanSuggestion.objects.create(**validated_data)
 
+
 class PlanSuggestionSerializerCreater(serializers.ModelSerializer):
     planEntries = EntrySuggestionSerializer(many=True, read_only=True)
 
@@ -75,6 +85,7 @@ class PlanSuggestionSerializerCreater(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return PlanSuggestion.objects.create(**validated_data)
+
 
 class NightOutSerializer(serializers.ModelSerializer):
     suggestedDates = DateSuggestionSerializer(many=True, read_only=True)
@@ -89,6 +100,3 @@ class NightOutSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return NightOutModel.objects.create(**validated_data)
-
-
-
