@@ -124,3 +124,21 @@ class SuggestionVote(models.Model):
 
     def __str__(self):
         return str(self.planSuggestion) + " - " + str(self.participant)
+
+
+class NotificationModel(models.Model):
+
+    CHOICES = (('ask_next_phase', 'asks you to bring the Nightout to the next phase'),
+               ('nightout_finished', 'This Nightout is finished. Go take a look'))
+
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="ownedNotifications")
+    nightout = models.ForeignKey(NightOutModel, on_delete=models.CASCADE,
+                                 related_name="notificationsOnNightout", blank=True, null=True)
+    dismissed = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    notificationMessage = models.CharField(
+        max_length=80, choices=CHOICES)
+
+    def __str__(self):
+        return str(self.owner) + " - " + str(self.nightout) + " - " + str(self.dismissed) + " - " + str(self.notificationMessage)
