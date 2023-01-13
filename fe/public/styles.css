@@ -167,6 +167,13 @@ td {
   border: none !important;
 }
 
+td:hover {
+  background-color: #3ec48821;
+  transition: 0.3s;
+  border-radius: 80px;
+}
+
+
 /* END: styles for datefind table */
 
 

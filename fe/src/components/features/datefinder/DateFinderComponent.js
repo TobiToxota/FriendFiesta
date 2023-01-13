@@ -199,6 +199,7 @@ const DateFinderComponent = ({
                                                 }
                                                 userData={userData}
                                                 working={working}
+                                                key={participantDate.id}
                                             />
                                         )
                                 )}

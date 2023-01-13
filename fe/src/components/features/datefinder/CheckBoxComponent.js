@@ -44,7 +44,7 @@ const CheckBoxComponent = ({
             isClicked
         ) {
             return (
-                <span class="loader-small"></span>
+                <span className="loader-small"></span>
             )
         } else if (participantDate.participant.user.id !== userData.id) {
             return (
