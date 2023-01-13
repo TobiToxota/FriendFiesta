@@ -14,15 +14,18 @@ class NightOutModel(models.Model):
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="createdNightOuts")
     title = models.CharField(max_length=40, )
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    uuid = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     description = models.CharField(max_length=200, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
     finalDate = models.DateTimeField(blank=True, null=True)
     phase = models.CharField(
         max_length=20, choices=CHOICES, default='datePhase')
-    finalFirstSuggestion = models.OneToOneField('PlanSuggestion', on_delete=models.CASCADE, null=True, related_name="thisNightOutFirst")
-    finalSecondSuggestion = models.OneToOneField('PlanSuggestion', on_delete=models.CASCADE, null=True, related_name="thisNightOutSecond")
+    finalFirstSuggestion = models.OneToOneField(
+        'PlanSuggestion', on_delete=models.CASCADE, null=True, related_name="thisNightOutFirst")
+    finalSecondSuggestion = models.OneToOneField(
+        'PlanSuggestion', on_delete=models.CASCADE, null=True, related_name="thisNightOutSecond")
 
     class Meta:
         ordering = ['-createdAt']
@@ -121,3 +124,21 @@ class SuggestionVote(models.Model):
 
     def __str__(self):
         return str(self.planSuggestion) + " - " + str(self.participant)
+
+
+class Notification(models.Model):
+    CHOICES = (
+        ('ask for next Phase', 'asks you to bring the Nightout to the next Phase.'), ('nightout finished',
+                                                                                      'This Nightout is finished, go take a look'), ('next Phase', 'This Nightout is in the next phase')
+    )
+
+    creator = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name="createdNotifications")
+    receiver = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name="receivedNotifications")
+    nightout = models.ForeignKey(
+        NightOutModel, on_delete=models.CASCADE, related_name="notificationsOnNightout")
+    createdAt = models.DateTimeField(auto_now_add=True)
+    dismissed = models.BooleanField(default=False)
+    notificationType = models.CharField(
+        max_length=40, choices=CHOICES, null=False)
