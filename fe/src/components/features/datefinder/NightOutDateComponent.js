@@ -25,7 +25,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
         <div
           className="notification is-light is-rounded main-nightout-container fade-in shadow"
           style={{ marginTop: "8vh", borderRadius: 15, minHeight: "150px" }}>
-          <h3 className="mb-2 is-size-2-touch squarepeg-title has-text-centered">
+          <h3 className="mb-2 is-size-2-touch squarepeg-title has-text-centered is-unselectable">
             Your Nightout: {nightOut.title}
           </h3>
           <ProgressComponent percentage={25}></ProgressComponent>

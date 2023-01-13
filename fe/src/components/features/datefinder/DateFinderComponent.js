@@ -108,10 +108,10 @@ const DateFinderComponent = ({
                     <thead>
                         <tr>
                             <th
-                                className="has-text-weight-medium is-size-5 is-size-6-touch"
+                                className="has-text-weight-medium is-size-5 is-size-6-touch has-text-centered"
                                 style={{ fontWeight: 400 }}
                             >
-                                Participants:
+                                Participants
                             </th>
                             {nightOut.suggestedDates.map((date) => (
                                 <th
@@ -173,7 +173,7 @@ const DateFinderComponent = ({
                     ) : null}
                     <tbody>
                         {nightOut.participants.map((participant) => (
-                            <tr key={participant.id}>
+                            <tr key={participant.id} className={'has-text-centered'}>
                                 <td>
                                     <button className="button is-info is-rounded p-4 is-small">
                                         <img
