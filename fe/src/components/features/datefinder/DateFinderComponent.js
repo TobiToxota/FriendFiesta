@@ -85,8 +85,8 @@ const DateFinderComponent = ({
                             <NotificatonComponent
                                 msg={success}
                                 animated={true}
-                                backgroundColor={"#48c78e"}
-                                color={"white"}
+                                backgroundColor={'#48c78e'}
+                                color={'white'}
                                 onExit={() => setSuccess()}
                             ></NotificatonComponent>
                         </>
@@ -108,7 +108,7 @@ const DateFinderComponent = ({
                     <thead>
                         <tr>
                             <th
-                                className="has-text-weight-medium is-size-5 is-size-6-touch has-text-centered"
+                                className="has-text-weight-medium is-size-5 is-size-6-touch"
                                 style={{ fontWeight: 400 }}
                             >
                                 Participants
@@ -173,7 +173,7 @@ const DateFinderComponent = ({
                     ) : null}
                     <tbody>
                         {nightOut.participants.map((participant) => (
-                            <tr key={participant.id} className={'has-text-centered'}>
+                            <tr key={participant.id}>
                                 <td>
                                     <button className="button is-info is-rounded p-4 is-small">
                                         <img
