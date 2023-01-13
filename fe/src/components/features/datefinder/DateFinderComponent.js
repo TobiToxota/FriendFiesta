@@ -117,15 +117,16 @@ const DateFinderComponent = ({
                                 <th
                                     className="roboto is-vcentered has-text-centered"
                                     key={date.id}
-                                ><p
-                                className="is-size-5"
-                                style={{
-                                    fontSize: '14px',
-                                    fontWeight: 200,
-                                }}
-                            >
-                                {date.weekday}
-                            </p>
+                                >
+                                    <p
+                                        className="is-size-5"
+                                        style={{
+                                            fontSize: '14px',
+                                            fontWeight: 200,
+                                        }}
+                                    >
+                                        {date.weekday}
+                                    </p>
                                     <p
                                         className=""
                                         style={{
@@ -215,6 +216,25 @@ const DateFinderComponent = ({
                         ))}
                     </tbody>
                 </table>
+                {nightOut.creator.id !== userData.id && (
+                    <div className="has-text-centered mt-3">
+                        <p className="subtitle mb-1">
+                            You want the Nightout to be in the next phase?
+                        </p>
+                        <p className="ml-2 has-text-centered">
+                            Only the Creator of the Nightout can submit a date
+                            and bring the Nightout to the planning phase.
+                        </p>
+                        <button className="button is-link is-rounded mt-2">
+                            <span className="icon is-small">
+                                <i className="fa-solid fa-bell"></i>
+                            </span>
+                            <span className="is-size-7">
+                                Send him a reminder
+                            </span>
+                        </button>
+                    </div>
+                )}
             </div>
         </>
     )

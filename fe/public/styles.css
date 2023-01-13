@@ -159,6 +159,7 @@ body,
 .datefinder-table {
   background-color: #f5f5f5 !important;
   min-width: 40%;
+  margin-bottom: 5px !important;
 }
 
 table,
@@ -172,6 +173,7 @@ td:hover {
   transition: 0.3s;
   border-radius: 80px;
 }
+
 
 
 /* END: styles for datefind table */
