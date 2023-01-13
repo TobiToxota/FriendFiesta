@@ -1,15 +1,19 @@
+import React, { useState } from 'react'
+
 /**
  * This Function checks if a user is the particpant and either returns a useable checkbox or an unusable checkbox
  *
  * @format
  */
-const getCheckBoxStatus = (
+const CheckBoxComponent = (
     addParticipantDateToNightOut,
     participantDate,
     userData,
     working
 ) => {
-    if (participantDate.participant.user.id === userData.id && !working) {
+    const [isClicked, setIsClicked] = useState(false)
+
+    if (participantDate.participant.user.id === userData.id && !isClicked) {
         return (
             <td key={participantDate.id} className="has-text-centered">
                 <label className="checkbox fade-in">
@@ -18,9 +22,15 @@ const getCheckBoxStatus = (
                         value={participantDate.id}
                         checked={participantDate.commit}
                         onChange={(e) => addParticipantDateToNightOut(e)}
-                        onClick={(this) => change}
+                        onClick={() => setIsClicked(true)}
                     />
                 </label>
+            </td>
+        )
+    } else if (isClicked) {
+        return (
+            <td key={participantDate.id} className="has-text-centered">
+                <div className="lds-roller"></div>
             </td>
         )
     } else {
@@ -51,4 +61,4 @@ const createDateFromDatePicker = (value) => {
     return date
 }
 
-export { getCheckBoxStatus, createDateFromDatePicker }
+export { CheckBoxComponent, createDateFromDatePicker }

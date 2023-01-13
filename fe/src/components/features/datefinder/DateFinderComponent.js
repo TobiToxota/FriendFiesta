@@ -10,6 +10,7 @@ import { useAddDateSuggestionToNightOut } from '../../../hooks/api/participantAP
 import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
 import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
 import NotificatonComponent from '../../common/NotificationComponent'
+import CheckBoxComponent from './CheckBoxComponent'
 
 const DateFinderComponent = ({
     nightOut,
@@ -85,6 +86,8 @@ const DateFinderComponent = ({
                             <NotificatonComponent
                                 msg={success}
                                 animated={true}
+                                backgroundColor={"#48c78e"}
+                                color={"white"}
                                 onExit={() => setSuccess()}
                             ></NotificatonComponent>
                         </>
@@ -187,12 +190,17 @@ const DateFinderComponent = ({
                                 {nightOut.participantDates.map(
                                     (participantDate) =>
                                         participantDate.participant.id ===
-                                            participant.id &&
-                                        getCheckBoxStatus(
-                                            addParticipantDateToNightOut,
-                                            participantDate,
-                                            userData,
-                                            working
+                                            participant.id && (
+                                            <CheckBoxComponent
+                                                addParticipantDateToNightOut={
+                                                    addParticipantDateToNightOut
+                                                }
+                                                participantDate={
+                                                    participantDate
+                                                }
+                                                userData={userData}
+                                                working={working}
+                                            />
                                         )
                                 )}
                             </tr>
