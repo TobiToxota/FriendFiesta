@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 
-from .serializer import NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
+from .serializer import NightOutSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When, Value
@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 import os
 import googlemaps
 
-from nightout.models import NightOutModel, Notification, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote
+from nightout.models import NightOutModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote
 
 User = get_user_model()
 
@@ -421,30 +421,3 @@ class FindFinalSuggestionForFinish(APIView):
         serializer = serializers.serialize('json', planSuggestions)
 
         return HttpResponse(serializer, content_type='application/json', status=status.HTTP_201_CREATED)
-
-
-@permission_classes((IsAuthenticated,))
-class NotificationsView(APIView):
-    def get(self, request, format=None):
-
-        #get all Notifications for User
-        userNotifications = Notification.objects.filter(receiver=request.user)
-
-        if userNotifications == None:
-            return Response({'Message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # serialize the data
-        serializer = NotificationSerializer(userNotifications)
-
-         # return the suggestion
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def post(self, request, format=None):
-
-        serializer = NotificationSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

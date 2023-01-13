@@ -13,5 +13,4 @@ urlpatterns = [
     path('suggestion/suggestionVote/', views.CreateAndDeleteVote.as_view()),
     path('participant/<int:pk>/', views.GetUserParticpantInfos.as_view()),
     path('finishNightOut/', views.FindFinalSuggestionForFinish.as_view()),
-    path('notification/', views.NotificationsView.as_view())
 ]

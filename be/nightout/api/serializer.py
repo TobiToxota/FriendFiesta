@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from nightout.models import NightOutModel, Notification, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, PlanEntry, SuggestionVote
+from nightout.models import NightOutModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, PlanEntry, SuggestionVote
 from base.api.serializer import UserSerializer
 
 
@@ -100,14 +100,3 @@ class NightOutSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return NightOutModel.objects.create(**validated_data)
-
-
-class NotificationSerializer(serializers.ModelSerializer):
-    nightout = NightOutSerializer(read_only=True)
-    creator = ParticipantSerializer(read_only=True)
-
-    class Meta:
-        model = Notification
-
-    def create(self, validated_data):
-        return Notification.objects.create(**validated_data)

@@ -229,7 +229,7 @@ const DateFinderComponent = ({
                     <p className="ml-2 has-text-centered">
                         Only the Creator of the Nightout can submit a date and
                         bring the Nightout to the planning phase.<br></br>
-                        But you can remind him:
+                        But you can remind the creator:
                     </p>
                     <button className="button is-link is-rounded mt-2">
                         <span className="icon is-small">
