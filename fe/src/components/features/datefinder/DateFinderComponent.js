@@ -151,7 +151,8 @@ const DateFinderComponent = ({
                                     className="is-vcentered"
                                     style={{ paddingRight: '0px' }}
                                 >
-                                    <p className="has-text-weight-medium is-size-5 is-size-6-touch">
+                                    <p className="is-size-5 is-size-6-touch"
+                                    style={{ fontWeight: 200 }}>
                                         Submit a date:
                                     </p>
                                 </td>
@@ -219,7 +220,7 @@ const DateFinderComponent = ({
                 {nightOut.creator.id !== userData.id && (
                     <div className="has-text-centered mt-3">
                         <p className="subtitle mb-1">
-                            You want the Nightout to be in the next phase?
+                            You want this Nightout to be in the next phase?
                         </p>
                         <p className="ml-2 has-text-centered">
                             Only the Creator of the Nightout can submit a date
@@ -230,7 +231,7 @@ const DateFinderComponent = ({
                                 <i className="fa-solid fa-bell"></i>
                             </span>
                             <span className="is-size-7">
-                                Send him a reminder
+                                Send a reminder
                             </span>
                         </button>
                     </div>
