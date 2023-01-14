@@ -1,5 +1,6 @@
 /** @format */
 
+// packages import
 import React, { useEffect, useState } from "react";
 
 const NotificatonComponent = ({
@@ -66,7 +67,7 @@ const NotificatonComponent = ({
           )}
         </>
       ) : (
-        <div className="mb-2"></div>
+        <div className="mb-3 pb-4"></div>
       )}
     </div>
   );

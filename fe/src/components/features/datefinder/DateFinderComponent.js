@@ -108,7 +108,7 @@ const DateFinderComponent = ({
                     <thead>
                         <tr>
                             <th
-                                className="is-size-5 is-size-6-touch is-vcentered"
+                                className="is-size-5 is-size-6-touch is-vcentered has-text-cet"
                                 style={{ fontWeight: 200 }}
                             >
                                 Participants
@@ -145,45 +145,6 @@ const DateFinderComponent = ({
                             ))}
                         </tr>
                     </thead>
-                    {nightOut.creator.id === userData.id ? (
-                        <tfoot>
-                            <tr>
-                                <td
-                                    className="is-vcentered"
-                                    style={{ paddingRight: '0px' }}
-                                >
-                                    <p
-                                        className="is-size-5 is-size-6-touch"
-                                        style={{ fontWeight: 200 }}
-                                    >
-                                        Submit a date:
-                                    </p>
-                                </td>
-                                {nightOut.suggestedDates.map((date) => (
-                                    <td
-                                        key={date.id}
-                                        className="has-text-centered"
-                                    >
-                                        <button
-                                            className="button is-info is-rounded is-small fade-in"
-                                            value={date.id}
-                                            onClick={() => {}}
-                                        >
-                                            <span
-                                                className="icon is-small"
-                                                value={date.id}
-                                            >
-                                                <i
-                                                    className="fa-solid fa-check-to-slot"
-                                                    value={date.id}
-                                                ></i>
-                                            </span>
-                                        </button>
-                                    </td>
-                                ))}
-                            </tr>
-                        </tfoot>
-                    ) : null}
                     <tbody>
                         {nightOut.participants.map((participant) => (
                             <tr key={participant.id}>
@@ -221,7 +182,7 @@ const DateFinderComponent = ({
                     </tbody>
                 </table>
             </div>
-            {nightOut.creator.id !== userData.id && (
+            {nightOut.creator.id !== userData.id ? (
                 <div className="has-text-centered">
                     <p className="subtitle mb-1">
                         You want this Nightout to be in the next phase?
@@ -238,6 +199,33 @@ const DateFinderComponent = ({
                         <span className="is-size-7">Send a reminder</span>
                     </button>
                 </div>
+            ) : (
+                <form>
+                    <div className="has-text-centered mt-4">
+                        <p className="subtitle mb-3">
+                            Decide which date is the final date for this
+                            Nightout.
+                        </p>
+                        <div className="container">
+                            <div className="select is-rounded is-link mr-1">
+                                <select name='dateselecter'>
+                                  {nightOut.suggestedDates.map((date) => 
+                                  <option key={date.id}>
+                                  {date.weekday} / {date.date}
+                                  </option>)}
+                                </select>
+                            </div>
+                            <button className="button is-link is-rounded">
+                                <span className="icon is-small">
+                                    <i className="fa-regular fa-calendar-check"></i>
+                                </span>
+                                <span className="is-size-7">
+                                    Submit this date
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             )}
         </>
     )
