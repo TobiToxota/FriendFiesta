@@ -25,11 +25,11 @@ const NotificatonComponent = ({
 
   return (
     <div
-      className="pb-1 notification is-warning mt-3 fade-in mx-auto is-rounded has-text-centered"
+      className="pb-0 notification is-warning mt-3 fade-in mx-auto is-rounded has-text-centered shadow"
       style={{
         paddingBottom: "2px !important",
         width: "60%",
-        borderRadius: "12px",
+        borderRadius: "2px",
         backgroundColor: backgroundColor,
         color: color,
       }}>
@@ -46,7 +46,7 @@ const NotificatonComponent = ({
               max="100"
               style={{
                 backgroundColor: backgroundColor,
-                transform: "translate(-15px, 0px)",
+                transform: "translate(-25px, 0px)",
                 height: "4px",
               }}>
               20%
@@ -58,7 +58,7 @@ const NotificatonComponent = ({
               max="100"
               style={{
                 backgroundColor: "#ffe08a",
-                transform: "translate(-15px, 0px)",
+                transform: "translate(-25px, 0px)",
                 height: "4px",
               }}>
               20%
