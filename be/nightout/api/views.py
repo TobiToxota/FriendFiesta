@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 
-from .serializer import NightOutSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
+from .serializer import NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When, Value
@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 import os
 import googlemaps
 
-from nightout.models import NightOutModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote
+from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote
 
 User = get_user_model()
 
@@ -421,3 +421,28 @@ class FindFinalSuggestionForFinish(APIView):
         serializer = serializers.serialize('json', planSuggestions)
 
         return HttpResponse(serializer, content_type='application/json', status=status.HTTP_201_CREATED)
+
+
+@permission_classes((IsAuthenticated,))
+class GetNotifications(APIView):
+    def get(self, request, format=None):
+
+        # get all notifications for one user
+        userNotifications = NotificationModel.objects.filter(owner=request.user)
+
+        print(len(userNotifications))
+
+        # check if there are notifications for this user
+        if len(userNotifications) == 0:
+            return Response({"message": "No Suggestions"}, status=status.HTTP_404_NOT_FOUND)
+
+        # error handling
+        if userNotifications == None:
+            return Response({"message": "Something went wrong"})
+            
+        # return all notifications
+        serializer = NotificationSerializer(userNotifications)
+
+        # return the suggestion
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
