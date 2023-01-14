@@ -24,7 +24,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
       <div className="container is-fluid active is-rounded" id="main-container">
         <div
           className="notification is-light is-rounded main-nightout-container fade-in shadow"
-          style={{ marginTop: "8vh", borderRadius: 15, minHeight: "150px" }}>
+          style={{ marginTop: "6vh", borderRadius: 15, minHeight: "150px" }}>
           <h3 className="mb-2 is-size-2-touch squarepeg-title has-text-centered is-unselectable">
             Your Nightout: {nightOut.title}
           </h3>

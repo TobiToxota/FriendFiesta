@@ -32,6 +32,16 @@ const DateFinderComponent = ({
             <h3 className="subtitle is-4 is-size-5-touch mb-2 mt-4">
                 Find a date for your Nightout:
             </h3>
+            {nightOut.creator.id !== userData.id && (
+            <button
+                className="button is-danger is-rounded ml-1"
+            >
+                <span className="icon is-small">
+                    <i className="fa-solid fa-person-through-window"></i>
+                </span>
+                <span className="is-size-7">Leave this Nightout</span>
+            </button>
+            )}
             <button
                 className="button is-success is-rounded ml-1"
                 onClick={() => setDatePicker(true)}
@@ -204,18 +214,19 @@ const DateFinderComponent = ({
                     <div className="has-text-centered mt-4">
                         <p className="subtitle mb-3">
                             Decide which date is the final date for this
-                            Nightout.
+                            Nightout:
                         </p>
                         <div className="container">
-                            <div className="select is-rounded is-link mr-1">
-                                <select name='dateselecter'>
-                                  {nightOut.suggestedDates.map((date) => 
-                                  <option key={date.id}>
-                                  {date.weekday} / {date.date}
-                                  </option>)}
+                            <div className="select is-size-7-touch is-rounded is-link mr-1">
+                                <select name="dateselecter">
+                                    {nightOut.suggestedDates.map((date) => (
+                                        <option key={date.id}>
+                                            {date.weekday} / {date.date}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
-                            <button className="button is-link is-rounded">
+                            <button className="button is-link is-rounded is-size-7-touch">
                                 <span className="icon is-small">
                                     <i className="fa-regular fa-calendar-check"></i>
                                 </span>
