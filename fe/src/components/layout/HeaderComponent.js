@@ -37,6 +37,23 @@ const HeaderComponent = () => {
                 <a className="navbar-item" href="/">
                     <img src="/logo_light.png" alt="ltshangout logo" />
                 </a>
+                {hamburger && (
+                    <div className="is-pulled-right fade-in">
+                        <button className="mt-3 ml-3 is-small button is-light is-rounded">
+                            <span className="icon">
+                                <i className="fa-solid fa-bell" />
+                                {notificationsLength(notifications) && (
+                                    <span
+                                        title="Badge top right"
+                                        className="badge is-top-right is-size-7 is-danger"
+                                    >
+                                        {notifications.length}
+                                    </span>
+                                )}
+                            </span>
+                        </button>
+                    </div>
+                )}
                 <button
                     className={`navbar-burger ${hamburger ? ' is-active' : ''}`}
                     aria-label="menu"
@@ -52,16 +69,14 @@ const HeaderComponent = () => {
                     <span aria-hidden="true" />
                 </button>
             </div>
+
             {!hamburger ? (
                 <div id="navMenu" className="navbar-menu">
                     <div className="navbar-end">
                         <div id="loggedIn" className="is-inline-flex">
                             {!loading && (
                                 <div className="navbar-item p-1">
-                                    <button
-                                        className="button is-light is-rounded"
-                                        id="avatar"
-                                    >
+                                    <button className="button is-light is-rounded">
                                         <span className="icon">
                                             <i className="fa-solid fa-bell" />
                                             {notificationsLength(
@@ -120,38 +135,40 @@ const HeaderComponent = () => {
                     </div>
                 </div>
             ) : (
-                <div
-                    id="hamburgerMenu"
-                    className="navbar-menu fade-in"
-                    style={{ display: 'block' }}
-                >
-                    <div className="navbar-end">
-                        <Link to={'/nightoutlist'}>
-                            <p
-                                className="navbar-item has-text-right"
-                                id="navbarItem"
-                            >
-                                Your NightOuts
-                            </p>
-                        </Link>
-                        <Link to={'/user'}>
-                            <p
-                                className="navbar-item has-text-right"
-                                id="navbarItem"
-                            >
-                                Edit your profile
-                            </p>
-                        </Link>
-                        <Link to={'/logout'}>
-                            <p
-                                className="navbar-item has-text-right"
-                                id="navbarItem"
-                            >
-                                Logout
-                            </p>
-                        </Link>
+                <>
+                    <div
+                        id="hamburgerMenu"
+                        className="navbar-menu fade-in"
+                        style={{ display: 'block' }}
+                    >
+                        <div className="navbar-end">
+                            <Link to={'/nightoutlist'}>
+                                <p
+                                    className="navbar-item has-text-right"
+                                    id="navbarItem"
+                                >
+                                    Your NightOuts
+                                </p>
+                            </Link>
+                            <Link to={'/user'}>
+                                <p
+                                    className="navbar-item has-text-right"
+                                    id="navbarItem"
+                                >
+                                    Edit your profile
+                                </p>
+                            </Link>
+                            <Link to={'/logout'}>
+                                <p
+                                    className="navbar-item has-text-right"
+                                    id="navbarItem"
+                                >
+                                    Logout
+                                </p>
+                            </Link>
+                        </div>
                     </div>
-                </div>
+                </>
             )}
         </nav>
     )
