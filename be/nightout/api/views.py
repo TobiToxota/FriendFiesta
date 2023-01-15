@@ -446,3 +446,21 @@ class GetNotifications(APIView):
         # return the suggestion
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+@permission_classes((IsAuthenticated,))
+class PostNotification(APIView):
+    def post(self, request, format=None):
+
+        # put the user from the request.user into the request.data
+        request.data['owner'] = request.user.id
+
+        print(request.data)
+
+        serializer = NotificationSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
