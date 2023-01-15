@@ -52,6 +52,25 @@ const HeaderComponent = () => {
                     <div className="navbar-end">
                         <div id="loggedIn" className="is-inline-flex">
                             <div className="navbar-item p-1">
+                                <Link to="/notifications">
+                                    <button
+                                        className="button is-light is-rounded"
+                                        id="avatar"
+                                    >
+                                        <span className="icon">
+                                            <i className="fa-solid fa-bell" />
+                                            <span
+                                                title="Badge top right"
+                                                className="badge is-bottom is-size-7 is-danger"
+                                            >
+                                                8
+                                            </span>
+                                        </span>
+                                    </button>
+                                </Link>
+                            </div>
+
+                            <div className="navbar-item p-1">
                                 <Link to="/user">
                                     <button
                                         className="button is-light is-rounded"
@@ -63,9 +82,6 @@ const HeaderComponent = () => {
                                                 alt=""
                                             />
                                         </span>
-                                        <p className="is-size-7">
-                                            {userData.username}
-                                        </p>
                                     </button>
                                 </Link>
                             </div>
