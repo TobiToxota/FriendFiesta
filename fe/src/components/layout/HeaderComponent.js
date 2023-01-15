@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom'
 // local imports
 import AuthContext from '../../context/AuthContext'
 import useScreenSize from '../../hooks/utilHooks/ScreenSize'
+import { getNotifications } from '../../api/userAPI'
 
 const HeaderComponent = () => {
     // get the user from the context
-    let { logout, userData } = useContext(AuthContext)
+    let { logout, userData, token } = useContext(AuthContext)
     let [hamburger, setHamburger] = useState(false)
 
     const isMobile = useScreenSize(1023)
@@ -63,7 +64,6 @@ const HeaderComponent = () => {
                                                 title="Badge top right"
                                                 className="badge is-bottom is-size-7 is-danger"
                                             >
-                                                8
                                             </span>
                                         </span>
                                     </button>

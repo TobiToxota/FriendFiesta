@@ -47,7 +47,7 @@ const NotificatonComponent = ({
               max="100"
               style={{
                 backgroundColor: backgroundColor,
-                transform: "translate(-25px, 0px)",
+                transform: "translate(-23px, 0px)",
                 height: "4px",
               }}>
               20%
@@ -59,7 +59,7 @@ const NotificatonComponent = ({
               max="100"
               style={{
                 backgroundColor: "#ffe08a",
-                transform: "translate(-25px, 0px)",
+                transform: "translate(-23px, 0px)",
                 height: "4px",
               }}>
               20%

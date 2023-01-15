@@ -212,11 +212,14 @@ const DateFinderComponent = ({
             ) : (
                 <form>
                     <div className="has-text-centered mt-4">
-                        <p className="subtitle mb-3">
-                            Decide which date is the final date for this
-                            Nightout:
+                        <p className="subtitle mb-1">
+                            You are the creator of this Nightout.
                         </p>
-                        <div className="container">
+                        <p className="ml-2 has-text-centered">
+                        You can decide which of the suggested dates should be the final date for this Nightout.<br></br>
+                        If you submit a date this Nightout will be taken to the next phase.
+                    </p>
+                        <div className="container mt-2">
                             <div className="select is-size-7-touch is-rounded is-link mr-1">
                                 <select name="dateselecter">
                                     {nightOut.suggestedDates.map((date) => (

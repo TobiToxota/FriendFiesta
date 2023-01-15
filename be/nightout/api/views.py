@@ -434,7 +434,7 @@ class GetNotifications(APIView):
 
         # check if there are notifications for this user
         if len(userNotifications) == 0:
-            return Response({"message": "No Suggestions"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': 'No Notifications'}, status=status.HTTP_200_OK)
 
         # error handling
         if userNotifications == None:
