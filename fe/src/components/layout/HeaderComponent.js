@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../../context/AuthContext'
 import useScreenSize from '../../hooks/utilHooks/ScreenSize'
 import useGetNotifications from '../../hooks/api/notifiactionAPI'
+import notificationsLength from '../../utils/notificationsLength'
 
 const HeaderComponent = () => {
     // get the user from the context
@@ -15,7 +16,7 @@ const HeaderComponent = () => {
     let [hamburger, setHamburger] = useState(false)
 
     // get the Notifications
-    const { data, loading } = useGetNotifications(token)
+    const { notifications, loading } = useGetNotifications(token)
 
     // check with hook if screensize is mobile, so hamburger menu is active/inactive
     const isMobile = useScreenSize(1023)
@@ -55,23 +56,28 @@ const HeaderComponent = () => {
                 <div id="navMenu" className="navbar-menu">
                     <div className="navbar-end">
                         <div id="loggedIn" className="is-inline-flex">
-                            <div className="navbar-item p-1">
-                                <Link to="/notifications">
+                            {!loading && (
+                                <div className="navbar-item p-1">
                                     <button
                                         className="button is-light is-rounded"
                                         id="avatar"
                                     >
                                         <span className="icon">
                                             <i className="fa-solid fa-bell" />
-                                            <span
-                                                title="Badge top right"
-                                                className="badge is-bottom is-size-7 is-danger"
-                                            ></span>
+                                            {notificationsLength(
+                                                notifications
+                                            ) && (
+                                                <span
+                                                    title="Badge top right"
+                                                    className="badge is-bottom is-size-7 is-danger fade-in"
+                                                >
+                                                    {notifications.length}
+                                                </span>
+                                            )}
                                         </span>
                                     </button>
-                                </Link>
-                            </div>
-
+                                </div>
+                            )}
                             <div className="navbar-item p-1">
                                 <Link to="/user">
                                     <button
