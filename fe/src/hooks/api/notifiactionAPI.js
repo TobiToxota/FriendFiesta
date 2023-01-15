@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 /** This custom hook feteches the backend with an token and gets the notifications for a user */
 const useGetNotifications = (token) => {
     const [loading, setLoading] = useState(true)
@@ -28,6 +30,10 @@ const useGetNotifications = (token) => {
             setError('Notifcations cant be loaded')
         }
     }
+
+    useEffect(() => {
+        getNotifications(token)
+    }, [token])
 
     return { getNotifications, data, loading, error, success }
 }

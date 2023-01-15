@@ -430,18 +430,12 @@ class GetNotifications(APIView):
         # get all notifications for one user
         userNotifications = NotificationModel.objects.filter(owner=request.user)
 
-        print(len(userNotifications))
-
-        # check if there are notifications for this user
-        if len(userNotifications) == 0:
-            return Response({'message': 'No Notifications'}, status=status.HTTP_200_OK)
-
         # error handling
         if userNotifications == None:
             return Response({"message": "Something went wrong"})
             
         # return all notifications
-        serializer = NotificationSerializer(userNotifications)
+        serializer = NotificationSerializer(userNotifications, many=True)
 
         # return the suggestion
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -453,8 +447,6 @@ class PostNotification(APIView):
 
         # put the user from the request.user into the request.data
         request.data['owner'] = request.user.id
-
-        print(request.data)
 
         serializer = NotificationSerializer(data=request.data)
 

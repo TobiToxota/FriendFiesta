@@ -7,15 +7,18 @@ import { Link } from 'react-router-dom'
 // local imports
 import AuthContext from '../../context/AuthContext'
 import useScreenSize from '../../hooks/utilHooks/ScreenSize'
-import { getNotifications } from '../../api/userAPI'
+import useGetNotifications from '../../hooks/api/notifiactionAPI'
 
 const HeaderComponent = () => {
     // get the user from the context
     let { logout, userData, token } = useContext(AuthContext)
     let [hamburger, setHamburger] = useState(false)
 
-    const isMobile = useScreenSize(1023)
+    // get the Notifications
+    const { data, loading } = useGetNotifications(token)
 
+    // check with hook if screensize is mobile, so hamburger menu is active/inactive
+    const isMobile = useScreenSize(1023)
     useEffect(() => {
         if (!isMobile) {
             setHamburger(false)
@@ -63,8 +66,7 @@ const HeaderComponent = () => {
                                             <span
                                                 title="Badge top right"
                                                 className="badge is-bottom is-size-7 is-danger"
-                                            >
-                                            </span>
+                                            ></span>
                                         </span>
                                     </button>
                                 </Link>
