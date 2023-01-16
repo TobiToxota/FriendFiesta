@@ -57,7 +57,7 @@ body,
 }
 
 .fade-in {
-  animation: fadeIn 0.4s;
+  animation: fadeIn 0.5s;
 }
 
 /* START: Everything for the Hamburger Menu on Mobile */
@@ -112,6 +112,16 @@ body,
   background-color: #3e8ed0 !important;
   box-shadow: none !important;
   font-size: smaller;
+}
+
+.dropdown-content-header {
+  margin-top: 7px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+  padding: 0.5rem;
+  transform: translate(-40px);
+  min-width: 250px;
 }
 
 .dropdown-border {

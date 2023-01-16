@@ -9,6 +9,7 @@ import AuthContext from '../../context/AuthContext'
 import useScreenSize from '../../hooks/utilHooks/ScreenSize'
 import useGetNotifications from '../../hooks/api/notifiactionAPI'
 import notificationsLength from '../../utils/notificationsLength'
+import DropDownContentComponent from '../common/DropDownContentComponent'
 
 const HeaderComponent = () => {
     // get the user from the context
@@ -75,22 +76,42 @@ const HeaderComponent = () => {
                     <div className="navbar-end">
                         <div id="loggedIn" className="is-inline-flex">
                             {!loading && (
-                                <div className="navbar-item p-1 is-active">
-                                    <button className="button is-light is-rounded">
-                                        <span className="icon">
-                                            <i className="fa-solid fa-bell" />
-                                            {notificationsLength(
-                                                notifications
-                                            ) && (
-                                                <span
-                                                    title="Badge top right"
-                                                    className="badge is-bottom is-size-7 is-danger fade-in"
-                                                >
-                                                    {notifications.length}
+                                <div className="navbar-item p-1">
+                                    <div className="dropdown is-hoverable is-vcentered">
+                                        <div className="dropdown-trigger ">
+                                            <button
+                                                className="button is-light is-rounded"
+                                                aria-haspopup="true"
+                                                aria-controls="dropdown-menu4"
+                                            >
+                                                <span className="icon">
+                                                    <i className="fa-solid fa-bell" />
+                                                    {notificationsLength(
+                                                        notifications
+                                                    ) && (
+                                                        <span
+                                                            title="Badge top right"
+                                                            className="badge is-bottom is-size-7 is-danger fade-in"
+                                                        >
+                                                            {
+                                                                notifications.length
+                                                            }
+                                                        </span>
+                                                    )}
                                                 </span>
-                                            )}
-                                        </span>
-                                    </button>
+                                            </button>
+                                        </div>
+
+                                        <div
+                                            className="dropdown-menu fade-in"
+                                            id="dropdown-menu4"
+                                            role="menu"
+                                        >
+                                            <div className="dropdown-content-header">
+                                                Hallo
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                             <div className="navbar-item p-1">
