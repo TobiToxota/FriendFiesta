@@ -75,7 +75,7 @@ const HeaderComponent = () => {
                     <div className="navbar-end">
                         <div id="loggedIn" className="is-inline-flex">
                             {!loading && (
-                                <div className="navbar-item p-1">
+                                <div className="navbar-item p-1 is-active">
                                     <button className="button is-light is-rounded">
                                         <span className="icon">
                                             <i className="fa-solid fa-bell" />
@@ -158,14 +158,13 @@ const HeaderComponent = () => {
                                     Edit your profile
                                 </p>
                             </Link>
-                            <Link to={'/logout'}>
-                                <p
-                                    className="navbar-item has-text-right"
-                                    id="navbarItem"
-                                >
-                                    Logout
-                                </p>
-                            </Link>
+                            <p
+                                className="navbar-item has-text-right"
+                                id="navbarItem"
+                                onClick={logout}
+                            >
+                                Logout
+                            </p>
                         </div>
                     </div>
                 </>

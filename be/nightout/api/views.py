@@ -445,8 +445,12 @@ class GetNotifications(APIView):
 class PostNotification(APIView):
     def post(self, request, format=None):
 
-        # put the user from the request.user into the request.data
-        request.data['owner'] = request.user.id
+        # get the creator as user from the Nightout
+        creator = User.objects.filter(createdNightOuts=request.data['nightout'])
+        
+        # put in the owner into the request
+        request["owner"] = creator.id
+        request["sender"] = request.user.id
 
         serializer = NotificationSerializer(data=request.data)
 

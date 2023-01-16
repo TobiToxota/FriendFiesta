@@ -229,11 +229,11 @@ const DateFinderComponent = ({
                                     ))}
                                 </select>
                             </div>
-                            <button className="button is-link is-rounded is-size-7-touch">
+                            <button className="button is-link is-rounded is-size-6 is-size-7-touch">
                                 <span className="icon is-small">
                                     <i className="fa-regular fa-calendar-check"></i>
                                 </span>
-                                <span className="is-size-7">
+                                <span className="is-size-6 is-is-size-7-touch">
                                     Submit this date
                                 </span>
                             </button>
