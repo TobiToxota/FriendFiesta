@@ -134,11 +134,15 @@ const HeaderComponent = () => {
                                                 {notificationsLength(
                                                     notifications
                                                 ) ? (
-                                                    {<></>}
+                                                    <div>
+                                                        {notifications.map((notification) => (
+                                                            notification.sender.username
+                                                        ))}
+                                                    </div>
                                                 ) : (
                                                     <div className="is-inline-flex has-text-centered">
-                                                        <span className="icon has-text-centered ml-1">
-                                                            <i className="fa-regular fa-face-smile-beam mr-2" />
+                                                        <span className="icon has-text-centered ml-2">
+                                                            <i className="fa-regular fa-face-smile-beam" />
                                                         </span>
                                                         <p className='ml-1'>You have no notifications</p>
                                                     </div>

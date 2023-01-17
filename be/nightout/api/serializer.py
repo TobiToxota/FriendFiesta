@@ -103,10 +103,16 @@ class NightOutSerializer(serializers.ModelSerializer):
 
 
 class NotificationSerializer(serializers.ModelSerializer):
+    sender = UserSerializer(read_only=True)
+    notificationMessage = serializers.SerializerMethodField()
 
     class Meta:
         model = NotificationModel
         fields = '__all__'
+
+    def get_notificationMessage(self, obj):
+        return obj.get_notificationMessage_display()
+
 
     def create(self, validated_data):
         return NotificationModel.objects.create(**validated_data)
