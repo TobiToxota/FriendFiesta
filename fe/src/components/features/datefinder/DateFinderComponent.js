@@ -30,8 +30,9 @@ const DateFinderComponent = ({
     const {
         postNotification,
         notificationError,
-        notificationSucess,
+        notificationSuccess,
         fetching,
+        setNotificationError,
     } = usePostNotification(token, nightOut.uuid)
 
     return (
@@ -94,7 +95,6 @@ const DateFinderComponent = ({
                             cancel
                         </button>
                     </div>
-                    {/* TODO:{errormsg ? <Notificaton msg={errormsg} onExit={onExit} /> : null} */}
                     {success && (
                         <>
                             <NotificatonComponent
@@ -218,14 +218,25 @@ const DateFinderComponent = ({
                             <span className="is-size-7">Send a reminder</span>
                         </button>
                     ) : (
-                        <button
-                            className="button is-link is-rounded mt-2 is-loading"
-                        >
-                            <span className="icon is-small">
-                                <i className="fa-solid fa-bell"></i>
-                            </span>
-                            <span className="is-size-7">Send a reminder</span>
-                        </button>
+                        <>
+                            <button className="button is-link is-rounded mt-2 is-loading">
+                                <span className="icon is-small">
+                                    <i className="fa-solid fa-bell"></i>
+                                </span>
+                                <span className="is-size-7">
+                                    Send a reminder
+                                </span>
+                            </button>
+                        </>
+                    )}
+                    {notificationSuccess && (
+                        <NotificatonComponent
+                            msg={notificationSuccess}
+                            animated={true}
+                            backgroundColor={'#48c78e'}
+                            color={'white'}
+                            onExit={() => setNotificationError(null)}
+                        />
                     )}
                 </div>
             ) : (

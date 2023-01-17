@@ -47,7 +47,7 @@ body,
 /* Fade In Animation */
 @keyframes fadeIn {
   0% {
-    border-radius: 60px;
+    border-radius: 20px;
     opacity: 0;
   }
 
