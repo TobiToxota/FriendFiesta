@@ -24,10 +24,7 @@ const HeaderComponent = () => {
         useGetNotifications(token)
 
     // get the usePatchNotificationHook
-    const { patchNotification, error, success } = usePatchNotification(
-        token,
-        getNotifications
-    )
+    const { patchNotification } = usePatchNotification(token, getNotifications)
 
     // check with hook if screensize is mobile, so hamburger menu is active/inactive
     const isMobile = useScreenSize(1023)
@@ -188,7 +185,14 @@ const HeaderComponent = () => {
                                                                             <div className="column is-vcentered is-1 pl-0">
                                                                                 <span
                                                                                     className="icon has-text-centered is-clickable"
-                                                                                    onClick={() => {patchNotification(notification.id); shaking('#trash-can')}}
+                                                                                    onClick={() => {
+                                                                                        patchNotification(
+                                                                                            notification.id
+                                                                                        )
+                                                                                        shaking(
+                                                                                            '#trash-can'
+                                                                                        )
+                                                                                    }}
                                                                                     onMouseDown={() =>
                                                                                         scaleDown(
                                                                                             '#notification' +
@@ -233,7 +237,7 @@ const HeaderComponent = () => {
                                                         <span className="icon">
                                                             <i className="fa-regular fa-face-smile-beam" />
                                                         </span>
-                                                        <p className="ml-1">
+                                                        <p className="ml-1 is-unselectable">
                                                             You have no
                                                             notifications
                                                         </p>
