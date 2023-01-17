@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When, Value
 from django.core import serializers
+from django.core.exceptions import ObjectDoesNotExist
 from dotenv import load_dotenv
 import os
 import googlemaps
@@ -369,6 +370,7 @@ class GetUserParticpantInfos(APIView):
 @permission_classes((IsAuthenticated,))
 class FindFinalSuggestionForFinish(APIView):
     """Find the final suggestion as the final nightout"""
+
     def post(self, request, format=None):
 
         # get the nightOut from the request
@@ -406,11 +408,12 @@ class FindFinalSuggestionForFinish(APIView):
 @permission_classes((IsAuthenticated,))
 class GetNotifications(APIView):
     """Get notifications for the loggen in user"""
+
     def get(self, request, format=None):
 
         # get all notifications for one user
         userNotifications = NotificationModel.objects.filter(
-            owner=request.user)
+            owner=request.user).filter(dismissed=False)
 
         # error handling
         if userNotifications == None:
@@ -426,15 +429,16 @@ class GetNotifications(APIView):
 @permission_classes((IsAuthenticated,))
 class PostPatchNotification(APIView):
     """Create and patch Notifications"""
+
     def post(self, request, format=None):
 
         # get the creator as user from the Nightout
         creator = User.objects.filter(
-            createdNightOuts=request.data['nightout'])
+            createdNightOuts=request.data['nightout']).first()
 
         # put in the owner into the request
-        request["owner"] = creator.id
-        request["sender"] = request.user.id
+        request.data["owner"] = creator.id
+        request.data["sender"] = request.user.id
 
         serializer = NotificationSerializer(data=request.data)
 
@@ -447,12 +451,26 @@ class PostPatchNotification(APIView):
 
     def patch(self, request, format=None):
 
-        # get the notification
-        notification = NotificationModel.objects.get(id=request.data['id'])
+        # get the notification while checking if it exists
+        try:
+            notification = NotificationModel.objects.get(
+                id=request.data['notification'])
+        except ObjectDoesNotExist:
+            return Response({"message": "This notification doesnt exist."}, status=status.HTTP_404_NOT_FOUND)
 
+            # check if notification is there
         if notification is None:
             return Response({"message": "This notification doesnt exist."}, status=status.HTTP_404_NOT_FOUND)
 
-        if notification.dismiss == True:
+        # check if notification allready dismissed
+        if notification.dismissed == True:
             return Response({'message': 'This notification is allready dismissed'})
 
+        serializer = NotificationSerializer(
+            notification, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'This notification was successfully dismissed'}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

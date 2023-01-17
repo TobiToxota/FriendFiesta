@@ -44,12 +44,21 @@ const usePatchNotification = (token) => {
     const [success, setSuccess] = useState(null)
 
     const patchNotification = async (id) => {
-
-        let response = await fetch(process.env.REACT_APP_API_URL + "notification/")
+        let response = await fetch(
+            process.env.REACT_APP_API_URL + 'notification/',
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Token ${token}`,
+                },
+                body: JSON.stringify({
+                    notification: id,
+                    dismissed: true,
+                }),
+            }
+        )
     }
-
-
-
 }
 
 export default useGetNotifications

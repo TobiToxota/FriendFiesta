@@ -9,7 +9,6 @@ import AuthContext from '../../context/AuthContext'
 import useScreenSize from '../../hooks/utilHooks/ScreenSize'
 import useGetNotifications from '../../hooks/api/notifiactionAPI'
 import notificationsLength from '../../utils/notificationsLength'
-import DropDownContentComponent from '../common/DropDownContentComponent'
 
 const HeaderComponent = () => {
     // get the user from the context
@@ -130,7 +129,7 @@ const HeaderComponent = () => {
                                             id="dropdown-menu4"
                                             role="menu"
                                         >
-                                            <div className="dropdown-content-header">
+                                            <div className="dropdown-content-header has-text-centered">
                                                 {notificationsLength(
                                                     notifications
                                                 ) ? (
@@ -200,8 +199,8 @@ const HeaderComponent = () => {
                                                         )}
                                                     </div>
                                                 ) : (
-                                                    <div className="is-inline-flex has-text-centered">
-                                                        <span className="icon has-text-centered ml-2">
+                                                    <div className=" is-inline-flex is-align-items-center is-justify-content-center">
+                                                        <span className="icon">
                                                             <i className="fa-regular fa-face-smile-beam" />
                                                         </span>
                                                         <p className="ml-1">
