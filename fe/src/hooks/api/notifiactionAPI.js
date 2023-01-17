@@ -39,7 +39,7 @@ const useGetNotifications = (token) => {
 }
 
 /** This custom hook fetches the backend with an token and a notification number to dismiss a notification */
-const usePatchNotification = (token) => {
+const usePatchNotification = (token, refreshNotifications) => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
 
@@ -58,7 +58,17 @@ const usePatchNotification = (token) => {
                 }),
             }
         )
+
+        if (response.status === 204) {
+            setSuccess('Notification was dismissed')
+            setTimeout(() => {
+                refreshNotifications(token)
+            }, 550)        
+        } else {
+            setError('Something went wrong')
+        }
     }
+    return { patchNotification, error, success }
 }
 
-export default useGetNotifications
+export { useGetNotifications, usePatchNotification }

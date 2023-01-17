@@ -7,8 +7,12 @@ import { Link } from 'react-router-dom'
 // local imports
 import AuthContext from '../../context/AuthContext'
 import useScreenSize from '../../hooks/utilHooks/ScreenSize'
-import useGetNotifications from '../../hooks/api/notifiactionAPI'
+import {
+    useGetNotifications,
+    usePatchNotification,
+} from '../../hooks/api/notifiactionAPI'
 import notificationsLength from '../../utils/notificationsLength'
+import { scaleDown, shaking } from '../../hooks/animations/animations'
 
 const HeaderComponent = () => {
     // get the user from the context
@@ -16,7 +20,14 @@ const HeaderComponent = () => {
     let [hamburger, setHamburger] = useState(false)
 
     // get the Notifications
-    const { notifications, loading } = useGetNotifications(token)
+    const { getNotifications, notifications, loading } =
+        useGetNotifications(token)
+
+    // get the usePatchNotificationHook
+    const { patchNotification, error, success } = usePatchNotification(
+        token,
+        getNotifications
+    )
 
     // check with hook if screensize is mobile, so hamburger menu is active/inactive
     const isMobile = useScreenSize(1023)
@@ -148,42 +159,61 @@ const HeaderComponent = () => {
                                                                     )}
                                                                     {notification.sender !==
                                                                         null && (
-                                                                        <div className='columns is-vcentered is-centered p-1 pr-0'>
-                                                                            <div className='column is-10 is-vcentered is-size-6 is-size-7-touch has-text-centered'>
-                                                                            <Link
-                                                                                to={
-                                                                                    '/nightout/' +
-                                                                                    notification
-                                                                                        .nightout
-                                                                                        .uuid
+                                                                        <div className="columns is-vcentered is-centered p-1 pr-0">
+                                                                            <div
+                                                                                className="column is-10 is-vcentered is-size-6 is-size-7-touch has-text-centered"
+                                                                                id={
+                                                                                    'notification' +
+                                                                                    notification.id
                                                                                 }
                                                                             >
-                                                                                {
-                                                                                    notification
-                                                                                        .sender
-                                                                                        .username
-                                                                                }{' '}
-                                                                                {
-                                                                                    notification.notificationMessage
-                                                                                }
-                                                                            </Link>
+                                                                                <Link
+                                                                                    to={
+                                                                                        '/nightout/' +
+                                                                                        notification
+                                                                                            .nightout
+                                                                                            .uuid
+                                                                                    }
+                                                                                >
+                                                                                    {
+                                                                                        notification
+                                                                                            .sender
+                                                                                            .username
+                                                                                    }{' '}
+                                                                                    {
+                                                                                        notification.notificationMessage
+                                                                                    }
+                                                                                </Link>
                                                                             </div>
-                                                                            <div className='column is-vcentered is-1 pl-0'>
-                                                                            <span className="icon has-text-centered is-clickable"
-                                                                            onClick={() => console.log('dismiss')}>
-                                                                                <i className="fa-regular fa-trash-can" />
-                                                                            </span>
+                                                                            <div className="column is-vcentered is-1 pl-0">
+                                                                                <span
+                                                                                    className="icon has-text-centered is-clickable"
+                                                                                    onClick={() => {patchNotification(notification.id); shaking('#trash-can')}}
+                                                                                    onMouseDown={() =>
+                                                                                        scaleDown(
+                                                                                            '#notification' +
+                                                                                                notification.id
+                                                                                        )
+                                                                                    }
+                                                                                >
+                                                                                    <i
+                                                                                        className="fa-regular fa-trash-can"
+                                                                                        id="trash-can"
+                                                                                    />
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     )}
                                                                     {notification.sender ===
                                                                         null && (
-                                                                        <Link to={
-                                                                            '/nightout/' +
-                                                                            notification
-                                                                                .nightout
-                                                                                .uuid
-                                                                        }>
+                                                                        <Link
+                                                                            to={
+                                                                                '/nightout/' +
+                                                                                notification
+                                                                                    .nightout
+                                                                                    .uuid
+                                                                            }
+                                                                        >
                                                                             {
                                                                                 notification
                                                                                     .nightout

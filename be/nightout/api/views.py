@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 
-from .serializer import NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
+from .serializer import CreateNotificationSerializer, NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When, Value
@@ -440,7 +440,7 @@ class PostPatchNotification(APIView):
         request.data["owner"] = creator.id
         request.data["sender"] = request.user.id
 
-        serializer = NotificationSerializer(data=request.data)
+        serializer = CreateNotificationSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -471,6 +471,6 @@ class PostPatchNotification(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'This notification was successfully dismissed'}, status=status.HTTP_200_OK)
+            return Response({'message': 'This notification was successfully dismissed'}, status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -136,7 +136,7 @@ class NotificationModel(models.Model):
     sender = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="sentNotifications", null=True, blank=True)
     nightout = models.ForeignKey(NightOutModel, on_delete=models.CASCADE,
-                                 related_name="notificationsOnNightout", blank=True, null=True)
+                                 related_name="notificationsOnNightout")
     dismissed = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True)
     notificationMessage = models.CharField(

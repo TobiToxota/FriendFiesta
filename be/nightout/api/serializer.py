@@ -114,6 +114,14 @@ class NotificationSerializer(serializers.ModelSerializer):
     def get_notificationMessage(self, obj):
         return obj.get_notificationMessage_display()
 
+    def create(self, validated_data):
+        return NotificationModel.objects.create(**validated_data)
+
+class CreateNotificationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = NotificationModel
+        fields = '__all__'
 
     def create(self, validated_data):
         return NotificationModel.objects.create(**validated_data)
