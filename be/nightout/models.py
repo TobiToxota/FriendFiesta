@@ -128,7 +128,7 @@ class SuggestionVote(models.Model):
 
 class NotificationModel(models.Model):
 
-    CHOICES = (('ask_next_phase', 'asks you to bring the Nightout to the next phase'),
+    CHOICES = (('ask_next_phase', 'asks you to bring this Nightout to the next phase'),
                ('nightout_finished', 'This Nightout is finished. Go take a look'))
 
     owner = models.ForeignKey(

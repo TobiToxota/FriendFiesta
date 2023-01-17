@@ -105,6 +105,7 @@ class NightOutSerializer(serializers.ModelSerializer):
 class NotificationSerializer(serializers.ModelSerializer):
     sender = UserSerializer(read_only=True)
     notificationMessage = serializers.SerializerMethodField()
+    nightout = NightOutSerializer(read_only=True)
 
     class Meta:
         model = NotificationModel

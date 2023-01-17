@@ -251,31 +251,8 @@ class CreateSuggestionView(APIView):
 
 
 @permission_classes((IsAuthenticated,))
-class EntrySuggestionView(APIView):
-
-    def post(self, request, format=None):
-
-        # get the participant from the request
-        userAsParticipant = Participant.objects.filter(
-            user=request.user).filter(nightOut=request.data['nightOut']).first()
-
-        suggestionObject = PlanSuggestion.objects.filter(
-            nightOut=request.data['nightOut']).filter(creator=userAsParticipant).last()
-
-        if suggestionObject == None:
-            return Response({"message": "You have not suggested a suggestion for this nightout."}, status=status.HTTP_404_NOT_FOUND)
-
-        serializer = EntrySuggestionSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@permission_classes((IsAuthenticated,))
 class NewEntrySuggestionView(APIView):
+    """Create a new suggestion"""
 
     def post(self, request, format=None):
 
@@ -326,6 +303,7 @@ class NewEntrySuggestionView(APIView):
 
 @permission_classes((IsAuthenticated,))
 class CreateAndDeleteVote(APIView):
+    """Create a vote or delete a vote"""
 
     def post(self, request, format=None):
 
@@ -364,6 +342,7 @@ class CreateAndDeleteVote(APIView):
 
 @permission_classes((IsAuthenticated,))
 class GetUserParticpantInfos(APIView):
+    """Get infos about a specific participant"""
 
     def get(self, request, pk, format=None):
 
@@ -389,6 +368,7 @@ class GetUserParticpantInfos(APIView):
 
 @permission_classes((IsAuthenticated,))
 class FindFinalSuggestionForFinish(APIView):
+    """Find the final suggestion as the final nightout"""
     def post(self, request, format=None):
 
         # get the nightOut from the request
@@ -425,15 +405,17 @@ class FindFinalSuggestionForFinish(APIView):
 
 @permission_classes((IsAuthenticated,))
 class GetNotifications(APIView):
+    """Get notifications for the loggen in user"""
     def get(self, request, format=None):
 
         # get all notifications for one user
-        userNotifications = NotificationModel.objects.filter(owner=request.user)
+        userNotifications = NotificationModel.objects.filter(
+            owner=request.user)
 
         # error handling
         if userNotifications == None:
             return Response({"message": "Something went wrong"})
-            
+
         # return all notifications
         serializer = NotificationSerializer(userNotifications, many=True)
 
@@ -442,12 +424,14 @@ class GetNotifications(APIView):
 
 
 @permission_classes((IsAuthenticated,))
-class PostNotification(APIView):
+class PostPatchNotification(APIView):
+    """Create and patch Notifications"""
     def post(self, request, format=None):
 
         # get the creator as user from the Nightout
-        creator = User.objects.filter(createdNightOuts=request.data['nightout'])
-        
+        creator = User.objects.filter(
+            createdNightOuts=request.data['nightout'])
+
         # put in the owner into the request
         request["owner"] = creator.id
         request["sender"] = request.user.id
@@ -460,3 +444,15 @@ class PostNotification(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, format=None):
+
+        # get the notification
+        notification = NotificationModel.objects.get(id=request.data['id'])
+
+        if notification is None:
+            return Response({"message": "This notification doesnt exist."}, status=status.HTTP_404_NOT_FOUND)
+
+        if notification.dismiss == True:
+            return Response({'message': 'This notification is allready dismissed'})
+
