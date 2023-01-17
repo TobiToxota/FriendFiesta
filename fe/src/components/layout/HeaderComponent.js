@@ -152,7 +152,7 @@ const HeaderComponent = () => {
                                                                 >
                                                                     {index !==
                                                                         0 && (
-                                                                        <hr class="navbar-divider"></hr>
+                                                                        <hr className="navbar-divider"></hr>
                                                                     )}
                                                                     {notification.sender !==
                                                                         null && (
@@ -193,12 +193,6 @@ const HeaderComponent = () => {
                                                                                             '#trash-can'
                                                                                         )
                                                                                     }}
-                                                                                    onMouseDown={() =>
-                                                                                        scaleDown(
-                                                                                            '#notification' +
-                                                                                                notification.id
-                                                                                        )
-                                                                                    }
                                                                                 >
                                                                                     <i
                                                                                         className="fa-regular fa-trash-can"

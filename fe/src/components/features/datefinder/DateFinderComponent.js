@@ -7,6 +7,7 @@ import DatePicker from 'react-date-picker'
 // local imports
 import { useAddDateSuggestionToNightOut } from '../../../hooks/api/participantAPI'
 import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
+import { usePostNotification } from '../../../hooks/api/notifiactionAPI'
 import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
 import NotificatonComponent from '../../common/NotificationComponent'
 import CheckBoxComponent from './CheckBoxComponent'
@@ -21,11 +22,17 @@ const DateFinderComponent = ({
     const [datePicker, setDatePicker] = useState(false)
     const [value, onChange] = useState(new Date())
 
-    // get the hooks for addDate and addParticipantDate
+    // get the hooks for addDate, addParticipantDate and postNotification
     const { addDateSuggestion, dateError, setDateError, success, setSuccess } =
         useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
     const { addParticipantDateToNightOut, working } =
         useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
+    const {
+        postNotification,
+        notificationError,
+        notificationSucess,
+        fetching,
+    } = usePostNotification(token, nightOut.uuid)
 
     return (
         <>
@@ -33,14 +40,12 @@ const DateFinderComponent = ({
                 Find a date for your Nightout:
             </h3>
             {nightOut.creator.id !== userData.id && (
-            <button
-                className="button is-danger is-rounded ml-1"
-            >
-                <span className="icon is-small">
-                    <i className="fa-solid fa-person-through-window"></i>
-                </span>
-                <span className="is-size-7">Leave this Nightout</span>
-            </button>
+                <button className="button is-danger is-rounded ml-1">
+                    <span className="icon is-small">
+                        <i className="fa-solid fa-person-through-window"></i>
+                    </span>
+                    <span className="is-size-7">Leave this Nightout</span>
+                </button>
             )}
             <button
                 className="button is-success is-rounded ml-1 margin-top-mobile"
@@ -202,12 +207,26 @@ const DateFinderComponent = ({
                         bring the Nightout to the planning phase.<br></br>
                         But you can remind the creator:
                     </p>
-                    <button className="button is-link is-rounded mt-2">
-                        <span className="icon is-small">
-                            <i className="fa-solid fa-bell"></i>
-                        </span>
-                        <span className="is-size-7">Send a reminder</span>
-                    </button>
+                    {!fetching ? (
+                        <button
+                            className="button is-link is-rounded mt-2"
+                            onClick={() => postNotification('ask_next_phase')}
+                        >
+                            <span className="icon is-small">
+                                <i className="fa-solid fa-bell"></i>
+                            </span>
+                            <span className="is-size-7">Send a reminder</span>
+                        </button>
+                    ) : (
+                        <button
+                            className="button is-link is-rounded mt-2 is-loading"
+                        >
+                            <span className="icon is-small">
+                                <i className="fa-solid fa-bell"></i>
+                            </span>
+                            <span className="is-size-7">Send a reminder</span>
+                        </button>
+                    )}
                 </div>
             ) : (
                 <form>
@@ -216,9 +235,11 @@ const DateFinderComponent = ({
                             You are the creator of this Nightout.
                         </p>
                         <p className="ml-2 has-text-centered">
-                        You can decide which of the suggested dates should be the final date for this Nightout.<br></br>
-                        If you submit a date this Nightout will be taken to the next phase.
-                    </p>
+                            You can decide which of the suggested dates should
+                            be the final date for this Nightout.<br></br>
+                            If you submit a date this Nightout will be taken to
+                            the next phase.
+                        </p>
                         <div className="container mt-2">
                             <div className="select is-size-7-touch is-rounded is-link mr-1">
                                 <select name="dateselecter">

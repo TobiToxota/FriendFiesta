@@ -73,10 +73,13 @@ const usePatchNotification = (token, refreshNotifications) => {
 
 /** This custom hook fetches the backend witn an token and nightout-id and creates a notification for the creator */
 const usePostNotification = (token, uuid) => {
-    const [error, setError] = useState(null)
-    const [success, setSuccess] = useState(null)
+    const [notificationError, setNotificationError] = useState(null)
+    const [notificationSuccess, setNotificationSuccess] = useState(null)
+    const [fetching, setFetching] = useState(false)
 
     const postNotification = async (notificationMessage) => {
+        setFetching(true)
+
         let response = await fetch(
             process.env.REACT_APP_API_URL + 'notification/',
             {
@@ -95,12 +98,31 @@ const usePostNotification = (token, uuid) => {
         let thisData = await response.json()
 
         if (response.status === 201) {
-            setSuccess('The reminder was successfully sent to the Creator.')
+            setNotificationSuccess(
+                'The reminder was successfully sent to the Creator.'
+            )
+            setTimeout(() => {
+                setNotificationSuccess(false)
+            }, 4800)
+            setTimeout(() => {
+                setFetching(false)
+            }, 400)
         } else {
-            setError(thisData)
+            setNotificationError(thisData)
+            setTimeout(() => {
+                setNotificationError(false)
+            }, 4800)
+            setTimeout(() => {
+                setFetching(false)
+            }, 400)
         }
     }
-    return { postNotification, error, success }
+    return {
+        postNotification,
+        notificationError,
+        notificationSuccess,
+        fetching,
+    }
 }
 
 export { useGetNotifications, usePatchNotification, usePostNotification }

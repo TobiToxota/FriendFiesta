@@ -73,15 +73,6 @@ const shaking = (target) => {
   })
 }
 
-const scaleDown = (target) => {
-  anime({
-    targets: target,
-    duration: 400,
-    delay: 200,
-    scale: 0,
-    easing: "easeInOutExpo",
-  })
-}
 
 export {
   useSwipeInFromLeft,
@@ -89,5 +80,4 @@ export {
   useProgressAnimation,
   useFading,
   shaking,
-  scaleDown
 };
