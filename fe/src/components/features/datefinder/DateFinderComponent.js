@@ -43,7 +43,7 @@ const DateFinderComponent = ({
             </button>
             )}
             <button
-                className="button is-success is-rounded ml-1"
+                className="button is-success is-rounded ml-1 margin-top-mobile"
                 onClick={() => setDatePicker(true)}
             >
                 <span className="icon is-small">

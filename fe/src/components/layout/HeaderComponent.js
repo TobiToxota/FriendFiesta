@@ -40,19 +40,42 @@ const HeaderComponent = () => {
                 </a>
                 {hamburger && (
                     <div className="is-pulled-right fade-in">
-                        <button className="mt-3 ml-3 is-small button is-light is-rounded">
-                            <span className="icon">
-                                <i className="fa-solid fa-bell" />
-                                {notificationsLength(notifications) && (
-                                    <span
-                                        title="Badge top right"
-                                        className="badge is-top-right is-size-7 is-danger"
-                                    >
-                                        {notifications.length}
+                        <div className="dropdown is-hoverable is-vcentered">
+                            <div className="dropdown-trigger ">
+                                <button
+                                    className="mt-3 ml-3 is-small button is-light is-rounded"
+                                    aria-haspopup="true"
+                                    aria-controls="dropdown-menu4"
+                                >
+                                    <span className="icon">
+                                        <i className="fa-solid fa-bell" />
+                                        {notificationsLength(notifications) && (
+                                            <span
+                                                title="Badge top right"
+                                                className="badge is-top-right is-size-7 is-danger"
+                                            >
+                                                {notifications.length}
+                                            </span>
+                                        )}
                                     </span>
-                                )}
-                            </span>
-                        </button>
+                                </button>
+                            </div>
+                            <div
+                                className="dropdown-menu fade-in"
+                                id="dropdown-menu4"
+                                role="menu"
+                            >
+                                <div className="dropdown-content-header">
+                                    {notificationsLength(notifications) ? (
+                                        <></>
+                                    ) : (
+                                        <p className="has-text-centered">
+                                            You have no notifications
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
                 <button
@@ -108,7 +131,18 @@ const HeaderComponent = () => {
                                             role="menu"
                                         >
                                             <div className="dropdown-content-header">
-                                                Hallo
+                                                {notificationsLength(
+                                                    notifications
+                                                ) ? (
+                                                    {<></>}
+                                                ) : (
+                                                    <div className="is-inline-flex has-text-centered">
+                                                        <span className="icon has-text-centered ml-1">
+                                                            <i className="fa-regular fa-face-smile-beam mr-2" />
+                                                        </span>
+                                                        <p className='ml-1'>You have no notifications</p>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
