@@ -65,7 +65,6 @@ const useFading = (target) => {
 };
 
 const shaking = (target) => {
-  console.log('shaking')
   anime({
     targets: target,
     rotate: [0, -20, 20, -20, 20, 0],

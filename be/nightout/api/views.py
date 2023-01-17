@@ -436,6 +436,10 @@ class PostPatchNotification(APIView):
         creator = User.objects.filter(
             createdNightOuts=request.data['nightout']).first()
 
+        # check if the sender allready created the exact same notification for this nightout
+        if NotificationModel.objects.filter(nightout=request.data['nightout']).filter(owner=creator.id).filter(sender=request.user.id).filter(notificationMessage=request.data['notificationMessage']).filter(dismissed=False).exists:
+            return Response({'message': 'You allready send him a reminder.'}, status=status.HTTP_400_BAD_REQUEST)
+
         # put in the owner into the request
         request.data["owner"] = creator.id
         request.data["sender"] = request.user.id
