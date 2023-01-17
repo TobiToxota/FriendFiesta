@@ -134,17 +134,80 @@ const HeaderComponent = () => {
                                                 {notificationsLength(
                                                     notifications
                                                 ) ? (
-                                                    <div>
-                                                        {notifications.map((notification) => (
-                                                            notification.sender.username
-                                                        ))}
+                                                    <div className="has-text-centered">
+                                                        {notifications.map(
+                                                            (
+                                                                notification,
+                                                                index
+                                                            ) => (
+                                                                <div
+                                                                    key={index}
+                                                                >
+                                                                    {index !==
+                                                                        0 && (
+                                                                        <hr class="navbar-divider"></hr>
+                                                                    )}
+                                                                    {notification.sender !==
+                                                                        null && (
+                                                                        <div className='columns is-vcentered is-centered p-1 pr-0'>
+                                                                            <div className='column is-10 is-vcentered is-size-6 is-size-7-touch has-text-centered'>
+                                                                            <Link
+                                                                                to={
+                                                                                    '/nightout/' +
+                                                                                    notification
+                                                                                        .nightout
+                                                                                        .uuid
+                                                                                }
+                                                                            >
+                                                                                {
+                                                                                    notification
+                                                                                        .sender
+                                                                                        .username
+                                                                                }{' '}
+                                                                                {
+                                                                                    notification.notificationMessage
+                                                                                }
+                                                                            </Link>
+                                                                            </div>
+                                                                            <div className='column is-vcentered is-1 pl-0'>
+                                                                            <span className="icon has-text-centered is-clickable"
+                                                                            onClick={() => console.log('dismiss')}>
+                                                                                <i className="fa-regular fa-trash-can" />
+                                                                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
+                                                                    {notification.sender ===
+                                                                        null && (
+                                                                        <Link to={
+                                                                            '/nightout/' +
+                                                                            notification
+                                                                                .nightout
+                                                                                .uuid
+                                                                        }>
+                                                                            {
+                                                                                notification
+                                                                                    .nightout
+                                                                                    .title
+                                                                            }{' '}
+                                                                            {
+                                                                                notification.notificationMessage
+                                                                            }
+                                                                        </Link>
+                                                                    )}
+                                                                </div>
+                                                            )
+                                                        )}
                                                     </div>
                                                 ) : (
                                                     <div className="is-inline-flex has-text-centered">
                                                         <span className="icon has-text-centered ml-2">
                                                             <i className="fa-regular fa-face-smile-beam" />
                                                         </span>
-                                                        <p className='ml-1'>You have no notifications</p>
+                                                        <p className="ml-1">
+                                                            You have no
+                                                            notifications
+                                                        </p>
                                                     </div>
                                                 )}
                                             </div>
