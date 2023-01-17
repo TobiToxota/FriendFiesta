@@ -41,7 +41,7 @@ const NightOutDateComponent = ({ nightOut, getNightOut, userData, token }) => {
               <p className="roboto-plain"></p>
             </button>
             <p
-              className="roboto is-inline-flex ml-2 pb-2 is-size-6-touch"
+              className="label is-inline-flex ml-2 pb-2 is-size-6-touch"
               style={{ verticalAlign: "bottom" }}>
               {nightOut.creator.username !== userData.username
                 ? nightOut.creator.username + " has created this NightOut"

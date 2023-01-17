@@ -64,6 +64,7 @@ const useFading = (target) => {
   });
 };
 
+/* This function lets an target shaker */
 const shaking = (target) => {
   anime({
     targets: target,

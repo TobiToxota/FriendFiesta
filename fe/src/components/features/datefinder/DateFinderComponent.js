@@ -37,7 +37,7 @@ const DateFinderComponent = ({
 
     return (
         <>
-            <h3 className="subtitle is-4 is-size-5-touch mb-2 mt-4">
+            <h3 className="label is-size-4 is-size-5-touch mb-2 mt-4">
                 Find a date for your Nightout:
             </h3>
             {nightOut.creator.id !== userData.id && (
@@ -121,33 +121,30 @@ const DateFinderComponent = ({
                     style={{}}
                 >
                     <thead>
-                        <tr>
+                        <tr className='is-vcentered'>
                             <th
-                                className="is-size-5 is-size-6-touch is-vcentered has-text-cet"
-                                style={{ fontWeight: 200 }}
+                                className="label is-size-5 is-size-6-touch is-vcentered mt-2"
                             >
                                 Participants
                             </th>
                             {nightOut.suggestedDates.map((date) => (
                                 <th
-                                    className="roboto is-vcentered has-text-centered fade-in"
+                                    className="is-vcentered has-text-centered fade-in"
                                     id="date-head"
                                     key={date.id}
                                 >
                                     <p
-                                        className="is-size-5"
+                                        className="label is-size-5 mb-0"
                                         style={{
                                             fontSize: '14px',
-                                            fontWeight: 200,
                                         }}
                                     >
                                         {date.weekday}
                                     </p>
                                     <p
-                                        className=""
+                                        className="label mb-1"
                                         style={{
                                             fontSize: '14px',
-                                            fontWeight: 200,
                                         }}
                                     >
                                         {date.date.slice(-2) +
@@ -204,7 +201,7 @@ const DateFinderComponent = ({
                     </p>
                     <p className="ml-2 has-text-centered">
                         Only the Creator of the Nightout can submit a date and
-                        bring the Nightout to the planning phase.<br></br>
+                        bring the Nightout to the planning phase.<br></br> 
                         But you can remind the creator:
                     </p>
                     {!fetching ? (
@@ -242,7 +239,7 @@ const DateFinderComponent = ({
             ) : (
                 <form>
                     <div className="has-text-centered mt-4">
-                        <p className="subtitle mb-1">
+                        <p className="label is-size-5 mb-0">
                             You are the creator of this Nightout.
                         </p>
                         <p className="ml-2 has-text-centered">
