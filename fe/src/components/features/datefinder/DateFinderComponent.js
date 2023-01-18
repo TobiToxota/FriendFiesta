@@ -33,6 +33,7 @@ const DateFinderComponent = ({
         notificationSuccess,
         fetching,
         setNotificationError,
+        setNotificationSuccess,
     } = usePostNotification(token, nightOut.uuid)
 
     return (
@@ -230,6 +231,13 @@ const DateFinderComponent = ({
                             animated={true}
                             backgroundColor={'#48c78e'}
                             color={'white'}
+                            onExit={() => setNotificationSuccess(null)}
+                        />
+                    )}
+                    {notificationError && (
+                        <NotificatonComponent
+                            msg={notificationError.message}
+                            animated={true}
                             onExit={() => setNotificationError(null)}
                         />
                     )}

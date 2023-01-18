@@ -122,7 +122,8 @@ const usePostNotification = (token, uuid) => {
         notificationError,
         notificationSuccess,
         fetching,
-        setNotificationError
+        setNotificationError,
+        setNotificationSuccess,
     }
 }
 
