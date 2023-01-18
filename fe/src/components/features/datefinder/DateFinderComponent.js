@@ -141,7 +141,7 @@ const DateFinderComponent = ({
                 >
                     <thead>
                         <tr className="is-vcentered">
-                            <th className="label is-size-5 is-size-6-touch is-vcentered mt-2">
+                            <th className="label is-size-5 is-size-6-touch is-vcentered mt-4">
                                 Participants
                             </th>
                             {nightOut.suggestedDates.map((date) => (
@@ -151,7 +151,7 @@ const DateFinderComponent = ({
                                     key={date.id}
                                 >
                                     <p
-                                        className="label is-size-5 mb-0"
+                                        className="label is-size-5 mb-0 is-size-6-touch"
                                         style={{
                                             fontSize: '14px',
                                         }}
@@ -170,6 +170,10 @@ const DateFinderComponent = ({
                                             '.' +
                                             date.date.slice(0, 4)}{' '}
                                     </p>
+                                    <span className="icon is-small">
+                                        <i className="fa-solid fa-people-group mr-1"></i>
+                                        {date.numberofCommits}
+                                    </span>
                                 </th>
                             ))}
                         </tr>
