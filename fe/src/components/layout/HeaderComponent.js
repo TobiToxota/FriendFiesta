@@ -244,7 +244,7 @@ const HeaderComponent = () => {
                                                             <i className="fa-regular fa-face-smile-beam" />
                                                         </span>
                                                         <p className="ml-1 is-unselectable">
-                                                            You have no
+                                                            You have 0
                                                             notifications
                                                         </p>
                                                     </div>
@@ -276,7 +276,7 @@ const HeaderComponent = () => {
                                             <i className="fa-solid fa-list-ul" />
                                         </span>
                                         <p className="is-size-6 has-text-weight-semibold pb-1">
-                                            Your NightOuts
+                                            Your Nightouts
                                         </p>
                                     </button>
                                 </Link>

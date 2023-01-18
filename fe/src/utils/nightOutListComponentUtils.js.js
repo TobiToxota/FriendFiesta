@@ -21,13 +21,13 @@ function getColorForNightOutListComponent(nightOut) {
 /* this function gets a nightout and returns a certain text for the nightout in the nightoutlistpage */
 function getPhaseForNightOutListComponent(nightOut) {
   if (nightOut.phase === "finished") {
-    return "This NightOut is finished";
+    return "This Nightout is finished";
   } else if (nightOut.phase === "votingPhase") {
-    return "This NightOut is in the voting phase";
+    return "This Nightout is in the voting phase";
   } else if (nightOut.phase === "planningPhase") {
-    return "This NightOut is in the planning phase";
+    return "This Nightout is in the planning phase";
   } else {
-    return "This nightOut is in the data phase";
+    return "This Nightout is in the data phase";
   }
 }
 
