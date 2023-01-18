@@ -18,6 +18,7 @@ class DateSuggestionSerializer(serializers.ModelSerializer):
 
     user = UserSerializer(read_only=True)
     weekday = serializers.SerializerMethodField()
+    numberofCommits = serializers.SerializerMethodField()
 
     class Meta:
         model = DateSuggestion
@@ -27,6 +28,12 @@ class DateSuggestionSerializer(serializers.ModelSerializer):
         weekDaysMapping = ("Mon.", "Tue.", "Wed.",
                            "Thu.", "Fri.", "Sat.", "Sun.")
         return weekDaysMapping[obj.date.weekday()]
+
+    def get_numberofCommits(self, obj):
+        # get all the true votes for this specific date
+        participantdatesCount = ParticipantDate.objects.filter(nightOut=obj.nightOut).filter(suggestedDate__date=obj.date).filter(commit=True).count()
+
+        return participantdatesCount
 
     def create(self, validated_data):
         return DateSuggestion.objects.create(**validated_data)

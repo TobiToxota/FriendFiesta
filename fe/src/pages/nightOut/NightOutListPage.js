@@ -33,7 +33,7 @@ const NightOutListPage = () => {
               Your Nightouts:
             </h1>
             {nightOutList.length === 0 ? (
-              <div className="has-text-centered">
+              <div className="has-text-centered fade-in">
                 <h2
                   class="has-text-centered squarepeg-onlyfont mt-4 is-size-2 is-size-3-touch"
                   style={{ color: "white" }}>

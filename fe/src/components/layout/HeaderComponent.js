@@ -308,7 +308,7 @@ const HeaderComponent = () => {
                                     className="navbar-item has-text-right"
                                     id="navbarItem"
                                 >
-                                    Your NightOuts
+                                    Your Nightouts
                                 </p>
                             </Link>
                             <Link to={'/user'}>
