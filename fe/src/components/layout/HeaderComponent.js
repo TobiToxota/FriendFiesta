@@ -12,7 +12,6 @@ import {
     usePatchNotification,
 } from '../../hooks/api/notifiactionAPI'
 import notificationsLength from '../../utils/notificationsLength'
-import { scaleDown, shaking } from '../../hooks/animations/animations'
 
 const HeaderComponent = () => {
     // get the user from the context

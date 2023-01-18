@@ -29,7 +29,7 @@ const DateFinderComponent = ({
         useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
     const {
         postNotification,
-        notificationError,
+        notificationError, {/*TODO*/}
         notificationSuccess,
         fetching,
         setNotificationError,
@@ -121,10 +121,8 @@ const DateFinderComponent = ({
                     style={{}}
                 >
                     <thead>
-                        <tr className='is-vcentered'>
-                            <th
-                                className="label is-size-5 is-size-6-touch is-vcentered mt-2"
-                            >
+                        <tr className="is-vcentered">
+                            <th className="label is-size-5 is-size-6-touch is-vcentered mt-2">
                                 Participants
                             </th>
                             {nightOut.suggestedDates.map((date) => (
@@ -201,7 +199,7 @@ const DateFinderComponent = ({
                     </p>
                     <p className="ml-2 has-text-centered">
                         Only the Creator of the Nightout can submit a date and
-                        bring the Nightout to the planning phase.<br></br> 
+                        bring the Nightout to the planning phase.<br></br>
                         But you can remind the creator:
                     </p>
                     {!fetching ? (
