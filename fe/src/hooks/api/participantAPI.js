@@ -62,6 +62,49 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
     }
 }
 
+/** this custom hook fetches the backend to delete a participant on a nightout */
+const useDeleteParticipantFromNightOut = (token, uuid) => {
+    const [deleteError, setDeleteError] = useState(null)
+    const [deleteSuccess, setDeleteSuccess] = useState(null)
+    const [deleteFetching, setDeleteFetching] = useState(false)
+
+    const deleteParticipantFromNightOut = async () => {
+        setDeleteFetching(true)
+
+        let response = await fetch(
+            process.env.REACT_APP_API_URL + 'participantdelete/',
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    nightout: uuid,
+                }),
+            }
+        )
+
+        if (response.status === 200) {
+            setDeleteSuccess('You successfully left this Nightout')
+            setTimeout(function () {
+                setDeleteFetching(false)
+                window.location.href = '/nightoutlist/'
+            }, 2000)
+        } else {
+            setDeleteFetching(false)
+            setDeleteError('Something went wrong')
+        }
+    }
+
+    return {
+        deleteParticipantFromNightOut,
+        deleteError,
+        deleteSuccess,
+        deleteFetching,
+    }
+}
+
 /** this custom hook fetches the backend to add an datesuggestion to a nightout */
 const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
     const [dateError, setDateError] = useState(null)
@@ -218,4 +261,5 @@ export {
     useAddParticipantToNightOut,
     useAddDateSuggestionToNightOut,
     useAddParticipantDateToNightOut,
+    useDeleteParticipantFromNightOut,
 }

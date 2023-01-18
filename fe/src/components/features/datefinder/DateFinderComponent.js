@@ -5,7 +5,10 @@ import React, { useState } from 'react'
 import DatePicker from 'react-date-picker'
 
 // local imports
-import { useAddDateSuggestionToNightOut } from '../../../hooks/api/participantAPI'
+import {
+    useAddDateSuggestionToNightOut,
+    useDeleteParticipantFromNightOut,
+} from '../../../hooks/api/participantAPI'
 import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
 import { usePostNotification } from '../../../hooks/api/notifiactionAPI'
 import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
@@ -35,33 +38,48 @@ const DateFinderComponent = ({
         setNotificationError,
         setNotificationSuccess,
     } = usePostNotification(token, nightOut.uuid)
+    const { deleteParticipantFromNightOut, deleteFetching } =
+        useDeleteParticipantFromNightOut(token, nightOut.uuid)
 
     return (
         <>
             <h3 className="label is-size-4 is-size-5-touch mb-2 mt-4">
                 Find a date for your Nightout:
             </h3>
-            {nightOut.creator.id !== userData.id && (
-                <button className="button is-danger is-rounded ml-1">
-                    <span className="icon is-small">
-                        <i className="fa-solid fa-person-through-window"></i>
-                    </span>
-                    <span className="is-size-7">Leave this Nightout</span>
-                </button>
-            )}
+            {nightOut.creator.id !== userData.id &&
+                (!deleteFetching ? (
+                    <button
+                        className="button is-danger is-rounded ml-1"
+                        onClick={() => deleteParticipantFromNightOut()}
+                    >
+                        <span className="icon is-small">
+                            <i className="fa-solid fa-person-through-window"></i>
+                        </span>
+                        <span className="is-size-7">Leave this Nightout</span>
+                    </button>
+                ) : (
+                    <button className="button is-danger is-rounded ml-1 is-loading">
+                        <span className="icon is-small">
+                            <i className="fa-solid fa-person-through-window"></i>
+                        </span>
+                        <span className="is-size-7">Leave this Nightout</span>
+                    </button>
+                ))}
             <button
                 className="button is-success is-rounded ml-1 margin-top-mobile"
                 onClick={() => setDatePicker(true)}
             >
                 <span className="icon is-small">
-                    <i className="fa-solid fa-calendar-plus"></i>
+                    <i className="fa-solid fa-plus"></i>
                 </span>
-                <span className="is-size-7">Add a new date suggestion</span>
+                <span className="is-size-6 is-size-7-touch">
+                    Add a new date suggestion
+                </span>
             </button>
             {datePicker && (
                 <>
                     <span
-                        className="button is-warning is-rounded ml-1 margin-top-mobile"
+                        className="button is-warning is-rounded ml-1 margin-top-mobile is-size-7-mobile"
                         id="date-buttons"
                         children={
                             <DatePicker
@@ -195,7 +213,7 @@ const DateFinderComponent = ({
             </div>
             {nightOut.creator.id !== userData.id ? (
                 <div className="has-text-centered">
-                    <p className="subtitle mb-1">
+                    <p className="label is-size-5 mb-1">
                         You want this Nightout to be in the next phase?
                     </p>
                     <p className="ml-2 has-text-centered">

@@ -139,6 +139,34 @@ class AddParticipant(APIView):
 
 
 @permission_classes((IsAuthenticated,))
+class DeleteParticipant(APIView):
+    """sumary_line: Delete a participant"""
+
+    def delete(self, request, format=None):
+
+        # get the participant object
+        try:
+            participant = Participant.objects.filter(
+                user=request.user).filter(nightOut=request.data['nightout'])
+        except ObjectDoesNotExist:
+            return Response({"message": "This participant doesnt exist."}, status=status.HTTP_404_NOT_FOUND)
+
+        # check if the participant is not None
+        if participant == None:
+            return Response({"message": "This participant doesnt exist."}, status=status.HTTP_404_NOT_FOUND)
+
+        deletedCount = participant.delete()
+
+        print(len(deletedCount))
+
+        if len(deletedCount) == 2:
+            return Response({"message": "This participant was successfully deleted from this nightout"}, status=status.HTTP_200_OK)
+
+        else:
+            return Response({"message": "This participant doesnt exist."}, status=status.HTTP_404_NOT_FOUND)
+
+
+@permission_classes((IsAuthenticated,))
 class AddDateSuggestion(APIView):
     """sumary_line: Add a date to a nightout"""
 
