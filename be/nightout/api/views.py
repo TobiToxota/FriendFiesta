@@ -87,8 +87,8 @@ class NightOut(APIView):
         serializer = NightOutSerializer(nightout)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def put(self, request, pk, format=None):
-        nightout = self.get_object(pk, request)
+    def put(self, request, uuid, format=None):
+        nightout = self.get_object(uuid, request)
         serializer = NightOutSerializer(nightout, data=request.data)
         if serializer.is_valid():
             serializer.save()

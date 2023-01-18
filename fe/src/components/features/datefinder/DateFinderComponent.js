@@ -14,6 +14,7 @@ import { usePostNotification } from '../../../hooks/api/notifiactionAPI'
 import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
 import NotificatonComponent from '../../common/NotificationComponent'
 import CheckBoxComponent from './CheckBoxComponent'
+import { useAddFinalDate } from '../../../hooks/api/nightOutAPI'
 
 const DateFinderComponent = ({
     nightOut,
@@ -25,7 +26,10 @@ const DateFinderComponent = ({
     const [datePicker, setDatePicker] = useState(false)
     const [value, onChange] = useState(new Date())
 
-    // get the hooks for addDate, addParticipantDate and postNotification
+    // state for selected date from create
+    const [finalDate, setFinalDate] = useState(null)
+
+    // get the hooks for addDate, addParticipantDate, postNotification and addFinalDate
     const { addDateSuggestion, dateError, setDateError, success, setSuccess } =
         useAddDateSuggestionToNightOut(token, nightOut.uuid, refreshNightOut)
     const { addParticipantDateToNightOut, working } =
@@ -40,6 +44,14 @@ const DateFinderComponent = ({
     } = usePostNotification(token, nightOut.uuid)
     const { deleteParticipantFromNightOut, deleteFetching } =
         useDeleteParticipantFromNightOut(token, nightOut.uuid)
+    const {
+        addFinalDate,
+        finalDateError,
+        finalDateSuccess,
+        finalDateFetching,
+        setFinalDateSuccess,
+        setFinalDateError,
+    } = useAddFinalDate(token, nightOut)
 
     return (
         <>
@@ -265,28 +277,34 @@ const DateFinderComponent = ({
                     )}
                 </div>
             ) : (
-                <form>
-                    <div className="has-text-centered mt-4">
-                        <p className="label is-size-5 mb-0">
-                            You are the creator of this Nightout.
-                        </p>
-                        <p className="ml-2 has-text-centered">
-                            You can decide which of the suggested dates should
-                            be the final date for this Nightout.<br></br>
-                            If you submit a date this Nightout will be taken to
-                            the next phase.
-                        </p>
-                        <div className="container mt-2">
-                            <div className="select is-size-7-touch is-rounded is-link mr-1">
-                                <select name="dateselecter">
-                                    {nightOut.suggestedDates.map((date) => (
-                                        <option key={date.id}>
-                                            {date.weekday} / {date.date}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <button className="button is-link is-rounded is-size-6 is-size-7-touch">
+                <div className="has-text-centered mt-4">
+                    <p className="label is-size-5 mb-0">
+                        You are the creator of this Nightout.
+                    </p>
+                    <p className="ml-2 has-text-centered">
+                        You can decide which of the suggested dates should be
+                        the final date for this Nightout.<br></br>
+                        If you submit a date this Nightout will be taken to the
+                        next phase.
+                    </p>
+                    <div className="container mt-2">
+                        <div className="select is-size-7-touch is-rounded is-link mr-1">
+                            <select
+                                name="dateselecter"
+                                onChange={(e) => setFinalDate(e.target.value)}
+                            >
+                                {nightOut.suggestedDates.map((date) => (
+                                    <option key={date.id} value={date.date}>
+                                        {date.weekday} / {date.date}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        {!finalDateFetching ? (
+                            <button
+                                className="button is-link is-rounded is-size-6 is-size-7-touch"
+                                onClick={() => addFinalDate(finalDate)}
+                            >
                                 <span className="icon is-small">
                                     <i className="fa-regular fa-calendar-check"></i>
                                 </span>
@@ -294,9 +312,34 @@ const DateFinderComponent = ({
                                     Submit this date
                                 </span>
                             </button>
-                        </div>
+                        ) : (
+                            <button className="button is-link is-rounded is-size-6 is-size-7-touch is-loading">
+                                <span className="icon is-small">
+                                    <i className="fa-regular fa-calendar-check"></i>
+                                </span>
+                                <span className="is-size-6 is-is-size-7-touch">
+                                    Submit this date
+                                </span>
+                            </button>
+                        )}
+                        {finalDateSuccess && (
+                            <NotificatonComponent
+                                msg={notificationSuccess}
+                                animated={true}
+                                backgroundColor={'#48c78e'}
+                                color={'white'}
+                                onExit={() => setFinalDateSuccess(null)}
+                            ></NotificatonComponent>
+                        )}
+                        {finalDateError && (
+                            <NotificatonComponent
+                                msg={finalDateError}
+                                animated={true}
+                                onExit={() => setFinalDateError(null)}
+                            ></NotificatonComponent>
+                        )}
                     </div>
-                </form>
+                </div>
             )}
         </>
     )
