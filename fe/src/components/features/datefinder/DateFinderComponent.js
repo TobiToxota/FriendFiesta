@@ -29,7 +29,7 @@ const DateFinderComponent = ({
         useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
     const {
         postNotification,
-        notificationError, {/*TODO*/}
+        notificationError,
         notificationSuccess,
         fetching,
         setNotificationError,

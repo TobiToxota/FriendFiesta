@@ -12,6 +12,7 @@ import {
     usePatchNotification,
 } from '../../hooks/api/notifiactionAPI'
 import notificationsLength from '../../utils/notificationsLength'
+import { shaking } from '../../hooks/animations/animations'
 
 const HeaderComponent = () => {
     // get the user from the context
@@ -262,7 +263,7 @@ const HeaderComponent = () => {
                                         <span className="icon">
                                             <i className="fa-solid fa-list-ul" />
                                         </span>
-                                        <p className="is-size-7">
+                                        <p className="is-size-6 has-text-weight-semibold pb-1">
                                             Your NightOuts
                                         </p>
                                     </button>
@@ -270,13 +271,13 @@ const HeaderComponent = () => {
                             </div>
                             <div className="navbar-item p-1">
                                 <button
-                                    className="button is-light is-rounded"
+                                    className="button is-light is-rounded has-text-weight-semibold"
                                     onClick={logout}
                                 >
                                     <span className="icon">
                                         <i className="fa-solid fa-person-running" />
                                     </span>
-                                    <span>LogOut</span>
+                                    <span className='pb-1'>LogOut</span>
                                 </button>
                             </div>
                         </div>
