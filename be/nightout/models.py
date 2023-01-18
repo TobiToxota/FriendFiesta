@@ -129,7 +129,7 @@ class SuggestionVote(models.Model):
 class NotificationModel(models.Model):
 
     CHOICES = (('ask_next_phase', 'asks you to bring this Nightout to the next phase'),
-               ('nightout_finished', 'This Nightout is finished. Go take a look'))
+               ('nightout_finished', 'This Nightout is finished. Go take a look'), ('added_you_to_nightout', 'has addded you to a Nightout'))
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="ownedNotifications")

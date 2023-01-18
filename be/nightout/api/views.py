@@ -125,6 +125,7 @@ class AddParticipant(APIView):
 
         serializer = ParticipantSerializer(data=request.data)
         if serializer.is_valid():
+
             serializer.save(user=userObject, nightOut=nightoutObject)
 
             # if the Participant is added we need to add all current datesuggestions as participantdates
@@ -133,6 +134,11 @@ class AddParticipant(APIView):
             for date in dateSuggestions:
                 ParticipantDate.objects.create(
                     participant=serializer.instance, suggestedDate=date, nightOut=nightoutObject)
+
+            # we also need to give the participant a new notification
+            notificationForParticipant = NotificationModel.objects.create(
+                nightout=nightoutObject, owner=userObject, sender=request.user, notificationMessage='added_you_to_nightout')
+            notificationForParticipant.save()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
