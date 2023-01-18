@@ -64,7 +64,7 @@ const useFading = (target) => {
   });
 };
 
-/* This function lets an target shaker */
+/* This function lets an target shake */
 const shaking = (target) => {
   anime({
     targets: target,
@@ -72,7 +72,6 @@ const shaking = (target) => {
     duration: 300,
   })
 }
-
 
 export {
   useSwipeInFromLeft,

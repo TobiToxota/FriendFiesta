@@ -63,7 +63,7 @@ const usePatchNotification = (token, refreshNotifications) => {
             setSuccess('Notification was dismissed')
             setTimeout(() => {
                 refreshNotifications(token)
-            }, 550)
+            }, 200)
         } else {
             setError('Something went wrong')
         }

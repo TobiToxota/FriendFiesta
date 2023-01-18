@@ -110,7 +110,7 @@ const HeaderComponent = () => {
                                     <div className="dropdown is-hoverable is-vcentered">
                                         <div className="dropdown-trigger ">
                                             <button
-                                                className="button is-light is-rounded"
+                                                className="button is-light is-rounded fade-in"
                                                 aria-haspopup="true"
                                                 aria-controls="dropdown-menu4"
                                             >
@@ -158,7 +158,7 @@ const HeaderComponent = () => {
                                                                         null && (
                                                                         <div className="columns is-vcentered is-centered p-1 pr-0">
                                                                             <div
-                                                                                className="column is-10 is-vcentered is-size-6 is-size-7-touch has-text-centered"
+                                                                                className="column is-10 is-vcentered has-text-centered"
                                                                                 id={
                                                                                     'notification' +
                                                                                     notification.id
@@ -172,14 +172,22 @@ const HeaderComponent = () => {
                                                                                             .uuid
                                                                                     }
                                                                                 >
-                                                                                    {
-                                                                                        notification
-                                                                                            .sender
-                                                                                            .username
-                                                                                    }{' '}
-                                                                                    {
-                                                                                        notification.notificationMessage
-                                                                                    }
+                                                                                    {' '}
+                                                                                    <p
+                                                                                        id={
+                                                                                            'notificationtext' +
+                                                                                            notification.id
+                                                                                        }
+                                                                                    >
+                                                                                        {
+                                                                                            notification
+                                                                                                .sender
+                                                                                                .username
+                                                                                        }{' '}
+                                                                                        {
+                                                                                            notification.notificationMessage
+                                                                                        }
+                                                                                    </p>
                                                                                 </Link>
                                                                             </div>
                                                                             <div className="column is-vcentered is-1 pl-0">
@@ -190,13 +198,17 @@ const HeaderComponent = () => {
                                                                                             notification.id
                                                                                         )
                                                                                         shaking(
-                                                                                            '#trash-can'
+                                                                                            '#trash-can' +
+                                                                                                notification.id
                                                                                         )
                                                                                     }}
                                                                                 >
                                                                                     <i
                                                                                         className="fa-regular fa-trash-can"
-                                                                                        id="trash-can"
+                                                                                        id={
+                                                                                            'trash-can' +
+                                                                                            notification.id
+                                                                                        }
                                                                                     />
                                                                                 </span>
                                                                             </div>
@@ -277,7 +289,7 @@ const HeaderComponent = () => {
                                     <span className="icon">
                                         <i className="fa-solid fa-person-running" />
                                     </span>
-                                    <span className='pb-1'>LogOut</span>
+                                    <span className="pb-1">LogOut</span>
                                 </button>
                             </div>
                         </div>
