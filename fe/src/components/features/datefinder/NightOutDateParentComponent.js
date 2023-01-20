@@ -9,6 +9,7 @@ import AddParticipantButtonComponent from './AddParticipantButtonComponent'
 import DateTableComponent from './DateTableComponent'
 import AddDateComponent from './AddDateButtonComponent'
 import AddFinalDateButtonComponent from './AddFinalDateButtonComponent'
+import SpinnerComponent from '../../common/SpinnerComponent'
 import { useSwipeInFromTop } from '../../../hooks/animations/animations'
 
 const NightOutDateParentComponent = ({
@@ -24,50 +25,57 @@ const NightOutDateParentComponent = ({
 
     return (
         <>
-            <div
-                className="container is-fluid active is-rounded"
-                id="main-container"
-            >
+            {!addFinalDateLoading ? (
                 <div
-                    className="notification is-light is-rounded fade-in shadow"
-                    style={{
-                        marginTop: '6vh',
-                        borderRadius: 15,
-                        minHeight: '150px',
-                    }}
+                    className="container is-fluid active is-rounded"
+                    id="main-container"
                 >
-                    <NightOutTopComponent
-                        nightOut={nightOut}
-                        refreshNightOut={refreshNightOut}
-                        userData={userData}
-                        children={
-                            <AddParticipantButtonComponent
-                                nightOut={nightOut}
-                                token={token}
-                                refreshNightOut={refreshNightOut}
-                            />
-                        }
-                    />
-                    <AddDateComponent
-                        token={token}
-                        nightOut={nightOut}
-                        refreshNightOut={refreshNightOut}
-                        userData={userData}
-                    />
-                    <DateTableComponent
-                        nightOut={nightOut}
-                        refreshNightOut={refreshNightOut}
-                        token={token}
-                        userData={userData}
-                    />
-                    <AddFinalDateButtonComponent
-                        nightOut={nightOut}
-                        refreshNightOut={refreshNightOut}
-                        userData={userData}
-                        setAddFinalDateLoading={setAddFinalDateLoading}
-                    />
+                    <div
+                        className="notification is-light is-rounded fade-in shadow"
+                        style={{
+                            marginTop: '6vh',
+                            borderRadius: 15,
+                            minHeight: '150px',
+                        }}
+                    >
+                        <NightOutTopComponent
+                            nightOut={nightOut}
+                            refreshNightOut={refreshNightOut}
+                            userData={userData}
+                            children={
+                                <AddParticipantButtonComponent
+                                    nightOut={nightOut}
+                                    token={token}
+                                    refreshNightOut={refreshNightOut}
+                                />
+                            }
+                        />
+                        <AddDateComponent
+                            token={token}
+                            nightOut={nightOut}
+                            refreshNightOut={refreshNightOut}
+                            userData={userData}
+                        />
+                        <DateTableComponent
+                            nightOut={nightOut}
+                            refreshNightOut={refreshNightOut}
+                            token={token}
+                            userData={userData}
+                        />
+                        <AddFinalDateButtonComponent
+                            nightOut={nightOut}
+                            refreshNightOut={refreshNightOut}
+                            userData={userData}
+                            token={token}
+                            setAddFinalDateLoading={setAddFinalDateLoading}
+                        />
+
+                        <></>
+                    </div>
                 </div>
-            </div>
+            ) : (
+                <SpinnerComponent children={'Your Nightout is moving from the date-phase to the planning-phase'}></SpinnerComponent>
+            )}
         </>
     )
 }

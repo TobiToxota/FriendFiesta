@@ -138,7 +138,7 @@ const useGetNightOutList = (token) => {
 }
 
 /** Thos custom hook fetches the backend to set a finaldate to a nightout and bring it to the next phase */
-const useAddFinalDate = (token, nightout, refreshNightOut) => {
+const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoading) => {
     const [finalDateError, setFinalDateError] = useState(null)
     const [finalDateSuccess, setFinalDateSuccess] = useState(null)
     const [finalDateFetching, setFinalDateFetching] = useState(false)
@@ -146,6 +146,7 @@ const useAddFinalDate = (token, nightout, refreshNightOut) => {
     const addFinalDate = async (e) => {
         e.preventDefault()
         setFinalDateFetching(true)
+        setAddFinalDateLoading(true)
 
         // Error handling
         if (e.target.dateselecter.value === null || e.target.dateselecter.value === '') {
@@ -155,7 +156,8 @@ const useAddFinalDate = (token, nightout, refreshNightOut) => {
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateError(null)
-            }, 4800)
+                setAddFinalDateLoading(false)
+            }, 3000)
             return
         }
 
@@ -183,15 +185,17 @@ const useAddFinalDate = (token, nightout, refreshNightOut) => {
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateSuccess(null)
+                setAddFinalDateLoading(false)
                 refreshNightOut(nightout.uuid)
-            }, 4800)
+            }, 3000)
         } else {
             setFinalDateError('You cant put this Nightout into the next Phase')
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateError(null)
+                setAddFinalDateLoading(false)
                 refreshNightOut(nightout.uuid)
-            }, 4800)
+            }, 3000)
         }
     }
 
