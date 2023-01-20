@@ -40,7 +40,7 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                 <DropDownContentComponent
                     content={
                         <ul
-                            className="is-inline-flex"
+                            className="is-inline is-size-6-desktop"
                             style={{ listStyle: 'none' }}
                         >
                             {nightOut.participants.map((participant) => (
