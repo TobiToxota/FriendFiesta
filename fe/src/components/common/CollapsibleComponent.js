@@ -49,10 +49,10 @@ const CollapsibleComponent = ({ title, content, style, arrow }) => {
 
   return (
     <div className="collapsible is-unselectable">     
-      <div className="content is-medium mt-1 has-text-centered" style={{backgroundColor: style}}>
-        <h1 className="is-inline collapsible-header is-size-3 is-size-4-touch" onClick={toggle}>
+      <div className="content is-medium mt-2 has-text-centered" style={{backgroundColor: style}}>
+        <h1 className="is-inline collapsible-header is-size-4 is-size-5-touch" onClick={toggle}>
           {title}
-          <i className="ml-1 fa-solid fa-chevron-down is-size-3 is-size-4-touch" style={{color: arrow}} id="arrow"></i>
+          <i className="ml-1 fa-solid fa-chevron-down is-size-4 is-size-5-touch" style={{color: arrow}} id="arrow"></i>
         </h1>
         <div className="container" id="animate">
           {open && (
