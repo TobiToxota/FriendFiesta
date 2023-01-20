@@ -3,8 +3,12 @@
 // package imports
 import React, { useState } from 'react'
 import DatePicker from 'react-date-picker'
+import Countdown from 'react-countdown-simple'
 
 // local imports
+import NotificatonComponent from '../../common/NotificationComponent'
+import CheckBoxComponent from './CheckBoxComponent'
+import DateTableComponent from './DateTableComponent'
 import {
     useAddDateSuggestionToNightOut,
     useDeleteParticipantFromNightOut,
@@ -12,8 +16,6 @@ import {
 import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
 import { usePostNotification } from '../../../hooks/api/notifiactionAPI'
 import { createDateFromDatePicker } from '../../../utils/nightOutDateFinderUtils'
-import NotificatonComponent from '../../common/NotificationComponent'
-import CheckBoxComponent from './CheckBoxComponent'
 import { useAddFinalDate } from '../../../hooks/api/nightOutAPI'
 
 const DateFinderComponent = ({
@@ -25,9 +27,6 @@ const DateFinderComponent = ({
     // states for the datePicker
     const [datePicker, setDatePicker] = useState(false)
     const [value, onChange] = useState(new Date())
-
-    // state for selected date from create
-    const [finalDate, setFinalDate] = useState(null)
 
     // get the hooks for addDate, addParticipantDate, postNotification and addFinalDate
     const { addDateSuggestion, dateError, setDateError, success, setSuccess } =
@@ -51,7 +50,7 @@ const DateFinderComponent = ({
         finalDateFetching,
         setFinalDateSuccess,
         setFinalDateError,
-    } = useAddFinalDate(token, nightOut)
+    } = useAddFinalDate(token, nightOut, refreshNightOut)
 
     return (
         <>
@@ -146,87 +145,12 @@ const DateFinderComponent = ({
                     )}
                 </>
             )}
-            <div className="table-container mt-2 mb-2" id="datetable">
-                <table
-                    className="table is-narrow datefinder-table mt-2"
-                    style={{}}
-                >
-                    <thead>
-                        <tr className="is-vcentered">
-                            <th className="label is-size-5 is-size-6-touch is-vcentered mt-4">
-                                Participants
-                            </th>
-                            {nightOut.suggestedDates.map((date) => (
-                                <th
-                                    className="is-vcentered has-text-centered fade-in"
-                                    id="date-head"
-                                    key={date.id}
-                                >
-                                    <p
-                                        className="label is-size-5 mb-0 is-size-6-touch"
-                                        style={{
-                                            fontSize: '14px',
-                                        }}
-                                    >
-                                        {date.weekday}
-                                    </p>
-                                    <p
-                                        className="label mb-1"
-                                        style={{
-                                            fontSize: '14px',
-                                        }}
-                                    >
-                                        {date.date.slice(-2) +
-                                            '.' +
-                                            date.date.slice(5, 7) +
-                                            '.' +
-                                            date.date.slice(0, 4)}{' '}
-                                    </p>
-                                    <span className="icon is-small">
-                                        <i className="fa-solid fa-people-group mr-1"></i>
-                                        {date.numberofCommits}
-                                    </span>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {nightOut.participants.map((participant) => (
-                            <tr key={participant.id}>
-                                <td>
-                                    <button className="button is-info is-rounded p-4 is-small">
-                                        <img
-                                            src={`https://avatars.dicebear.com/api/${participant.user.avatarStyle}/${participant.user.username}+${participant.user.avatarIteration}.svg`}
-                                            alt=""
-                                            width={30}
-                                        />
-                                        <p className="mr-1 ml-1">
-                                            {participant.user.username}
-                                        </p>
-                                    </button>
-                                </td>
-                                {nightOut.participantDates.map(
-                                    (participantDate) =>
-                                        participantDate.participant.id ===
-                                            participant.id && (
-                                            <CheckBoxComponent
-                                                addParticipantDateToNightOut={
-                                                    addParticipantDateToNightOut
-                                                }
-                                                participantDate={
-                                                    participantDate
-                                                }
-                                                userData={userData}
-                                                working={working}
-                                                key={participantDate.id}
-                                            />
-                                        )
-                                )}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <DateTableComponent
+                nightOut={nightOut}
+                refreshNightOut={refreshNightOut}
+                token={token}
+                userData={userData}
+            ></DateTableComponent>
             {nightOut.creator.id !== userData.id ? (
                 <div className="has-text-centered">
                     <p className="label is-size-5 mb-1">
@@ -287,58 +211,69 @@ const DateFinderComponent = ({
                         If you submit a date this Nightout will be taken to the
                         next phase.
                     </p>
-                    <div className="container mt-2">
-                        <div className="select is-size-7-touch is-rounded is-link mr-1">
-                            <select
-                                name="dateselecter"
-                                onChange={(e) => setFinalDate(e.target.value)}
-                            >
-                                {nightOut.suggestedDates.map((date) => (
-                                    <option key={date.id} value={date.date}>
-                                        {date.weekday} / {date.date}
-                                    </option>
-                                ))}
-                            </select>
+                    <form onSubmit={(e) => addFinalDate(e)}>
+                        <div className="container mt-2">
+                            <div className="select is-size-7-touch is-rounded is-link mr-1">
+                                <select name="dateselecter">
+                                    {nightOut.suggestedDates.map((date) => (
+                                        <option key={date.id} value={date.date}>
+                                            {date.weekday} / {date.date}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            {!finalDateFetching ? (
+                                <button className="button is-link is-rounded is-size-6 is-size-7-touch">
+                                    <span className="icon is-small">
+                                        <i className="fa-regular fa-calendar-check"></i>
+                                    </span>
+                                    <span className="is-size-6 is-is-size-7-touch">
+                                        Submit this date
+                                    </span>
+                                </button>
+                            ) : (
+                                <button className="button is-link is-rounded is-size-6 is-size-7-touch is-loading">
+                                    <span className="icon is-small">
+                                        <i className="fa-regular fa-calendar-check"></i>
+                                    </span>
+                                    <span className="is-size-6 is-is-size-7-touch">
+                                        Submit this date
+                                    </span>
+                                </button>
+                            )}
+                            {finalDateSuccess && (
+                                <NotificatonComponent
+                                    msg={finalDateSuccess}
+                                    animated={true}
+                                    backgroundColor={'#48c78e'}
+                                    color={'white'}
+                                    onExit={() => setFinalDateSuccess(null)}
+                                    children={
+                                        <Countdown
+                                            targetDate={new Date(
+                                                new Date().setSeconds(
+                                                    new Date().getSeconds() + 5
+                                                )
+                                            ).toISOString()}
+                                            renderer={({ seconds }) => (
+                                                <div style={{ color: 'white' }}>
+                                                    You will get redirected in{' '}
+                                                    {seconds} seconds 🚀
+                                                </div>
+                                            )}
+                                        />
+                                    }
+                                ></NotificatonComponent>
+                            )}
+                            {finalDateError && (
+                                <NotificatonComponent
+                                    msg={finalDateError}
+                                    animated={true}
+                                    onExit={() => setFinalDateError(null)}
+                                ></NotificatonComponent>
+                            )}
                         </div>
-                        {!finalDateFetching ? (
-                            <button
-                                className="button is-link is-rounded is-size-6 is-size-7-touch"
-                                onClick={() => addFinalDate(finalDate)}
-                            >
-                                <span className="icon is-small">
-                                    <i className="fa-regular fa-calendar-check"></i>
-                                </span>
-                                <span className="is-size-6 is-is-size-7-touch">
-                                    Submit this date
-                                </span>
-                            </button>
-                        ) : (
-                            <button className="button is-link is-rounded is-size-6 is-size-7-touch is-loading">
-                                <span className="icon is-small">
-                                    <i className="fa-regular fa-calendar-check"></i>
-                                </span>
-                                <span className="is-size-6 is-is-size-7-touch">
-                                    Submit this date
-                                </span>
-                            </button>
-                        )}
-                        {finalDateSuccess && (
-                            <NotificatonComponent
-                                msg={notificationSuccess}
-                                animated={true}
-                                backgroundColor={'#48c78e'}
-                                color={'white'}
-                                onExit={() => setFinalDateSuccess(null)}
-                            ></NotificatonComponent>
-                        )}
-                        {finalDateError && (
-                            <NotificatonComponent
-                                msg={finalDateError}
-                                animated={true}
-                                onExit={() => setFinalDateError(null)}
-                            ></NotificatonComponent>
-                        )}
-                    </div>
+                    </form>
                 </div>
             )}
         </>

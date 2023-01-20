@@ -138,13 +138,26 @@ const useGetNightOutList = (token) => {
 }
 
 /** Thos custom hook fetches the backend to set a finaldate to a nightout and bring it to the next phase */
-const useAddFinalDate = (token, nightout) => {
+const useAddFinalDate = (token, nightout, refreshNightOut) => {
     const [finalDateError, setFinalDateError] = useState(null)
     const [finalDateSuccess, setFinalDateSuccess] = useState(null)
     const [finalDateFetching, setFinalDateFetching] = useState(false)
 
-    const addFinalDate = async (date) => {
+    const addFinalDate = async (e) => {
+        e.preventDefault()
         setFinalDateFetching(true)
+
+        // Error handling
+        if (e.target.dateselecter.value === null || e.target.dateselecter.value === '') {
+            setFinalDateError(
+                'You have to select a date or at least have one date suggested in this Nightout.'
+            )
+            setTimeout(() => {
+                setFinalDateFetching(false)
+                setFinalDateError(null)
+            }, 4800)
+            return
+        }
 
         let response = await fetch(
             process.env.REACT_APP_API_URL + 'nightout/' + nightout.uuid + '/',
@@ -157,7 +170,7 @@ const useAddFinalDate = (token, nightout) => {
                 body: JSON.stringify({
                     title: nightout.title,
                     nightOut: nightout.uuid,
-                    finalDate: date,
+                    finalDate: e.target.dateselecter.value,
                     phase: 'planningPhase',
                 }),
             }
@@ -165,17 +178,19 @@ const useAddFinalDate = (token, nightout) => {
 
         if (response.status === 200) {
             setFinalDateSuccess(
-                'This Nightout was successfully put in the next Phase'
+                'This Nightout was successfully put in the next Phase. Nightout refreshing'
             )
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateSuccess(null)
+                refreshNightOut(nightout.uuid)
             }, 4800)
         } else {
             setFinalDateError('You cant put this Nightout into the next Phase')
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateError(null)
+                refreshNightOut(nightout.uuid)
             }, 4800)
         }
     }
