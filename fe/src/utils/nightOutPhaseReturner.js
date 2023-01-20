@@ -1,7 +1,7 @@
 /** @format */
 
 // local imports
-import NightOutDateComponent from '../components/features/datefinder/NightOutDateComponent'
+import NightOutDateComponent from '../components/features/datefinder/NightOutDateParentComponent'
 
 /* this function gets a phase as prop and returns the needed collection of components */
 const nightOutPhaseReturner = (nightOut, getNightOut, userData, token) => {
