@@ -34,6 +34,7 @@ const NightOutPlanningParentComponent = ({
                     refreshNightOut={refreshNightOut}
                     userData={userData}
                     progressPercentage={50}
+                    finalDate={nightOut.finalDate}
                 />
                 <PlanningInfoComponent/>
                 <CreateSuggestionButtonComponent nightOut={nightOut} token={token} userData={userData}/>

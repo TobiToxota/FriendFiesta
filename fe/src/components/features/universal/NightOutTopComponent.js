@@ -4,8 +4,15 @@ import React from 'react'
 // local imports
 import ProgressComponent from '../../common/ProgressComponent'
 import DropDownContentComponent from '../../common/DropDownContentComponent'
+import { nightOutDateToDate } from '../../../utils/nightOutDateToDate'
 
-const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage }) => {
+const NightOutTopComponent = ({
+    nightOut,
+    userData,
+    children,
+    progressPercentage,
+    finalDate,
+}) => {
     return (
         <div className="container">
             <div className="container">
@@ -36,6 +43,7 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                     </p>
                 </div>
             </div>
+            <p className="label is-pulled-right is-size-5 is-size-7-touch margin-top-mobile">Final Date: {nightOutDateToDate(finalDate)}</p>
             <div className="container is-inline-flex mt-1">
                 <DropDownContentComponent
                     content={
@@ -53,6 +61,7 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                     title="Participants"
                     icon={'fa-solid fa-user-astronaut'}
                 />
+                
                 {children}
             </div>
         </div>
