@@ -1,6 +1,6 @@
 const DropDownContentComponent = ({ title, content, icon, style, width, inline }) => {
     return (
-        <div className="dropdown is-hoverable is-vcentered">
+        <div className="dropdown is-hoverable is-vcentered is-block">
             <div className="dropdown-trigger ">
                 {!style && (
                     <button

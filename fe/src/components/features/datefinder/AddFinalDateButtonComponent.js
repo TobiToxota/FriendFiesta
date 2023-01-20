@@ -115,7 +115,7 @@ const AddFinalDateButtonComponent = ({
                                     <span className="icon is-small">
                                         <i className="fa-regular fa-calendar-check"></i>
                                     </span>
-                                    <span className="is-size-6 is-is-size-7-touch">
+                                    <span className="is-size-6 is-size-7-touch">
                                         Submit this date
                                     </span>
                                 </button>
