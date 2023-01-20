@@ -43,7 +43,11 @@ const NightOutTopComponent = ({
                     </p>
                 </div>
             </div>
-            <p className="label is-pulled-right is-size-5 is-size-7-touch margin-top-mobile">Final Date: {nightOutDateToDate(finalDate)}</p>
+            {finalDate && (
+                <p className="label is-pulled-right is-size-5 is-size-7-touch margin-top-mobile">
+                    Final Date: {nightOutDateToDate(finalDate)}
+                </p>
+            )}
             <div className="container is-inline-flex mt-1">
                 <DropDownContentComponent
                     content={
@@ -61,7 +65,7 @@ const NightOutTopComponent = ({
                     title="Participants"
                     icon={'fa-solid fa-user-astronaut'}
                 />
-                
+
                 {children}
             </div>
         </div>
