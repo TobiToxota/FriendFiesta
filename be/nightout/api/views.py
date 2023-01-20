@@ -223,23 +223,23 @@ class PatchParticipantDate(APIView):
 class GetSuggestionView(APIView):
     """Plan a suggestion for a nightout"""
 
-    def get(self, request, pk, format=None):
+    def get(self, request, uuid, format=None):
 
         # check if the user is the creator or a participant of the nightout
-        if not (NightOutModel.objects.filter(pk=pk, creator=request.user).exists() or Participant.objects.filter(nightOut=pk, user=request.user).exists()):
+        if not (NightOutModel.objects.filter(pk=uuid, creator=request.user).exists() or Participant.objects.filter(nightOut=uuid, user=request.user).exists()):
             return Response({"message": "You are not the creator or a participant of this nightout."}, status=status.HTTP_403_FORBIDDEN)
 
         # get the participant from the user:
         userAsParticipant = Participant.objects.filter(
-            nightOut=pk).filter(user=request.user).first()
+            nightOut=uuid).filter(user=request.user).first()
 
         # check if the user hasnt suggested a suggestion for this nightout
-        if not PlanSuggestion.objects.filter(nightOut=pk).filter(creator=userAsParticipant).exists():
+        if not PlanSuggestion.objects.filter(nightOut=uuid).filter(creator=userAsParticipant).exists():
             return Response({"message": "You have not suggested a suggestion for this nightout."}, status=status.HTTP_404_NOT_FOUND)
 
         # get the suggestion from the user:
         suggestionAsSuggestion = PlanSuggestion.objects.filter(
-            nightOut=pk).filter(creator=userAsParticipant).first()
+            nightOut=uuid).filter(creator=userAsParticipant).first()
 
         serializer = PlanSuggestionSerializer(suggestionAsSuggestion)
 

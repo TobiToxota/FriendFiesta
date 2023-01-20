@@ -1,7 +1,7 @@
 import React from 'react'
 import CollapsibleComponent from '../../common/CollapsibleComponent'
 
-const PlanningInfoComponent = ({}) => {
+const PlanningInfoComponent = () => {
     return (
             <CollapsibleComponent
                 title={'What to do here?'}

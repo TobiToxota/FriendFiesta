@@ -8,7 +8,7 @@ urlpatterns = [
     path('participantdelete/', views.DeleteParticipant.as_view()),
     path('datesuggestion/', views.AddDateSuggestion.as_view()),
     path('participantdate/', views.PatchParticipantDate.as_view()),
-    path('suggestion/<int:pk>/', views.GetSuggestionView.as_view()),
+    path('suggestion/<uuid:uuid>/', views.GetSuggestionView.as_view()),
     path('suggestion/', views.CreateSuggestionView.as_view()),
     path('suggestion/entrys/', views.NewEntrySuggestionView.as_view()),
     path('suggestion/suggestionVote/', views.CreateAndDeleteVote.as_view()),

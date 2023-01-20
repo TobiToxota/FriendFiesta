@@ -4,6 +4,7 @@ import React from 'react'
 // local imports
 import { useSwipeInFromTop } from '../../../hooks/animations/animations'
 import NightOutTopComponent from '../universal/NightOutTopComponent'
+import CreateSuggestionButtonComponent from './CreateSuggestionButtonComponent'
 import PlanningInfoComponent from './PlanningInfoComponent'
 
 const NightOutPlanningParentComponent = ({
@@ -35,6 +36,7 @@ const NightOutPlanningParentComponent = ({
                     progressPercentage={50}
                 />
                 <PlanningInfoComponent/>
+                <CreateSuggestionButtonComponent nightOut={nightOut} token={token} userData={userData}/>
             </div>
         </div>
     )

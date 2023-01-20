@@ -7,7 +7,7 @@ const useLoadSuggestion = (token, uuid) => {
     const [suggestionLoading, setSuggestionLoading] = useState(false)
 
     const loadSuggestion = async () => {
-        setSuggestionData(true)
+        setSuggestionLoading(true)
 
         let response = await fetch(
             process.env.REACT_APP_API_URL + 'suggestion/' + uuid,
