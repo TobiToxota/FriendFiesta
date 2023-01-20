@@ -5,14 +5,14 @@ import React from 'react'
 import ProgressComponent from '../../common/ProgressComponent'
 import DropDownContentComponent from '../../common/DropDownContentComponent'
 
-const NightOutTopComponent = ({ nightOut, userData, children }) => {
+const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage }) => {
     return (
         <div className="container">
             <div className="container">
                 <h3 className="mb-2 is-size-2-touch squarepeg-title has-text-centered is-unselectable">
                     Your Nightout: {nightOut.title}
                 </h3>
-                <ProgressComponent percentage={25} />
+                <ProgressComponent percentage={progressPercentage} />
                 <div
                     id="creator"
                     className="mt-2 is-inline-block is-vcentered is-flex"

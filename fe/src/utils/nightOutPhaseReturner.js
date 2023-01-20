@@ -2,22 +2,32 @@
 
 // local imports
 import NightOutDateParentComponent from '../components/features/datefinder/NightOutDateParentComponent'
+import NightOutPlanningParentComponent from '../components/features/planningPhase/NightOutPlanningParentComponent'
 
 /* this function gets a phase as prop and returns the needed collection of components */
-const nightOutPhaseReturner = (nightOut, getNightOut, userData, token) => {
+const nightOutPhaseReturner = (nightOut, refreshNightOut, userData, token) => {
     if (nightOut.phase === 'datePhase') {
         return (
             <>
                 <NightOutDateParentComponent
                     nightOut={nightOut}
-                    refreshNightOut={getNightOut}
+                    refreshNightOut={refreshNightOut}
                     userData={userData}
                     token={token}
                 />
             </>
         )
     } else if (nightOut.phase === 'planningPhase') {
-        return <></>
+        return (
+            <>
+                <NightOutPlanningParentComponent
+                    nightOut={nightOut}
+                    refreshNightOut={refreshNightOut}
+                    userData={userData}
+                    token={token}
+                />
+            </>
+        )
     } else if (nightOut.phase === 'votingPhase') {
         return <></>
     } else if (nightOut.phase === 'finished') {

@@ -15,7 +15,7 @@ const NightOutPage = () => {
     // get userData, token, params and nightOutData
     const { userData, token } = useContext(AuthContext)
     const { uuid } = useParams()
-    const { nightOut, getNightOut, loading } = useGetNightOut(token, uuid)
+    const { nightOut, refreshNightOut, loading } = useGetNightOut(token, uuid)
 
     return (
         <>
@@ -29,7 +29,7 @@ const NightOutPage = () => {
                     <HeaderComponent />
                     {nightOutPhaseReturner(
                         nightOut,
-                        getNightOut,
+                        refreshNightOut,
                         userData,
                         token
                     )}

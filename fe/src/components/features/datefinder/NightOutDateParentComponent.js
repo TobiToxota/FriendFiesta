@@ -42,6 +42,7 @@ const NightOutDateParentComponent = ({
                             nightOut={nightOut}
                             refreshNightOut={refreshNightOut}
                             userData={userData}
+                            progressPercentage={25}
                             children={
                                 <AddParticipantButtonComponent
                                     nightOut={nightOut}
@@ -74,7 +75,7 @@ const NightOutDateParentComponent = ({
                     </div>
                 </div>
             ) : (
-                <SpinnerComponent children={'Your Nightout is moving from the date-phase to the planning-phase'}></SpinnerComponent>
+                <SpinnerComponent children={'Your Nightout is moving 🚀 from the date-phase to the planning-phase'}></SpinnerComponent>
             )}
         </>
     )
