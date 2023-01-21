@@ -89,7 +89,7 @@ class PlanSuggestion(models.Model):
         NightOutModel, on_delete=models.CASCADE, related_name="planSuggestions")
     creator = models.ForeignKey(
         Participant, on_delete=models.CASCADE, related_name="planSuggestions")
-    description = models.CharField(max_length=200, blank=True)
+    description = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         ordering = ['creator']
