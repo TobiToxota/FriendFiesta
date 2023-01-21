@@ -127,6 +127,8 @@ body,
   background-color: #3e8ed0 !important;
   box-shadow: none !important;
   font-size: smaller;
+  position: relative;
+  z-index: 9;
 }
 
 .dropdown-content-header {

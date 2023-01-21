@@ -46,4 +46,56 @@ const useLoadSuggestion = (token, uuid) => {
     }
 }
 
-export {useLoadSuggestion}
+const useAddSuggestion = (token, uuid, refreshNightOut) => {
+    const [addSuggestionData, setAddSuggestioanData] = useState(null)
+    const [addSuggestionError, setAddSuggestionError] = useState(null)
+    const [addSuggestionFetching, SetAddSuggestionFetching] = useState(false)
+    const [addSuggestionSuccess, setAddSuggestionSuccess] = useState(null)
+
+    const addSuggestion = async (e) => {
+        SetAddSuggestionFetching(true)
+
+        let response = await fetch(
+            process.env.REACT_APP_API_URL + 'suggestion/',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    description: e.target.description.value,
+                    nightOut: uuid,
+                }),
+            }
+        )
+        let thisData = await response.json()
+
+        if (response.status === 201) {
+            setAddSuggestioanData(thisData)
+            setAddSuggestionSuccess('Suggestion was successfully created')
+            setTimeout(() => {
+                setAddSuggestionSuccess(null)
+                refreshNightOut()
+            }, 4800)
+        } else {
+            setAddSuggestioanData(thisData)
+            setAddSuggestionError('Something went wrong')
+            setTimeout(() => {
+                setAddSuggestionError(null)
+                refreshNightOut()
+            }, 4800)
+        }
+    }
+    return {
+        addSuggestion,
+        addSuggestionData,
+        addSuggestionFetching,
+        addSuggestionSuccess,
+        addSuggestionError,
+        setAddSuggestionError,
+        setAddSuggestionSuccess,
+    }
+}
+
+export { useLoadSuggestion, useAddSuggestion }

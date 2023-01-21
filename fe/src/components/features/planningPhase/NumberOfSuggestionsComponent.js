@@ -25,6 +25,7 @@ const NumberOfSuggestionsComponent = ({ nightOut }) => {
                 }
                 title={nightOut.planSuggestions.length + ' suggestions'}
                 icon={'fa-solid fa-hashtag'}
+                width={'240px'}
             />
         </div>
     )

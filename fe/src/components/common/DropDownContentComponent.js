@@ -24,8 +24,8 @@ const DropDownContentComponent = ({ title, content, icon, style, width, inline }
                 role="menu"
                 style={{ minWidth: "5rem", width: width }}>
                 <div
-                    className="dropdown-content dropdown-border has-text-centered"
-                    style={{ backgroundColor: "#3e8ed0" }}>
+                    className="dropdown-content dropdown-border has-text-centered is-relative"
+                    style={{ backgroundColor: "#3e8ed0", zIndex: '10000' }}>
                     <div className="dropdown-item">
                         <div className="dropdown-content">{content}</div>
                     </div>
