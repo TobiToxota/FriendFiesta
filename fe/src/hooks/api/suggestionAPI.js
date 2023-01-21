@@ -46,7 +46,7 @@ const useLoadSuggestion = (token, uuid) => {
     }
 }
 
-const useAddSuggestion = (token, uuid, refreshNightOut) => {
+const useAddSuggestion = ( refreshSuggestion, token, uuid) => {
     const [addSuggestionData, setAddSuggestioanData] = useState(null)
     const [addSuggestionError, setAddSuggestionError] = useState(null)
     const [addSuggestionFetching, SetAddSuggestionFetching] = useState(false)
@@ -64,7 +64,6 @@ const useAddSuggestion = (token, uuid, refreshNightOut) => {
                     Authorization: `token ${token}`,
                 },
                 body: JSON.stringify({
-                    description: e.target.description.value,
                     nightOut: uuid,
                 }),
             }
@@ -76,14 +75,14 @@ const useAddSuggestion = (token, uuid, refreshNightOut) => {
             setAddSuggestionSuccess('Suggestion was successfully created')
             setTimeout(() => {
                 setAddSuggestionSuccess(null)
-                refreshNightOut()
+                refreshSuggestion(uuid)
             }, 4800)
         } else {
             setAddSuggestioanData(thisData)
             setAddSuggestionError('Something went wrong')
             setTimeout(() => {
                 setAddSuggestionError(null)
-                refreshNightOut()
+                refreshSuggestion(uuid)
             }, 4800)
         }
     }

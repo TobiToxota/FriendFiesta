@@ -67,7 +67,7 @@ const useGetNightOut = (token, uuid) => {
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    async function getNightOut(uuid) {
+    async function refreshNightOut(uuid) {
         let response = await fetch(
             process.env.REACT_APP_API_URL + 'nightout/' + uuid,
             {
@@ -92,11 +92,11 @@ const useGetNightOut = (token, uuid) => {
     }
 
     useEffect(() => {
-        getNightOut(uuid)
+        refreshNightOut(uuid)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uuid, token])
 
-    return { getNightOut, nightOut, error, setError, success, loading }
+    return { refreshNightOut, nightOut, error, setError, success, loading }
 }
 
 /** This custom hook fetches the backend for all nightouts that a user is participating in */

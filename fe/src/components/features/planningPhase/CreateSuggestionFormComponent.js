@@ -3,16 +3,28 @@ import React from 'react'
 
 // local imports
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
+import { useAddSuggestion } from '../../../hooks/api/suggestionAPI'
 
 const CreateSuggestionFormComponent = ({
+    loadSuggestion,
     token,
     nightOut,
     setCreateSuggestion,
 }) => {
+    // animation
     useSwipeInFromBottom(
         CreateSuggestionFormComponent,
         '#create-suggestion-container'
     )
+
+    // get the useAddSuggestionHook
+    const {
+        addSuggestion,
+        addSuggestionSuccess,
+        addSuggestionError,
+        addSuggestionFetching,
+    } = useAddSuggestion(loadSuggestion, token, nightOut.uuid)
+
     return (
         <div
             className="container is-fluid active is-rounded"
@@ -35,16 +47,14 @@ const CreateSuggestionFormComponent = ({
                     Create your suggestion for {nightOut.title}
                 </h2>
                 <p className="label has-text-centered is-size-6 is-size-7-touch">
-                    Here you can create your suggestion. Afterwards you can add
-                    entrys to your suggestion. An entry could be a specific
-                    location like a bar or a bowling alley with the time you
-                    approximately suggest to spent there. You can also add a
-                    description to your suggestion if you want to share some
-                    inside about it when the other participants take a look at
-                    your suggestion in the next phase.
+                    Are you sure that you want to create a suggestion for{' '}
+                    {nightOut.title}?
                 </p>
                 <div className="has-text-centered">
-                    <button className="button is-primary is-rounded">
+                    <button
+                        className="button is-primary is-rounded"
+                        onClick={() => addSuggestion()}
+                    >
                         <span className="icon is-small">
                             <i className="fa-regular fa-lightbulb"></i>
                         </span>

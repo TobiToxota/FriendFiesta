@@ -1,15 +1,18 @@
 // package imports
 import React from 'react'
 
+// local imports
+
 const CreateSuggestionButtonComponent = ({
     nightOut,
-    userData,
     token,
     setCreateSuggestion,
     createSuggestion,
     suggestionLoading,
-    suggestionData,
 }) => {
+
+
+
     return (
         <>
             <div className="has-text-centered mt-3">
@@ -28,14 +31,13 @@ const CreateSuggestionButtonComponent = ({
                         </button>
                     ) : (
                         <button
-                            className="button is-danger is-rounded"
-                            onClick={() => setCreateSuggestion(false)}
-                        >
+                            className="button is-primary is-rounded "
+                        disabled>
                             <span className="icon is-small">
-                                <i className="fa-solid fa-xmark"></i>
+                                <i className="fa-regular fa-lightbulb"></i>
                             </span>
                             <span className="is-size-6 is-size-7-touch">
-                                Close
+                                Add your suggestion
                             </span>
                         </button>
                     )

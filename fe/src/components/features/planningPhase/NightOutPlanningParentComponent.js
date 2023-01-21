@@ -23,7 +23,7 @@ const NightOutPlanningParentComponent = ({
     const [createSuggestion, setCreateSuggestion] = useState(false)
 
     // get the Suggestion from the current user
-    const { suggestionLoading, suggestionData } = useLoadSuggestion(
+    const { loadSuggestion, suggestionLoading, suggestionData } = useLoadSuggestion(
         token,
         nightOut.uuid
     )
@@ -64,11 +64,12 @@ const NightOutPlanningParentComponent = ({
                     )}
                 </div>
             </div>
-            {createSuggestion && (
+            {createSuggestion && !suggestionData && (
                 <CreateSuggestionFormComponent
                     nightOut={nightOut}
                     token={token}
                     setCreateSuggestion={setCreateSuggestion}
+                    loadSuggestion={loadSuggestion}
                 />
             )}
         </>
