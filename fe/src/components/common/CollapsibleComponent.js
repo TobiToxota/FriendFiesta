@@ -56,7 +56,7 @@ const CollapsibleComponent = ({ title, content, style, arrow }) => {
         </p>
         <div className="container" id="animate">
           {open && (
-            <p className="has-text-weight-semibold collapsible-content is-size-6" id="content">
+            <p className="label collapsible-content is-size-6 is-size-7-touch" id="content">
               {content}
             </p>
           )}

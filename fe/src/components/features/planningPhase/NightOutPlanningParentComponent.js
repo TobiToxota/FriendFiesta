@@ -7,6 +7,8 @@ import NightOutTopComponent from '../universal/NightOutTopComponent'
 import CreateSuggestionButtonComponent from './CreateSuggestionButtonComponent'
 import CreateSuggestionFormComponent from './CreateSuggestionFormComponent'
 import PlanningInfoComponent from './PlanningInfoComponent'
+import { useLoadSuggestion } from '../../../hooks/api/suggestionAPI'
+import NumberOfSuggestionsComponent from './NumberOfSuggestionsComponent'
 
 const NightOutPlanningParentComponent = ({
     nightOut,
@@ -19,6 +21,12 @@ const NightOutPlanningParentComponent = ({
 
     // state for creating a suggestion
     const [createSuggestion, setCreateSuggestion] = useState(false)
+
+    // get the Suggestion from the current user
+    const { suggestionLoading, suggestionData } = useLoadSuggestion(
+        token,
+        nightOut.uuid
+    )
 
     return (
         <>
@@ -40,15 +48,20 @@ const NightOutPlanningParentComponent = ({
                         userData={userData}
                         progressPercentage={50}
                         finalDate={nightOut.finalDate}
+                        children={<NumberOfSuggestionsComponent nightOut={nightOut}/>}
                     />
                     <PlanningInfoComponent />
-                    <CreateSuggestionButtonComponent
-                        nightOut={nightOut}
-                        token={token}
-                        userData={userData}
-                        setCreateSuggestion={setCreateSuggestion}
-                        createSuggestion={createSuggestion}
-                    />
+                    {!suggestionData && (
+                        <CreateSuggestionButtonComponent
+                            nightOut={nightOut}
+                            token={token}
+                            userData={userData}
+                            setCreateSuggestion={setCreateSuggestion}
+                            createSuggestion={createSuggestion}
+                            suggestionLoading={suggestionLoading}
+                            suggestionData={suggestionData}
+                        />
+                    )}
                 </div>
             </div>
             {createSuggestion && (
