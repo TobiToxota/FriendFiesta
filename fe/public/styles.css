@@ -96,6 +96,16 @@ body,
   max-width: 1200px !important;
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 15px;
+}
+
+/* style for the createsuggestioncomponent */
+#create-suggestion-container {
+  border-radius: 100px;
+  margin-top: 2px !important;
+  max-width: 1200px !important;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-bottom: 20px;
 }
 
@@ -343,3 +353,5 @@ td {
 }
 
 /* END: CSS Spinner */
+
+/* CSS Toggle Switch */
