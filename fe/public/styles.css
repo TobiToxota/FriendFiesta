@@ -109,6 +109,11 @@ body,
   margin-bottom: 20px;
 }
 
+/* style for the textarea-suggestion-form */
+#textarea-suggestion-form {
+  width: 100px !important;
+}
+
 /* make the main nightout container better visible on mobile */
 @media screen and (max-width: 900px) {
   .main-nightout-container {

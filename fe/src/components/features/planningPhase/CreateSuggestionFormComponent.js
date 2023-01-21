@@ -22,23 +22,26 @@ const CreateSuggestionFormComponent = ({ token, nightOut }) => {
                     minHeight: '150px',
                 }}
             >
-                <h2 className="label is-size-3 has-text-centered">
+                <h2 className="label is-size-5 is-size-6-touch has-text-centered mb-2">
                     Create your suggestion for {nightOut.title}
                 </h2>
-                <form>
-                    <div className="has-text-centered">
-                        <p className="is-inline-flex label is-size-5 mr-3" style={{verticalAlign: 'top'}}>
-                            I want to add a description
-                        </p>
-                        <div
-                            className="mt-check-garden is-inline-flex mt-1"
-                            style={{ fontSize: '9px' }}
-                        >
-                            <input id={2} type="checkbox" />
-                            <label htmlFor={2}></label>
-                        </div>
-                    </div>
-                </form>
+                <p className="label has-text-centered is-size-6 is-size-7-touch">
+                    Here you can create your suggestion. Afterwards you can add
+                    entrys to your suggestion. An entry could be a specific
+                    location like a bar or a bowling alley with the time you
+                    approximately suggest to spent there. You can also add a
+                    description to your suggestion if you want to share some
+                    inside about it when the other participants take a look at
+                    your suggestion in the next phase.
+                </p>
+                <div className="has-text-centered">
+                    <button className="button is-primary is-rounded">
+                        <span className="icon is-small">
+                            <i className="fa-regular fa-lightbulb"></i>
+                        </span>
+                        <span className="is-size-6 is-size-7-touch">Yes, I want to add a suggestion</span>
+                    </button>
+                </div>
             </div>
         </div>
     )

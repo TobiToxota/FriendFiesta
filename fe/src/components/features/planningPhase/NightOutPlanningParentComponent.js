@@ -52,7 +52,10 @@ const NightOutPlanningParentComponent = ({
                 </div>
             </div>
             {createSuggestion && (
-                <CreateSuggestionFormComponent nightOut={nightOut} token={token}/>
+                <CreateSuggestionFormComponent
+                    nightOut={nightOut}
+                    token={token}
+                />
             )}
         </>
     )
