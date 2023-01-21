@@ -4,7 +4,11 @@ import React from 'react'
 // local imports
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 
-const CreateSuggestionFormComponent = ({ token, nightOut }) => {
+const CreateSuggestionFormComponent = ({
+    token,
+    nightOut,
+    setCreateSuggestion,
+}) => {
     useSwipeInFromBottom(
         CreateSuggestionFormComponent,
         '#create-suggestion-container'
@@ -22,6 +26,11 @@ const CreateSuggestionFormComponent = ({ token, nightOut }) => {
                     minHeight: '150px',
                 }}
             >
+                <i
+                    className="fa-solid fa-xmark fa-xl is-clickable"
+                    id="x"
+                    onClick={() => setCreateSuggestion(false)}
+                />
                 <h2 className="label is-size-5 is-size-6-touch has-text-centered mb-2">
                     Create your suggestion for {nightOut.title}
                 </h2>
@@ -39,7 +48,9 @@ const CreateSuggestionFormComponent = ({ token, nightOut }) => {
                         <span className="icon is-small">
                             <i className="fa-regular fa-lightbulb"></i>
                         </span>
-                        <span className="is-size-6 is-size-7-touch">Yes, I want to add a suggestion</span>
+                        <span className="is-size-6 is-size-7-touch">
+                            Yes, I want to add a suggestion
+                        </span>
                     </button>
                 </div>
             </div>

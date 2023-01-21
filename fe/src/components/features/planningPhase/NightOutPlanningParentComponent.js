@@ -68,6 +68,7 @@ const NightOutPlanningParentComponent = ({
                 <CreateSuggestionFormComponent
                     nightOut={nightOut}
                     token={token}
+                    setCreateSuggestion={setCreateSuggestion}
                 />
             )}
         </>
