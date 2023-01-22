@@ -99,9 +99,11 @@ class NightOut(APIView):
 
             # give every participant a notification
             for participant in participants:
-                newNotification = NotificationModel.objects.create(
+
+                if participant.user != nightOut.creator:
+                    newNotification = NotificationModel.objects.create(
                     nightout=nightOut, owner=participant.user, sender=nightOut.creator, notificationMessage='nightout_next_phase')
-                newNotification.save()
+                    newNotification.save()
 
         if serializer.is_valid():
             serializer.save()
