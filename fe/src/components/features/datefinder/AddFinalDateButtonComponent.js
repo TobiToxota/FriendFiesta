@@ -1,9 +1,7 @@
 // package imports
 import React from 'react'
-import Countdown from 'react-countdown-simple'
 
 // local imports
-import NotificatonComponent from '../../common/NotificationComponent'
 import { usePostNotification } from '../../../hooks/api/notifiactionAPI'
 import { useAddFinalDate } from '../../../hooks/api/nightOutAPI'
 
@@ -17,19 +15,11 @@ const AddFinalDateButtonComponent = ({
     // get the hooks for addFinalDate and postNotification
     const {
         postNotification,
-        notificationError,
-        notificationSuccess,
         fetching,
-        setNotificationError,
-        setNotificationSuccess,
     } = usePostNotification(token, nightOut.uuid)
     const {
         addFinalDate,
-        finalDateError,
-        finalDateSuccess,
         finalDateFetching,
-        setFinalDateSuccess,
-        setFinalDateError,
     } = useAddFinalDate(
         token,
         nightOut,
@@ -70,22 +60,6 @@ const AddFinalDateButtonComponent = ({
                                 </span>
                             </button>
                         </>
-                    )}
-                    {notificationSuccess && (
-                        <NotificatonComponent
-                            msg={notificationSuccess}
-                            animated={true}
-                            backgroundColor={'#48c78e'}
-                            color={'white'}
-                            onExit={() => setNotificationSuccess(null)}
-                        />
-                    )}
-                    {notificationError && (
-                        <NotificatonComponent
-                            msg={notificationError.message}
-                            animated={true}
-                            onExit={() => setNotificationError(null)}
-                        />
                     )}
                 </div>
             ) : (
@@ -128,37 +102,6 @@ const AddFinalDateButtonComponent = ({
                                         Submit this date
                                     </span>
                                 </button>
-                            )}
-                            {finalDateSuccess && (
-                                <NotificatonComponent
-                                    msg={finalDateSuccess}
-                                    animated={true}
-                                    backgroundColor={'#48c78e'}
-                                    color={'white'}
-                                    onExit={() => setFinalDateSuccess(null)}
-                                    children={
-                                        <Countdown
-                                            targetDate={new Date(
-                                                new Date().setSeconds(
-                                                    new Date().getSeconds() + 5
-                                                )
-                                            ).toISOString()}
-                                            renderer={({ seconds }) => (
-                                                <div style={{ color: 'white' }}>
-                                                    You will get redirected in{' '}
-                                                    {seconds} seconds 🚀
-                                                </div>
-                                            )}
-                                        />
-                                    }
-                                ></NotificatonComponent>
-                            )}
-                            {finalDateError && (
-                                <NotificatonComponent
-                                    msg={finalDateError}
-                                    animated={true}
-                                    onExit={() => setFinalDateError(null)}
-                                ></NotificatonComponent>
                             )}
                         </div>
                     </form>

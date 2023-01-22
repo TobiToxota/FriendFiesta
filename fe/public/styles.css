@@ -80,11 +80,11 @@ body,
 
 /* style for the SpinnerComponent */
 .loader {
-  border: 1.0vw solid #f3f3f3 !important;
+  border: 0.7vw solid #f3f3f3 !important;
   border-radius: 50%;
   border-top: 1.0vw solid #3e8ed0 !important;
-  width: 15vw !important;
-  height: 15vw !important;
+  width: 10vw !important;
+  height: 10vw !important;
   -webkit-animation: spin 1s linear infinite;
   /* Safari */
   animation: spin 0.5s linear infinite;

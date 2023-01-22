@@ -1,6 +1,9 @@
 /** @format */
 
+// package imports
 import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import Countdown from 'react-countdown-simple'
 
 /* this custom hook fetches the backend and creates a nightOut Object in the database */
 const useCreateNightOut = (token) => {
@@ -13,19 +16,18 @@ const useCreateNightOut = (token) => {
 
         // Error Handling
         if (e.target.title.value.length < 2) {
-            setError('Please enter a title, or at least 2 characters.')
-            setTimeout(() => {
-                setError(false)
-            }, 5000)
+            toast.error('Please enter a title, or at least 2 characters', {
+                autoClose: 6500,
+            })
             return { data, success, error }
         }
 
         // Error Handling
         if (e.target.title.value.length > 39) {
-            setError('Ensure that your title has not more than 40 characters.')
-            setTimeout(() => {
-                setError(false)
-            }, 5000)
+            toast.error(
+                'Ensure that your title has not more than 40 characters',
+                { autoClose: 6500 }
+            )
             return { data, success, error }
         }
 
@@ -46,14 +48,16 @@ const useCreateNightOut = (token) => {
 
         // check the response
         if (response.status === 201) {
-            setSuccess('Your nightout is beeing created')
+            toast.info(
+                '🚀 Your nightout is beeing created. You will get redirected '
+            )
             setData(thisData)
             // send user to the new nightout
             setTimeout(function () {
                 window.location.href = '/nightout/' + thisData.uuid
             }, 4800)
         } else {
-            setError('Something went wrong')
+            toast.error('Something went wrong')
             setData(thisData)
         }
     }
@@ -85,7 +89,7 @@ const useGetNightOut = (token, uuid) => {
             setSuccess('Nightout loaded')
             setLoading(false)
         } else {
-            setError('You are not participating in this nightOut')
+            toast.error('You are not participating in this Nightout')
             setNightOut(thisData)
             setLoading(false)
         }
@@ -138,7 +142,12 @@ const useGetNightOutList = (token) => {
 }
 
 /** Thos custom hook fetches the backend to set a finaldate to a nightout and bring it to the next phase */
-const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoading) => {
+const useAddFinalDate = (
+    token,
+    nightout,
+    refreshNightOut,
+    setAddFinalDateLoading
+) => {
     const [finalDateError, setFinalDateError] = useState(null)
     const [finalDateSuccess, setFinalDateSuccess] = useState(null)
     const [finalDateFetching, setFinalDateFetching] = useState(false)
@@ -149,10 +158,12 @@ const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoadin
         setAddFinalDateLoading(true)
 
         // Error handling
-        if (e.target.dateselecter.value === null || e.target.dateselecter.value === '') {
-            setFinalDateError(
-                'You have to select a date or at least have one date suggested in this Nightout.'
-            )
+        if (
+            e.target.dateselecter.value === null ||
+            e.target.dateselecter.value === ''
+        ) {
+            toast.error(
+                'You have to select a date or at least have one date suggested in this Nightout.', {autoClose: 3000})
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateError(null)
@@ -182,6 +193,7 @@ const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoadin
             setFinalDateSuccess(
                 'This Nightout was successfully put in the next Phase. Nightout refreshing'
             )
+            toast.success('This Nightout was successfully put in the next Phase. Nightout refreshing', {autoClose: 3000})
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateSuccess(null)
@@ -189,7 +201,8 @@ const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoadin
                 refreshNightOut(nightout.uuid)
             }, 3000)
         } else {
-            setFinalDateError('You cant put this Nightout into the next Phase')
+            toast.error(
+                'You have to select a date or at least have one date suggested in this Nightout.', {autoClose: 3000})
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateError(null)

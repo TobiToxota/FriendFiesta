@@ -13,7 +13,7 @@ const SpinnerComponent = ({ children }) => {
                 <div className="level mt-4 fade-in mx-6">
                     <div className="level-item has-text-centered">
                         <p
-                            className=" is-size-2-fullhd is-size-3-widescreen is-size-4-touch"
+                            className=" is-size-3-fullhd is-size-4-widescreen is-size-4-touch"
                             style={{ color: 'white' }}
                         >
                             {children}

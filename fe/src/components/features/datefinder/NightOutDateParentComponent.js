@@ -75,7 +75,7 @@ const NightOutDateParentComponent = ({
                     </div>
                 </div>
             ) : (
-                <SpinnerComponent children={'Your Nightout is moving 🚀 from the date-phase to the planning-phase'}></SpinnerComponent>
+                <SpinnerComponent/>
             )}
         </>
     )

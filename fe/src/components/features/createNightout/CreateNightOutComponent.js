@@ -18,7 +18,7 @@ const CreateNightOutComponent = ({ userData, setCreation, token }) => {
     <div className="container is-fluid active is-rounded" id="main-container">
       <div
         className="notification is-light is-rounded"
-        style={{ marginTop: "25vh", borderRadius: 15 }}>
+        style={{ marginTop: "15vh", borderRadius: 15 }}>
         <i
           className="fa-solid fa-xmark fa-xl is-clickable"
           id="x"
