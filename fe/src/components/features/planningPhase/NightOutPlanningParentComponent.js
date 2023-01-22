@@ -3,11 +3,12 @@ import React, { useState } from 'react'
 
 // local imports
 import { useSwipeInFromTop } from '../../../hooks/animations/animations'
+import { useLoadSuggestion } from '../../../hooks/api/suggestionAPI'
 import NightOutTopComponent from '../universal/NightOutTopComponent'
 import CreateSuggestionButtonComponent from './CreateSuggestionButtonComponent'
 import CreateSuggestionFormComponent from './CreateSuggestionFormComponent'
 import PlanningInfoComponent from './PlanningInfoComponent'
-import { useLoadSuggestion } from '../../../hooks/api/suggestionAPI'
+import EditSuggestionFormComponent from './EditSuggestionFormComponent'
 import NumberOfSuggestionsComponent from './NumberOfSuggestionsComponent'
 
 const NightOutPlanningParentComponent = ({
@@ -71,6 +72,9 @@ const NightOutPlanningParentComponent = ({
                     setCreateSuggestion={setCreateSuggestion}
                     loadSuggestion={loadSuggestion}
                 />
+            )}
+            {suggestionData && (
+                <EditSuggestionFormComponent nightOut={nightOut}/>
             )}
         </>
     )

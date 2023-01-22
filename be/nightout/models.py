@@ -61,6 +61,7 @@ class Participant(models.Model):
                              on_delete=models.CASCADE)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
+    finishedDatePhase = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.user.username) + " - " + str(self.nightOut.title) + " from " + str(self.nightOut.creator.username)

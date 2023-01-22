@@ -2,7 +2,7 @@
 import React from 'react'
 
 // local imports
-import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
+import { useSwipeInFromBottom, swipeAwayToBottom } from '../../../hooks/animations/animations'
 import { useAddSuggestion } from '../../../hooks/api/suggestionAPI'
 
 const CreateSuggestionFormComponent = ({
@@ -11,19 +11,17 @@ const CreateSuggestionFormComponent = ({
     nightOut,
     setCreateSuggestion,
 }) => {
+    // get the useAddSuggestionHook
+    const {
+        addSuggestion,
+        addSuggestionFetching,
+    } = useAddSuggestion(loadSuggestion, token, nightOut.uuid)
+
     // animation
     useSwipeInFromBottom(
         CreateSuggestionFormComponent,
         '#create-suggestion-container'
     )
-
-    // get the useAddSuggestionHook
-    const {
-        addSuggestion,
-        addSuggestionSuccess,
-        addSuggestionError,
-        addSuggestionFetching,
-    } = useAddSuggestion(loadSuggestion, token, nightOut.uuid)
 
     return (
         <div
@@ -51,17 +49,28 @@ const CreateSuggestionFormComponent = ({
                     {nightOut.title}?
                 </p>
                 <div className="has-text-centered">
-                    <button
-                        className="button is-primary is-rounded"
-                        onClick={() => addSuggestion()}
-                    >
-                        <span className="icon is-small">
-                            <i className="fa-regular fa-lightbulb"></i>
-                        </span>
-                        <span className="is-size-6 is-size-7-touch">
-                            Yes, I want to add a suggestion
-                        </span>
-                    </button>
+                    {!addSuggestionFetching ? (
+                        <button
+                            className="button is-primary is-rounded"
+                            onClick={() => {addSuggestion(); swipeAwayToBottom('#create-suggestion-container')}}
+                        >
+                            <span className="icon is-small">
+                                <i className="fa-regular fa-lightbulb"></i>
+                            </span>
+                            <span className="is-size-6 is-size-7-touch">
+                                Yes, I want to add a suggestion
+                            </span>
+                        </button>
+                    ) : (
+                        <button className="button is-primary is-rounded is-loading">
+                            <span className="icon is-small">
+                                <i className="fa-regular fa-lightbulb"></i>
+                            </span>
+                            <span className="is-size-6 is-size-7-touch">
+                                Yes, I want to add a suggestion
+                            </span>
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

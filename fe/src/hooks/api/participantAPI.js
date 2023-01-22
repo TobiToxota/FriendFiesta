@@ -1,6 +1,8 @@
 /** @format */
 
+// package imports
 import { useState } from 'react'
+import { toast } from "react-toastify"
 
 /** this custom hook fetches the backend to add an user to a nightout as a participant*/
 const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
@@ -46,6 +48,7 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
             setError(
                 'A user with that email does not exist. Or your friend did not create an account. Try again or ask your friend to create an account.'
             )
+            toast('A user with that email does not exist. Or your friend did not create an account. Try again or ask your friend to create an account.')
             setTimeout(() => {
                 setError(false)
             }, 4800)

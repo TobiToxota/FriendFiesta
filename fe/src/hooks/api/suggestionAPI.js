@@ -76,14 +76,14 @@ const useAddSuggestion = ( refreshSuggestion, token, uuid) => {
             setTimeout(() => {
                 setAddSuggestionSuccess(null)
                 refreshSuggestion(uuid)
-            }, 4800)
+            }, 1500)
         } else {
             setAddSuggestioanData(thisData)
             setAddSuggestionError('Something went wrong')
             setTimeout(() => {
                 setAddSuggestionError(null)
                 refreshSuggestion(uuid)
-            }, 4800)
+            }, 1500)
         }
     }
     return {

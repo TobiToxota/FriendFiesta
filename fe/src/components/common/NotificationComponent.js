@@ -33,7 +33,9 @@ const NotificatonComponent = ({
         borderRadius: "2px",
         backgroundColor: backgroundColor,
         color: color,
-      }}>
+        position: 'absolute; bottom: 0; right: 0',
+      }}
+      id='notification'>
       <button className="delete" onClick={onExit} />
       {msg}
       <br></br>
