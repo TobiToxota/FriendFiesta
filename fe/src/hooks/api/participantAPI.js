@@ -2,7 +2,7 @@
 
 // package imports
 import { useState } from 'react'
-import { toast } from "react-toastify"
+import { toast } from 'react-toastify'
 
 /** this custom hook fetches the backend to add an user to a nightout as a participant*/
 const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
@@ -30,28 +30,22 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
         const thisData = await response.json()
 
         if (response.status === 201) {
-            setSuccess('Participant successfully added to your Nightout.')
             setData(thisData)
-            setTimeout(() => {
-                setSuccess(false)
-            }, 4800)
+            toast.success('Participant successfully added to your Nightout.', {
+                autoClose: 6500,
+            })
             refreshNightOut(uuid)
         } else if (response.status === 409) {
-            setError(
-                'It seems like the person you want to add, is allready participating in this Nightout.'
+            toast.error(
+                'A user with that email does not exist. Or your friend did not create an account. Try again or ask your friend to create an account.',
+                { autoClose: 6500 }
             )
-            setTimeout(() => {
-                setError(false)
-            }, 4800)
             setData(thisData)
         } else {
-            setError(
-                'A user with that email does not exist. Or your friend did not create an account. Try again or ask your friend to create an account.'
+            toast.error(
+                'A user with that email does not exist. Or your friend did not create an account. Try again or ask your friend to create an account.',
+                { autoClose: 6500 }
             )
-            toast('A user with that email does not exist. Or your friend did not create an account. Try again or ask your friend to create an account.')
-            setTimeout(() => {
-                setError(false)
-            }, 4800)
             setData(thisData)
         }
     }
@@ -89,14 +83,16 @@ const useDeleteParticipantFromNightOut = (token, uuid) => {
         )
 
         if (response.status === 200) {
-            setDeleteSuccess('You successfully left this Nightout')
+            toast.success('You successfully left this Nightout', {
+                autoClose: 2000,
+            })
             setTimeout(function () {
                 setDeleteFetching(false)
                 window.location.href = '/nightoutlist/'
             }, 2000)
         } else {
             setDeleteFetching(false)
-            setDeleteError('Something went wrong')
+            toast.error('Something went wrong', { autoClose: 3000 })
         }
     }
 
@@ -132,25 +128,16 @@ const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
         let thisData = await response.json()
 
         if (response.status === 201) {
-            setSuccess(
-                'Your suggested date was successfully added to this Nightout'
-            )
+            toast.success('Your suggested date was successfully added', {
+                autoClose: 2000,
+            })
             setDateSuggestionData(thisData)
             refreshNightOut(uuid)
-            setTimeout(() => {
-                setSuccess(false)
-            }, 4800)
         } else if (response.status === 400 || response.status === 409) {
             setDateSuggestionData(thisData)
-            setDateError(thisData.message)
-            setTimeout(() => {
-                setDateError(false)
-            }, 4800)
+            toast.error('This date is allready a date in this Nightout')
         } else {
-            setDateError('Something went wrong')
-            setTimeout(() => {
-                setDateError(false)
-            }, 4800)
+            toast.error('Something went wrong')
         }
     }
     return {
