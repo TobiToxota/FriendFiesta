@@ -31,7 +31,7 @@ class NightOutModel(models.Model):
         ordering = ['-createdAt']
 
     def __str__(self):
-        return self.title + " - " + self.creator.username + " - " + str(self.createdAt) + " - " + str(self.id)
+        return self.title + " - " + self.creator.username + " - " + str(self.createdAt) + " - " + str(self.uuid)
 
 
 class DateSuggestion(models.Model):
@@ -129,7 +129,7 @@ class SuggestionVote(models.Model):
 class NotificationModel(models.Model):
 
     CHOICES = (('ask_next_phase', 'asks you to bring this Nightout to the next phase'),
-               ('nightout_finished', 'This Nightout is finished. Go take a look'), ('added_you_to_nightout', 'has addded you to a Nightout'))
+               ('nightout_finished', 'This Nightout is finished. Go take a look'), ('added_you_to_nightout', 'has addded you to a Nightout'), ('nightout_next_phase', 'This nightout was brought to the next phase by'))
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="ownedNotifications")

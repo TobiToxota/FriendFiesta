@@ -88,8 +88,21 @@ class NightOut(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, uuid, format=None):
-        nightout = self.get_object(uuid, request)
-        serializer = NightOutSerializer(nightout, data=request.data)
+        nightOut = self.get_object(uuid, request)
+        serializer = NightOutSerializer(nightOut, data=request.data)
+
+        # check if a NightOut is brought by the creator to the next phase, if so put in a notification for every particpant except for the creator.
+        if request.data['finalDate'] != None:
+
+            # get all participants from this nightout
+            participants = Participant.objects.filter(nightOut=nightOut).all()
+
+            # give every participant a notification
+            for participant in participants:
+                newNotification = NotificationModel.objects.create(
+                    nightout=nightOut, owner=participant.user, sender=nightOut.creator, notificationMessage='nightout_next_phase')
+                newNotification.save()
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
