@@ -27,7 +27,7 @@ const NightOutTopComponent = ({
                     >
                         <button className="button is-info is-rounded p-2">
                             <img
-                                src={`https://avatars.dicebear.com/api/${nightOut.creator.avatarStyle}/${userData.username}+${nightOut.creator.avatarIteration}.svg`}
+                                src={`https://avatars.dicebear.com/api/${nightOut.creator.avatarStyle}/${nightOut.creator.username}+${nightOut.creator.avatarIteration}.svg`}
                                 alt=""
                                 width={30}
                             />
@@ -50,24 +50,26 @@ const NightOutTopComponent = ({
                     Final Date: {nightOutDateToDate(finalDate)}
                 </p>
             )}
-            <div className="container is-inline-flex mt-1">
-                <DropDownContentComponent
-                    content={
-                        <ul
-                            className="is-inline is-size-6-desktop"
-                            style={{ listStyle: 'none' }}
-                        >
-                            {nightOut.participants.map((participant) => (
-                                <li key={participant.id}>
-                                    {participant.user.username}
-                                </li>
-                            ))}
-                        </ul>
-                    }
-                    title="Participants"
-                    icon={'fa-solid fa-user-astronaut'}
-                />
 
+            <div className="container is-inline-flex mt-1">
+                {nightOut.phase !== "datePhase" && 
+                <>
+                {nightOut.participants.map((participant) => (
+                <>
+                  <DropDownContentComponent
+                    title={
+                      <img
+                        src={`https://avatars.dicebear.com/api/${participant.user.avatarStyle}/${participant.user.username}+${participant.user.avatarIteration}.svg`}
+                        alt=""
+                        width={30}
+                      />
+                    }
+                    content={participant.user.username}
+                    thisStyle="avatar">
+                    </DropDownContentComponent>
+                </>
+              ))}
+                </>}
                 {children}
             </div>
         </div>

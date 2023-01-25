@@ -1,8 +1,8 @@
-const DropDownContentComponent = ({ title, content, icon, style, width, inline }) => {
+const DropDownContentComponent = ({ title, content, icon, thisStyle, width, inline }) => {
     return (
         <div className="dropdown is-hoverable is-vcentered is-block">
             <div className="dropdown-trigger ">
-                {!style && (
+                {!thisStyle && (
                     <button
                         className="button is-rounded is-info is-size-7-touch"
                         aria-haspopup="true"
@@ -15,8 +15,8 @@ const DropDownContentComponent = ({ title, content, icon, style, width, inline }
                         )}
                     </button>
                 )}
-                {style === "label" && <span className="is-underlined" style={{ color: "purple" }}>{title}</span>}
-                {style === "avatar" && <span className="is-underlined">{title}</span>}
+                {thisStyle === "label" && <span className="is-underlined" style={{ color: "purple" }}>{title}</span>}
+                {thisStyle === "avatar" && <span className="is-underlined">{title}</span>}
             </div>
             <div
                 className="dropdown-menu fade-in"

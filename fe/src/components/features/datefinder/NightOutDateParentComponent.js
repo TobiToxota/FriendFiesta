@@ -43,13 +43,6 @@ const NightOutDateParentComponent = ({
                             refreshNightOut={refreshNightOut}
                             userData={userData}
                             progressPercentage={25}
-                            children={
-                                <AddParticipantButtonComponent
-                                    nightOut={nightOut}
-                                    token={token}
-                                    refreshNightOut={refreshNightOut}
-                                />
-                            }
                         />
                         <AddDateComponent
                             token={token}
@@ -63,6 +56,11 @@ const NightOutDateParentComponent = ({
                             token={token}
                             userData={userData}
                         />
+                        <AddParticipantButtonComponent
+                                    nightOut={nightOut}
+                                    token={token}
+                                    refreshNightOut={refreshNightOut}
+                                />
                         <AddFinalDateButtonComponent
                             nightOut={nightOut}
                             refreshNightOut={refreshNightOut}
@@ -75,7 +73,7 @@ const NightOutDateParentComponent = ({
                     </div>
                 </div>
             ) : (
-                <SpinnerComponent/>
+                <SpinnerComponent />
             )}
         </>
     )

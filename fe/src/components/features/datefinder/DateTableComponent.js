@@ -10,7 +10,7 @@ const DateTableComponent = ({ nightOut, refreshNightOut, token, userData }) => {
         useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
 
     return (
-        <div className="table-container mt-2 mb-2" id="datetable">
+        <div className="table-container mt-2 mb-0" id="datetable">
             <table className="table is-narrow datefinder-table mt-2" style={{}}>
                 <thead>
                     <tr className="is-vcentered">
