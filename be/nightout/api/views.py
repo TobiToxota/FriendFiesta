@@ -166,26 +166,24 @@ class PutParticipant(APIView):
     def put(self, request, format=None):
 
         try:
-            nightOut = NightOutModel.objects.get(uuid=request.data['uuid'])
+            nightOut = NightOutModel.objects.get(
+                uuid=request.data['nightout_uuid'])
         except ObjectDoesNotExist:
             return Response({"message": "NightOut doesnt exist"}, status=status.HTTP_404_NOT_FOUND)
-        
+
         try:
             participant = Participant.objects.get(
-            id=request.data['participant_id'])
+                id=request.data['participant_id'])
         except ObjectDoesNotExist:
             return Response({"message": "Participant does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-        currentCommit = participant.commit
-        newCommit = None
-
-        if currentCommit == True:
-            participant.commit = False
+        if participant.finishedDatePhase == True:
+            participant.finishedDatePhase = False
             participant.save()
             return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
 
         else:
-            participant.commit = True
+            participant.finishedDatePhase = True
             participant.save()
             return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
 

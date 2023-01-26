@@ -6,6 +6,7 @@ urlpatterns = [
     path('nightout/<uuid:uuid>/', views.NightOut.as_view()),
     path('participant/', views.AddParticipant.as_view()), 
     path('participantdelete/', views.DeleteParticipant.as_view()),
+    path('participantcommit', views.PutParticipant.as_view()),
     path('datesuggestion/', views.AddDateSuggestion.as_view()),
     path('participantdate/', views.PatchParticipantDate.as_view()),
     path('suggestion/<uuid:uuid>/', views.GetSuggestionView.as_view()),
