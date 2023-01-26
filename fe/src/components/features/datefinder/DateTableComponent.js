@@ -2,18 +2,13 @@ import React from 'react'
 
 // local imports
 import CheckBoxComponent from './CheckBoxComponent'
-import { useAddParticipantDateToNightOut, useDeleteParticipantFromNightOut } from '../../../hooks/api/participantAPI'
+import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantAPI'
 
 const DateTableComponent = ({ nightOut, refreshNightOut, token, userData }) => {
     // get the hook for adding a participant
     const { addParticipantDateToNightOut, working } =
         useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
 
-    // get the hook for leaving a nightout
-    const { deleteParticipantFromNightOut, deleteFetching } = useDeleteParticipantFromNightOut(
-        token,
-        nightOut.uuid
-    )
 
     return (
         <div className="table-container mt-0 mb-0" id="datetable">
