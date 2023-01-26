@@ -60,7 +60,11 @@ const NightOutDateParentComponent = ({ nightOut, refreshNightOut, userData, toke
                             token={token}
                             refreshNightOut={refreshNightOut}
                         />
-                        <CommitDateButtonComponent/>
+                        <CommitDateButtonComponent
+                            nightOut={nightOut}
+                            token={token}
+                            refreshNightOut={refreshNightOut}
+                        />
                         <AddFinalDateButtonComponent
                             nightOut={nightOut}
                             refreshNightOut={refreshNightOut}
