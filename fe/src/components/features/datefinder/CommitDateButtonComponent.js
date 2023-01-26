@@ -8,7 +8,7 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
     )
 
     return (
-        <div className="container has-text-centered mt-4">
+        <div className="container has-text-centered mt-4 mb-2">
             <p className="label is-size-5 mb-0">
                 You're done checking off the dates you can attend?
             </p>

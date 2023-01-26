@@ -6,9 +6,11 @@ import { useAddParticipantDateToNightOut } from '../../../hooks/api/participantA
 
 const DateTableComponent = ({ nightOut, refreshNightOut, token, userData }) => {
     // get the hook for adding a participant
-    const { addParticipantDateToNightOut, working } =
-        useAddParticipantDateToNightOut(token, nightOut.uuid, refreshNightOut)
-
+    const { addParticipantDateToNightOut, working } = useAddParticipantDateToNightOut(
+        token,
+        nightOut.uuid,
+        refreshNightOut
+    )
 
     return (
         <div className="table-container mt-2 mb-0" id="datetable">
@@ -62,18 +64,15 @@ const DateTableComponent = ({ nightOut, refreshNightOut, token, userData }) => {
                                         alt=""
                                         width={30}
                                     />
-                                    <p className="mr-1 ml-1">
-                                        {participant.user.username}
-                                    </p>
+                                    <p className="mr-1 ml-1">{participant.user.username}</p>
                                 </button>
-                                {participant.user.id === userData.id &&
-                <>
-                </>}
+                                {participant.finishedDatePhase && (
+                                    <i className="fa-solid fa-flag-checkered ml-2 has-text-primary-dark is-size-5 mt-1"></i>
+                                )}
                             </td>
                             {nightOut.participantDates.map(
                                 (participantDate) =>
-                                    participantDate.participant.id ===
-                                        participant.id && (
+                                    participantDate.participant.id === participant.id && (
                                         <CheckBoxComponent
                                             addParticipantDateToNightOut={
                                                 addParticipantDateToNightOut
