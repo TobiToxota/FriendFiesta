@@ -236,24 +236,25 @@ const usePutParticipantState = (token, nightOut, refreshNightOut) => {
     const putParticipantState = async () => {
         setLoading(true)
 
-        let response = await fetch(process.env.REACT_APP_API_URL + 'participantcommit/', {
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participantcommit', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `token ${token}`,
             },
             body: JSON.stringify({
-                nightOut_uuid: nightOut.uuid,
+                nightout_uuid: nightOut.uuid,
             }),
         })
 
         if (response.status === 201) {
-            toast.success('Successfully changed your s', {
+            toast.success('Successfully changed!', {
                 autoClose: 2000,
             })
+            setLoading(false)
             refreshNightOut(nightOut.uuid)
         } else if (response.status === 400 || response.status === 409) {
-            toast.error('This date is allready a date in this Nightout')
+            toast.error('Something went wrong')
         } else {
             toast.error('Something went wrong')
         }
