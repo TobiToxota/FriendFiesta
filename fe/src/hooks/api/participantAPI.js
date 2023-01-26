@@ -13,20 +13,17 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
     const addParticipantToNightOut = async (e) => {
         e.preventDefault()
 
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'participant/',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-                body: JSON.stringify({
-                    nightOut: uuid,
-                    user: e.target.email.value,
-                }),
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participant/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightOut: uuid,
+                user: e.target.email.value,
+            }),
+        })
         const thisData = await response.json()
 
         if (response.status === 201) {
@@ -68,19 +65,16 @@ const useDeleteParticipantFromNightOut = (token, uuid) => {
     const deleteParticipantFromNightOut = async () => {
         setDeleteFetching(true)
 
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'participantdelete/',
-            {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-                body: JSON.stringify({
-                    nightout: uuid,
-                }),
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participantdelete/', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightout: uuid,
+            }),
+        })
 
         if (response.status === 200) {
             toast.success('You successfully left this Nightout', {
@@ -111,20 +105,17 @@ const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
     const [dateSuggestionData, setDateSuggestionData] = useState(null)
 
     const addDateSuggestion = async (date) => {
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'datesuggestion/',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-                body: JSON.stringify({
-                    nightOut: uuid,
-                    date: date,
-                }),
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'datesuggestion/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightOut: uuid,
+                date: date,
+            }),
+        })
         let thisData = await response.json()
 
         if (response.status === 201) {
@@ -161,20 +152,17 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
         setWorking(true)
 
         if (e.target.checked) {
-            let response = await fetch(
-                process.env.REACT_APP_API_URL + 'participantdate/',
-                {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'Application/json',
-                        Authorization: `token ${token}`,
-                    },
-                    body: JSON.stringify({
-                        pk: e.target.value,
-                        commit: true,
-                    }),
-                }
-            )
+            let response = await fetch(process.env.REACT_APP_API_URL + 'participantdate/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'Application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    pk: e.target.value,
+                    commit: true,
+                }),
+            })
             let thisData = await response.json()
 
             if (response.status === 200) {
@@ -199,20 +187,17 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 }, 2500)
             }
         } else {
-            let response = await fetch(
-                process.env.REACT_APP_API_URL + 'participantdate/',
-                {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'Application/json',
-                        Authorization: `token ${token}`,
-                    },
-                    body: JSON.stringify({
-                        pk: e.target.value,
-                        commit: false,
-                    }),
-                }
-            )
+            let response = await fetch(process.env.REACT_APP_API_URL + 'participantdate/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'Application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    pk: e.target.value,
+                    commit: false,
+                }),
+            })
             let thisData = await response.json()
 
             if (response.status === 200) {
@@ -247,53 +232,46 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
         participantDateData,
     }
 }
-export {
-    useAddParticipantToNightOut,
-    useAddDateSuggestionToNightOut,
-    useAddParticipantDateToNightOut,
-    useDeleteParticipantFromNightOut,
-}
 
 /** this custom hook fetches the backend to switch the finishedDatePhaseState of a participant */
-const usePutParticipantState = (participant_id, token, nightOut, refreshNightOut) => {
+const usePutParticipantState = (token, nightOut, refreshNightOut) => {
+    const [loading, setLoading] = useState(false)
 
     const putParticipantState = async () => {
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'participantcommit/',
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-                body: JSON.stringify({
-                    nightOut_uuid: uuid,
-                    participant_uuid: date,
-                }),
-            }
-        )
-        let thisData = await response.json()
+        setLoading(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participantcommit/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightOut_uuid: nightOut.uuid,
+            }),
+        })
 
         if (response.status === 201) {
-            toast.success('Your suggested date was successfully added', {
+            toast.success('Successfully changed your s', {
                 autoClose: 2000,
             })
-            setDateSuggestionData(thisData)
-            refreshNightOut(uuid)
+            refreshNightOut(nightOut.uuid)
         } else if (response.status === 400 || response.status === 409) {
-            setDateSuggestionData(thisData)
             toast.error('This date is allready a date in this Nightout')
         } else {
             toast.error('Something went wrong')
         }
     }
     return {
-        addDateSuggestion,
-        dateError,
-        setDateError,
-        success,
-        setSuccess,
-        dateSuggestionData,
+        putParticipantState,
+        loading,
     }
+}
 
+export {
+    useAddParticipantToNightOut,
+    useAddDateSuggestionToNightOut,
+    useAddParticipantDateToNightOut,
+    useDeleteParticipantFromNightOut,
+    usePutParticipantState,
 }
