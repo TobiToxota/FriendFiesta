@@ -172,8 +172,7 @@ class PutParticipant(APIView):
             return Response({"message": "NightOut doesnt exist"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            participant = Participant.objects.get(
-                id=request.data['participant_id'])
+            participant = Participant.objects.filter(nightOut=nightOut).filter(user=request.user).first()
         except ObjectDoesNotExist:
             return Response({"message": "Participant does not exist"}, status=status.HTTP_404_NOT_FOUND)
 

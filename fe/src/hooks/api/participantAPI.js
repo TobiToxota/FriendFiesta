@@ -253,3 +253,47 @@ export {
     useAddParticipantDateToNightOut,
     useDeleteParticipantFromNightOut,
 }
+
+/** this custom hook fetches the backend to switch the finishedDatePhaseState of a participant */
+const usePutParticipantState = (participant_id, token, nightOut, refreshNightOut) => {
+
+    const putParticipantState = async () => {
+        let response = await fetch(
+            process.env.REACT_APP_API_URL + 'participantcommit/',
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    nightOut_uuid: uuid,
+                    participant_uuid: date,
+                }),
+            }
+        )
+        let thisData = await response.json()
+
+        if (response.status === 201) {
+            toast.success('Your suggested date was successfully added', {
+                autoClose: 2000,
+            })
+            setDateSuggestionData(thisData)
+            refreshNightOut(uuid)
+        } else if (response.status === 400 || response.status === 409) {
+            setDateSuggestionData(thisData)
+            toast.error('This date is allready a date in this Nightout')
+        } else {
+            toast.error('Something went wrong')
+        }
+    }
+    return {
+        addDateSuggestion,
+        dateError,
+        setDateError,
+        success,
+        setSuccess,
+        dateSuggestionData,
+    }
+
+}
