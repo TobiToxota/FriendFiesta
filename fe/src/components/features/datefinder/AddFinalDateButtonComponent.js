@@ -4,6 +4,7 @@ import React from 'react'
 // local imports
 import { usePostNotification } from '../../../hooks/api/notifiactionAPI'
 import { useAddFinalDate } from '../../../hooks/api/nightOutAPI'
+import { getAllFinishedDatePhaseParticipantsCounts } from '../../../utils/nightOutDateFinderUtils'
 
 const AddFinalDateButtonComponent = ({
     token,
@@ -13,14 +14,8 @@ const AddFinalDateButtonComponent = ({
     setAddFinalDateLoading,
 }) => {
     // get the hooks for addFinalDate and postNotification
-    const {
-        postNotification,
-        fetching,
-    } = usePostNotification(token, nightOut.uuid)
-    const {
-        addFinalDate,
-        finalDateFetching,
-    } = useAddFinalDate(
+    const { postNotification, fetching } = usePostNotification(token, nightOut.uuid)
+    const { addFinalDate, finalDateFetching } = useAddFinalDate(
         token,
         nightOut,
         refreshNightOut,
@@ -35,8 +30,8 @@ const AddFinalDateButtonComponent = ({
                         You want this Nightout to be in the next phase?
                     </p>
                     <p className="ml-2 has-text-centered">
-                        Only the Creator of the Nightout can submit a date and
-                        bring the Nightout to the planning phase.<br></br>
+                        Only the Creator of the Nightout can submit a date and bring the Nightout to
+                        the planning phase.<br></br>
                         But you can remind the creator:
                     </p>
                     {!fetching ? (
@@ -55,23 +50,22 @@ const AddFinalDateButtonComponent = ({
                                 <span className="icon is-small">
                                     <i className="fa-solid fa-bell"></i>
                                 </span>
-                                <span className="is-size-7">
-                                    Send a reminder
-                                </span>
+                                <span className="is-size-7">Send a reminder</span>
                             </button>
                         </>
                     )}
                 </div>
             ) : (
                 <div className="has-text-centered mt-4">
-                    <p className="label is-size-5 mb-0">
-                        You are the creator of this Nightout.
+                    <p className="label is-size-5 mb-0 mt-0">
+                        {getAllFinishedDatePhaseParticipantsCounts(nightOut)} /{' '}
+                        {nightOut.participants.length} participants are finished. <br></br> You are
+                        the creator of this Nightout.
                     </p>
                     <p className="ml-2 has-text-centered">
-                        You can decide which of the suggested dates should be
-                        the final date for this Nightout.<br></br>
-                        If you submit a date this Nightout will be taken to the
-                        next phase.
+                        You can decide which of the suggested dates should be the final date for
+                        this Nightout.<br></br>
+                        If you submit a date this Nightout will be taken to the next phase.
                     </p>
                     <form onSubmit={(e) => addFinalDate(e)}>
                         <div className="container mt-2">
