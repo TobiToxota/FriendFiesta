@@ -22,9 +22,9 @@ const AddDateComponent = ({ token, nightOut, refreshNightOut, userData }) => {
         useDeleteParticipantFromNightOut(token, nightOut.uuid)
 
     return (
-        <>
-            <h3 className="label is-size-4 is-size-5-touch mb-2 mt-4">
-                Find a date for your Nightout:
+        <div className='ml-1'>
+            <h3 className="label is-size-5 is-size-6-touch ml-1 mb-1 mt-1">
+                Add a date suggestion
             </h3>
             {nightOut.creator.id !== userData.id &&
                 (!deleteFetching ? (
@@ -45,21 +45,10 @@ const AddDateComponent = ({ token, nightOut, refreshNightOut, userData }) => {
                         <span className="is-size-7">Leave this Nightout</span>
                     </button>
                 ))}
-            <button
-                className="button is-success is-rounded ml-1 margin-top-mobile"
-                onClick={() => setDatePicker(true)}
-            >
-                <span className="icon is-small">
-                    <i className="fa-solid fa-plus"></i>
-                </span>
-                <span className="is-size-6 is-size-7-touch">
-                    Add a new date suggestion
-                </span>
-            </button>
-            {datePicker && (
-                <>
+                <nav className='level'>
+                <div class="level-left">
                     <span
-                        className="button is-warning is-rounded ml-1 margin-top-mobile is-size-7-mobile"
+                        className="button is-warning is-rounded ml-0 is-size-7-mobile"
                         id="date-buttons"
                         children={
                             <DatePicker
@@ -69,10 +58,10 @@ const AddDateComponent = ({ token, nightOut, refreshNightOut, userData }) => {
                             />
                         }
                     ></span>
-                    <div className="fade-in is-inline" id="addDateForm">
+                    <div className="is-inline" id="addDateForm">
                         <div className="control is-inline ml-1">
                             <button
-                                className="button is-info is-rounded is-small mt-1 margin-top-mobile"
+                                className="button is-info is-rounded is-small"
                                 type="submit"
                                 id="date-buttons-two"
                                 onClick={() =>
@@ -85,7 +74,7 @@ const AddDateComponent = ({ token, nightOut, refreshNightOut, userData }) => {
                             </button>
                         </div>
                         <button
-                            className="button is-danger is-rounded is-small mt-1 ml-1 margin-top-mobile"
+                            className="button is-danger is-rounded is-small ml-1"
                             onClick={() => {
                                 setDatePicker(false)
                             }}
@@ -94,27 +83,9 @@ const AddDateComponent = ({ token, nightOut, refreshNightOut, userData }) => {
                             cancel
                         </button>
                     </div>
-                    {success && (
-                        <>
-                            <NotificatonComponent
-                                msg={success}
-                                animated={true}
-                                backgroundColor={'#48c78e'}
-                                color={'white'}
-                                onExit={() => setSuccess()}
-                            ></NotificatonComponent>
-                        </>
-                    )}
-                    {dateError && (
-                        <NotificatonComponent
-                            msg={dateError}
-                            onExit={() => setDateError()}
-                            animated={true}
-                        />
-                    )}
-                </>
-            )}
-        </>
+                    </div>
+                </nav>
+        </div>
     )
 }
 

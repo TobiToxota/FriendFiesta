@@ -37,6 +37,7 @@ const NightOutDateParentComponent = ({
                             borderRadius: 15,
                             minHeight: '150px',
                         }}
+                        id='nightout-container'
                     >
                         <NightOutTopComponent
                             nightOut={nightOut}
