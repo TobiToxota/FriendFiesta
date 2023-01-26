@@ -150,7 +150,7 @@ const useAddDateSuggestionToNightOut = (token, uuid, refreshNightOut) => {
     }
 }
 
-/** this custom hook fetches the backend to add an  to a nightout */
+/** this custom hook fetches the backend to add an participantDate to a nightout */
 const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
     const [participantError, setParticipantError] = useState(null)
     const [working, setWorking] = useState(false)
