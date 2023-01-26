@@ -13,6 +13,7 @@ import AddFinalDateButtonComponent from './AddFinalDateButtonComponent'
 import LeaveNightOutComponent from './LeaveNightOutComponent'
 import SpinnerComponent from '../../common/SpinnerComponent'
 import { useSwipeInFromTop } from '../../../hooks/animations/animations'
+import CommitDateButtonComponent from './CommitDateButtonComponent'
 
 const NightOutDateParentComponent = ({ nightOut, refreshNightOut, userData, token }) => {
     // animation
@@ -59,6 +60,7 @@ const NightOutDateParentComponent = ({ nightOut, refreshNightOut, userData, toke
                             token={token}
                             refreshNightOut={refreshNightOut}
                         />
+                        <CommitDateButtonComponent/>
                         <AddFinalDateButtonComponent
                             nightOut={nightOut}
                             refreshNightOut={refreshNightOut}
@@ -66,8 +68,6 @@ const NightOutDateParentComponent = ({ nightOut, refreshNightOut, userData, toke
                             token={token}
                             setAddFinalDateLoading={setAddFinalDateLoading}
                         />
-
-                        <></>
                     </div>
                 </div>
             ) : (

@@ -11,7 +11,7 @@ const DateTableComponent = ({ nightOut, refreshNightOut, token, userData }) => {
 
 
     return (
-        <div className="table-container mt-0 mb-0" id="datetable">
+        <div className="table-container mt-2 mb-0" id="datetable">
             <table className="table is-narrow datefinder-table mt-2" style={{}}>
                 <thead>
                     <tr className="is-vcentered">

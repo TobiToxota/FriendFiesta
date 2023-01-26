@@ -58,8 +58,6 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
 
 /** this custom hook fetches the backend to delete a participant on a nightout */
 const useDeleteParticipantFromNightOut = (token, uuid) => {
-    const [deleteError, setDeleteError] = useState(null)
-    const [deleteSuccess, setDeleteSuccess] = useState(null)
     const [deleteFetching, setDeleteFetching] = useState(false)
 
     const deleteParticipantFromNightOut = async () => {
@@ -92,8 +90,6 @@ const useDeleteParticipantFromNightOut = (token, uuid) => {
 
     return {
         deleteParticipantFromNightOut,
-        deleteError,
-        deleteSuccess,
         deleteFetching,
     }
 }
