@@ -102,7 +102,7 @@ class NightOut(APIView):
 
                 if participant.user != nightOut.creator:
                     newNotification = NotificationModel.objects.create(
-                    nightout=nightOut, owner=participant.user, sender=nightOut.creator, notificationMessage='nightout_next_phase')
+                        nightout=nightOut, owner=participant.user, sender=nightOut.creator, notificationMessage='nightout_next_phase')
                     newNotification.save()
 
         if serializer.is_valid():
@@ -157,6 +157,37 @@ class AddParticipant(APIView):
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@permission_classes((IsAuthenticated,))
+class PutParticipant(APIView):
+    """sumary_line: Change a commit on a participant"""
+
+    def put(self, request, format=None):
+
+        try:
+            nightOut = NightOutModel.objects.get(uuid=request.data['uuid'])
+        except ObjectDoesNotExist:
+            return Response({"message": "NightOut doesnt exist"}, status=status.HTTP_404_NOT_FOUND)
+        
+        try:
+            participant = Participant.objects.get(
+            id=request.data['participant_id'])
+        except ObjectDoesNotExist:
+            return Response({"message": "Participant does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        currentCommit = participant.commit
+        newCommit = None
+
+        if currentCommit == True:
+            participant.commit = False
+            participant.save()
+            return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
+
+        else:
+            participant.commit = True
+            participant.save()
+            return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
 
 
 @permission_classes((IsAuthenticated,))
