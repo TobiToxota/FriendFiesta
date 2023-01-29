@@ -19,7 +19,7 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
                     onClick={() => putParticipantState()}
                 >
                     <span className="icon">
-                        <i className="fa-solid fa-flag-checkered"></i>
+                        <i className="fa-regular fa-circle-check"></i>
                     </span>
                     <span className="is-size-7-mobile">I'm finished</span>
                 </button>
@@ -29,7 +29,7 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
                     onClick={() => putParticipantState()}
                 >
                     <span className="icon">
-                        <i className="fa-solid fa-flag-checkered"></i>
+                        <i className="fa-regular fa-circle-check"></i>
                     </span>
                     <span className="is-size-7-mobile">I'm finished</span>
                 </button>

@@ -25,7 +25,7 @@ const AddDateComponent = ({ token, nightOut, refreshNightOut, userData }) => {
             <nav className="level">
                 <div className="level-left">
                     <span
-                        className="button is-warning is-rounded ml-0 is-size-7-mobile"
+                        className="button is-rounded ml-0 is-size-7-mobile"
                         id="date-buttons"
                         children={
                             <DatePicker

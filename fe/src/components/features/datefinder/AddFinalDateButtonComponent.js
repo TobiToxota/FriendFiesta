@@ -27,6 +27,8 @@ const AddFinalDateButtonComponent = ({
             {nightOut.creator.id !== userData.id ? (
                 <div className="has-text-centered">
                     <p className="label is-size-5 mb-1">
+                        {getAllFinishedDatePhaseParticipantsCounts(nightOut)} /{' '}
+                        {nightOut.participants.length} participants are finished. <br></br>
                         You want this Nightout to be in the next phase?
                     </p>
                     <p className="ml-2 has-text-centered">

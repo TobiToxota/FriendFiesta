@@ -64,11 +64,12 @@ const DateTableComponent = ({ nightOut, refreshNightOut, token, userData }) => {
                                         alt=""
                                         width={30}
                                     />
-                                    <p className="mr-1 ml-1">{participant.user.username}</p>
-                                </button>
-                                {participant.finishedDatePhase && (
-                                    <i className="fa-solid fa-flag-checkered ml-2 has-text-primary-dark is-size-5 mt-1"></i>
+                                    <p className="mr-0 ml-1">{participant.user.username}</p>
+                                    {participant.finishedDatePhase && (
+                                    <i className="fa-regular fade-in fa-circle-check ml-1 has-text-white is-size-5 is-size-6-mobile"></i>
                                 )}
+                                </button>
+                                
                             </td>
                             {nightOut.participantDates.map(
                                 (participantDate) =>
