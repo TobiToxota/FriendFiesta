@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const useLoadSuggestion = (token, uuid) => {
     const [suggestionData, setSuggestionData] = useState(null)
@@ -72,14 +73,18 @@ const useAddSuggestion = ( refreshSuggestion, token, uuid) => {
 
         if (response.status === 201) {
             setAddSuggestioanData(thisData)
-            setAddSuggestionSuccess('Suggestion was successfully created')
+            toast.success('Suggestion was successfully created.', {
+                autoClose: 2000,
+            })
             setTimeout(() => {
                 setAddSuggestionSuccess(null)
                 refreshSuggestion(uuid)
             }, 1500)
         } else {
             setAddSuggestioanData(thisData)
-            setAddSuggestionError('Something went wrong')
+            toast.error('Somethinh went wrong', {
+                autoClose: 2000,
+            })
             setTimeout(() => {
                 setAddSuggestionError(null)
                 refreshSuggestion(uuid)

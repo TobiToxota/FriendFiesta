@@ -6,7 +6,6 @@ import { useSwipeInFromTop } from '../../../hooks/animations/animations'
 import { useLoadSuggestion } from '../../../hooks/api/suggestionAPI'
 import NightOutTopComponent from '../universal/NightOutTopComponent'
 import CreateSuggestionButtonComponent from './CreateSuggestionButtonComponent'
-import CreateSuggestionFormComponent from './CreateSuggestionFormComponent'
 import PlanningInfoComponent from './PlanningInfoComponent'
 import EditSuggestionFormComponent from './EditSuggestionFormComponent'
 import NumberOfSuggestionsComponent from './NumberOfSuggestionsComponent'
@@ -20,11 +19,8 @@ const NightOutPlanningParentComponent = ({
     // animataion
     useSwipeInFromTop(NightOutPlanningParentComponent, '#main-container')
 
-    // state for creating a suggestion
-    const [createSuggestion, setCreateSuggestion] = useState(false)
-
     // get the Suggestion from the current user
-    const { loadSuggestion, suggestionLoading, suggestionData } = useLoadSuggestion(
+    const { loadSuggestion, suggestionData } = useLoadSuggestion(
         token,
         nightOut.uuid
     )
@@ -56,23 +52,11 @@ const NightOutPlanningParentComponent = ({
                         <CreateSuggestionButtonComponent
                             nightOut={nightOut}
                             token={token}
-                            userData={userData}
-                            setCreateSuggestion={setCreateSuggestion}
-                            createSuggestion={createSuggestion}
-                            suggestionLoading={suggestionLoading}
-                            suggestionData={suggestionData}
+                            loadSuggestion={loadSuggestion}
                         />
                     )}
                 </div>
             </div>
-            {createSuggestion && !suggestionData && (
-                <CreateSuggestionFormComponent
-                    nightOut={nightOut}
-                    token={token}
-                    setCreateSuggestion={setCreateSuggestion}
-                    loadSuggestion={loadSuggestion}
-                />
-            )}
             {suggestionData && (
                 <EditSuggestionFormComponent nightOut={nightOut}/>
             )}

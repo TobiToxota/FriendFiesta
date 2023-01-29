@@ -3,7 +3,6 @@ import React from 'react'
 
 // local imports
 import ProgressComponent from '../../common/ProgressComponent'
-import DropDownContentComponent from '../../common/DropDownContentComponent'
 import { nightOutDateToDate } from '../../../utils/nightOutDateToDate'
 
 const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage, finalDate }) => {
@@ -40,7 +39,6 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                     Final Date: {nightOutDateToDate(finalDate)}
                 </p>
             )}
-
             <div className="container is-inline-flex" style={{ transform: 'translateY(-8px)' }}>
                 {nightOut.phase !== 'datePhase' && (
                     <div className="columns is-centered is-flex-wrap-wrap has-text-centered is-hidden-mobile">
