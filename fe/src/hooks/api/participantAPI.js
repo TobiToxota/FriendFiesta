@@ -166,7 +166,7 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setTimeout(() => {
                     setWorking(false)
                     refreshNightOut(uuid)
-                }, 2500)
+                }, 1000)
             } else if (
                 response.status === 400 ||
                 response.status === 409 ||
@@ -175,12 +175,12 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setParticipantError(participantDateData.message)
                 setTimeout(() => {
                     setWorking(false)
-                }, 2500)
+                }, 1000)
             } else {
                 setParticipantError('Something went wrong')
                 setTimeout(() => {
                     setWorking(false)
-                }, 2500)
+                }, 1000)
             }
         } else {
             let response = await fetch(process.env.REACT_APP_API_URL + 'participantdate/', {
@@ -201,7 +201,7 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setTimeout(() => {
                     setWorking(false)
                     refreshNightOut(uuid)
-                }, 2500)
+                }, 1000)
             } else if (
                 response.status === 400 ||
                 response.status === 409 ||
@@ -211,13 +211,13 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
                 setTimeout(() => {
                     setWorking(false)
                     refreshNightOut(uuid)
-                }, 2500)
+                }, 1000)
             } else {
                 setParticipantError('Something went wrong')
                 setTimeout(() => {
                     setWorking(false)
                     refreshNightOut(uuid)
-                }, 2500)
+                }, 1000)
             }
         }
     }

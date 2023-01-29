@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 /** This custom hook feteches the backend with an token and gets the notifications for a user */
 const useGetNotifications = (token) => {
@@ -101,17 +102,16 @@ const usePostNotification = (token, uuid) => {
             setNotificationSuccess(
                 'The reminder was successfully sent to the Creator.'
             )
-            setTimeout(() => {
-                setNotificationSuccess(false)
-            }, 4800)
+            toast.success('The reminder was successfully sent to the Creator', {
+                autoClose: 2000,
+            })
             setTimeout(() => {
                 setFetching(false)
             }, 400)
         } else {
-            setNotificationError(thisData)
-            setTimeout(() => {
-                setNotificationError(false)
-            }, 4800)
+            toast.error(thisData.message, {
+                autoClose: 2000,
+            })
             setTimeout(() => {
                 setFetching(false)
             }, 400)
