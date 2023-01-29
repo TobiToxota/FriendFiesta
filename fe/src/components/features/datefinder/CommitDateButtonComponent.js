@@ -16,19 +16,35 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
     return !participantLoading ? (
         <div className="container has-text-centered mt-4 mb-2">
             <p className="label is-size-5 mb-0">
-                You're done checking off the dates you can attend?
+                {!participantInfos.finishedDatePhase ? (
+                    <>You're done checking off the dates you can attend?</>
+                ) : (
+                    <>You're not done checking off the dates you can attend?</>
+                )}
             </p>
             <p className="ml-2 has-text-centered">Tell the other ones, that you are finished:</p>
             {!loading ? (
-                <button
-                    className="button is-primary is-rounded mt-1"
-                    onClick={() => putParticipantState()}
-                >
-                    <span className="icon">
-                        <i className="fa-regular fa-circle-check"></i>
-                    </span>
-                    <span className="is-size-7-mobile">I'm finished</span>
-                </button>
+                !participantInfos.finishedDatePhase ? (
+                    <button
+                        className="button is-primary is-rounded mt-1"
+                        onClick={() => putParticipantState()}
+                    >
+                        <span className="icon">
+                            <i className="fa-regular fa-circle-check"></i>
+                        </span>
+                        <span className="is-size-7-mobile">I'm finished</span>
+                    </button>
+                ) : (
+                    <button
+                        className="button is-danger is-rounded mt-1"
+                        onClick={() => putParticipantState()}
+                    >
+                        <span className="icon">
+                            <i className="fa-regular fa-circle-xmark"></i>
+                        </span>
+                        <span className="is-size-7-mobile">I'm not finished</span>
+                    </button>
+                )
             ) : (
                 <button
                     className="button is-primary is-rounded mt-1 is-loading"
