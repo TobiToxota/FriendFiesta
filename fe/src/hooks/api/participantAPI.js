@@ -230,7 +230,7 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
 }
 
 /** this custom hook fetches the backend to switch the finishedDatePhaseState of a participant */
-const usePutParticipantState = (token, nightOut, refreshNightOut) => {
+const usePutParticipantState = (token, nightOut, refreshNightOut, refreshParticipantInfos) => {
     const [loading, setLoading] = useState(false)
 
     const putParticipantState = async () => {
@@ -253,6 +253,7 @@ const usePutParticipantState = (token, nightOut, refreshNightOut) => {
             })
             setLoading(false)
             refreshNightOut(nightOut.uuid)
+            refreshParticipantInfos(nightOut.uuid)
         } else if (response.status === 400 || response.status === 409) {
             toast.error('Something went wrong')
         } else {
@@ -268,10 +269,10 @@ const usePutParticipantState = (token, nightOut, refreshNightOut) => {
 /** this custom hook gets the participant infos about a user */
 const useGetParticipantInfos = (token, nightOut) => {
     const [participantInfos, setParticipantInfos] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [participantLoading, setParticipantLoading] = useState(true)
 
     const getParticipantInfos = async (uuid) => {
-        let response = await fetch(process.env.REACT_APP_API_URL + 'nightout/' + uuid, {
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participant/' + uuid, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -282,9 +283,9 @@ const useGetParticipantInfos = (token, nightOut) => {
 
         if (response.status === 200) {
             setParticipantInfos(thisData)
-            setLoading(false)
+            setParticipantLoading(false)
         } else {
-            setLoading(false)
+            setParticipantLoading(false)
         }
     }
     useEffect(() => {
@@ -292,7 +293,7 @@ const useGetParticipantInfos = (token, nightOut) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
 
-    return { participantInfos, loading }
+    return { getParticipantInfos, participantInfos, participantLoading }
 }
 
 export {

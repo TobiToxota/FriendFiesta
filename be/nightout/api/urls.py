@@ -13,7 +13,7 @@ urlpatterns = [
     path('suggestion/', views.CreateSuggestionView.as_view()),
     path('suggestion/entrys/', views.NewEntrySuggestionView.as_view()),
     path('suggestion/suggestionVote/', views.CreateAndDeleteVote.as_view()),
-    path('participant/<int:pk>/', views.GetUserParticpantInfos.as_view()),
+    path('participant/<uuid:uuid>/', views.GetUserParticpantInfos.as_view()),
     path('finishNightOut/', views.FindFinalSuggestionForFinish.as_view()),
     path('notificationlist/', views.GetNotifications.as_view()),
     path('notification/', views.PostPatchNotification.as_view())

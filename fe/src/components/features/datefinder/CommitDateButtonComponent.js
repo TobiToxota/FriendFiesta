@@ -1,13 +1,19 @@
-import { usePutParticipantState } from '../../../hooks/api/participantAPI'
+import { usePutParticipantState, useGetParticipantInfos } from '../../../hooks/api/participantAPI'
 
 const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
+    const { getParticipantInfos, participantInfos, participantLoading } = useGetParticipantInfos(
+        token,
+        nightOut
+    )
+
     const { putParticipantState, loading } = usePutParticipantState(
         token,
         nightOut,
-        refreshNightOut
+        refreshNightOut,
+        getParticipantInfos
     )
 
-    return (
+    return !participantLoading ? (
         <div className="container has-text-centered mt-4 mb-2">
             <p className="label is-size-5 mb-0">
                 You're done checking off the dates you can attend?
@@ -35,6 +41,8 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
                 </button>
             )}
         </div>
+    ) : (
+        <></>
     )
 }
 
