@@ -66,7 +66,8 @@ const AddFinalDateButtonComponent = ({
                     </p>
                     <p className="ml-2 has-text-centered">
                         You can decide which of the suggested dates should be the final date for
-                        this Nightout.<br></br>
+                        this Nightout.<br/>
+                        Please check if enough participants have either declared that they are finished or atleast have registered some of their dates<br/>
                         If you submit a date this Nightout will be taken to the next phase.
                     </p>
                     <form onSubmit={(e) => addFinalDate(e)}>

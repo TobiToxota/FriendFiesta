@@ -22,11 +22,18 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
                     <>You're not done checking off the dates you can attend?</>
                 )}
             </p>
-            <p className="ml-2 has-text-centered">Tell the other ones, that you are finished:</p>
+            <p className="ml-2 has-text-centered">
+            {!participantInfos.finishedDatePhase ? (
+                <>
+                Tell the other ones, that you are finished:</> ) : (
+                    <>
+                    Tell the other ones, that you are not finished</>
+                )}
+                </p>
             {!loading ? (
                 !participantInfos.finishedDatePhase ? (
                     <button
-                        className="button is-primary is-rounded mt-1"
+                        className="button is-success is-rounded mt-1 fade-in"
                         onClick={() => putParticipantState()}
                     >
                         <span className="icon">
@@ -36,7 +43,7 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
                     </button>
                 ) : (
                     <button
-                        className="button is-danger is-rounded mt-1"
+                        className="button is-danger is-rounded mt-1 fade-in"
                         onClick={() => putParticipantState()}
                     >
                         <span className="icon">
