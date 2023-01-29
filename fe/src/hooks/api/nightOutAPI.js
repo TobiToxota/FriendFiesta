@@ -3,7 +3,6 @@
 // package imports
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import Countdown from 'react-countdown-simple'
 
 /* this custom hook fetches the backend and creates a nightOut Object in the database */
 const useCreateNightOut = (token) => {

@@ -1,7 +1,7 @@
 /** @format */
 
 // package imports
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 /** this custom hook fetches the backend to add an user to a nightout as a participant*/
@@ -265,10 +265,41 @@ const usePutParticipantState = (token, nightOut, refreshNightOut) => {
     }
 }
 
+/** this custom hook gets the participant infos about a user */
+const useGetParticipantInfos = (token, nightOut) => {
+    const [participantInfos, setParticipantInfos] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    const getParticipantInfos = async (uuid) => {
+        let response = await fetch(process.env.REACT_APP_API_URL + 'nightout/' + uuid, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+        })
+        let thisData = await response.json()
+
+        if (response.status === 200) {
+            setParticipantInfos(thisData)
+            setLoading(false)
+        } else {
+            setLoading(false)
+        }
+    }
+    useEffect(() => {
+        getParticipantInfos(nightOut.uuid)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token])
+
+    return { participantInfos, loading }
+}
+
 export {
     useAddParticipantToNightOut,
     useAddDateSuggestionToNightOut,
     useAddParticipantDateToNightOut,
     useDeleteParticipantFromNightOut,
     usePutParticipantState,
+    useGetParticipantInfos,
 }

@@ -422,11 +422,11 @@ class CreateAndDeleteVote(APIView):
 class GetUserParticpantInfos(APIView):
     """Get infos about a specific participant"""
 
-    def get(self, request, pk, format=None):
+    def get(self, request, uuid, format=None):
 
         # get the nightOutObject
         nightOutObject = NightOutModel.objects.filter(
-            pk=pk).last()
+            uuid=uuid).last()
 
         # get the Particpant from the User and NightOut
         participant = Participant.objects.filter(
