@@ -10,16 +10,13 @@ const useLoadSuggestion = (token, uuid) => {
     const loadSuggestion = async () => {
         setSuggestionLoading(true)
 
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'suggestion/' + uuid,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/' + uuid, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+        })
 
         let thisData = await response.json()
 
@@ -47,7 +44,7 @@ const useLoadSuggestion = (token, uuid) => {
     }
 }
 
-const useAddSuggestion = ( refreshSuggestion, token, uuid) => {
+const useAddSuggestion = (refreshSuggestion, token, uuid) => {
     const [addSuggestionData, setAddSuggestioanData] = useState(null)
     const [addSuggestionError, setAddSuggestionError] = useState(null)
     const [addSuggestionFetching, SetAddSuggestionFetching] = useState(false)
@@ -56,19 +53,16 @@ const useAddSuggestion = ( refreshSuggestion, token, uuid) => {
     const addSuggestion = async (e) => {
         SetAddSuggestionFetching(true)
 
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'suggestion/',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-                body: JSON.stringify({
-                    nightOut: uuid,
-                }),
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightOut: uuid,
+            }),
+        })
         let thisData = await response.json()
 
         if (response.status === 201) {
@@ -102,4 +96,40 @@ const useAddSuggestion = ( refreshSuggestion, token, uuid) => {
     }
 }
 
-export { useLoadSuggestion, useAddSuggestion }
+const usePutSuggestion = (refreshSuggestion, token, uuid, suggestion) => {
+    const [putSuggestionetching, setPutSuggestionFetching] = useState(false)
+
+    const putSuggestion = async (newSuggestion) => {
+        setPutSuggestionFetching(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                id: suggestion.id,
+                nightOut: uuid,
+                newSuggestion,
+            }),
+        })
+
+        if (response.status === 201) {
+            toast.success('Your Suggestion was successfully modified')
+            setTimeout(() => {
+                setPutSuggestionFetching(false)
+                refreshSuggestion(uuid)
+            }, 1500)
+        } else {
+            toast.error('Something went wrong')
+        }
+    }
+
+    return {
+        putSuggestion,
+        putSuggestionetching,
+    }
+}
+
+export { useLoadSuggestion, useAddSuggestion, usePutSuggestion }
