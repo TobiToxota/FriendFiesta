@@ -172,7 +172,8 @@ class PutParticipant(APIView):
             return Response({"message": "NightOut doesnt exist"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            participant = Participant.objects.filter(nightOut=nightOut).filter(user=request.user).first()
+            participant = Participant.objects.filter(
+                nightOut=nightOut).filter(user=request.user).first()
         except ObjectDoesNotExist:
             return Response({"message": "Participant does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -292,7 +293,7 @@ class GetSuggestionView(APIView):
 
 @permission_classes((IsAuthenticated,))
 class CreateSuggestionView(APIView):
-    """Create a suggestion or delete a suggestion"""
+    """Create a suggestion or delete a suggestion or edit a suggestion"""
 
     def post(self, request, format=None):
 
@@ -313,6 +314,17 @@ class CreateSuggestionView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, format=None):
+        suggestion = PlanSuggestion.objects.get(id=request.data['id'])
+        serializer = PlanSuggestionSerializer(suggestion, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
 
