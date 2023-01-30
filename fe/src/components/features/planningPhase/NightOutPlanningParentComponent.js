@@ -58,7 +58,7 @@ const NightOutPlanningParentComponent = ({
                 </div>
             </div>
             {suggestionData && (
-                <EditSuggestionFormComponent nightOut={nightOut} suggestionData={suggestionData}/>
+                <EditSuggestionFormComponent nightOut={nightOut} suggestionData={suggestionData} loadSuggestion={loadSuggestion} token={token}/>
             )}
         </>
     )

@@ -191,6 +191,14 @@ body,
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px !important;
 }
 
+/* Style for the textarea*/
+#textarea-description {
+  max-width: 800px;
+  min-width: 40%;
+  background-color: #f5f5f5;
+  min-height: 70px;
+}
+
 /* styles for datefind table */
 .datefinder-table {
   background-color: #f5f5f5 !important;

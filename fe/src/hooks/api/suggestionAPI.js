@@ -96,10 +96,10 @@ const useAddSuggestion = (refreshSuggestion, token, uuid) => {
     }
 }
 
-const usePutSuggestion = (refreshSuggestion, token, uuid, suggestion) => {
+const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     const [putSuggestionetching, setPutSuggestionFetching] = useState(false)
 
-    const putSuggestion = async (newSuggestion) => {
+    const putSuggestion = async (props) => {
         setPutSuggestionFetching(true)
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/', {
@@ -111,7 +111,7 @@ const usePutSuggestion = (refreshSuggestion, token, uuid, suggestion) => {
             body: JSON.stringify({
                 id: suggestion.id,
                 nightOut: uuid,
-                newSuggestion,
+                ...props,
             }),
         })
 
@@ -119,7 +119,7 @@ const usePutSuggestion = (refreshSuggestion, token, uuid, suggestion) => {
             toast.success('Your Suggestion was successfully modified')
             setTimeout(() => {
                 setPutSuggestionFetching(false)
-                refreshSuggestion(uuid)
+                loadSuggestion(uuid)
             }, 1500)
         } else {
             toast.error('Something went wrong')
