@@ -1,5 +1,5 @@
 // packages imports
-import React, { useState } from 'react'
+import React from 'react'
 
 // local imports
 import { useSwipeInFromTop } from '../../../hooks/animations/animations'
@@ -58,7 +58,7 @@ const NightOutPlanningParentComponent = ({
                 </div>
             </div>
             {suggestionData && (
-                <EditSuggestionFormComponent nightOut={nightOut}/>
+                <EditSuggestionFormComponent nightOut={nightOut} suggestionData={suggestionData}/>
             )}
         </>
     )

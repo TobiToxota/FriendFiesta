@@ -52,7 +52,7 @@ const CollapsibleComponent = ({ title, content, style, arrow }) => {
       <div className="content is-medium mt-2 has-text-centered" style={{backgroundColor: style}}>
         <p className="label is-inline is-size-4 is-size-5-touch" onClick={toggle}>
           {title}
-          <i className="ml-1 fa-solid fa-chevron-down is-size-4 is-size-5-touch" style={{color: arrow}} id="arrow"></i>
+          <i className="ml-1 fa-solid fa-chevron-down is-size-4 is-size-5-touch is-clickable" style={{color: arrow}} id="arrow"></i>
         </p>
         <div className="container" id="animate">
           {open && (

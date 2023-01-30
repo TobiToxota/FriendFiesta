@@ -43,7 +43,7 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                 {nightOut.phase !== 'datePhase' && (
                     <div className="columns is-centered is-flex-wrap-wrap has-text-centered is-hidden-mobile">
                         {nightOut.participants.map((participant, index) => (
-                            <div className="column has-text-centered mr-1 p-1 is-flex" key={index}>
+                            <div className="column has-text-centered mr-1 p-1 is-flex is-unselectable" key={index}>
                                 <div className="container">
                                     <img
                                         src={`https://avatars.dicebear.com/api/${participant.user.avatarStyle}/${participant.user.username}+${participant.user.avatarIteration}.svg`}
