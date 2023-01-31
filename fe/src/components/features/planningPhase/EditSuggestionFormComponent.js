@@ -49,13 +49,13 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                                 <label className="label">Your description</label>
                                 <div className="control has-text-centered">
                                     <textarea
-                                        className="textarea is-primary mx-auto"
+                                        className="textarea is-link mx-auto has-text-centered p-0"
                                         id="textarea-description"
                                         placeholder={suggestionData.description}
                                         defaultValue={suggestionData.description}
                                     />
                                 </div>
-                                <button className="button is-primary is-rounded mt-1">Save</button>
+                                <button className="button is-info is-rounded mt-2">Save</button>
                             </div>
                         </>
                     )}
