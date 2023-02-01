@@ -116,7 +116,6 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
         })
 
         if (response.status === 201) {
-            console.log(props.description)
             if (props.description === null) {
                 toast.success('Your Suggestion was successfully deleted 🗑️')
                 loadSuggestion(uuid)
