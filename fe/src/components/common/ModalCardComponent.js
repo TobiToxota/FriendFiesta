@@ -1,12 +1,15 @@
+// package imports
+import {createPortal} from 'react-dom'
+
 //local imports
 import { useSwipeInFromBottomTwo } from '../../hooks/animations/animations'
 
-const ModalComponent = ({ click, showModal, setShowModal, children, title, fetching }) => {
+const ModalCardComponent = ({ click, showModal, setShowModal, children, title, fetching }) => {
     // animation
     useSwipeInFromBottomTwo(showModal, '#modal')
 
     if (showModal) {
-        return (
+        return createPortal(
             <div className="overlay modal is-active" id="modal">
                 <div className="modal-background" onClick={() => setShowModal(false)} />
                 <div className="modal-card px-1">
@@ -52,11 +55,11 @@ const ModalComponent = ({ click, showModal, setShowModal, children, title, fetch
                     aria-label="close"
                     onClick={() => setShowModal(false)}
                 />
-            </div>
+            </div>, document.body
         )
     } else {
         return null
     }
 }
 
-export default ModalComponent
+export default ModalCardComponent

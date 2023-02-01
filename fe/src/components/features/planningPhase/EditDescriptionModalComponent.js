@@ -16,8 +16,6 @@ const EditDescriptionModalComponent = ({
                     className="textarea is-link mx-auto has-text-centered p-2"
                     id="textarea-description"
                     autoFocus
-                    placeholder={suggestionData.description}
-                    defaultValue={suggestionData.description}
                     onChange={handleChange}
                 />
             </div>

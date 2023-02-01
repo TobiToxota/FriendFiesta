@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 // local imports
 import { usePutSuggestion } from '../../../hooks/api/suggestionAPI'
-import ModalComponent from '../../common/ModalComponent'
+import ModalCardComponent from '../../common/ModalCardComponent'
 import EditDescriptionModalComponent from './EditDescriptionModalComponent'
 
 const EditDescriptionComponent = ({loadSuggestion, token, nightOut, suggestionData}) => {
@@ -61,7 +61,7 @@ const EditDescriptionComponent = ({loadSuggestion, token, nightOut, suggestionDa
             )}
              
         </div>
-        <ModalComponent
+        <ModalCardComponent
         showModal={showModal}
         setShowModal={setShowModal}
         fetching={putSuggestionFetching}
@@ -76,7 +76,7 @@ const EditDescriptionComponent = ({loadSuggestion, token, nightOut, suggestionDa
             />
         }
         title={<>Edit your description</>}
-    ></ModalComponent>
+    ></ModalCardComponent>
     </>
     )
 }
