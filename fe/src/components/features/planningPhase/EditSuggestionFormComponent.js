@@ -21,6 +21,8 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
 
     // state for Modal
     const [showModal, setShowModal] = useState(false)
+    // state for description
+    const [description, setDescription] = useState(null)
 
     return (
         <>
@@ -69,7 +71,16 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
             <ModalComponent
                 showModal={showModal}
                 setShowModal={setShowModal}
-                children={<EditDescriptionComponent suggestionData={suggestionData} />}
+                click={() => putSuggestion({'description': description})}
+                children={
+                    <EditDescriptionComponent
+                        suggestionData={suggestionData}
+                        loadSuggestion={loadSuggestion}
+                        token={token}
+                        uuid={nightOut.uuid}
+                        setDescription={setDescription}
+                    />
+                }
                 title={<>Edit your description</>}
             ></ModalComponent>
         </>

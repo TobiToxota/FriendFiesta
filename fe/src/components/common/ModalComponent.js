@@ -4,17 +4,19 @@ import { useState } from 'react'
 //local imports
 import { useSwipeInFromBottomTwo } from '../../hooks/animations/animations'
 
-const ModalComponent = ({ showModal, setShowModal, children, title }) => {
+const ModalComponent = ({ click, showModal, setShowModal, children, title,  }) => {
     // animation
     useSwipeInFromBottomTwo(showModal, '#modal')
 
     if (showModal) {
         return (
-            <div className="modal is-active" id='modal'>
+            <div className="modal is-active" id="modal">
                 <div className="modal-background" onClick={() => setShowModal(false)} />
                 <div className="modal-card">
                     <header className="modal-card-head">
-                        <p className="modal-card-title label has-text-centered is-size-5 is-size-6-mobile mb-0">{title}</p>
+                        <p className="modal-card-title label has-text-centered is-size-5 is-size-6-mobile mb-0">
+                            {title}
+                        </p>
                         <button
                             className="delete"
                             aria-label="close"
@@ -22,11 +24,12 @@ const ModalComponent = ({ showModal, setShowModal, children, title }) => {
                         />
                     </header>
                     <div>
-                        <section className="modal-card-body">
-                            {children}
-                        </section>
+                        <section className="modal-card-body">{children}</section>
                         <footer className="modal-card-foot is-justify-content-center is-flex-wrap-wrap">
-                            <button className="button is-success mb-1 is-rounded">
+                            <button
+                                className="button is-success mb-1 is-rounded"
+                                onClick={() => {click(); setShowModal(false)}}
+                            >
                                 Save changes
                             </button>
                             <button

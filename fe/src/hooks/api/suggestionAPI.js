@@ -121,6 +121,7 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
                 setPutSuggestionFetching(false)
                 loadSuggestion(uuid)
             }, 1500)
+            loadSuggestion(uuid)
         } else {
             toast.error('Something went wrong')
         }
