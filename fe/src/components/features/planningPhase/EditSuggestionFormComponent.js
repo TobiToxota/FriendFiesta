@@ -67,7 +67,8 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                                         </button>
                                     </p>
                                     <p className="control">
-                                        <button className="button is-danger is-rounded">
+                                        <button className="button is-danger is-rounded"
+                                        onClick={() => putSuggestion({ description: null })}>
                                             <span className="icon">
                                                 <i className="fa-regular fa-trash-can" />
                                             </span>

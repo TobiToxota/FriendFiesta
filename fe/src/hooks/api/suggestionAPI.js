@@ -116,10 +116,15 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
         })
 
         if (response.status === 201) {
+            console.log(props.description)
+            if (props.description === null) {
+                toast.success('Your Suggestion was successfully deleted 🗑️')
+                loadSuggestion(uuid)
+                return
+            }
             toast.success('Your Suggestion was successfully modified')
             setTimeout(() => {
                 setPutSuggestionFetching(false)
-                loadSuggestion(uuid)
             }, 1500)
             loadSuggestion(uuid)
         } else {
