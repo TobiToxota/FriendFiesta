@@ -1,13 +1,14 @@
-// local imports
-import { usePutSuggestion } from "../../../hooks/api/suggestionAPI"
-
-const EditDescriptionComponent = ({suggestionData, loadSuggestion, token, uuid, setDescription}) => {
-    const {putSuggestion, putSuggestionLoading} = usePutSuggestion(loadSuggestion, token, uuid, suggestionData)
-
+const EditDescriptionModalComponent = ({
+    suggestionData,
+    loadSuggestion,
+    token,
+    uuid,
+    setDescription,
+}) => {
     const handleChange = (e) => {
         setDescription(e.target.value)
     }
- 
+
     return (
         <div className="field has-text-centered">
             <div className="control has-text-centered">
@@ -24,4 +25,4 @@ const EditDescriptionComponent = ({suggestionData, loadSuggestion, token, uuid, 
     )
 }
 
-export default EditDescriptionComponent
+export default EditDescriptionModalComponent

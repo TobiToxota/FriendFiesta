@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 // local imports
 import ModalComponent from '../../common/ModalComponent'
-import EditDescriptionComponent from './EditDescriptionComponent'
+import EditDescriptionModalComponent from './EditDescriptionModalComponent'
 import { usePutSuggestion } from '../../../hooks/api/suggestionAPI'
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 
@@ -86,7 +86,7 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                 fetching={putSuggestionFetching}
                 click={() => putSuggestion({ description: description })}
                 children={
-                    <EditDescriptionComponent
+                    <EditDescriptionModalComponent
                         suggestionData={suggestionData}
                         loadSuggestion={loadSuggestion}
                         token={token}
