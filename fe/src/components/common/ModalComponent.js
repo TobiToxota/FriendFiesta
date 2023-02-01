@@ -1,6 +1,3 @@
-// package imports
-import { useState } from 'react'
-
 //local imports
 import { useSwipeInFromBottomTwo } from '../../hooks/animations/animations'
 
