@@ -42,6 +42,19 @@ const useSwipeInFromBottom = (component, target) => {
 };
 
 /* This function lets an target (id or classname) fly in from the bottom when the component changes or gets rendered*/
+const useSwipeInFromBottomTwo = (component, target) => {
+  useLayoutEffect(() => {
+    anime({
+      targets: target,
+      translateY: [2000, 0],
+      duration: 400,
+      easing: 'easeOutQuint'
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [component]);
+};
+
+/* This function lets an target (id or classname) fly in from the bottom when the component changes or gets rendered*/
 const swipeAwayToBottom = (target) => {
     anime({
       targets: target,
@@ -104,6 +117,7 @@ export {
   useSwipeInFromTop,
   useProgressAnimation,
   useSwipeInFromBottom,
+  useSwipeInFromBottomTwo,
   swipeAwayToBottom,
   useFading,
   shaking,
