@@ -4,7 +4,7 @@ import { useState } from 'react'
 //local imports
 import { useSwipeInFromBottomTwo } from '../../hooks/animations/animations'
 
-const ModalComponent = ({ click, showModal, setShowModal, children, title,  }) => {
+const ModalComponent = ({ click, showModal, setShowModal, children, title, fetching }) => {
     // animation
     useSwipeInFromBottomTwo(showModal, '#modal')
 
@@ -26,12 +26,21 @@ const ModalComponent = ({ click, showModal, setShowModal, children, title,  }) =
                     <div>
                         <section className="modal-card-body">{children}</section>
                         <footer className="modal-card-foot is-justify-content-center is-flex-wrap-wrap">
-                            <button
-                                className="button is-success mb-1 is-rounded"
-                                onClick={() => {click(); setShowModal(false)}}
-                            >
-                                Save changes
-                            </button>
+                            {!fetching ? (
+                                <button
+                                    className="button is-success mb-1 is-rounded"
+                                    onClick={() => {
+                                        click()
+                                        setShowModal(false)
+                                    }}
+                                >
+                                    Save changes
+                                </button>
+                            ) : (
+                                <button className="button is-success mb-1 is-rounded is-loading">
+                                    Save changes
+                                </button>
+                            )}
                             <button
                                 className="button is-danger is-rounded mb-1"
                                 onClick={() => setShowModal(false)}

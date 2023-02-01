@@ -57,12 +57,23 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                                     Your current description:
                                 </label>
                                 <p className="mb-2"> {suggestionData.description}</p>
-                                <button
-                                    className="button is-link is-rounded"
-                                    onClick={() => setShowModal(true)}
-                                >
-                                    Edit your description
-                                </button>
+                                <div className="field is-grouped is-justify-content-center">
+                                    <p className="control">
+                                        <button
+                                            className="button is-link is-rounded"
+                                            onClick={() => setShowModal(true)}
+                                        >
+                                            Edit your description
+                                        </button>
+                                    </p>
+                                    <p className="control">
+                                        <button className="button is-danger is-rounded">
+                                            <span className="icon">
+                                                <i className="fa-regular fa-trash-can" />
+                                            </span>
+                                        </button>
+                                    </p>
+                                </div>
                             </>
                         )}
                     </div>
@@ -71,7 +82,8 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
             <ModalComponent
                 showModal={showModal}
                 setShowModal={setShowModal}
-                click={() => putSuggestion({'description': description})}
+                fetching={putSuggestionFetching}
+                click={() => putSuggestion({ description: description })}
                 children={
                     <EditDescriptionComponent
                         suggestionData={suggestionData}
