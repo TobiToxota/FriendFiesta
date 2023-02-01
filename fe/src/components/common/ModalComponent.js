@@ -9,7 +9,7 @@ const ModalComponent = ({ click, showModal, setShowModal, children, title, fetch
         return (
             <div className="modal is-active" id="modal">
                 <div className="modal-background" onClick={() => setShowModal(false)} />
-                <div className="modal-card">
+                <div className="modal-card px-1">
                     <header className="modal-card-head">
                         <p className="modal-card-title label has-text-centered is-size-5 is-size-6-mobile mb-0">
                             {title}

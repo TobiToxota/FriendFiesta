@@ -53,21 +53,21 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                             </>
                         ) : (
                             <>
-                                <label className="label is-size-6-touch mb-0">
+                                <label className="label is-size-7-touch mb-0">
                                     Your current description:
                                 </label>
-                                <p className="mb-2"> {suggestionData.description}</p>
+                                <p className="mb-2 is-size-7-touch"> {suggestionData.description}</p>
                                 <div className="field is-grouped is-justify-content-center">
                                     <p className="control">
                                         <button
-                                            className="button is-link is-rounded"
+                                            className="button is-link is-rounded is-size-7-touch"
                                             onClick={() => setShowModal(true)}
                                         >
                                             Edit your description
                                         </button>
                                     </p>
                                     <p className="control">
-                                        <button className="button is-danger is-rounded"
+                                        <button className="button is-danger is-rounded is-size-7-touch"
                                         onClick={() => putSuggestion({ description: null })}>
                                             <span className="icon">
                                                 <i className="fa-regular fa-trash-can" />
