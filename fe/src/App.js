@@ -14,6 +14,7 @@ import NightOutListPage from "./pages/nightOut/NightOutListPage";
 import PrivateRoute from "./utils/PrivateRoute";
 
 import 'react-toastify/dist/ReactToastify.css';
+import ModalComponent from "./components/common/ModalComponent";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route element={<Register />} path="/register" />
           <Route element={<Login />} path="/login" />
         </Routes>
+        <ModalComponent/>
         <ToastContainer limit={2} position="top-center" autoClose={4000}/>
       </AuthProvider>
     </BrowserRouter>

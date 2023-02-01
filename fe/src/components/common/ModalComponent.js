@@ -7,7 +7,7 @@ const ModalComponent = ({ click, showModal, setShowModal, children, title, fetch
 
     if (showModal) {
         return (
-            <div className="modal is-active" id="modal">
+            <div className="overlay modal is-active" id="modal">
                 <div className="modal-background" onClick={() => setShowModal(false)} />
                 <div className="modal-card px-1">
                     <header className="modal-card-head">
