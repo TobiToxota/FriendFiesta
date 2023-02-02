@@ -356,39 +356,53 @@ class NewEntrySuggestionView(APIView):
         if suggestionObject == None:
             return Response({"message": "You have not suggested a suggestion for this nightout."}, status=status.HTTP_404_NOT_FOUND)
 
-        # send a get request to the google places api
-        googlePlacesResponse = map_client.find_place(input=request.data['name'], fields=[
-            'name', 'rating', 'photos', 'formatted_address', 'types'], input_type='textquery')
+        # check if the formType is Google Maps
+        if request.data['formType'] == 'Google Maps':
 
-        # check if the response is valid
-        if googlePlacesResponse['status'] == 'OK':
+            # send a get request to the google places api
+            googlePlacesResponse = map_client.find_place(input=request.data['name'], fields=[
+                'name', 'rating', 'photos', 'formatted_address', 'types'], input_type='textquery')
 
-            # get the specific photo url
-            photo = map_client.places_photo(
-                photo_reference=googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'], max_height=150, max_width=150)
+            # check if the response is valid
+            if googlePlacesResponse['status'] == 'OK':
 
-            # put the photo url in our response
-            googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'] = photo.gi_frame.f_locals['self'].url
+                # get the specific photo url
+                photo = map_client.places_photo(
+                    photo_reference=googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'], max_height=150, max_width=150)
 
-            # now we can fill the googleplacesapi into the request
-            request.data['name'] = googlePlacesResponse['candidates'][0]['name']
-            request.data['rating'] = googlePlacesResponse['candidates'][0]['rating']
-            request.data['location'] = googlePlacesResponse['candidates'][0]['formatted_address']
-            request.data['photoKey'] = googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference']
-            request.data['locationType'] = ",".join(
-                googlePlacesResponse['candidates'][0]['types'])
+                # put the photo url in our response
+                googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'] = photo.gi_frame.f_locals['self'].url
 
-            # create the serializer
-            serializer = EntrySuggestionSerializer(data=request.data)
+                # now we can fill the googleplacesapi into the request
+                request.data['name'] = googlePlacesResponse['candidates'][0]['name']
+                request.data['rating'] = googlePlacesResponse['candidates'][0]['rating']
+                request.data['location'] = googlePlacesResponse['candidates'][0]['formatted_address']
+                request.data['photoKey'] = googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference']
+                request.data['locationType'] = ",".join(
+                    googlePlacesResponse['candidates'][0]['types'])
 
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                # create the serializer
+                serializer = EntrySuggestionSerializer(data=request.data)
 
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+            elif request.data['formType'] == 'Individual Place':
+                
+                # create the serializer:
+                serializer = EntrySuggestionSerializer(data=request.data)
+
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+                
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         # if the response is not valid return a 404
-        return Response({"message": "The Google Places API returned an error."}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"message": "Something went wrong."}, status=status.HTTP_404_NOT_FOUND)
 
 
 @permission_classes((IsAuthenticated,))
