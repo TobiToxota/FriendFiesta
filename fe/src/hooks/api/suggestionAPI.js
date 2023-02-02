@@ -144,13 +144,13 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
         setAddEntryFetching(true)
 
         if (
-            e.target.startTime.value === "" ||
-            e.target.endTime.value === "" ||
-            e.target.location.value === ""
-          ) {
+            e.target.startTime.value === '' ||
+            e.target.endTime.value === '' ||
+            e.target.location.value === ''
+        ) {
             toast.error('You need to put in some stuff ')
-            return;
-          }
+            return
+        }
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/entrys/', {
             method: 'POST',
@@ -166,12 +166,22 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
                 name: e.target.location.value,
                 formType: e.target.formType.value,
             }),
-        });
+        })
         if (response.status === 201) {
-            toast.success('Your Entry was successfully modified')
+            toast.success('Your entry was successfully modified')
             setAddEntryFetching(false)
+            loadSuggestion()
+            return
+        } else {
+            toast.error('Something went wrong')
+            return
         }
-    } 
+    }
+    
+    return {
+        addEntry,
+        addEntryFetching,
+    }
 }
 
 export { useLoadSuggestion, useAddSuggestion, usePutSuggestion }
