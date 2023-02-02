@@ -12,9 +12,9 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
 
     return (
         <>
-            <div className="container mt-4 is-hidden-touch">
+            <div className="container is-hidden-touch" style={{ marginTop: '30px' }}>
                 <form onSubmit={(e) => addEntry(e)}>
-                    <label className="label mb-0 has-text-centered mb-2">
+                    <label className="label mb-0 is-size-5 has-text-centered mb-4">
                         Add an entry to your suggestion:
                     </label>
                     <div className="field has-addons has-addons-centered">
@@ -37,8 +37,8 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                                 style={{
                                     height: 'auto !important',
                                     whiteSpace: 'unset',
-                                    width: '260px',
-                                    transform: 'translateY(-95px)translateX(-20px)',
+                                    width: '220px',
+                                    transform: 'translateY(-98px)translateX(0px)',
                                     position: 'absolute',
                                 }}
                             >
@@ -67,12 +67,21 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                             <input className="input" type="time" placeholder="" name="endTime" />
                         </p>
                         <p className="control">
-                            <button className="button is-link is-rounded" type="submit">
-                                <span className="icon is-small">
-                                    <i className="fa-solid fa-plus"></i>
-                                </span>
-                                <span>Add</span>
-                            </button>
+                            {!addEntryFetching ? (
+                                <button className="button is-link is-rounded" type="submit">
+                                    <span className="icon is-small">
+                                        <i className="fa-solid fa-plus"></i>
+                                    </span>
+                                    <span>Add</span>
+                                </button>
+                            ) : (
+                                <button className="button is-link is-rounded is-loading">
+                                    <span className="icon is-small">
+                                        <i className="fa-solid fa-plus"></i>
+                                    </span>
+                                    <span>Add</span>
+                                </button>
+                            )}
                         </p>
                     </div>
                 </form>

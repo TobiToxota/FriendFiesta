@@ -151,6 +151,9 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
             e.target.location.value === ''
         ) {
             toast.error('You need to fill out the form first.')
+            setTimeout(() => {
+                setAddEntryFetching(false)
+            }, 300)
             return
         }
 
@@ -171,7 +174,9 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
         })
         if (response.status === 201) {
             toast.success('Your entry was successfully added')
-            setAddEntryFetching(false)
+            setTimeout(() => {
+                setAddEntryFetching(false)
+            }, 300)
             loadSuggestion()
             return
         } else {

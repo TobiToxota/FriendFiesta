@@ -1,6 +1,8 @@
 
 // local imports
 import EditDescriptionComponent from './EditDescriptionComponent'
+import EntryComponent from './EntryComponent'
+import EntrysHeaderComponent from './EntrysHeaderComponent'
 import AddEntryComponent from './AddEntryComponent'
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 
@@ -25,6 +27,10 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                     </h2>
                     <EditDescriptionComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData} />
                     <AddEntryComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData}/>
+                    <EntrysHeaderComponent/>
+                    {suggestionData.planEntries.map((entry, index) => (
+                        <EntryComponent entry={entry} key={index} index={index}/>
+                    ))}
                 </div>
             </div>
         </>

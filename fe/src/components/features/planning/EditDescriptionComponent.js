@@ -25,7 +25,7 @@ const EditDescriptionComponent = ({loadSuggestion, token, nightOut, suggestionDa
         <div className="field mt-2 has-text-centered">
             {suggestionData.description === null ? (
                 <>
-                    <label className="label is-size-6-touch">You did not add a description</label>
+                    <label className="label is-size-5 is-size-6-touch">You did not add a description</label>
                     <button
                         className="button is-link is-rounded is-size-7-mobile"
                         onClick={() => putSuggestion({ description: '' })}
@@ -35,7 +35,7 @@ const EditDescriptionComponent = ({loadSuggestion, token, nightOut, suggestionDa
                 </>
             ) : (
                 <>
-                    <label className="label is-size-7-touch mb-0">Your current description:</label>
+                    <label className="label is-size-7-touch is-size-5 mb-0">Your current description:</label>
                     <p className="mb-2 is-size-7-touch"> {suggestionData.description}</p>
                     <div className="field is-grouped is-justify-content-center">
                         <p className="control">
