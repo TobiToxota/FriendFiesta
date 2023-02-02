@@ -101,6 +101,8 @@ class PlanSuggestion(models.Model):
 
 class PlanEntry(models.Model):
 
+    CHOICES = (('Google Maps', 'Google Maps'), ('Individual Place', 'Individual Place'))
+
     planSuggestion = models.ForeignKey(
         PlanSuggestion, on_delete=models.CASCADE, related_name="planEntries")
     name = models.CharField(max_length=40, blank=True)
@@ -111,6 +113,7 @@ class PlanEntry(models.Model):
         max_length=90)
     startTime = models.TimeField(blank=True, null=True)
     endTime = models.TimeField(blank=True, null=True)
+    formType = models.CharField(max_length=80, choices=CHOICES)
 
     def __str__(self):
         return str(self.location) + " - " + str(self.locationType) + " - " + str(self.startTime) + " - " + str(self.endTime) + " - " + str(self.description) + " - " + str(self.planSuggestion.participant.user.username) + " - " + str(self.planSuggestion.participant.nightOut.title)

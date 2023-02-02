@@ -1,8 +1,14 @@
+// local imports
+import { useAddEntryToSuggestion } from "../../../hooks/api/suggestionAPI"
+
 const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) => {
+    // get the useAddEntryToSuggestionHook
+    const {addEntry, addEntryFetching} = useAddEntryToSuggestion(loadSuggestion, token, nightOut.uuid, suggestionData)
+
     return (
         <>
             <div className="container mt-4 is-hidden-touch">
-                <form>
+                <form onSubmit={(e) => addEntry(e)}>
                     <label className="label mb-0 has-text-centered mb-2">
                         Add an entry to your suggestion:
                     </label>
@@ -55,7 +61,7 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
             </div>
 
             <div className="container mt-4 is-hidden-desktop">
-                <form>
+                <form onSubmit={(e) => addEntry(e)}>
                     <label className="label mb-0 has-text-centered mb-2">
                         Add an entry to your suggestion:
                     </label>

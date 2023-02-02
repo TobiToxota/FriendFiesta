@@ -342,7 +342,7 @@ class CreateSuggestionView(APIView):
 
 @permission_classes((IsAuthenticated,))
 class NewEntrySuggestionView(APIView):
-    """Create a new suggestion"""
+    """Create a new entry"""
 
     def post(self, request, format=None):
 

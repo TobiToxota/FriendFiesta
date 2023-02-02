@@ -51,6 +51,7 @@ const useAddSuggestion = (refreshSuggestion, token, uuid) => {
     const [addSuggestionSuccess, setAddSuggestionSuccess] = useState(null)
 
     const addSuggestion = async (e) => {
+        e.preventDefault()
         SetAddSuggestionFetching(true)
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/', {
@@ -141,6 +142,7 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     const [addEntryFetching, setAddEntryFetching] = useState(false)
 
     const addEntry = async (e) => {
+        e.preventDefault()
         setAddEntryFetching(true)
 
         if (
@@ -148,7 +150,7 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
             e.target.endTime.value === '' ||
             e.target.location.value === ''
         ) {
-            toast.error('You need to put in some stuff ')
+            toast.error('You need to fill out the form first.')
             return
         }
 
@@ -168,7 +170,7 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
             }),
         })
         if (response.status === 201) {
-            toast.success('Your entry was successfully modified')
+            toast.success('Your entry was successfully added')
             setAddEntryFetching(false)
             loadSuggestion()
             return
@@ -177,11 +179,11 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
             return
         }
     }
-    
+
     return {
         addEntry,
         addEntryFetching,
     }
 }
 
-export { useLoadSuggestion, useAddSuggestion, usePutSuggestion }
+export { useLoadSuggestion, useAddSuggestion, usePutSuggestion, useAddEntryToSuggestion }
