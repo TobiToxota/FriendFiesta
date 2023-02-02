@@ -110,7 +110,7 @@ class PlanEntry(models.Model):
     photoKey = models.CharField(max_length=200, blank=True)
     location = models.CharField(max_length=60, blank=True)
     locationType = models.CharField(
-        max_length=90)
+        max_length=100, blank=True)
     startTime = models.TimeField(blank=True, null=True)
     endTime = models.TimeField(blank=True, null=True)
     formType = models.CharField(max_length=80, choices=CHOICES)

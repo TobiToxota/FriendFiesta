@@ -1,9 +1,14 @@
 // local imports
-import { useAddEntryToSuggestion } from "../../../hooks/api/suggestionAPI"
+import { useAddEntryToSuggestion } from '../../../hooks/api/suggestionAPI'
 
 const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) => {
     // get the useAddEntryToSuggestionHook
-    const {addEntry, addEntryFetching} = useAddEntryToSuggestion(loadSuggestion, token, nightOut.uuid, suggestionData)
+    const { addEntry, addEntryFetching } = useAddEntryToSuggestion(
+        loadSuggestion,
+        token,
+        nightOut.uuid,
+        suggestionData
+    )
 
     return (
         <>
@@ -26,6 +31,19 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                             </span>
                             <span className="icon is-small is-left">
                                 <i className="fa-solid fa-location-dot" />
+                            </span>
+                            <span
+                                className="help is-primary mt-0 has-text-centered"
+                                style={{
+                                    height: 'auto !important',
+                                    whiteSpace: 'unset',
+                                    width: '260px',
+                                    transform: 'translateY(-95px)translateX(-20px)',
+                                    position: 'absolute',
+                                }}
+                            >
+                                Select here if you want to add the place via Google Places or not. A
+                                place like your apartment should be an individual place.
                             </span>
                         </p>
                         <p className="control">
@@ -68,9 +86,13 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                     <div className="field has-addons has-addons-centered mb-1">
                         <p className="control has-icons-left">
                             <span className="select is-rounded is-size-7-mobile">
-                                <select name="formType" defaultValue="Google Maps"> 
-                                    <option key={1} value={'Google Maps'}>Google Maps Place</option>
-                                    <option key={2} value={'Individual Place'}>Individual Place</option>
+                                <select name="formType" defaultValue="Google Maps">
+                                    <option key={1} value={'Google Maps'}>
+                                        Google Maps Place
+                                    </option>
+                                    <option key={2} value={'Individual Place'}>
+                                        Individual Place
+                                    </option>
                                 </select>
                             </span>
                             <span className="icon is-small is-left is-size-7-mobile">

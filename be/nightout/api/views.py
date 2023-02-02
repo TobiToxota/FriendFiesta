@@ -389,17 +389,17 @@ class NewEntrySuggestionView(APIView):
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            
-            elif request.data['formType'] == 'Individual Place':
-                
-                # create the serializer:
-                serializer = EntrySuggestionSerializer(data=request.data)
 
-                if serializer.is_valid():
-                    serializer.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-                
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif request.data['formType'] == 'Individual Place':
+
+            # create the serializer:
+            serializer = EntrySuggestionSerializer(data=request.data)
+
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         # if the response is not valid return a 404
         return Response({"message": "Something went wrong."}, status=status.HTTP_404_NOT_FOUND)
