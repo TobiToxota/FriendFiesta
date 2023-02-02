@@ -1,6 +1,7 @@
 
 // local imports
 import EditDescriptionComponent from './EditDescriptionComponent'
+import AddEntryComponent from './AddEntryComponent'
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 
 const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggestionData }) => {
@@ -23,6 +24,7 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                         Edit your Suggestion for {nightOut.title}
                     </h2>
                     <EditDescriptionComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData} />
+                    <AddEntryComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData}/>
                 </div>
             </div>
         </>

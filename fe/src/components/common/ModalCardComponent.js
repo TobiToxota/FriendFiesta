@@ -1,5 +1,5 @@
 // package imports
-import {createPortal} from 'react-dom'
+import { createPortal } from 'react-dom'
 
 //local imports
 import { useSwipeInFromBottomTwo } from '../../hooks/animations/animations'
@@ -55,7 +55,8 @@ const ModalCardComponent = ({ click, showModal, setShowModal, children, title, f
                     aria-label="close"
                     onClick={() => setShowModal(false)}
                 />
-            </div>, document.body
+            </div>,
+            document.body
         )
     } else {
         return null
