@@ -12,7 +12,7 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
 
     return (
         <>
-            <div className="container is-hidden-touch" style={{ marginTop: '30px' }}>
+            <div className="container is-hidden-touch mb-6" style={{ marginTop: '10px' }}>
                 <form onSubmit={(e) => addEntry(e)}>
                     <label className="label mb-0 is-size-5 has-text-centered mb-4">
                         Add an entry to your suggestion:
@@ -37,8 +37,8 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                                 style={{
                                     height: 'auto !important',
                                     whiteSpace: 'unset',
-                                    width: '220px',
-                                    transform: 'translateY(-98px)translateX(0px)',
+                                    width: '350px',
+                                    transform: 'translateX(-50px)',
                                     position: 'absolute',
                                 }}
                             >

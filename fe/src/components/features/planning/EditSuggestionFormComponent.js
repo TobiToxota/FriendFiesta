@@ -22,15 +22,16 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                         minHeight: '150px',
                     }}
                 >
-                    <h2 className="label is-size-5 is-size-6-touch has-text-centered mb-2">
+                    <h2 className="label is-size-4 is-size-5-touch has-text-centered mb-2">
                         Edit your Suggestion for {nightOut.title}
                     </h2>
                     <EditDescriptionComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData} />
-                    <AddEntryComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData}/>
-                    <EntrysHeaderComponent/>
+                    
+                    <EntrysHeaderComponent nightOut={nightOut}/>
                     {suggestionData.planEntries.map((entry, index) => (
                         <EntryComponent entry={entry} key={index} index={index}/>
                     ))}
+                    <AddEntryComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData}/>
                 </div>
             </div>
         </>

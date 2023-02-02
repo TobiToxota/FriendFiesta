@@ -1,8 +1,10 @@
-const EntrysHeaderComponent = () => {
+import { nightOutDateToDate } from "../../../utils/nightOutDateToDate"
+
+const EntrysHeaderComponent = ({nightOut}) => {
     return (
         <>
-            <label className="label mb-1 is-size-5 has-text-centered mt-4">
-                Your entrys for your suggestion:
+            <label className="label mb-1 is-size-5 is-size-6-mobile has-text-centered mt-4">
+                Your entrys for your suggestion for {nightOut.title}
             </label>
             <div
                 className="is-centered columns is-1 is-vcentered is-centered has-text-centered is-multiline mt-1 is-hidden-mobile"
