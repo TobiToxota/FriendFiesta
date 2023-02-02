@@ -20,8 +20,9 @@ const useSwipeInFromTop = (component, target) => {
   useLayoutEffect(() => {
     anime({
       targets: target,
-      translateY: [-500, 0],
-      duration: 1000,
+      translateY: [-400, 0],
+      duration: 400,
+      easing: 'easeOutQuint'
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [component]);

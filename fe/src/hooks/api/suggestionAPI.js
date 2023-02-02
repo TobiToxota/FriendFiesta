@@ -137,4 +137,41 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     }
 }
 
+const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
+    const [addEntryFetching, setAddEntryFetching] = useState(false)
+
+    const addEntry = async (e) => {
+        setAddEntryFetching(true)
+
+        if (
+            e.target.startTime.value === "" ||
+            e.target.endTime.value === "" ||
+            e.target.location.value === ""
+          ) {
+            toast.error('You need to put in some stuff ')
+            return;
+          }
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/entrys/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                planSuggestion: suggestion.id,
+                nightOut: uuid,
+                startTime: e.target.startTime.value,
+                endTime: e.target.endTime.value,
+                name: e.target.location.value,
+                formType: e.target.formType.value,
+            }),
+        });
+        if (response.status === 201) {
+            toast.success('Your Entry was successfully modified')
+            setAddEntryFetching(false)
+        }
+    } 
+}
+
 export { useLoadSuggestion, useAddSuggestion, usePutSuggestion }
