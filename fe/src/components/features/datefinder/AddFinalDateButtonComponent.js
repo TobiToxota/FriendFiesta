@@ -75,34 +75,44 @@ const AddFinalDateButtonComponent = ({
                     </p>
                     <form onSubmit={(e) => addFinalDate(e)}>
                         <div className="container mt-2">
-                            <div className="select is-size-7-touch is-rounded is-link mr-1">
-                                <select name="dateselecter">
-                                    {nightOut.suggestedDates.map((date) => (
-                                        <option key={date.id} value={date.date}>
-                                            {date.weekday} / {date.date}
-                                        </option>
-                                    ))}
-                                </select>
+                            <div className="field has-addons has-addons-centered">
+                                <span className="control " >
+                                    <div className="select is-size-7-touch is-rounded is-link" >
+                                        <select name="dateselecter">
+                                            {nightOut.suggestedDates.length === 0 &&
+                                        <option value="">Please add a date first</option>}
+                                            {nightOut.suggestedDates.map((date) => (
+                                                <option key={date.id} value={date.date}>
+                                                    {date.weekday} / {date.date}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </span>
+                                {!finalDateFetching ? (
+                                    <span className="control">
+                                    <button className="button is-link is-rounded is-size-6 is-size-7-touch">
+                                        <span className="icon is-small">
+                                            <i className="fa-regular fa-calendar-check"></i>
+                                        </span>
+                                        <span className="is-size-6 is-size-7-touch">
+                                            Submit this date
+                                        </span>
+                                    </button>
+                                    </span>
+                                ) : (
+                                    <span className='control'>
+                                    <button className="button is-link is-rounded is-size-6 is-size-7-touch is-loading">
+                                        <span className="icon is-small">
+                                            <i className="fa-regular fa-calendar-check"></i>
+                                        </span>
+                                        <span className="is-size-6 is-is-size-7-touch">
+                                            Submit this date
+                                        </span>
+                                    </button>
+                                    </span>
+                                )}
                             </div>
-                            {!finalDateFetching ? (
-                                <button className="button is-link is-rounded is-size-6 is-size-7-touch">
-                                    <span className="icon is-small">
-                                        <i className="fa-regular fa-calendar-check"></i>
-                                    </span>
-                                    <span className="is-size-6 is-size-7-touch">
-                                        Submit this date
-                                    </span>
-                                </button>
-                            ) : (
-                                <button className="button is-link is-rounded is-size-6 is-size-7-touch is-loading">
-                                    <span className="icon is-small">
-                                        <i className="fa-regular fa-calendar-check"></i>
-                                    </span>
-                                    <span className="is-size-6 is-is-size-7-touch">
-                                        Submit this date
-                                    </span>
-                                </button>
-                            )}
                         </div>
                     </form>
                 </div>

@@ -18,37 +18,43 @@ const AddDateComponent = ({ token, nightOut, refreshNightOut, userData }) => {
     )
 
     return (
-        <div className="ml-1 mb-0">
-            <h3 className="label is-size-5 is-size-6-touch ml-1 mb-1 mt-1">
-                Add a date suggestion
-            </h3>
-            <nav className="level">
-                <div className="level-left">
-                    <span
-                        className="button is-rounded ml-0 is-size-7-mobile"
-                        id="date-buttons"
-                        children={
-                            <DatePicker
-                                onChange={onChange}
-                                value={value}
-                                style={{ border: 'none !important' }}
-                            />
-                        }
-                    ></span>
-                    <div className="is-inline" id="addDateForm">
-                        <div className="control is-inline ml-1">
-                            <button
-                                className="button is-info is-rounded is-small"
-                                type="submit"
-                                id="date-buttons-two"
-                                onClick={() => addDateSuggestion(createDateFromDatePicker(value))}
-                            >
-                                add
-                            </button>
-                        </div>
+        <div className="mt-4">
+                    <div className="field has-addons">
+                        <span className="control">
+                            <span className="is-not-clickable button is-size-7-mobile label">
+                                Add a date Suggestion
+                            </span>
+                        </span>
+                        <span className="control">
+                            <span
+                                className="button ml-0 is-size-7-mobile"
+                                id="date-buttons"
+                                children={
+                                    <DatePicker
+                                        onChange={onChange}
+                                        value={value}
+                                        style={{ border: 'none !important' }}
+                                    />
+                                }
+                            ></span>
+                        </span>
+                        <span className="control">
+                            <div className="is-inline" id="addDateForm">
+                                <div className="control is-inline">
+                                    <button
+                                        className="button is-link is-rounded"
+                                        type="submit"
+                                        id="date-buttons-two"
+                                        onClick={() =>
+                                            addDateSuggestion(createDateFromDatePicker(value))
+                                        }
+                                    >
+                                        add
+                                    </button>
+                                </div>
+                            </div>
+                        </span>
                     </div>
-                </div>
-            </nav>
         </div>
     )
 }

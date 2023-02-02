@@ -22,7 +22,7 @@ const CreateSuggestionButtonComponent = ({
                 {!addSuggestionFetching ? (
                     <button
                         className="button is-primary is-rounded"
-                        onClick={() => addSuggestion()}
+                        onClick={(e) => addSuggestion(e)}
                     >
                         <span className="icon is-small">
                             <i className="fa-regular fa-lightbulb"></i>

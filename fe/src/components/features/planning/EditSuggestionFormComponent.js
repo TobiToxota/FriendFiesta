@@ -27,7 +27,7 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                     </h2>
                     <EditDescriptionComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData} />
                     
-                    <EntrysHeaderComponent nightOut={nightOut}/>
+                    <EntrysHeaderComponent nightOut={nightOut} suggestionData={suggestionData}/>
                     {suggestionData.planEntries.map((entry, index) => (
                         <EntryComponent entry={entry} key={index} index={index}/>
                     ))}

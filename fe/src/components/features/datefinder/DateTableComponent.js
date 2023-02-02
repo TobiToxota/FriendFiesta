@@ -58,7 +58,7 @@ const DateTableComponent = ({ nightOut, refreshNightOut, token, userData }) => {
                     {nightOut.participants.map((participant) => (
                         <tr key={participant.id}>
                             <td>
-                                <button className="button is-info is-rounded p-4 is-small">
+                                <button className="button is-link is-rounded p-4 is-small">
                                     <img
                                         src={`https://avatars.dicebear.com/api/${participant.user.avatarStyle}/${participant.user.username}+${participant.user.avatarIteration}.svg`}
                                         alt=""

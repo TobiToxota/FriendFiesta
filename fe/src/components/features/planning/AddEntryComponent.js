@@ -14,7 +14,7 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
         <>
             <div className="container is-hidden-touch mb-6" style={{ marginTop: '10px' }}>
                 <form onSubmit={(e) => addEntry(e)}>
-                    <label className="label mb-0 is-size-5 has-text-centered mb-4">
+                    <label className="label mb-1 is-size-5 has-text-centered">
                         Add an entry to your suggestion:
                     </label>
                     <div className="field has-addons has-addons-centered">

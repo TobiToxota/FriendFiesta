@@ -177,13 +177,33 @@ body,
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px !important;
 }
 
-/* margin left and right for mobiule */
+/* margin left and right for mobile */
 @media screen and (max-width: 768px) {
   #nightoutlist-component {
     margin-left: 12vw !important;
     margin-right: 12vw !important;
   }
 }
+
+/* margin left and right for mobile */
+@media screen and (min-width: 768px) {
+  #mx-mobile {
+    margin-left: 3vw !important;
+    margin-right: 3vw !important;
+  }
+}
+
+/* styling entry comp */
+.entry-component:hover {
+  background-color: #def5ed !important;
+  transition: 0.3s;
+}
+
+.entry-component {
+  background-color: #f5f5f5 !important;
+  transition: 0.8s;
+}
+
 
 /* black title for nightoutlistpage */
 #blackTitle {
@@ -220,12 +240,6 @@ table,
 th,
 td {
   border: none !important;
-}
-
-td:hover {
-  background-color: #3e42c40a;
-  transition: 0.3s;
-  border-radius: 80px;
 }
 
 td {

@@ -31,7 +31,7 @@ const AddParticipantButtonComponent = ({
                     handleSubmit()
                 }}
             >
-                <div className="field is-inline">
+                <div className="field has-addons">
                     <div className="control is-inline has-icons-left">
                         <input
                             className="input is-inline is-rounded is-size-7-touch is-small has-icons-left"
@@ -45,9 +45,9 @@ const AddParticipantButtonComponent = ({
                             <i className="fas fa-add mb-1" />
                         </span>
                     </div>
-                    <div className="control is-inline ml-1">
+                    <div className="control is-inline">
                         <button
-                            className="button is-info is-rounded is-small"
+                            className="button is-link is-rounded is-small"
                             type="submit"
                         >
                             add participant
