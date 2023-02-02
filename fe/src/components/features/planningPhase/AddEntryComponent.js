@@ -20,26 +20,26 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                     <p className="control">
                         <input className="input" type="text" placeholder="Name of Place" />
                     </p>
-                    <p class="control">
-                        <div class="button">Start:</div>
+                    <p className="control">
+                        <button className="is-not-clickable button">Start:</button>
                     </p>
                     <p className="control">
                         <input className="input" type="time" placeholder="" />
                     </p>
-                    <p class="control">
-                        <div class="button">End:</div>
+                    <p className="control">
+                        <button className="is-not-clickable button">End:</button>
                     </p>
                     <p className="control">
                         <input className="input" type="time" placeholder="" />
                     </p>
 
                     <p className="control">
-                        <div className="button is-link is-rounded">
+                        <button className="button is-link is-rounded">
                             <span className="icon is-small">
                                 <i className="fa-solid fa-plus"></i>
                             </span>
                             <span>Add</span>
-                        </div>
+                        </button>
                     </p>
                 </div>
             </div>
@@ -48,38 +48,52 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                 <label className="label mb-0 has-text-centered mb-2">
                     Add an entry to your suggestion:
                 </label>
-                <div className="field has-addons has-addons-centered">
+                <div className="field has-addons has-addons-centered mb-1">
                     <p className="control has-icons-left">
-                        <span className="select is-rounded is-size-7-touch">
+                        <span className="select is-rounded is-size-7-mobile">
                             <select>
                                 <option>Google Maps Place</option>
                                 <option>Individual Place</option>
                             </select>
                         </span>
-                        <span className="icon is-small is-left is-size-7-touch">
+                        <span className="icon is-small is-left is-size-7-mobile">
                             <i className="fa-solid fa-location-dot" />
                         </span>
                     </p>
                     <p className="control">
                         <input
-                            className="input is-rounded is-size-7-touch"
+                            className="input is-rounded is-size-7-mobile"
                             type="text"
                             placeholder="Name of Place"
                         />
                     </p>
                 </div>
                 <div className="field has-addons has-addons-centered">
-                <p class="control">
-                        <div class="button is-size-7">Start:</div>
+                    <p className="control">
+                        <button className="is-not-clickable button is-size-7-mobile is-rounded">
+                            Start:
+                        </button>
                     </p>
                     <p className="control">
-                        <input className="input is-size-7-touch" type="time" placeholder="" />
-                    </p>
-                    <p class="control">
-                        <div class="button is-size-7-touch">End:</div>
+                        <input className="input is-size-7-mobile" type="time" placeholder="" />
                     </p>
                     <p className="control">
-                        <input className="input is-size-7-touch" type="time" placeholder="" />
+                        <button className="is-not-clickable button is-size-7-mobile">End:</button>
+                    </p>
+                    <p className="control">
+                        <input
+                            className="input is-size-7-mobile is-rounded"
+                            type="time"
+                            placeholder=""
+                        />
+                    </p>
+                    <p className="control">
+                        <button className="button is-link is-rounded is-small">
+                            <span className="icon is-small">
+                                <i className="fa-solid fa-plus"></i>
+                            </span>
+                            <span>Add</span>
+                        </button>
                     </p>
                 </div>
             </div>

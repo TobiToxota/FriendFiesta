@@ -27,7 +27,7 @@ const EditDescriptionComponent = ({loadSuggestion, token, nightOut, suggestionDa
                 <>
                     <label className="label is-size-6-touch">You did not add a description</label>
                     <button
-                        className="button is-link is-rounded"
+                        className="button is-link is-rounded is-size-7-mobile"
                         onClick={() => putSuggestion({ description: '' })}
                     >
                         Add a description
