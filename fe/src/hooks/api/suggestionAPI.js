@@ -29,6 +29,7 @@ const useLoadSuggestion = (token, uuid) => {
             return
         } else {
             setSuggestionError('Something went wrong')
+            setSuggestionData(null)
             setSuggestionLoading(false)
         }
     }
@@ -143,7 +144,7 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
 }
 
 /** this custom hook fetches the backend to delete a suggestion */
-const useDeleteSuggestion = (loadSuggestion, token, uuid, suggestion) => {
+const useDeleteSuggestion = (loadSuggestion, token, suggestion) => {
     const [deleteSuggestionFeteching, setDeleteSuggestionFetching] = useState(false)
 
     const deleteSuggestion = async () => {

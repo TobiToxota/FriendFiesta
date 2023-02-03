@@ -21,7 +21,7 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                         minHeight: '150px',
                     }}
                 >
-                    <DeleteSuggestionComponent suggestion={suggestionData} token={token} />
+                    <DeleteSuggestionComponent suggestion={suggestionData} token={token} loadSuggestion={loadSuggestion} />
                     <h2 className="label is-size-4 is-size-5-touch has-text-centered mb-2">
                         Edit your Suggestion for {nightOut.title}
                     </h2>
