@@ -118,11 +118,11 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
 
         if (response.status === 201) {
             if (props.description === null) {
-                toast.success('Your Suggestion was successfully deleted 🗑️')
+                toast.success('Your description was successfully deleted 🗑️')
                 loadSuggestion(uuid)
                 return
             }
-            toast.success('Your Suggestion was successfully modified')
+            toast.success('Your description was successfully modified')
             setTimeout(() => {
                 setPutSuggestionFetching(false)
             }, 1500)
@@ -135,6 +135,32 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     return {
         putSuggestion,
         putSuggestionetching,
+    }
+}
+
+const useDeleteSuggestion = (loadSuggestion, token, uuid, suggestion) => {
+    const [deleteSuggestionFeteching, setDeleteSuggestionFetching] = useState(false)
+
+    const deleteSuggestion = async () => {
+        setDeleteSuggestionFetching(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                planSuggestion: suggestion.id,
+            }),
+        })
+        if (response.status === 204) {
+            toast.success('Your Suggestion was successfully deleted 🗑️')
+            setDeleteSuggestionFetching(false)
+            loadSuggestion()
+        } else {
+            toast.error('Something went wrong')
+        }
     }
 }
 
