@@ -1,6 +1,9 @@
+// package imports
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 
+
+/** this custom hook fetches the backend to load a suggestion*/
 const useLoadSuggestion = (token, uuid) => {
     const [suggestionData, setSuggestionData] = useState(null)
     const [suggestionSuccess, setSuggestionSuccess] = useState(null)
@@ -44,6 +47,8 @@ const useLoadSuggestion = (token, uuid) => {
     }
 }
 
+
+/** this custom hook fetches the backend to add a suggestion*/
 const useAddSuggestion = (refreshSuggestion, token, uuid) => {
     const [addSuggestionData, setAddSuggestioanData] = useState(null)
     const [addSuggestionError, setAddSuggestionError] = useState(null)
@@ -97,6 +102,8 @@ const useAddSuggestion = (refreshSuggestion, token, uuid) => {
     }
 }
 
+
+/** this custom hook fetches the backend to add props in a put request to a suggestion*/
 const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     const [putSuggestionetching, setPutSuggestionFetching] = useState(false)
 
@@ -138,6 +145,8 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     }
 }
 
+
+/** this custom hook fetches the backend to delete a suggestion */
 const useDeleteSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     const [deleteSuggestionFeteching, setDeleteSuggestionFetching] = useState(false)
 
@@ -164,6 +173,8 @@ const useDeleteSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     }
 }
 
+
+/** this custom hook fetches the backend to add an entry to a suggestion */
 const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     const [addEntryFetching, setAddEntryFetching] = useState(false)
 
