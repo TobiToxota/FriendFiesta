@@ -1,5 +1,3 @@
-import { nightOutDateToDate } from '../../../utils/nightOutDateToDate'
-
 const EntrysHeaderComponent = ({ nightOut, suggestionData }) => {
     return (
         <>

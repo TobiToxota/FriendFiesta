@@ -91,6 +91,7 @@ class PlanSuggestion(models.Model):
     creator = models.ForeignKey(
         Participant, on_delete=models.CASCADE, related_name="planSuggestions")
     description = models.CharField(max_length=200, blank=True, null=True)
+    status = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['creator']

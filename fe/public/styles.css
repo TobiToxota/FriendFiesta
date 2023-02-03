@@ -195,7 +195,7 @@ body,
 
 /* styling entry comp */
 .entry-component:hover {
-  background-color: #def5ed !important;
+  background-color: #e7e7e7cf!important;
   transition: 0.3s;
 }
 

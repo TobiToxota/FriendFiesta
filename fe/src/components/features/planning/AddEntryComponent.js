@@ -55,13 +55,13 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                             />
                         </p>
                         <p className="control">
-                            <button className="is-not-clickable button">Start:</button>
+                            <span className="is-not-clickable button">Start:</span>
                         </p>
                         <p className="control">
                             <input className="input" type="time" placeholder="" name="startTime" />
                         </p>
                         <p className="control">
-                            <button className="is-not-clickable button">End:</button>
+                            <span className="is-not-clickable button">End:</span>
                         </p>
                         <p className="control">
                             <input className="input" type="time" placeholder="" name="endTime" />
@@ -119,9 +119,9 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                     </div>
                     <div className="field has-addons has-addons-centered">
                         <p className="control">
-                            <button className="is-not-clickable button is-size-7-mobile is-rounded">
+                            <span className="is-not-clickable button is-size-7-mobile is-rounded">
                                 Start:
-                            </button>
+                            </span>
                         </p>
                         <p className="control">
                             <input
@@ -132,9 +132,7 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                             />
                         </p>
                         <p className="control">
-                            <button className="is-not-clickable button is-size-7-mobile">
-                                End:
-                            </button>
+                            <span className="is-not-clickable button is-size-7-mobile">End:</span>
                         </p>
                         <p className="control">
                             <input
@@ -145,7 +143,10 @@ const AddEntryComponent = ({ loadSuggestion, token, nightOut, suggestionData }) 
                             />
                         </p>
                         <p className="control">
-                            <button className="button is-link is-rounded is-small" type="submit">
+                            <button
+                                className="button is-link is-rounded is-size-7-mobile"
+                                type="submit"
+                            >
                                 <span className="icon is-small">
                                     <i className="fa-solid fa-plus"></i>
                                 </span>

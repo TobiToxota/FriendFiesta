@@ -4,11 +4,7 @@ import React, { useRef } from 'react'
 // local imports
 import { useAddParticipantToNightOut } from '../../../hooks/api/participantAPI'
 
-const AddParticipantButtonComponent = ({
-    nightOut,
-    refreshNightOut,
-    token,
-}) => {
+const AddParticipantButtonComponent = ({ nightOut, refreshNightOut, token }) => {
     const { addParticipantToNightOut } = useAddParticipantToNightOut(
         token,
         nightOut.uuid,
@@ -46,11 +42,11 @@ const AddParticipantButtonComponent = ({
                         </span>
                     </div>
                     <div className="control is-inline">
-                        <button
-                            className="button is-link is-rounded is-small"
-                            type="submit"
-                        >
-                            add participant
+                        <button className="button is-link is-rounded is-small" type="submit">
+                            <span className="icon is-small">
+                                <i className="fa-solid fa-user-plus"></i>
+                            </span>
+                            <span>add participant</span>
                         </button>
                     </div>
                 </div>
