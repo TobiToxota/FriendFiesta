@@ -12,9 +12,9 @@ const splitLocationType = (location) => {
 }
 
 /** This Functions takes a date and slices the last digits off  */
-const makeDateBeautifull = (date) => {
+const makeDateBeautiful = (date) => {
     let newDate = date.slice(0, 5)
     return newDate
 }
 
-export { splitLocationType, makeDateBeautifull }
+export { splitLocationType, makeDateBeautiful }

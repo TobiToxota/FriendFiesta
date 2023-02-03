@@ -117,9 +117,18 @@ body,
   margin-bottom: 20px;
 }
 
+/* Modal Card */
+@media screen and (min-width: 1000px) {
+  .modal-content {
+    margin: 0 auto;
+    max-height: calc(100vh - 40px);
+    width: 800px !important;
+  }
+}
+
 /* style for making a button not clickable */
 .is-not-clickable {
-  cursor:default !important;
+  cursor: default !important;
 }
 
 /* style for the textarea-suggestion-form */
@@ -195,7 +204,7 @@ body,
 
 /* styling entry comp */
 .entry-component:hover {
-  background-color: #e7e7e7cf!important;
+  background-color: #e7e7e7cf !important;
   transition: 0.3s;
 }
 
@@ -225,7 +234,7 @@ body,
   min-height: 150px;
   border-color: #ffffff;
   box-shadow: none;
-  resize:none;
+  resize: none;
   margin: none;
 }
 
