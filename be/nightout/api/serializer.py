@@ -31,7 +31,8 @@ class DateSuggestionSerializer(serializers.ModelSerializer):
 
     def get_numberofCommits(self, obj):
         # get all the true votes for this specific date
-        participantdatesCount = ParticipantDate.objects.filter(nightOut=obj.nightOut).filter(suggestedDate__date=obj.date).filter(commit=True).count()
+        participantdatesCount = ParticipantDate.objects.filter(nightOut=obj.nightOut).filter(
+            suggestedDate__date=obj.date).filter(commit=True).count()
 
         return participantdatesCount
 
@@ -123,6 +124,7 @@ class NotificationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return NotificationModel.objects.create(**validated_data)
+
 
 class CreateNotificationSerializer(serializers.ModelSerializer):
 

@@ -116,6 +116,9 @@ class PlanEntry(models.Model):
     endTime = models.TimeField(blank=True, null=True)
     formType = models.CharField(max_length=80, choices=CHOICES)
 
+    class Meta:
+        ordering = ['startTime']
+
     def __str__(self):
         return str(self.location) + " - " + str(self.locationType) + " - " + str(self.startTime) + " - " + str(self.endTime) + " - " + str(self.description) + " - " + str(self.planSuggestion.participant.user.username) + " - " + str(self.planSuggestion.participant.nightOut.title)
 
