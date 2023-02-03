@@ -1,7 +1,7 @@
-
 // local imports
 import EditDescriptionComponent from './EditDescriptionComponent'
 import EntryComponent from './EntryComponent'
+import DeleteSuggestionComponent from './DeleteSuggestionComponent'
 import EntrysHeaderComponent from './EntrysHeaderComponent'
 import AddEntryComponent from './AddEntryComponent'
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
@@ -9,7 +9,6 @@ import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggestionData }) => {
     // animation
     useSwipeInFromBottom(EditSuggestionFormComponent, '#create-suggestion-container')
-
 
     return (
         <>
@@ -22,16 +21,27 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                         minHeight: '150px',
                     }}
                 >
+                    <DeleteSuggestionComponent suggestion={suggestionData} token={token} />
                     <h2 className="label is-size-4 is-size-5-touch has-text-centered mb-2">
                         Edit your Suggestion for {nightOut.title}
                     </h2>
-                    <EditDescriptionComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData} />
-                    
-                    <EntrysHeaderComponent nightOut={nightOut} suggestionData={suggestionData}/>
+                    <EditDescriptionComponent
+                        loadSuggestion={loadSuggestion}
+                        token={token}
+                        nightOut={nightOut}
+                        suggestionData={suggestionData}
+                    />
+
+                    <EntrysHeaderComponent nightOut={nightOut} suggestionData={suggestionData} />
                     {suggestionData.planEntries.map((entry, index) => (
-                        <EntryComponent entry={entry} key={index} index={index}/>
+                        <EntryComponent entry={entry} key={index} index={index} />
                     ))}
-                    <AddEntryComponent loadSuggestion={loadSuggestion} token={token} nightOut={nightOut} suggestionData={suggestionData}/>
+                    <AddEntryComponent
+                        loadSuggestion={loadSuggestion}
+                        token={token}
+                        nightOut={nightOut}
+                        suggestionData={suggestionData}
+                    />
                 </div>
             </div>
         </>
