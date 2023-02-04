@@ -226,6 +226,35 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
     }
 }
 
+/** this custom hook fetches the backend to delete an entry from a suggestion */
+const useDeleteEntryFromSuggestion = (loadSuggestion, token, uuid, suggestion) => {
+    const deleteEntryFromSuggestion = async (id) => {
+        let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/entrys/', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                planEntry: id,
+            }),
+        })
+        if (response.status === 204) {
+            toast.success('Your selected entry was successfully deleted 🗑️')
+            setTimeout(() => {
+                loadSuggestion()
+            }, 300)
+            return
+        } else {
+            toast.error('Something went wrong')
+            return
+        }
+    }
+    return {
+        deleteEntryFromSuggestion,
+    }
+}
+
 export {
     useLoadSuggestion,
     useAddSuggestion,
