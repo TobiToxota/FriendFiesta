@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 import os
 import googlemaps
 
-from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote
+from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote, PlanEntry
 
 User = get_user_model()
 
@@ -341,8 +341,8 @@ class CreateSuggestionView(APIView):
 
 
 @permission_classes((IsAuthenticated,))
-class NewEntrySuggestionView(APIView):
-    """Create a new entry"""
+class EntrySuggestionView(APIView):
+    """Create a new entry or delete an existing entry"""
 
     def post(self, request, format=None):
 
@@ -403,6 +403,17 @@ class NewEntrySuggestionView(APIView):
 
         # if the response is not valid return a 404
         return Response({"message": "Something went wrong."}, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, format=None):
+
+        # get the entry fron the request
+        try:
+            entry = PlanEntry.objects.get(id=request.data['id'])
+        except ObjectDoesNotExist:
+            return Response({"message": "Entry does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        entry.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @permission_classes((IsAuthenticated,))
