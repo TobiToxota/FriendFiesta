@@ -5,16 +5,16 @@ const EntryDetailsComponent = ({ entry, token }) => {
         <div className="columns is-vcentered">
             <div className="column is-6 ml-2">
                 <div className="container mb-2">
-                        <span className="is-size-4">{entry.name}</span>
+                        <span className="is-size-4 has-text-weight-semibold">{entry.name}</span>
                 </div>
                 <div className="container mb-2">
-                        <span className="is-size-4">
-                            {!entry.location ? <>Adress: Not defined</> : entry.location}
+                        <span className="is-size-4 is-size-5-touch">
+                            {!entry.location ? <>Address: Not defined</> : entry.location}
                         </span>
                 </div>
                 <div className="container mb-2">
 
-                        <span className="is-size-4">
+                        <span className="is-size-4  is-size-5-touch">
                             {!entry.locationType ? (
                                 <>Location-Type: Not defined</>
                             ) : (
@@ -24,14 +24,14 @@ const EntryDetailsComponent = ({ entry, token }) => {
                 </div>
                 <div className="container mb-2">
 
-                        <span className="is-size-4">
+                        <span className="is-size-4  is-size-5-touch">
                             From: {makeDateBeautiful(entry.startTime)} to:{' '}
                             {makeDateBeautiful(entry.endTime)}
                         </span>
                 </div>
                 <div className="container">
 
-                        <span className="is-size-4">
+                        <span className="is-size-4  is-size-5-touch">
                             Rating: {!entry.rating ? <>No Google Maps Place</> : entry.rating}
                         </span>
                 </div>
