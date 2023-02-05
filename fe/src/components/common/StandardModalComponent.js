@@ -14,8 +14,24 @@ const StandardModalComponent = ({ showModal, setShowModal, children }) => {
                 <div className="modal-background" onClick={() => setShowModal(false)} />
                 <div className="modal-content px-2">
                     <div className="pl-0 box">
-                    <i className="fa-solid fa-xmark fa-xl is-clickable is-pulled-right has-text-danger-dark" onClick={() => setShowModal(false)} id="x" />
+                        <i
+                            className="fa-solid fa-xmark fa-xl is-clickable is-pulled-right is-size-3 is-size-4-touch"
+                            onClick={() => setShowModal(false)}
+                            id="x"
+                            style={{color: 'red'}}
+                        />
                         {children}
+                        <div className="has-text-centered">
+                            <button
+                                className="button is-rounded is-danger"
+                                onClick={() => setShowModal(false)}
+                            >
+                                <span className="icon is-small">
+                                    <i className="fa-solid fa-door-open"></i>
+                                </span>
+                                <span className="is-size-6 is-size-7-touch">Close</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <button

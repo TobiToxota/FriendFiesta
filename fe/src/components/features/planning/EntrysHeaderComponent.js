@@ -17,17 +17,19 @@ const EntrysHeaderComponent = ({ nightOut, suggestionData }) => {
                         >
                             #
                         </div>
-                        <div className="column label is-size-5 mb-0 is-6">Location</div>
+                        <div className="column label is-size-5 mb-0 is-5">Location</div>
                         <div className="column label is-size-5 mb-0 is-1">Start</div>
                         <div className="column label is-size-5 mb-0 is-1">End</div>
+                        <div className="column label is-size-5 mb-0 is-1">Edit</div>
                         <div className="column label is-size-5 mb-0 is-1">Delete</div>
                     </div>
                     <div className="container is-hidden-desktop" style={{ height: '20px' }}></div>
                 </>
             ) : (
                 <label className="label mb-1 is-size-6 is-size-7-mobile has-text-centered mt-4">
-                😔 You have added no entrys to your suggestion for {nightOut.title}:
-            </label>
+                    You have added no entrys to your suggestion for {nightOut.title}.<br /> Go
+                    create some 🚀
+                </label>
             )}
         </>
     )

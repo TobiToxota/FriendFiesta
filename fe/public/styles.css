@@ -44,6 +44,8 @@ body,
   }
 }
 
+
+
 /* Fade In Animation */
 @keyframes fadeIn {
   0% {
@@ -90,6 +92,12 @@ body,
   animation: spin 0.5s linear infinite;
 }
 
+/* better responsiveness on entry component mobile */
+@media screen and (max-width: 900px) {
+#entry-component {
+    padding: 2px !important;
+  }
+}
 /* style for the WelcomeComponent */
 #main-container {
   border-radius: 100px;
