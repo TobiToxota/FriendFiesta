@@ -46,6 +46,11 @@ const EntryDetailsComponent = ({ entry, token }) => {
             </div>
             <div className="column has-text-centered">
                 {entry.photoKey ? (
+                    <a
+                    href={'https:/www.google.de/maps/search/' + entry.name}
+                    target="_blank"
+                    rel="noreferrer"
+                >
                     <figure className="image mx-auto">
                         <img
                             className="mx-auto mb-2"
@@ -58,6 +63,7 @@ const EntryDetailsComponent = ({ entry, token }) => {
                             list.
                         </span>
                     </figure>
+                    </a>
                 ) : (
                     <span className="my-auto has-text-primary-dark">
                         This place is an individual place. You can add some data with the edit
