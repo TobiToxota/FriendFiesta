@@ -227,7 +227,7 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
 }
 
 /** this custom hook fetches the backend to delete an entry from a suggestion */
-const useDeleteEntryFromSuggestion = (loadSuggestion, token, uuid, suggestion) => {
+const useDeleteEntryFromSuggestion = (loadSuggestion, token) => {
     const deleteEntryFromSuggestion = async (id) => {
         let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/entrys/', {
             method: 'DELETE',
@@ -236,7 +236,7 @@ const useDeleteEntryFromSuggestion = (loadSuggestion, token, uuid, suggestion) =
                 Authorization: `token ${token}`,
             },
             body: JSON.stringify({
-                planEntry: id,
+                id: id,
             }),
         })
         if (response.status === 204) {
