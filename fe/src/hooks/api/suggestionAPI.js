@@ -261,4 +261,5 @@ export {
     usePutSuggestion,
     useDeleteSuggestion,
     useAddEntryToSuggestion,
+    useDeleteEntryFromSuggestion
 }
