@@ -486,13 +486,16 @@ class GetUserParticpantInfos(APIView):
         # get the state of the declaration for a finished date phase
         finishedDatePhase = participant.finishedDatePhase
 
+        # get the state of the declaration for a finished planning phase
+        finishedPlanningPhase = participant.finishedPlanningPhase
+
         if participant == None:
             return Response({'Message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
         if vote == None:
-            return Response({'participant_id': participant.id, 'votedForSuggestion_id': "no vote placed", 'finishedDatePhase': finishedDatePhase}, status=status.HTTP_200_OK)
+            return Response({'participant_id': participant.id, 'votedForSuggestion_id': "no vote placed", 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase}, status=status.HTTP_200_OK)
 
-        return Response({'participant_id': participant.id, 'votedForSuggestion_id': vote.planSuggestion.id, 'finishedDatePhase': finishedDatePhase}, status=status.HTTP_200_OK)
+        return Response({'participant_id': participant.id, 'votedForSuggestion_id': vote.planSuggestion.id, 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase}, status=status.HTTP_200_OK)
 
 
 @permission_classes((IsAuthenticated,))

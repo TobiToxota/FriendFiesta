@@ -9,6 +9,7 @@ import CreateSuggestionButtonComponent from './CreateSuggestionButtonComponent'
 import PlanningInfoComponent from './PlanningInfoComponent'
 import EditSuggestionFormComponent from './EditSuggestionFormComponent'
 import NumberOfSuggestionsComponent from './NumberOfSuggestionsComponent'
+import FinishedPlanningButtonComponent from './FinishedPlanningButtonComponent'
 
 const NightOutPlanningParentComponent = ({
     nightOut,
@@ -55,6 +56,7 @@ const NightOutPlanningParentComponent = ({
                             loadSuggestion={loadSuggestion}
                         />
                     )}
+                    <FinishedPlanningButtonComponent nightOut={nightOut} token={token} />
                 </div>
             </div>
             {suggestionData && (

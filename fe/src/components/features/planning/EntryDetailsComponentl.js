@@ -40,7 +40,7 @@ const EntryDetailsComponent = ({ entry, token }) => {
                 </div>
                 <div className="container">
                     <span className="is-size-4  is-size-5-touch">
-                        Rating: {!entry.rating ? <>No Google Maps Place</> : entry.rating}
+                        Rating: {!entry.rating ? <>No Google Maps Place</> : entry.rating} / 5
                     </span>
                 </div>
             </div>
