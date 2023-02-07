@@ -95,7 +95,7 @@ body,
 /* better responsiveness on entry component mobile */
 @media screen and (max-width: 900px) {
 #entry-component {
-    padding: 2px !important;
+    padding: 5px !important;
   }
 }
 /* style for the WelcomeComponent */
