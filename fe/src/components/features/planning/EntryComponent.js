@@ -73,9 +73,15 @@ const EntryComponent = ({ entry, index, token, loadSuggestion }) => {
             <ModalCardComponent
                 showModal={showEditModal}
                 setShowModal={setShowEditModal}
-                children={<EditEntryComponent entry={entry} token={token} />}
+                form={'putEntryForm' + entry.id}
+                children={
+                    <EditEntryComponent
+                        entry={entry}
+                        token={token}
+                        loadSuggestion={loadSuggestion}
+                    />
+                }
                 title={'#' + index + ' ' + entry.name}
-
             ></ModalCardComponent>
             <div className="container" style={{ height: '10px' }}></div>
         </>

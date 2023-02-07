@@ -4,7 +4,15 @@ import { createPortal } from 'react-dom'
 //local imports
 import { useSwipeInFromBottomTwo } from '../../hooks/animations/animations'
 
-const ModalCardComponent = ({ click, showModal, setShowModal, children, title, fetching }) => {
+const ModalCardComponent = ({
+    click,
+    showModal,
+    setShowModal,
+    children,
+    title,
+    fetching,
+    form,
+}) => {
     // animation
     useSwipeInFromBottomTwo(showModal, '#modal')
 
@@ -27,15 +35,25 @@ const ModalCardComponent = ({ click, showModal, setShowModal, children, title, f
                         <section className="modal-card-body">{children}</section>
                         <footer className="modal-card-foot is-justify-content-center is-flex-wrap-wrap">
                             {!fetching ? (
-                                <button
-                                    className="button is-success mb-1 is-rounded"
-                                    onClick={() => {
-                                        click()
-                                        setShowModal(false)
-                                    }}
-                                >
-                                    Save changes
-                                </button>
+                                !form ? (
+                                    <button
+                                        className="button is-success mb-1 is-rounded"
+                                        onClick={() => {
+                                            click()
+                                            setShowModal(false)
+                                        }}
+                                    >
+                                        Save changes
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="button is-success mb-1 is-rounded"
+                                        type="submit"
+                                        form={form}
+                                    >
+                                        Save changes
+                                    </button>
+                                )
                             ) : (
                                 <button className="button is-success mb-1 is-rounded is-loading">
                                     Save changes

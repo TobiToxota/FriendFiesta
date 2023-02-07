@@ -1,9 +1,12 @@
 // local imports
 import { makeDateBeautiful } from '../../../utils/nightOutPlanningUtils'
+import { usePutEntryFromSuggestion } from '../../../hooks/api/suggestionAPI'
 
-const EditEntryComponent = ({ token, entry }) => {
+const EditEntryComponent = ({ token, entry, loadSuggestion}) => {
+    const {putEntry, putEntryFetching} = usePutEntryFromSuggestion(loadSuggestion, token, entry)
+
     return (
-        <form>
+        <form onSubmit={(e) => putEntry(e)} id={'putEntryForm' + entry.id}>
             <div className="field">
                 <label className="label is-size-5 is-size-6-touch mb-1">Location Name:</label>
                 <div className="control">

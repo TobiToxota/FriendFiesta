@@ -256,10 +256,10 @@ const useDeleteEntryFromSuggestion = (loadSuggestion, token) => {
 }
 
 /** This custom hook fetches the backend to make a put request and change an entry on a suggestion */
-const usePutEntryFromSuggestion = (loadSuggestion, token, uuid, suggestion) => {
+const usePutEntryFromSuggestion = (loadSuggestion, token, entry) => {
     const [putEntryFetching, setPutEntryFetching] = useState(false)
 
-    const putEntry = async (e, id) => {
+    const putEntryFromSuggestion = async (e) => {
         e.preventDefault()
         setPutEntryFetching(true)
 
@@ -270,12 +270,14 @@ const usePutEntryFromSuggestion = (loadSuggestion, token, uuid, suggestion) => {
                 Authorization: `token ${token}`,
             },
             body: JSON.stringify({
-                planEntry: id,
+                id: entry.id,
                 startTime: e.target.startTime.value,
                 endTime: e.target.endTime.value,
                 location: e.target.location.value,
                 name: e.target.name.value,
                 locationType: e.target.locationType.value,
+                planSuggestion: entry.planSuggestion,
+                formType: entry.formType
             }),
         })
 
@@ -290,6 +292,10 @@ const usePutEntryFromSuggestion = (loadSuggestion, token, uuid, suggestion) => {
             toast.error('Something went wrong')
             return
         }
+    }
+    return {
+        putEntry: putEntryFromSuggestion,
+        putEntryFetching,
     }
 }
 

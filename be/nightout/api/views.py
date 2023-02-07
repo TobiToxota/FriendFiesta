@@ -406,7 +406,7 @@ class EntrySuggestionView(APIView):
 
     def put(self, request, format=None):
         entry = PlanEntry.objects.get(id=request.data['id'])
-        serializer = PlanEntrySerializer(entry, data=request.data)
+        serializer = EntrySuggestionSerializer(entry, data=request.data)
 
         if serializer.is_valid():
             serializer.save()
