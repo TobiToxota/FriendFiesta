@@ -255,11 +255,50 @@ const useDeleteEntryFromSuggestion = (loadSuggestion, token) => {
     }
 }
 
+/** This custom hook fetches the backend to make a put request and change an entry on a suggestion */
+const usePutEntryFromSuggestion = (loadSuggestion, token, uuid, suggestion) => {
+    const [putEntryFetching, setPutEntryFetching] = useState(false)
+
+    const putEntry = async (e, id) => {
+        e.preventDefault()
+        setPutEntryFetching(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/entrys/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                planEntry: id,
+                startTime: e.target.startTime.value,
+                endTime: e.target.endTime.value,
+                location: e.target.location.value,
+                name: e.target.name.value,
+                locationType: e.target.locationType.value,
+            }),
+        })
+
+        if (response.status === 201) {
+            toast.success('Your entry was successfully modified')
+            setTimeout(() => {
+                setPutEntryFetching(false)
+            }, 300)
+            loadSuggestion()
+            return
+        } else {
+            toast.error('Something went wrong')
+            return
+        }
+    }
+}
+
 export {
     useLoadSuggestion,
     useAddSuggestion,
     usePutSuggestion,
     useDeleteSuggestion,
     useAddEntryToSuggestion,
-    useDeleteEntryFromSuggestion
+    useDeleteEntryFromSuggestion,
+    usePutEntryFromSuggestion
 }

@@ -45,7 +45,7 @@ const EditEntryComponent = ({ token, entry }) => {
                 <label className="label is-size-5 is-size-6-touch mb-1">Address:</label>
                 <div className="control">
                     <input
-                        className="input"
+                        className="input is-size-7-touch"
                         type="text"
                         placeholder="Text input"
                         defaultValue={entry.location}
@@ -57,7 +57,7 @@ const EditEntryComponent = ({ token, entry }) => {
                 <label className="label is-size-5 is-size-6-touch mb-1">Location Type:</label>
                 <div className="control">
                     <input
-                        className="input"
+                        className="input is-size-7-touch"
                         type="text"
                         placeholder="Text input"
                         defaultValue={entry.locationType}
