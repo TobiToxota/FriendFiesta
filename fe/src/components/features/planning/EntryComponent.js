@@ -8,7 +8,7 @@ import { shaking } from '../../../hooks/animations/animations'
 import StandardModalComponent from '../../common/StandardModalComponent'
 import ModalCardComponent from '../../common/ModalCardComponent'
 import EntryDetailsComponent from './EntryDetailsComponentl'
-import EntryEditComponent from './EntryEditComponent'
+import EditEntryComponent from './EditEntryComponent'
 
 const EntryComponent = ({ entry, index, token, loadSuggestion }) => {
     const [showDetailsModal, setShowDetailsModal] = useState(false)
@@ -40,7 +40,14 @@ const EntryComponent = ({ entry, index, token, loadSuggestion }) => {
                     {makeDateBeautiful(entry.endTime)}
                 </div>
                 <div className="column is-1 pb-3 is-size-6" id="entry-component">
-                    <span className="icon has-text-info is-clickable">
+                    <span
+                        className="icon has-text-info is-clickable"
+                        onClick={(event) => {
+                            event.stopPropagation()
+                            shaking('#trash')
+                            setShowEditModal(true)
+                        }}
+                    >
                         <i className="fa-solid fa-pen has-text-link-dark"></i>
                     </span>
                 </div>
@@ -66,7 +73,9 @@ const EntryComponent = ({ entry, index, token, loadSuggestion }) => {
             <ModalCardComponent
                 showModal={showEditModal}
                 setShowModal={setShowEditModal}
-                children={<EntryEditComponent />}
+                children={<EditEntryComponent entry={entry} token={token} />}
+                title={'#' + index + ' ' + entry.name}
+
             ></ModalCardComponent>
             <div className="container" style={{ height: '10px' }}></div>
         </>

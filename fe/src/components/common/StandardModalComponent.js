@@ -15,7 +15,7 @@ const StandardModalComponent = ({ showModal, setShowModal, children }) => {
                 <div className="modal-content px-2">
                     <div className="pl-0 box">
                         <i
-                            className="fa-solid fa-xmark fa-xl is-clickable is-pulled-right is-size-3 is-size-4-touch"
+                            className="fa-solid fa-xmark fa-xl is-clickable is-pulled-right is-size-4 is-size-5-touch"
                             onClick={() => setShowModal(false)}
                             id="x"
                             style={{color: 'red'}}
