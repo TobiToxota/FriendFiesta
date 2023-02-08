@@ -42,7 +42,19 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
             <div className="container is-inline-flex" style={{ transform: 'translateY(-8px)' }}>
                 {nightOut.phase !== 'datePhase' && (
                     <div className="columns is-centered is-flex-wrap-wrap has-text-centered is-hidden-mobile">
+                        <div className="column has-text-centered mr-1 p-1 is-flex is-unselectable">
+                        <div className="container">
+                                    <img
+                                        src={`https://avatars.dicebear.com/api/${nightOut.creator.avatarStyle}/${nightOut.creator.username}+${nightOut.creator.avatarIteration}.svg`}
+                                        alt=""
+                                        width={30}
+                                    />
+                                    <p className="label is-size-7" style={{whiteSpace: 'nowrap'}}>{'👑' + nightOut.creator.username}</p>
+                                </div>
+
+                            </div>
                         {nightOut.participants.map((participant, index) => (
+                            nightOut.creator.id !== participant.user.id && 
                             <div className="column has-text-centered mr-1 p-1 is-flex is-unselectable" key={index}>
                                 <div className="container">
                                     <img
