@@ -11,7 +11,7 @@ const PutNightOutToNextPhaseComponent = ({ nightOut, refreshNightOut, token }) =
     const ModalContent = (
         <div className=" content has-text-centered mb-2">
             <h3>Bring Nightout to next phase</h3>
-            <h4 className='mb-2'>Are you really sure that you want to bring this Nightout to the next phase?</h4>
+            <h4 className='mb-2'>Are you really sure that you want to bring this Nightout to the voting phase?</h4>
             <h5 className='mb-2'>
                 {nightOut.planSuggestions.length} of {nightOut.participants.length} participants
                 have created a suggestion so far.

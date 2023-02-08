@@ -10,7 +10,7 @@ const NumberOfSuggestionsComponent = ({ nightOut }) => {
             </p>
             <p className="label is-size-6 is-size-6-mobile mt-0 mb-0">
                 {countPeopleFinished(nightOut)} of {nightOut.participants.length} particpants have
-                declared that they are done with this phase.
+                declared that they are done with the planning phase.
             </p>
 
             <p className="is-size-6">

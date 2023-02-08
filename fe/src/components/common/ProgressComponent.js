@@ -22,7 +22,7 @@ const ProgressComponent = ({percentage}) => {
             className="progress-container is-align-items-center has-text-centered"
             style={{ margin: "0px", padding: "0px" }}>
             <progress
-                className="progress is-info"
+                className="progress is-link"
                 max="100"
                 value={percentage}
                 style={{ marginBottom: "4px" }}></progress>
