@@ -48,7 +48,7 @@ const useLoadSuggestion = (token, uuid) => {
 }
 
 /** this custom hook fetches the backend to add a suggestion*/
-const useAddSuggestion = (refreshSuggestion, token, uuid) => {
+const useAddSuggestion = (refreshSuggestion, token, uuid, refreshNightOut) => {
     const [addSuggestionData, setAddSuggestioanData] = useState(null)
     const [addSuggestionError, setAddSuggestionError] = useState(null)
     const [addSuggestionFetching, SetAddSuggestionFetching] = useState(false)
@@ -78,6 +78,7 @@ const useAddSuggestion = (refreshSuggestion, token, uuid) => {
             setTimeout(() => {
                 setAddSuggestionSuccess(null)
                 refreshSuggestion(uuid)
+                refreshNightOut(uuid)
             }, 1500)
         } else {
             setAddSuggestioanData(thisData)
@@ -144,7 +145,7 @@ const usePutSuggestion = (loadSuggestion, token, uuid, suggestion) => {
 }
 
 /** this custom hook fetches the backend to delete a suggestion */
-const useDeleteSuggestion = (loadSuggestion, token, suggestion) => {
+const useDeleteSuggestion = (loadSuggestion, token, suggestion, refreshNightOut, uuid) => {
     const [deleteSuggestionFeteching, setDeleteSuggestionFetching] = useState(false)
 
     const deleteSuggestion = async () => {
@@ -164,6 +165,7 @@ const useDeleteSuggestion = (loadSuggestion, token, suggestion) => {
             toast.success('Your Suggestion was successfully deleted 🗑️')
             setDeleteSuggestionFetching(false)
             loadSuggestion()
+            refreshNightOut(uuid)
         } else {
             toast.error('Something went wrong')
         }

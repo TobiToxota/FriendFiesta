@@ -6,7 +6,7 @@ import EntrysHeaderComponent from './EntrysHeaderComponent'
 import AddEntryComponent from './AddEntryComponent'
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 
-const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggestionData }) => {
+const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggestionData, refreshNightOut }) => {
     // animation
     useSwipeInFromBottom(EditSuggestionFormComponent, '#create-suggestion-container')
 
@@ -25,6 +25,9 @@ const EditSuggestionFormComponent = ({ loadSuggestion, token, nightOut, suggesti
                         suggestion={suggestionData}
                         token={token}
                         loadSuggestion={loadSuggestion}
+                        nightOut={nightOut}
+                        refreshNightOut={refreshNightOut}
+                        uuid={nightOut.uuid}
                     />
                     <h2 className="label is-size-4 is-size-5-touch has-text-centered mb-2">
                         Edit your Suggestion for {nightOut.title}

@@ -2,9 +2,16 @@
 import { useDeleteSuggestion } from '../../../hooks/api/suggestionAPI'
 import { shaking } from '../../../hooks/animations/animations'
 
-const DeleteSuggestionComponent = ({ loadSuggestion, suggestion, token }) => {
+const DeleteSuggestionComponent = ({ loadSuggestion, suggestion, token, refreshNightOut, uuid }) => {
     // get the useDeleteSuggestionHook
-    const { deleteSuggestion } = useDeleteSuggestion(loadSuggestion,token, suggestion)
+    const { deleteSuggestion } = useDeleteSuggestion(
+        loadSuggestion,
+        token,
+        suggestion,
+        refreshNightOut,
+        uuid
+    )
+    // get the useGetParticipantInfosHook
     return (
         <div style={{ transform: 'translateX(19px)' }}>
             <span

@@ -1,4 +1,4 @@
-import { usePutParticipantState, useGetParticipantInfos } from '../../../hooks/api/participantAPI'
+import { usePutParticipantStateDate, useGetParticipantInfos } from '../../../hooks/api/participantAPI'
 
 const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
     const { getParticipantInfos, participantInfos, participantLoading } = useGetParticipantInfos(
@@ -6,7 +6,7 @@ const CommitDateButtonComponent = ({ token, nightOut, refreshNightOut }) => {
         nightOut
     )
 
-    const { putParticipantState, loading } = usePutParticipantState(
+    const { putParticipantState, loading } = usePutParticipantStateDate(
         token,
         nightOut,
         refreshNightOut,

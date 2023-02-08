@@ -230,13 +230,50 @@ const useAddParticipantDateToNightOut = (token, uuid, refreshNightOut) => {
 }
 
 /** this custom hook fetches the backend to switch the finishedDatePhaseState of a participant */
-const usePutParticipantState = (token, nightOut, refreshNightOut, refreshParticipantInfos) => {
+const usePutParticipantStateDate = (token, nightOut, refreshNightOut, refreshParticipantInfos) => {
     const [loading, setLoading] = useState(false)
 
     const putParticipantState = async () => {
         setLoading(true)
 
-        let response = await fetch(process.env.REACT_APP_API_URL + 'participantcommit', {
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participantcommitdate', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightout_uuid: nightOut.uuid,
+            }),
+        })
+
+        if (response.status === 201) {
+            toast.success('Successfully changed!', {
+                autoClose: 2000,
+            })
+            setLoading(false)
+            refreshNightOut(nightOut.uuid)
+            refreshParticipantInfos(nightOut.uuid)
+        } else if (response.status === 400 || response.status === 409) {
+            toast.error('Something went wrong')
+        } else {
+            toast.error('Something went wrong')
+        }
+    }
+    return {
+        putParticipantState,
+        loading,
+    }
+}
+
+/** this custom hook fetches the backend to switch the finishedDatePhaseState of a participant */
+const usePutParticipantStatePlanning = (token, nightOut, refreshNightOut, refreshParticipantInfos) => {
+    const [loading, setLoading] = useState(false)
+
+    const putParticipantState = async () => {
+        setLoading(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participantcommitplanning', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -291,7 +328,7 @@ const useGetParticipantInfos = (token, nightOut) => {
     useEffect(() => {
         getParticipantInfos(nightOut.uuid)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token])
+    }, [token, nightOut])
 
     return { getParticipantInfos, participantInfos, participantLoading }
 }
@@ -301,6 +338,7 @@ export {
     useAddDateSuggestionToNightOut,
     useAddParticipantDateToNightOut,
     useDeleteParticipantFromNightOut,
-    usePutParticipantState,
+    usePutParticipantStateDate,
     useGetParticipantInfos,
+    usePutParticipantStatePlanning,
 }

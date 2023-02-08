@@ -160,7 +160,7 @@ class AddParticipant(APIView):
 
 
 @permission_classes((IsAuthenticated,))
-class PutParticipant(APIView):
+class PutParticipantDatePhase(APIView):
     """sumary_line: Change a commit on a participant"""
 
     def put(self, request, format=None):
@@ -184,6 +184,34 @@ class PutParticipant(APIView):
 
         else:
             participant.finishedDatePhase = True
+            participant.save()
+            return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
+        
+@permission_classes((IsAuthenticated,))
+class PutParticipantPlanningPhase(APIView):
+    """sumary_line: Change a commit on a participant"""
+
+    def put(self, request, format=None):
+
+        try:
+            nightOut = NightOutModel.objects.get(
+                uuid=request.data['nightout_uuid'])
+        except ObjectDoesNotExist:
+            return Response({"message": "NightOut doesnt exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            participant = Participant.objects.filter(
+                nightOut=nightOut).filter(user=request.user).first()
+        except ObjectDoesNotExist:
+            return Response({"message": "Participant does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        if participant.finishedPlanningPhase == True:
+            participant.finishedPlanningPhase = False
+            participant.save()
+            return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
+
+        else:
+            participant.finishedPlanningPhase = True
             participant.save()
             return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
 
@@ -489,13 +517,16 @@ class GetUserParticpantInfos(APIView):
         # get the state of the declaration for a finished planning phase
         finishedPlanningPhase = participant.finishedPlanningPhase
 
+        # get the state if the user created a planSuggestion
+        createdSuggestion = nightOutObject.planSuggestions.filter(creator=participant).exists()
+
         if participant == None:
             return Response({'Message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
         if vote == None:
-            return Response({'participant_id': participant.id, 'votedForSuggestion_id': "no vote placed", 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase}, status=status.HTTP_200_OK)
+            return Response({'participant_id': participant.id, 'votedForSuggestion_id': "no vote placed", 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase, 'hasCreatedSuggestion': createdSuggestion}, status=status.HTTP_200_OK)
 
-        return Response({'participant_id': participant.id, 'votedForSuggestion_id': vote.planSuggestion.id, 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase}, status=status.HTTP_200_OK)
+        return Response({'participant_id': participant.id, 'votedForSuggestion_id': vote.planSuggestion.id, 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase, 'hasCreatedSuggestion': createdSuggestion}, status=status.HTTP_200_OK)
 
 
 @permission_classes((IsAuthenticated,))
