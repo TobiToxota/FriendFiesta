@@ -17,4 +17,15 @@ const makeDateBeautiful = (date) => {
     return newDate
 }
 
-export { splitLocationType, makeDateBeautiful }
+/** This Function takes a Nightout and returns how many people have declared that they are finished */
+const countPeopleFinished = (nightOut) => {
+    let finished = 0
+    nightOut.participants.forEach((participant) => {
+        if (participant.finishedPlanningPhase) {
+            finished += 1
+        }
+    })
+    return finished
+}
+
+export { splitLocationType, makeDateBeautiful, countPeopleFinished }

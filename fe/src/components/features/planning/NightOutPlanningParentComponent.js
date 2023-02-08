@@ -48,6 +48,7 @@ const NightOutPlanningParentComponent = ({
                         finalDate={nightOut.finalDate}
                         children={<NumberOfSuggestionsComponent nightOut={nightOut}/>}
                     />
+                     <FinishedPlanningButtonComponent nightOut={nightOut} token={token} />
                     <PlanningInfoComponent />
                     {!suggestionData && (
                         <CreateSuggestionButtonComponent
@@ -56,7 +57,7 @@ const NightOutPlanningParentComponent = ({
                             loadSuggestion={loadSuggestion}
                         />
                     )}
-                    <FinishedPlanningButtonComponent nightOut={nightOut} token={token} />
+                   
                 </div>
             </div>
             {suggestionData && (

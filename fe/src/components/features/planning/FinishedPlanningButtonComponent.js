@@ -1,10 +1,12 @@
 import { useGetParticipantInfos } from '../../../hooks/api/participantAPI'
 
 const FinishedPlanningButtonComponent = ({ token, nightOut }) => {
-    const { getParticipantInfos, participantInfos, participantLoading } = useGetParticipantInfos(
+    const { participantInfos, participantLoading } = useGetParticipantInfos(
         token,
         nightOut
     )
+
+    console.log(participantInfos)
 
     return !participantLoading ? (
         <div className="container has-text-centered mt-2 mb-2">
