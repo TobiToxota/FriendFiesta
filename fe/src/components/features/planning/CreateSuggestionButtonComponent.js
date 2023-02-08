@@ -16,7 +16,7 @@ const CreateSuggestionButtonComponent = ({ nightOut, token, loadSuggestion, refr
     return (
         <>
         <p className="mt-1 label has-text-centered is-size-5 mb-1 is-size-6-touch">
-            You did not create a suggestion - if you want to create one 🚀!
+            You did not create a suggestion - if you want to, go and create one 🚀!
         </p>
             <div className="has-text-centered">
                 {!addSuggestionFetching ? (

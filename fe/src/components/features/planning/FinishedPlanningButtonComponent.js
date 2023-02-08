@@ -1,6 +1,7 @@
 // local imports
 import { usePutParticipantStatePlanning } from '../../../hooks/api/participantAPI'
 import SendReminderComponent from '../universal/SendReminderComponent'
+import PutNightOutToNextPhaseComponent from '../universal/PutNightOutToNextPhaseComponent'
 
 const FinishedPlanningButtonComponent = ({
     token,
@@ -58,18 +59,18 @@ const FinishedPlanningButtonComponent = ({
                 )
             ) : (
                 <button
-                    className="button is-danger is-rounded mt-2 fade-in is-size-7-touch mr-1"
+                    className="button is-warning is-rounded mt-2 fade-in is-size-7-touch mr-1"
                     onClick={() => putParticipantState()}
                 >
                     <span className="icon">
-                        <i className="fa-regular fa-circle-xmark"></i>
+                        <i className="fa-regular fa-pen-to-square"></i>
                     </span>
                     <span className="">I need to change something - I'm not finished</span>
                 </button>
             )}
             {participantInfos.finishedPlanningPhase ?
              nightOut.creator.id === userData.id ? (
-                <></>
+                <PutNightOutToNextPhaseComponent nightOut={nightOut} />
             ) : (
                 <SendReminderComponent nightOut={nightOut} token={token} />
             ) : (
