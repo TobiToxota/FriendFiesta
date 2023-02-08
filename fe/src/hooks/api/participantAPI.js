@@ -267,7 +267,7 @@ const usePutParticipantStateDate = (token, nightOut, refreshNightOut, refreshPar
 }
 
 /** this custom hook fetches the backend to switch the finishedDatePhaseState of a participant */
-const usePutParticipantStatePlanning = (token, nightOut, refreshNightOut, refreshParticipantInfos) => {
+const usePutParticipantStatePlanning = (token, nightOut, refreshNightOut) => {
     const [loading, setLoading] = useState(false)
 
     const putParticipantState = async () => {
@@ -290,7 +290,6 @@ const usePutParticipantStatePlanning = (token, nightOut, refreshNightOut, refres
             })
             setLoading(false)
             refreshNightOut(nightOut.uuid)
-            refreshParticipantInfos(nightOut.uuid)
         } else if (response.status === 400 || response.status === 409) {
             toast.error('Something went wrong')
         } else {
