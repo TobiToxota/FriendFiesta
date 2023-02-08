@@ -1,5 +1,6 @@
 // local imports
 import { usePutParticipantStatePlanning } from '../../../hooks/api/participantAPI'
+import SendReminderComponent from '../universal/SendReminderComponent'
 
 const FinishedPlanningButtonComponent = ({
     token,
@@ -7,12 +8,13 @@ const FinishedPlanningButtonComponent = ({
     participantInfos,
     refreshNightOut,
     participantLoading,
+    userData,
 }) => {
     // get the useputparticipantstateplanning hook
     const { putParticipantState, loading } = usePutParticipantStatePlanning(
         token,
         nightOut,
-        refreshNightOut,
+        refreshNightOut
     )
 
     return !participantLoading ? (
@@ -32,20 +34,22 @@ const FinishedPlanningButtonComponent = ({
                         </>
                     )
                 ) : (
-                    <>Tell the other ones, that you are not finished</>
+                    <>You declared that you are finished 😊</>
                 )}
             </p>
             {!participantInfos.finishedPlanningPhase ? (
                 !loading ? (
-                    <button className="button is-success is-rounded mt-2 fade-in is-size-7-mobile"
-                    onClick={() => putParticipantState()}>
+                    <button
+                        className="button is-success is-rounded mt-2 fade-in is-size-7-touch mr-1"
+                        onClick={() => putParticipantState()}
+                    >
                         <span className="icon">
                             <i className="fa-regular fa-circle-check"></i>
                         </span>
                         <span className="">I'm finished</span>
                     </button>
                 ) : (
-                    <button className="button is-success is-rounded mt-2 fade-in is-size-7-mobile is-loading">
+                    <button className="button is-success is-rounded mt-2 fade-in is-size-7-touch is-loading mr-1">
                         <span className="icon">
                             <i className="fa-regular fa-circle-check"></i>
                         </span>
@@ -53,13 +57,23 @@ const FinishedPlanningButtonComponent = ({
                     </button>
                 )
             ) : (
-                <button className="button is-danger is-rounded mt-2 fade-in is-size-7-mobile"
-                onClick={() => putParticipantState()}>
+                <button
+                    className="button is-danger is-rounded mt-2 fade-in is-size-7-touch mr-1"
+                    onClick={() => putParticipantState()}
+                >
                     <span className="icon">
                         <i className="fa-regular fa-circle-xmark"></i>
                     </span>
-                    <span className="">I'm not finished</span>
+                    <span className="">I need to change something - I'm not finished</span>
                 </button>
+            )}
+            {participantInfos.finishedPlanningPhase ?
+             nightOut.creator.id === userData.id ? (
+                <></>
+            ) : (
+                <SendReminderComponent nightOut={nightOut} token={token} />
+            ) : (
+                null
             )}
         </div>
     ) : null

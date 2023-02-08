@@ -48,6 +48,7 @@ const NightOutPlanningParentComponent = ({ nightOut, refreshNightOut, userData, 
                         participantInfos={participantInfos}
                         participantLoading={participantLoading}
                         refreshNightOut={refreshNightOut}
+                        userData={userData}
                     />
                     {!suggestionData && (
                         <CreateSuggestionButtonComponent

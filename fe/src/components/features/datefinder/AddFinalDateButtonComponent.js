@@ -2,7 +2,7 @@
 import React from 'react'
 
 // local imports
-import { usePostNotification } from '../../../hooks/api/notifiactionAPI'
+import SendReminderComponent from '../universal/SendReminderComponent'
 import { useAddFinalDate } from '../../../hooks/api/nightOutAPI'
 import { getAllFinishedDatePhaseParticipantsCounts } from '../../../utils/nightOutDateFinderUtils'
 
@@ -13,8 +13,6 @@ const AddFinalDateButtonComponent = ({
     userData,
     setAddFinalDateLoading,
 }) => {
-    // get the hooks for addFinalDate and postNotification
-    const { postNotification, fetching } = usePostNotification(token, nightOut.uuid)
     const { addFinalDate, finalDateFetching } = useAddFinalDate(
         token,
         nightOut,
@@ -36,26 +34,7 @@ const AddFinalDateButtonComponent = ({
                         the planning phase.<br></br>
                         But you can remind the creator:
                     </p>
-                    {!fetching ? (
-                        <button
-                            className="button is-link is-rounded mt-2"
-                            onClick={() => postNotification('ask_next_phase')}
-                        >
-                            <span className="icon is-small">
-                                <i className="fa-solid fa-bell"></i>
-                            </span>
-                            <span className="is-size-7">Send a reminder</span>
-                        </button>
-                    ) : (
-                        <>
-                            <button className="button is-link is-rounded mt-2 is-loading">
-                                <span className="icon is-small">
-                                    <i className="fa-solid fa-bell"></i>
-                                </span>
-                                <span className="is-size-7">Send a reminder</span>
-                            </button>
-                        </>
-                    )}
+                    <SendReminderComponent token={token} nightOut={nightOut}/>
                 </div>
             ) : (
                 <div className="has-text-centered mt-4">

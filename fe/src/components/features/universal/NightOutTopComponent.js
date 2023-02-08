@@ -50,7 +50,7 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                                         alt=""
                                         width={30}
                                     />
-                                    <p className="label is-size-7">{participant.user.username}</p>
+                                    <p className="label is-size-7" style={{whiteSpace: 'nowrap'}}>{participant.user.id === nightOut.creator.id && ('👑 ')}{participant.user.username}</p>
                                 </div>
                             </div>
                         ))}
