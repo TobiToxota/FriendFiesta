@@ -146,11 +146,13 @@ const usePutNextStage = (token, nightOut, refreshNightOut) => {
                 body: JSON.stringify({
                     phase: nextStage,
                     nightOut: nightOut.uuid,
+                    finalDate: nightOut.finalDate,
+                    title: nightOut.title,
                 }),
             }
         )
 
-        if (response.status === 201) {
+        if (response.status === 200) {
             toast.success(
                 'This Nightout was successfully put in the next Phase. Nightout refreshing'
             )

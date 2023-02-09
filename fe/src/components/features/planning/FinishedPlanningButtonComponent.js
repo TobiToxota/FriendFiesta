@@ -70,7 +70,7 @@ const FinishedPlanningButtonComponent = ({
             )}
             {participantInfos.finishedPlanningPhase ?
              nightOut.creator.id === userData.id ? (
-                <PutNightOutToNextPhaseComponent nightOut={nightOut} />
+                <PutNightOutToNextPhaseComponent nightOut={nightOut} token={token} refreshNightOut={refreshNightOut} />
             ) : (
                 <SendReminderComponent nightOut={nightOut} token={token} />
             ) : (
