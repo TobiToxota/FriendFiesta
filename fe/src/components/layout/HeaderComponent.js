@@ -6,11 +6,8 @@ import { Link } from 'react-router-dom'
 
 // local imports
 import AuthContext from '../../context/AuthContext'
-import useScreenSize from '../../hooks/utilHooks/ScreenSize'
-import {
-    useGetNotifications,
-    usePatchNotification,
-} from '../../hooks/api/notifiactionAPI'
+import useScreenSize from '../../hooks/utilHooks/screenSize'
+import { useGetNotifications, usePatchNotification } from '../../hooks/api/notifiactionAPI'
 import notificationsLength from '../../utils/notificationsLength'
 import { shaking } from '../../hooks/animations/animations'
 
@@ -20,8 +17,7 @@ const HeaderComponent = () => {
     let [hamburger, setHamburger] = useState(false)
 
     // get the Notifications
-    const { getNotifications, notifications, loading } =
-        useGetNotifications(token)
+    const { getNotifications, notifications, loading } = useGetNotifications(token)
 
     // get the usePatchNotificationHook
     const { patchNotification } = usePatchNotification(token, getNotifications)
@@ -67,11 +63,7 @@ const HeaderComponent = () => {
                                     </span>
                                 </button>
                             </div>
-                            <div
-                                className="dropdown-menu fade-in"
-                                id="dropdown-menu4"
-                                role="menu"
-                            >
+                            <div className="dropdown-menu fade-in" id="dropdown-menu4" role="menu">
                                 <div className="dropdown-content-header">
                                     {notificationsLength(notifications) ? (
                                         <></>
@@ -90,9 +82,7 @@ const HeaderComponent = () => {
                     aria-label="menu"
                     aria-expanded="false"
                     data-target="navMenu"
-                    onClick={() =>
-                        setHamburger((prevHamburger) => !prevHamburger)
-                    }
+                    onClick={() => setHamburger((prevHamburger) => !prevHamburger)}
                     style={{ color: 'white' }}
                 >
                     <span aria-hidden="true" />
@@ -116,16 +106,12 @@ const HeaderComponent = () => {
                                             >
                                                 <span className="icon">
                                                     <i className="fa-solid fa-bell" />
-                                                    {notificationsLength(
-                                                        notifications
-                                                    ) && (
+                                                    {notificationsLength(notifications) && (
                                                         <span
                                                             title="Badge top right"
                                                             className="badge is-bottom is-size-7 is-danger fade-in"
                                                         >
-                                                            {
-                                                                notifications.length
-                                                            }
+                                                            {notifications.length}
                                                         </span>
                                                     )}
                                                 </span>
@@ -138,20 +124,12 @@ const HeaderComponent = () => {
                                             role="menu"
                                         >
                                             <div className="dropdown-content-header has-text-centered">
-                                                {notificationsLength(
-                                                    notifications
-                                                ) ? (
+                                                {notificationsLength(notifications) ? (
                                                     <div className="has-text-centered">
                                                         {notifications.map(
-                                                            (
-                                                                notification,
-                                                                index
-                                                            ) => (
-                                                                <div
-                                                                    key={index}
-                                                                >
-                                                                    {index !==
-                                                                        0 && (
+                                                            (notification, index) => (
+                                                                <div key={index}>
+                                                                    {index !== 0 && (
                                                                         <hr className="navbar-divider"></hr>
                                                                     )}
                                                                     {notification.sender !==
@@ -220,14 +198,12 @@ const HeaderComponent = () => {
                                                                             to={
                                                                                 '/nightout/' +
                                                                                 notification
-                                                                                    .nightout
-                                                                                    .uuid
+                                                                                    .nightout.uuid
                                                                             }
                                                                         >
                                                                             {
                                                                                 notification
-                                                                                    .nightout
-                                                                                    .title
+                                                                                    .nightout.title
                                                                             }{' '}
                                                                             {
                                                                                 notification.notificationMessage
@@ -244,8 +220,7 @@ const HeaderComponent = () => {
                                                             <i className="fa-regular fa-face-smile-beam" />
                                                         </span>
                                                         <p className="ml-1 is-unselectable">
-                                                            You have 0
-                                                            notifications
+                                                            You have 0 notifications
                                                         </p>
                                                     </div>
                                                 )}
@@ -256,10 +231,7 @@ const HeaderComponent = () => {
                             )}
                             <div className="navbar-item p-1">
                                 <Link to="/user">
-                                    <button
-                                        className="button is-light is-rounded"
-                                        id="avatar"
-                                    >
+                                    <button className="button is-light is-rounded" id="avatar">
                                         <span className="icon">
                                             <img
                                                 src={`https://avatars.dicebear.com/api/${userData.avatarStyle}/${userData.username}+${userData.avatarIteration}.svg`}
@@ -304,18 +276,12 @@ const HeaderComponent = () => {
                     >
                         <div className="navbar-end">
                             <Link to={'/nightoutlist'}>
-                                <p
-                                    className="navbar-item has-text-right"
-                                    id="navbarItem"
-                                >
+                                <p className="navbar-item has-text-right" id="navbarItem">
                                     Your Nightouts
                                 </p>
                             </Link>
                             <Link to={'/user'}>
-                                <p
-                                    className="navbar-item has-text-right"
-                                    id="navbarItem"
-                                >
+                                <p className="navbar-item has-text-right" id="navbarItem">
                                     Edit your profile
                                 </p>
                             </Link>

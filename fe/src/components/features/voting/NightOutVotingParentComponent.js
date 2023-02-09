@@ -19,7 +19,7 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                     <VotingInfoComponent/>
                 </div>
             </div>
-            <ShowSuggestionsComponent/>
+            <ShowSuggestionsComponent nightOut={nightOut}/>
         </>
     )
 }
