@@ -125,6 +125,16 @@ body,
   margin-bottom: 20px;
 }
 
+/* style for the createsuggestioncomponent */
+#show-suggestion-container {
+  border-radius: 100px;
+  margin-top: 2px !important;
+  max-width: 1200px !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+}
+
 /* Modal Card */
 @media screen and (min-width: 1000px) {
   .modal-content {
