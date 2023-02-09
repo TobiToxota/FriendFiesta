@@ -23,33 +23,27 @@ const useCreateNightOut = (token) => {
 
         // Error Handling
         if (e.target.title.value.length > 39) {
-            toast.error(
-                'Ensure that your title has not more than 40 characters',
-                { autoClose: 6500 }
-            )
+            toast.error('Ensure that your title has not more than 40 characters', {
+                autoClose: 6500,
+            })
             return { data, success, error }
         }
 
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'nightoutlist/',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-                body: JSON.stringify({
-                    title: e.target.title.value,
-                }),
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'nightoutlist/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                title: e.target.title.value,
+            }),
+        })
         let thisData = await response.json()
 
         // check the response
         if (response.status === 201) {
-            toast.info(
-                '🚀 Your nightout is beeing created. You will get redirected '
-            )
+            toast.info('🚀 Your nightout is beeing created. You will get redirected ')
             setData(thisData)
             // send user to the new nightout
             setTimeout(function () {
@@ -71,16 +65,13 @@ const useGetNightOut = (token, uuid) => {
     const [loading, setLoading] = useState(true)
 
     async function refreshNightOut(uuid) {
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'nightout/' + uuid,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'nightout/' + uuid, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+        })
         let thisData = await response.json()
 
         if (response.status === 200) {
@@ -110,16 +101,13 @@ const useGetNightOutList = (token) => {
     const [loading, setLoading] = useState(true)
 
     const getNightOutList = async () => {
-        let response = await fetch(
-            process.env.REACT_APP_API_URL + 'nightoutlist/',
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`,
-                },
-            }
-        )
+        let response = await fetch(process.env.REACT_APP_API_URL + 'nightoutlist/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+        })
         let thisData = await response.json()
 
         if (response.status === 200) {
@@ -140,13 +128,49 @@ const useGetNightOutList = (token) => {
     return { getNightOutList, nightOutList, error, success, loading }
 }
 
+/** This custom hook fetches the backend to bring the nightout to the next phase */
+const usePutNextStage = (token, nightOut, refreshNightOut) => {
+    const [putNextStageFetching, setPutNextStageFetching] = useState(false)
+
+    const putNextStage = async (nextStage) => {
+        setPutNextStageFetching(true)
+
+        let response = await fetch(
+            process.env.REACT_APP_API_URL + 'nightout/' + nightOut.uuid + '/',
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    phase: nextStage,
+                    nightOut: nightOut.uuid,
+                }),
+            }
+        )
+
+        if (response.status === 201) {
+            toast.success(
+                'This Nightout was successfully put in the next Phase. Nightout refreshing'
+            )
+            setPutNextStageFetching(false)
+            refreshNightOut(nightOut.uuid)
+        } else {
+            toast.error('Something went wrong')
+            setPutNextStageFetching(false)
+            refreshNightOut(nightOut.uuid)
+        }
+    }
+
+    return {
+        putNextStage,
+        putNextStageFetching,
+    }
+}
+
 /** This custom hook fetches the backend to set a finaldate to a nightout and bring it to the next phase */
-const useAddFinalDate = (
-    token,
-    nightout,
-    refreshNightOut,
-    setAddFinalDateLoading
-) => {
+const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoading) => {
     const [finalDateError, setFinalDateError] = useState(null)
     const [finalDateSuccess, setFinalDateSuccess] = useState(null)
     const [finalDateFetching, setFinalDateFetching] = useState(false)
@@ -157,12 +181,11 @@ const useAddFinalDate = (
         setAddFinalDateLoading(true)
 
         // Error handling
-        if (
-            e.target.dateselecter.value === null ||
-            e.target.dateselecter.value === ''
-        ) {
+        if (e.target.dateselecter.value === null || e.target.dateselecter.value === '') {
             toast.error(
-                'You have to select a date or at least have one date suggested in this Nightout.', {autoClose: 3000})
+                'You have to select a date or at least have one date suggested in this Nightout.',
+                { autoClose: 3000 }
+            )
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateError(null)
@@ -192,7 +215,10 @@ const useAddFinalDate = (
             setFinalDateSuccess(
                 'This Nightout was successfully put in the next Phase. Nightout refreshing'
             )
-            toast.success('This Nightout was successfully put in the next Phase. Nightout refreshing', {autoClose: 3000})
+            toast.success(
+                'This Nightout was successfully put in the next Phase. Nightout refreshing',
+                { autoClose: 3000 }
+            )
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateSuccess(null)
@@ -201,7 +227,9 @@ const useAddFinalDate = (
             }, 3000)
         } else {
             toast.error(
-                'You have to select a date or at least have one date suggested in this Nightout.', {autoClose: 3000})
+                'You have to select a date or at least have one date suggested in this Nightout.',
+                { autoClose: 3000 }
+            )
             setTimeout(() => {
                 setFinalDateFetching(false)
                 setFinalDateError(null)
@@ -221,9 +249,4 @@ const useAddFinalDate = (
     }
 }
 
-export {
-    useCreateNightOut,
-    useGetNightOut,
-    useGetNightOutList,
-    useAddFinalDate,
-}
+export { useCreateNightOut, useGetNightOut, useGetNightOutList, usePutNextStage, useAddFinalDate }
