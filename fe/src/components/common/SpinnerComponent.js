@@ -5,7 +5,7 @@ const SpinnerComponent = ({ children }) => {
         <div className="has-text-centered" style={{ height: '100vh' }}>
             <div
                 className="container"
-                style={{ marginTop: '28vh', marginLeft: '42%' }}
+                style={{ marginTop: '28vh', marginLeft: '45%' }}
             >
                 <div className="loader is-flex"></div>
             </div>
