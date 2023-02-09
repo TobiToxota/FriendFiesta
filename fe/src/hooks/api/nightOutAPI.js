@@ -140,7 +140,7 @@ const useGetNightOutList = (token) => {
     return { getNightOutList, nightOutList, error, success, loading }
 }
 
-/** Thos custom hook fetches the backend to set a finaldate to a nightout and bring it to the next phase */
+/** This custom hook fetches the backend to set a finaldate to a nightout and bring it to the next phase */
 const useAddFinalDate = (
     token,
     nightout,
