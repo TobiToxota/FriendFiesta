@@ -23,7 +23,7 @@ load_dotenv()
 apiKey = os.getenv('REACT_APP_PLACES_API')
 
 # initialize the google maps client
-map_client = googlemaps.Client(apiKey)
+map_client = googlemaps.Client(apiKey, timeout=3)
 
 
 @permission_classes((IsAuthenticated,))
