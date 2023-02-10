@@ -23,7 +23,7 @@ load_dotenv()
 apiKey = os.getenv('REACT_APP_PLACES_API')
 
 # initialize the google maps client
-map_client = googlemaps.Client(apiKey, timeout=3)
+map_client = googlemaps.Client(apiKey, timeout=2)
 
 
 @permission_classes((IsAuthenticated,))
@@ -395,8 +395,12 @@ class EntrySuggestionView(APIView):
             if googlePlacesResponse['status'] == 'OK':
 
                 # get the specific photo url
-                photo = map_client.places_photo(
-                    photo_reference=googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'], max_height=150, max_width=150)
+                try:
+                    photo = map_client.places_photo(
+                        photo_reference=googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'], max_height=150, max_width=150)
+                    
+                except googlemaps.exceptions.Timeout:
+                    return Response({"message": "Google Places API timed out."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
                 # put the photo url in our response
                 googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'] = photo.gi_frame.f_locals['self'].url
