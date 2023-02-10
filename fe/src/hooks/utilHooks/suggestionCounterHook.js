@@ -8,12 +8,12 @@ const useSuggestionCounter = (nightOut) => {
         if (nightOut.planSuggestions.length === 0) {
             return
         }
-        if (suggestionCounter < nightOut.planSuggestions.length - 1) {
+        if (suggestionCounter < nightOut.planSuggestions.length) {
             setSuggestionCounter((count) => count + 1)
             return
         }
-        if (suggestionCounter === nightOut.planSuggestions.length - 1) {
-            setSuggestionCounter(0)
+        if (suggestionCounter === nightOut.planSuggestions.length) {
+            setSuggestionCounter(1)
         }
     }
 
@@ -21,11 +21,11 @@ const useSuggestionCounter = (nightOut) => {
         if (nightOut.planSuggestions.length === 0) {
             return
         }
-        if (suggestionCounter > 0) {
+        if (suggestionCounter > 1) {
             setSuggestionCounter(suggestionCounter - 1)
         }
-        if (suggestionCounter === 0) {
-            setSuggestionCounter(nightOut.planSuggestions.length - 1)
+        if (suggestionCounter === 1) {
+            setSuggestionCounter(nightOut.planSuggestions.length)
         }
     }
 
