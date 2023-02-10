@@ -37,7 +37,7 @@ const ShowSuggestionsComponent = ({ nightOut, token, refreshNightOut, userData }
                             </button>
                         </div>
                         <div className="column p-1 pt-2 has-text-centered">
-                            <p className="label is-size-4 is-size-5-touch"># {suggestionCounter} / {nightOut.planSuggestions.length}</p>
+                            <p className="label is-size-4 is-size-5-touch"># {suggestionCounter + 1} / {nightOut.planSuggestions.length}</p>
                         </div>
                         <div className="column p-1 py-0">
                             <button className="button is-rounded is-link is-pulled-right is-hidden-mobile"

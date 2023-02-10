@@ -2,18 +2,18 @@
 import { useState } from 'react'
 
 const useSuggestionCounter = (nightOut) => {
-    const [suggestionCounter, setSuggestionCounter] = useState(1)
+    const [suggestionCounter, setSuggestionCounter] = useState(0)
 
     const incrementSuggestionCounter = () => {
         if (nightOut.planSuggestions.length === 0) {
             return
         }
-        if (suggestionCounter < nightOut.planSuggestions.length) {
+        if (suggestionCounter < nightOut.planSuggestions.length - 1) {
             setSuggestionCounter((count) => count + 1)
             return
         }
-        if (suggestionCounter === nightOut.planSuggestions.length) {
-            setSuggestionCounter(1)
+        if (suggestionCounter === nightOut.planSuggestions.length - 1) {
+            setSuggestionCounter(0)
         }
     }
 
@@ -21,11 +21,11 @@ const useSuggestionCounter = (nightOut) => {
         if (nightOut.planSuggestions.length === 0) {
             return
         }
-        if (suggestionCounter > 1) {
+        if (suggestionCounter > 0) {
             setSuggestionCounter(suggestionCounter - 1)
         }
-        if (suggestionCounter === 1) {
-            setSuggestionCounter(nightOut.planSuggestions.length)
+        if (suggestionCounter === 0) {
+            setSuggestionCounter(nightOut.planSuggestions.length - 1)
         }
     }
 
