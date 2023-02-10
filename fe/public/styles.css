@@ -126,7 +126,7 @@ body,
 }
 
 /* style for the createsuggestioncomponent */
-#show-suggestion-container {
+#suggestion-container {
   border-radius: 100px;
   margin-top: 2px !important;
   max-width: 1200px !important;

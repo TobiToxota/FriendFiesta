@@ -7,7 +7,7 @@ import { useDeleteEntryFromSuggestion } from '../../../hooks/api/suggestionAPI'
 import { shaking } from '../../../hooks/animations/animations'
 import StandardModalComponent from '../../common/StandardModalComponent'
 import ModalCardComponent from '../../common/ModalCardComponent'
-import EntryDetailsComponent from './EntryDetailsComponentl'
+import EntryDetailsComponent from './EntryDetailsComponent'
 import EditEntryComponent from './EditEntryComponent'
 
 const EntryComponent = ({ entry, index, token, loadSuggestion }) => {

@@ -2,6 +2,7 @@
 import NightOutTopComponent from '../universal/NightOutTopComponent'
 import VotingInfoComponent from './VotingInfoComponent'
 import SelectSuggestionComponent from './SelectSuggestionComponent'
+import SuggestionComponent from './SuggestionComponent'
 import { useSuggestionCounter } from '../../../hooks/utilHooks/suggestionCounterHook'
 
 const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, token }) => {
@@ -27,14 +28,16 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                         finalDate={nightOut.finalDate}
                     />
                     <VotingInfoComponent />
-                </div>
-            </div>
-            <SelectSuggestionComponent
+                    <SelectSuggestionComponent
                 nightOut={nightOut}
                 suggestionCounter={suggestionCounter}
                 incrementSuggestionCounter={incrementSuggestionCounter}
                 decrementSuggestionCounter={decrementSuggestionCounter}
             />
+                </div>
+            </div>
+            
+            <SuggestionComponent suggestion={nightOut.planSuggestions[suggestionCounter]} userData={userData} />
         </>
     )
 }

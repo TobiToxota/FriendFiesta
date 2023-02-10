@@ -128,6 +128,22 @@ const buttonPress = (target) => {
   });
 };
 
+/* This function lets an target (id or classname) fly in from the left when the component changes or gets rendered*/
+const swipeAwaytoRight = (target) => {
+    anime({
+      targets: target,
+      translateX: [
+        { value: 10, duration: 90 },
+        { value: -10, duration: 70 },
+        { value: 10, duration: 80 },
+        { value: 0, duration: 50 },
+      ],
+      
+      easing: "easeInOutQuad",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+};
+
 
 export {
   useSwipeInFromLeft,
@@ -139,4 +155,5 @@ export {
   useFading,
   shaking,
   buttonPress,
+  swipeAwaytoRight
 };
