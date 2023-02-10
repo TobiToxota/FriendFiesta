@@ -1,9 +1,14 @@
 //local imports
-import NightOutTopComponent from "../universal/NightOutTopComponent"
-import VotingInfoComponent from "./VotingInfoComponent"
-import ShowSuggestionsComponent from "./ShowSuggestionsComponent"
+import NightOutTopComponent from '../universal/NightOutTopComponent'
+import VotingInfoComponent from './VotingInfoComponent'
+import SelectSuggestionComponent from './SelectSuggestionComponent'
+import { useSuggestionCounter } from '../../../hooks/utilHooks/suggestionCounterHook'
 
 const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, token }) => {
+    // get the useSuggestionCounter
+    const { suggestionCounter, incrementSuggestionCounter, decrementSuggestionCounter } =
+        useSuggestionCounter(nightOut)
+
     return (
         <>
             <div className="container is-fluid active is-rounded" id="main-container">
@@ -15,11 +20,16 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                         minHeight: '150px',
                     }}
                 >
-                    <NightOutTopComponent nightOut={nightOut} userData={userData} progressPercentage={75} finalDate={nightOut.finalDate}/>
-                    <VotingInfoComponent/>
+                    <NightOutTopComponent
+                        nightOut={nightOut}
+                        userData={userData}
+                        progressPercentage={75}
+                        finalDate={nightOut.finalDate}
+                    />
+                    <VotingInfoComponent />
                 </div>
             </div>
-            <ShowSuggestionsComponent nightOut={nightOut}/>
+            <SelectSuggestionComponent nightOut={nightOut} />
         </>
     )
 }

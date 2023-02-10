@@ -113,6 +113,22 @@ const shaking = (target) => {
   })
 }
 
+/* this function aniamtes a button */
+const buttonPress = (target) => {
+  anime({
+    targets: target,
+    translateX: [
+      { value: 2, duration: 50 },
+      { value: -2, duration: 50 },
+      { value: 2, duration: 50 },
+      { value: 0, duration: 50 },
+    ],
+    backgroundColor: [ "#48c78e", "#3e56c4"],
+    easing: "easeOutElastic(1, .8)",
+  });
+};
+
+
 export {
   useSwipeInFromLeft,
   useSwipeInFromTop,
@@ -122,4 +138,5 @@ export {
   swipeAwayToBottom,
   useFading,
   shaking,
+  buttonPress,
 };
