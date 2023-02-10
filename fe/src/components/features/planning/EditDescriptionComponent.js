@@ -25,7 +25,7 @@ const EditDescriptionComponent = ({ loadSuggestion, token, nightOut, suggestionD
             <div className="field mt-2 has-text-centered">
                 {suggestionData.description === null ? (
                     <>
-                        <label className="is-block mb-1 is-size-6 is-size-7-touch">
+                        <label className="is-block mb-2 is-size-6">
                             You have not added a description yet. You can add one if you want. But
                             you don't necessarily need one.
                         </label>
