@@ -1,6 +1,5 @@
 // local imports
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
-import { useSuggestionCounter } from '../../../hooks/utilHooks/suggestionCounterHook'
 import { buttonPress } from '../../../hooks/animations/animations'
 
 const SelectSuggestionComponent = ({

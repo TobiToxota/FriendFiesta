@@ -29,7 +29,12 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                     <VotingInfoComponent />
                 </div>
             </div>
-            <SelectSuggestionComponent nightOut={nightOut} />
+            <SelectSuggestionComponent
+                nightOut={nightOut}
+                suggestionCounter={suggestionCounter}
+                incrementSuggestionCounter={incrementSuggestionCounter}
+                decrementSuggestionCounter={decrementSuggestionCounter}
+            />
         </>
     )
 }
