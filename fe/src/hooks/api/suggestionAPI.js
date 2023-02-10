@@ -182,6 +182,8 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
         e.preventDefault()
         setAddEntryFetching(true)
 
+        console.log('starting')
+
         if (
             e.target.startTime.value === '' ||
             e.target.endTime.value === '' ||
@@ -193,6 +195,8 @@ const useAddEntryToSuggestion = (loadSuggestion, token, uuid, suggestion) => {
             }, 300)
             return
         }
+
+        console.log('going for request')
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'suggestion/entrys/', {
             method: 'POST',

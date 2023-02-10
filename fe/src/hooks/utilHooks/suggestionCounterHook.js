@@ -1,11 +1,10 @@
 // package imports
 import { useState } from 'react'
 
-const useSuggestionCounter = ({ nightOut }) => {
-    const [suggestionCounter, setSuggestionCounter] = useState(0)
+const useSuggestionCounter = (nightOut) => {
+    const [suggestionCounter, setSuggestionCounter] = useState(1)
 
     const incrementSuggestionCounter = () => {
-        console.log(suggestionCounter)
         if (nightOut.planSuggestions.length === 0) {
             return
         }
