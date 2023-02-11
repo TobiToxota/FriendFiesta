@@ -15,7 +15,7 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                 <ProgressComponent percentage={progressPercentage} />
                 {nightOut.creator.username !== userData.username ? (
                     <div id="creator" className="mt-2 is-inline-block is-vcentered is-flex mb-3">
-                        <button className="button is-info is-rounded p-2">
+                        <button className="button is-link is-rounded p-2">
                             <img
                                 src={`https://avatars.dicebear.com/api/${nightOut.creator.avatarStyle}/${nightOut.creator.username}+${nightOut.creator.avatarIteration}.svg`}
                                 alt=""
