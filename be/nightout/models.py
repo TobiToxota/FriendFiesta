@@ -63,6 +63,8 @@ class Participant(models.Model):
     updatedAt = models.DateTimeField(auto_now=True)
     finishedDatePhase = models.BooleanField(default=False)
     finishedPlanningPhase = models.BooleanField(default=False)
+    abstention = models.BooleanField(default=False)
+
 
     def __str__(self):
         return str(self.user.username) + " - " + str(self.nightOut.title) + " from " + str(self.nightOut.creator.username)
