@@ -14,7 +14,8 @@ const SuggestionComponent = ({ suggestion, token, userData }) => {
                 style={{
                     marginTop: '0px !important',
                     paddingRight: '1.25rem',
-                    borderRadius: 15,
+                    borderBottomRightRadius: '15px',
+                    borderBottomLeftRadius: '15px',
                     minHeight: 'auto',
                 }}
                 id="suggestion-container-box"
@@ -51,11 +52,18 @@ const SuggestionComponent = ({ suggestion, token, userData }) => {
                         The creator of this suggestion hasn't added a description
                     </p>
                 )}
-                <EntryViewHeaderComponent suggestion={suggestion}/>
+                <EntryViewHeaderComponent suggestion={suggestion} />
                 {suggestion.planEntries.map((entry, index) => (
-                    <EntryViewComponent entry={entry} index={index} key={index}/>
-                )
-                )}
+                    <EntryViewComponent entry={entry} index={index} key={index} />
+                ))}
+                <div className="container has-text-centered">
+                    <button className="button is-success is-rounded is-size-7-touch">
+                        <span className="icon is-large pl-1 mr-3">
+                            <i className="fas fa-check-to-slot is-size-5-desktop" />
+                        </span>
+                        <span>I want to vote for this suggestion</span>
+                    </button>
+                </div>
             </div>
         </div>
     )

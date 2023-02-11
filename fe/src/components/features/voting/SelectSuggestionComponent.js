@@ -7,11 +7,21 @@ const SelectSuggestionComponent = ({
     incrementSuggestionCounter,
     decrementSuggestionCounter,
     suggestionCounter,
-    children,
 }) => {
 
     return (
-        <div className="container mt-4">
+        
+        <div className="container is-fluid active is-rounded mb-1" id="suggestion-container">
+        <div
+            className="notification is-light is-rounded shadow"
+            style={{
+                marginTop: '0px !important',
+                paddingRight: '1.25rem',
+                borderTopRightRadius: '15px',
+                borderTopLeftRadius: '15px',
+                minHeight: 'auto',
+            }}
+        >
             <div className="columns is-mobile">
                 <div className="column p-1 py-0">
                     <button
@@ -26,7 +36,7 @@ const SelectSuggestionComponent = ({
                         <span className="icon">
                             <i className="fa-solid fa-left-long"></i>
                         </span>
-                        <span className="pb-1">previous</span>
+                        <span className="pb-1">previous suggestion</span>
                     </button>
                     <button
                         className="button is-rounded is-link is-hidden-tablet"
@@ -58,7 +68,7 @@ const SelectSuggestionComponent = ({
                             swipeAwaytoRight('#suggestion-container-box')
                         }}
                     >
-                        <span className="pb-1 is-hidden-mobile">next</span>
+                        <span className="pb-1 is-hidden-mobile">next suggestion</span>
                         <span className="icon">
                             <i className="fa-solid fa-right-long"></i>
                         </span>
@@ -78,6 +88,7 @@ const SelectSuggestionComponent = ({
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

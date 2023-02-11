@@ -4,7 +4,7 @@ import { useState } from 'react'
 // local imports
 import StandardModalComponent from '../../common/StandardModalComponent'
 import EntryDetailsComponent from '../../features/planning/EntryDetailsComponent'
-import { makeDateBeautiful, splitLocationType } from '../../../utils/nightOutPlanningUtils'
+import { makeDateBeautiful } from '../../../utils/nightOutPlanningUtils'
 
 const EntryViewComponent = ({ entry, index }) => {
     const [showDetailsModal, setShowDetailsModal] = useState(false)
@@ -17,18 +17,18 @@ const EntryViewComponent = ({ entry, index }) => {
                 id="mx-mobile"
                 onClick={() => setShowDetailsModal(true)}
             >
-                <div className="column is-1 label pb-2 mb-0 is-size-5" id="entry-component">
+                <div className="column is-1 label pb-2 mb-0 is-size-5 is-size-6-touch" id="entry-component">
                     <p className="is-hidden-tablet is-inline"># </p>
                     {index}
                 </div>
-                <div className="column is-5 label pb-3 mb-0 is-size-5" id="entry-component">
+                <div className="column is-5 label pb-3 mb-0 is-size-5 is-size-6-touch" id="entry-component">
                     {entry.name}
                 </div>
-                <div className="column is-2 pb-3 is-size-5" id="entry-component">
+                <div className="column is-2 pb-3 is-size-5 is-size-6-touch" id="entry-component">
                     {' '}
                     {makeDateBeautiful(entry.startTime)}
                 </div>
-                <div className="column is-2 pb-3 is-size-5" id="entry-component">
+                <div className="column is-2 pb-3 is-size-5 is-size-6-touch" id="entry-component">
                     {makeDateBeautiful(entry.endTime)}
                 </div>
             </div>

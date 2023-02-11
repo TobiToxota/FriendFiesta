@@ -28,15 +28,15 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                         finalDate={nightOut.finalDate}
                     />
                     <VotingInfoComponent />
-                    <SelectSuggestionComponent
+                    
+                </div>
+            </div>
+            <SelectSuggestionComponent
                 nightOut={nightOut}
                 suggestionCounter={suggestionCounter}
                 incrementSuggestionCounter={incrementSuggestionCounter}
                 decrementSuggestionCounter={decrementSuggestionCounter}
             />
-                </div>
-            </div>
-            
             <SuggestionComponent suggestion={nightOut.planSuggestions[suggestionCounter]} userData={userData} />
         </>
     )
