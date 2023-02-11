@@ -2,6 +2,7 @@
 import { useState } from 'react'
 
 const useSuggestionCounter = (nightOut) => {
+
     const [suggestionCounter, setSuggestionCounter] = useState(0)
 
     const incrementSuggestionCounter = () => {
@@ -29,7 +30,7 @@ const useSuggestionCounter = (nightOut) => {
         }
     }
 
-    return { suggestionCounter, incrementSuggestionCounter, decrementSuggestionCounter }
+    return { setSuggestionCounter, suggestionCounter, incrementSuggestionCounter, decrementSuggestionCounter }
 }
 
 export { useSuggestionCounter }

@@ -73,15 +73,47 @@ const SuggestionComponent = ({
                 {suggestion.planEntries.map((entry, index) => (
                     <EntryViewComponent entry={entry} index={index} key={index} />
                 ))}
-                <div className="container has-text-centered">
-                    <button className="button is-success is-rounded is-size-7-touch"
-                    onClick={() => createNewVote(suggestion.id)}>
-                        <span className="icon is-large pl-1 mr-3">
-                            <i className="fas fa-check-to-slot is-size-5-desktop" />
-                        </span>
-                        <span>I want to vote for this suggestion</span>
-                    </button>
-                </div>
+                {participantInfos && (
+                    <div className="container has-text-centered">
+                        {participantInfos.votedForSuggestion_id !== suggestion.id && (
+                            !newVoteFetching? (
+                            <button
+                                className="button is-success is-rounded is-size-7-touch fade-in"
+                                onClick={() => createNewVote(suggestion.id)}
+                            >
+                                <span className="icon is-large pl-1 mr-3">
+                                    <i className="fas fa-check-to-slot is-size-5-desktop" />
+                                </span>
+                                <span>I want to vote for this suggestion</span>
+                            </button>
+                            ) : (
+                                <button
+                                className="button is-success is-rounded is-size-7-touch fade-in is-loading"
+                            >
+                                <span className="icon is-large pl-1 mr-3">
+                                    <i className="fas fa-check-to-slot is-size-5-desktop" />
+                                </span>
+                                <span>I want to vote for this suggestion</span>
+                            </button>
+                            )
+                        )}
+                        {participantInfos.votedForSuggestion_id === suggestion.id && (
+                            <div className="container has-text-centered fade-in">
+                                <span className="icon has-text-primary-dark is-size-4 is-size-5-touch mb-1">
+                                    <i className="fa-regular fa-face-smile-wink" />
+                                </span>
+
+                                <p
+                                    className="is-size-7-mobile has-text-weight-semibold mx-auto"
+                                    style={{ maxWidth: '470px' }}
+                                >
+                                    You voted for this suggestion. You want to vote for another one?
+                                    No problem, just cast your vote for another suggestion.
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     )

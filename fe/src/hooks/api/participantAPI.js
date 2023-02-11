@@ -306,6 +306,7 @@ const usePutParticipantStatePlanning = (token, nightOut, refreshNightOut) => {
 const useGetParticipantInfos = (token, nightOut) => {
     const [participantInfos, setParticipantInfos] = useState(null)
     const [participantLoading, setParticipantLoading] = useState(true)
+    const [loaded, setLoaded] = useState(false)
 
     const getParticipantInfos = async (uuid) => {
         let response = await fetch(process.env.REACT_APP_API_URL + 'participant/' + uuid, {
@@ -320,6 +321,7 @@ const useGetParticipantInfos = (token, nightOut) => {
         if (response.status === 200) {
             setParticipantInfos(thisData)
             setParticipantLoading(false)
+            setLoaded(true)
         } else {
             setParticipantLoading(false)
         }
@@ -329,7 +331,7 @@ const useGetParticipantInfos = (token, nightOut) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token, nightOut])
 
-    return { getParticipantInfos, participantInfos, participantLoading }
+    return { getParticipantInfos, participantInfos, participantLoading, loaded }
 }
 
 export {
