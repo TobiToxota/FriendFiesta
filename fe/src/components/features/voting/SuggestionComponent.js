@@ -2,10 +2,27 @@
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 import EntryViewHeaderComponent from './EntryViewHeaderComponent'
 import EntryViewComponent from './EntryViewComponent'
+import { useCreateNewVote } from '../../../hooks/api/votingAPI'
 
-const SuggestionComponent = ({ suggestion, token, userData }) => {
+const SuggestionComponent = ({
+    suggestion,
+    token,
+    userData,
+    nightOut,
+    refreshNightOut,
+    getParticipantInfos,
+    participantInfos,
+}) => {
     // animation
     useSwipeInFromBottom(SuggestionComponent, '#suggestion-container')
+
+    // get the useCreateNewVote hook
+    const { createNewVote, newVoteFetching } = useCreateNewVote(
+        token,
+        refreshNightOut,
+        getParticipantInfos,
+        nightOut.uuid
+    )
 
     return (
         <div className="container is-fluid active is-rounded" id="suggestion-container">
@@ -57,7 +74,8 @@ const SuggestionComponent = ({ suggestion, token, userData }) => {
                     <EntryViewComponent entry={entry} index={index} key={index} />
                 ))}
                 <div className="container has-text-centered">
-                    <button className="button is-success is-rounded is-size-7-touch">
+                    <button className="button is-success is-rounded is-size-7-touch"
+                    onClick={() => createNewVote(suggestion.id)}>
                         <span className="icon is-large pl-1 mr-3">
                             <i className="fas fa-check-to-slot is-size-5-desktop" />
                         </span>

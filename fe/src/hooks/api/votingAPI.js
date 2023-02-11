@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-const useCreateNewVote = ({ token, refreshNightOut, getParticipantInfos, uuid }) => {
+const useCreateNewVote = ( token, refreshNightOut, getParticipantInfos, uuid ) => {
     const [newVoteFetching, setNewVoteFetching] = useState(false)
 
     const createNewVote = async (suggestionId) => {
@@ -21,10 +21,12 @@ const useCreateNewVote = ({ token, refreshNightOut, getParticipantInfos, uuid })
         if (response.status === 201) {
             toast.success('🗳️ You Voted!')
             refreshNightOut(uuid)
-            getParticipantInfos()
+            getParticipantInfos(uuid)
             setNewVoteFetching(false)
+        } else if (response.status === 400) {
+            toast.error('You allready voted for the exact same planSuggestion')
         } else {
-            toast.error('Sorry, something went wrong!')
+            toast.error('Something went wrong')
         }
     }
 
