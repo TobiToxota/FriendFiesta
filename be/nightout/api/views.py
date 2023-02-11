@@ -186,7 +186,8 @@ class PutParticipantDatePhase(APIView):
             participant.finishedDatePhase = True
             participant.save()
             return Response({"message": "Participant commit state successfully changed"}, status=status.HTTP_201_CREATED)
-        
+
+
 @permission_classes((IsAuthenticated,))
 class PutParticipantPlanningPhase(APIView):
     """sumary_line: Change a commit on a participant"""
@@ -398,7 +399,7 @@ class EntrySuggestionView(APIView):
                 try:
                     photo = map_client.places_photo(
                         photo_reference=googlePlacesResponse['candidates'][0]['photos'][0]['photo_reference'], max_height=150, max_width=150)
-                    
+
                 except googlemaps.exceptions.Timeout:
                     return Response({"message": "Google Places API timed out."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -493,9 +494,37 @@ class CreateAndDeleteVote(APIView):
 
         if serializer.is_valid():
             serializer.save()
+
+            # when everything worked we have to check if the user declared that he opts out
+            if userAsParticipant.abstention == True:
+                userAsParticipant.abstention = False
+                userAsParticipant.save()
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response({"message": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@permission_classes((IsAuthenticated,))
+class DeclareAbstention(APIView):
+
+    def post(self, request, format=None):
+
+        # get Nightout from the request
+        nightOut = NightOutModel.objects.get(uuid=request.data['nightOut'])
+
+        # get the participant from the request
+        userAsParticipant = Participant.objects.filter(
+            user=request.user).filter(nightOut=nightOut).first()
+
+        # check if the current user allready declared that he opts out
+        if userAsParticipant.abstention == True:
+            return Response({"message": "You allready declared that you are opting out"}, status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            userAsParticipant.abstention = True
+            userAsParticipant.save()
+            return Response({'message': 'Abstention marked'}, status=status.HTTP_201_CREATED)
 
 
 @permission_classes((IsAuthenticated,))
@@ -522,7 +551,8 @@ class GetUserParticpantInfos(APIView):
         finishedPlanningPhase = participant.finishedPlanningPhase
 
         # get the state if the user created a planSuggestion
-        createdSuggestion = nightOutObject.planSuggestions.filter(creator=participant).exists()
+        createdSuggestion = nightOutObject.planSuggestions.filter(
+            creator=participant).exists()
 
         if participant == None:
             return Response({'Message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
