@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
+/** This custom hook creates a new vote in the backend */
 const useCreateNewVote = (token, refreshNightOut, getParticipantInfos, uuid) => {
     const [newVoteFetching, setNewVoteFetching] = useState(false)
 
@@ -33,6 +34,7 @@ const useCreateNewVote = (token, refreshNightOut, getParticipantInfos, uuid) => 
     return { createNewVote, newVoteFetching }
 }
 
+/** This custom hook declares that a user declares abstention */
 const useDeclareAbstention = (token, nightOut, refreshNightOut, getParticipantInfos) => {
     const [declareAbstentionFetching, setDeclareAbstentionFetching] = useState(false)
 
@@ -53,13 +55,16 @@ const useDeclareAbstention = (token, nightOut, refreshNightOut, getParticipantIn
             }
         )
         if (response.status === 201) {
-            toast.success('You declared your abstention')
-
+            toast.success('You declared your abstention.')
             refreshNightOut(nightOut.uuid)
-            getParticipantInfos(uuid)
+            getParticipantInfos(nightOut.uuid)
+            setDeclareAbstentionFetching(false)
+        } else if (response.status === 400) {
+            toast.error('You already declared your abstention.')
             setDeclareAbstentionFetching(false)
         } else {
-            toast.error('Something went wrong')
+            toast.error('Something went wrong.')
+            setDeclareAbstentionFetching(false)
         }
     }
 

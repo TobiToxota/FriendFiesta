@@ -521,10 +521,16 @@ class DeclareAbstention(APIView):
         if userAsParticipant.abstention == True:
             return Response({"message": "You allready declared that you are opting out"}, status=status.HTTP_400_BAD_REQUEST)
 
-        else:
-            userAsParticipant.abstention = True
-            userAsParticipant.save()
-            return Response({'message': 'Abstention marked'}, status=status.HTTP_201_CREATED)
+        # check if the user has voted, if so delete it
+        existingSuggestionVote = SuggestionVote.objects.filter(
+            participant=userAsParticipant).first()
+
+        if existingSuggestionVote != None:
+            existingSuggestionVote.delete()
+
+        userAsParticipant.abstention = True
+        userAsParticipant.save()
+        return Response({'message': 'Abstention marked'}, status=status.HTTP_201_CREATED)
 
 
 @permission_classes((IsAuthenticated,))
@@ -553,14 +559,18 @@ class GetUserParticpantInfos(APIView):
         # get the state if the user created a planSuggestion
         createdSuggestion = nightOutObject.planSuggestions.filter(
             creator=participant).exists()
+        
+        # get the state if the user declared abstention
+        declaredAbstention = participant.abstention
+
 
         if participant == None:
             return Response({'Message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
         if vote == None:
-            return Response({'participant_id': participant.id, 'votedForSuggestion_id': "no vote placed", 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase, 'hasCreatedSuggestion': createdSuggestion}, status=status.HTTP_200_OK)
+            return Response({'participant_id': participant.id, 'votedForSuggestion_id': "no vote placed", 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase, 'hasCreatedSuggestion': createdSuggestion, 'votingAbstention': declaredAbstention}, status=status.HTTP_200_OK)
 
-        return Response({'participant_id': participant.id, 'votedForSuggestion_id': vote.planSuggestion.id, 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase, 'hasCreatedSuggestion': createdSuggestion}, status=status.HTTP_200_OK)
+        return Response({'participant_id': participant.id, 'votedForSuggestion_id': vote.planSuggestion.id, 'finishedDatePhase': finishedDatePhase, 'finishedPlanningPhase': finishedPlanningPhase, 'hasCreatedSuggestion': createdSuggestion, 'votingAbstention': declaredAbstention}, status=status.HTTP_200_OK)
 
 
 @permission_classes((IsAuthenticated,))
