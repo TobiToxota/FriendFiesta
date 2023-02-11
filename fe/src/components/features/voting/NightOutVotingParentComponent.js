@@ -3,12 +3,13 @@ import NightOutTopComponent from '../universal/NightOutTopComponent'
 import VotingInfoComponent from './VotingInfoComponent'
 import SelectSuggestionComponent from './SelectSuggestionComponent'
 import SuggestionComponent from './SuggestionComponent'
+import VotesInfoComponent from './VotesInfoComponent'
 import { useSuggestionCounter } from '../../../hooks/utilHooks/suggestionCounterHook'
 import { useGetParticipantInfos } from '../../../hooks/api/participantAPI'
 
 const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, token }) => {
     // get the participant infos
-    const { getParticipantInfos, participantInfos } = useGetParticipantInfos(token, nightOut)
+    const { getParticipantInfos, participantInfos, loaded } = useGetParticipantInfos(token, nightOut)
 
     // get the useSuggestionCounter
     const { suggestionCounter, incrementSuggestionCounter, decrementSuggestionCounter } =
@@ -31,6 +32,7 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                         progressPercentage={75}
                         finalDate={nightOut.finalDate}
                     />
+                    <VotesInfoComponent nightOut={nightOut} participantInfos={participantInfos} loaded={loaded}/>
                     <VotingInfoComponent />
                 </div>
             </div>

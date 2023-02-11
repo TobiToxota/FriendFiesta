@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 /* this custom hook fetches the backend and creates a nightOut Object in the database */
 const useCreateNightOut = (token) => {
     const [data, setData] = useState(null)
-    const [success, setSuccess] = useState(null)
     const [error, setError] = useState('')
 
     async function createNightOut(e) {
@@ -18,7 +17,7 @@ const useCreateNightOut = (token) => {
             toast.error('Please enter a title, or at least 2 characters', {
                 autoClose: 6500,
             })
-            return { data, success, error }
+            return { data, error }
         }
 
         // Error Handling
@@ -26,7 +25,7 @@ const useCreateNightOut = (token) => {
             toast.error('Ensure that your title has not more than 40 characters', {
                 autoClose: 6500,
             })
-            return { data, success, error }
+            return { data, error }
         }
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'nightoutlist/', {
@@ -54,7 +53,7 @@ const useCreateNightOut = (token) => {
             setData(thisData)
         }
     }
-    return { data, error, setError, success, createNightOut }
+    return { data, error, setError, createNightOut }
 }
 
 /* this custom hook fetches the bakend for the data of the nighOut */

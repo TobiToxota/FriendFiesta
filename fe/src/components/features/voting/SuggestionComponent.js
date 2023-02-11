@@ -104,10 +104,10 @@ const SuggestionComponent = ({
                                 </span>
 
                                 <p
-                                    className="is-size-7-mobile has-text-weight-semibold mx-auto"
-                                    style={{ maxWidth: '470px' }}
+                                    className="is-size-7-mobile has-text-weight-semibold mx-auto has-text-primary-dark"
+                                    style={{ maxWidth: '520px' }}
                                 >
-                                    You voted for this suggestion. You want to vote for another one?
+                                    You voted for this suggestion. You want to vote for a different suggestion?
                                     No problem, just cast your vote for another suggestion.
                                 </p>
                             </div>

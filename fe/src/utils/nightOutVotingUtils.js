@@ -1,35 +1,6 @@
-/** This function takes  */
-const incrementSuggestionCounter = (nightOut, loadCurrentSuggestion, setSuggestionCounter, suggestionCounter) => {
-    if (nightOut.planSuggestions.length === 0) {
-      return;
-    }
-    if (suggestionCounter < nightOut.planSuggestions.length - 1) {
-      setSuggestionCounter(
-        (count) => count + 1,
-        function () {
-          loadCurrentSuggestion();
-        }
-      );
-      return;
-    }
-    if (suggestionCounter === nightOut.planSuggestions.length - 1) {
-      setSuggestionCounter(0);
-      loadCurrentSuggestion();
-    }
-  };
+/** This function takes an id of an selected suggestion and returns it from the nightout Json */
+const getSuggestionFromNightOut = (nightout, id) => {
+  return nightout.planSuggestions.find(suggestion => suggestion.id === id);
+}
 
-  const decrementSuggestionCounter = (nightOut, loadCurrentSuggestion, setSuggestionCounter, suggestionCounter) => {
-    if (nightOut.planSuggestions.length === 0) {
-      return;
-    }
-    if (suggestionCounter > 0) {
-      setSuggestionCounter(suggestionCounter - 1);
-      loadCurrentSuggestion();
-    }
-    if (suggestionCounter === 0) {
-      setSuggestionCounter(nightOut.planSuggestions.length - 1);
-      loadCurrentSuggestion();
-    }
-  };
-
-  export {incrementSuggestionCounter, decrementSuggestionCounter};
+export { getSuggestionFromNightOut };
