@@ -101,10 +101,17 @@ class NightOutSerializer(serializers.ModelSerializer):
     participants = ParticipantSerializer(many=True, read_only=True)
     participantDates = ParticipantDateSerializer(many=True, read_only=True)
     creator = UserSerializer(read_only=True)
+    numberOfVotes = serializers.SerializerMethodField()
 
     class Meta:
         model = NightOutModel
         fields = '__all__'
+
+    def get_numberOfVotes(self, obj):
+        # get the number of participants who allready give a vote
+        numberOfVotes = SuggestionVote.objects.filter(planSuggestion__nightOut=obj).count()
+
+        return numberOfVotes
 
     def create(self, validated_data):
         return NightOutModel.objects.create(**validated_data)
