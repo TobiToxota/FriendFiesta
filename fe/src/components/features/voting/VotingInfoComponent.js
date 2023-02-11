@@ -6,7 +6,7 @@ const VotingInfoComponent = () => {
         <CollapsibleComponent
             title={'What to do here?'}
             content={
-                'In this phase you will see all the suggestions. You have one vote and you can vote for the suggestion you like the most. The voting phase will end automatically when either everyone has voted or the creator wants to end the voting phase early. You can send the creator of the nightout a reminder if you think he should end the voting phase early.'
+                'In this phase you will see all the suggestions. You have one vote and you can vote for the suggestion you like the most. If there is not a suggestion that you like you can also abstain. The voting phase will end automatically when either everyone has voted/abstained or the creator wants to end the voting phase early. You can send the creator of the nightout a reminder if you think he should end the voting phase early.'
             }
         />
     )

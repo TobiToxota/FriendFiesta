@@ -102,6 +102,7 @@ class NightOutSerializer(serializers.ModelSerializer):
     participantDates = ParticipantDateSerializer(many=True, read_only=True)
     creator = UserSerializer(read_only=True)
     numberOfVotes = serializers.SerializerMethodField()
+    numberOfAbstentions = serializers.SerializerMethodField()
 
     class Meta:
         model = NightOutModel
@@ -109,9 +110,17 @@ class NightOutSerializer(serializers.ModelSerializer):
 
     def get_numberOfVotes(self, obj):
         # get the number of participants who allready give a vote
-        numberOfVotes = SuggestionVote.objects.filter(planSuggestion__nightOut=obj).count()
-
+        numberOfVotes = SuggestionVote.objects.filter(
+            planSuggestion__nightOut=obj).count()
+        
         return numberOfVotes
+
+    def get_numberOfAbstentions(self, obj):
+        # get the number of participants that abstained from the voting
+        numberOfAbstains = Participant.objects.filter(
+            nightOut=obj).filter(abstention=True).count()
+        
+        return numberOfAbstains
 
     def create(self, validated_data):
         return NightOutModel.objects.create(**validated_data)
