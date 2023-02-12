@@ -607,12 +607,16 @@ class FindFinalSuggestionForFinish(APIView):
         # calculate which planSuggestion has the highest number of votes
         planSuggestions = nightOutObject.planSuggestions.order_by('votes')
 
+        # check if there are votes for the first plan suggestion
+        if planSuggestions[0].votes.count() == 0:
+            return Response({'message': 'There are no votes for the first plan suggestion. You cant put this NightOut to the next phase'}, status=status.HTTP_400_BAD_REQUEST)
+
         # check if the nightOut allready has a finafirst and finalsecondSuggestion
         if nightOutObject.finalFirstSuggestion == None:
             nightOutObject.finalFirstSuggestion = planSuggestions[0]
 
-            # check if there are 2 suggestions min
-            if len(planSuggestions) > 1:
+            # check if there are 2 suggestions min and both have the same number of votes
+            if len(planSuggestions) > 1 and planSuggestions[0].votes.count() == planSuggestions[1].votes.count():
 
                 # if so add the second suggestion to the nightOutModel
                 nightOutObject.finalSecondSuggestion = planSuggestions[1]
