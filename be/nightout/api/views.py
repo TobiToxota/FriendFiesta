@@ -531,6 +531,23 @@ class DeclareAbstention(APIView):
         userAsParticipant.abstention = True
         userAsParticipant.save()
         return Response({'message': 'Abstention marked'}, status=status.HTTP_201_CREATED)
+    
+    def delete(self, request, format =None):
+        # get Nightout from the request
+        nightOut = NightOutModel.objects.get(uuid=request.data['nightOut'])
+
+        # get the participant from the request
+        userAsParticipant = Participant.objects.filter(
+            user=request.user).filter(nightOut=nightOut).first()
+
+        # check if the current user allready declared that he opts out
+        if userAsParticipant.abstention == False:
+            return Response({"message": "You allready declared that you are not opting out"}, status=status.HTTP_400_BAD_REQUEST)
+
+        userAsParticipant.abstention = False
+        userAsParticipant.save()
+        return Response({'message': 'Abstention deleted'}, status=status.HTTP_201_CREATED)
+
 
 
 @permission_classes((IsAuthenticated,))

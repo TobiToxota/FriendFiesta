@@ -152,7 +152,7 @@ const SuggestionComponent = ({
                     ) : (
                         <>
                             <p className="label has-text-centered is-size-7-mobile mb-1">
-                                You have stated to abstain
+                                You have stated to abstain from the voting phase.
                             </p>
                             <button
                                 className="button is-rounded is-success is-size-7-touch"
