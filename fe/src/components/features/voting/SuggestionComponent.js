@@ -161,6 +161,7 @@ const SuggestionComponent = ({
                             <p className="label has-text-centered is-size-7-mobile mb-1">
                                 You have stated to abstain from the voting phase.
                             </p>
+                            {!removeAbstentionFetching ? (
                             <button
                                 className="button is-rounded is-success is-size-7-touch"
                                 onClick={() => removeAbstention()}
@@ -170,6 +171,16 @@ const SuggestionComponent = ({
                                 </span>
                                 <span>I no longer want to abstain</span>
                             </button>
+                            ) : (
+                                <button
+                                className="button is-rounded is-success is-size-7-touch is-loading"
+                            >
+                                <span className="icon">
+                                    <i className="fas fa-heart" />
+                                </span>
+                                <span>I no longer want to abstain</span>
+                            </button>
+                            )}
                         </>
                     )}
                 </div>

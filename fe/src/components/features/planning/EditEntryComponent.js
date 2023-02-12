@@ -2,8 +2,8 @@
 import { makeDateBeautiful } from '../../../utils/nightOutPlanningUtils'
 import { usePutEntryFromSuggestion } from '../../../hooks/api/suggestionAPI'
 
-const EditEntryComponent = ({ token, entry, loadSuggestion}) => {
-    const {putEntry, putEntryFetching} = usePutEntryFromSuggestion(loadSuggestion, token, entry)
+const EditEntryComponent = ({ token, entry, loadSuggestion }) => {
+    const { putEntry } = usePutEntryFromSuggestion(loadSuggestion, token, entry)
 
     return (
         <form onSubmit={(e) => putEntry(e)} id={'putEntryForm' + entry.id}>
@@ -68,7 +68,8 @@ const EditEntryComponent = ({ token, entry, loadSuggestion}) => {
                     />
                 </div>
                 <p className="help has-text-primary-dark">
-                    Please seperate the location types with a comma as a seperator and without a space. (e.g. restaurant,bar)
+                    Please seperate the location types with a comma as a seperator and without a
+                    space. (e.g. restaurant,bar)
                 </p>
             </div>
         </form>
