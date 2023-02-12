@@ -68,6 +68,8 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                             nightOut={nightOut}
                             token={token}
                             refreshNightOut={refreshNightOut}
+                            userData={userData}
+                            participantInfos={participantInfos}
                         />
                     }
                 />

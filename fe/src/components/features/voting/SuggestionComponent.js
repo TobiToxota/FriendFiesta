@@ -13,7 +13,7 @@ const SuggestionComponent = ({
     refreshNightOut,
     getParticipantInfos,
     participantInfos,
-    children
+    children,
 }) => {
     // animation
     useSwipeInFromBottom(SuggestionComponent, '#suggestion-container')
@@ -26,15 +26,14 @@ const SuggestionComponent = ({
         nightOut.uuid
     )
 
-        // get the useDeclareAbstention hook
-        const { declareAbstention, declareAbstentionFetching } = useDeclareAbstention(
-            token,
-            nightOut,
-            refreshNightOut,
-            getParticipantInfos
-        )
+    // get the useDeclareAbstention hook
+    const { declareAbstention, declareAbstentionFetching } = useDeclareAbstention(
+        token,
+        nightOut,
+        refreshNightOut,
+        getParticipantInfos
+    )
 
-        
     return (
         <div className="container is-fluid active is-rounded" id="suggestion-container">
             <div
@@ -86,28 +85,6 @@ const SuggestionComponent = ({
                 ))}
                 {participantInfos && (
                     <div className="container has-text-centered">
-                        {participantInfos.votedForSuggestion_id !== suggestion.id && (
-                            !newVoteFetching? (
-                            <button
-                                className="button is-success is-rounded is-size-7-touch fade-in"
-                                onClick={() => createNewVote(suggestion.id)}
-                            >
-                                <span className="icon is-large pl-1 mr-3">
-                                    <i className="fas fa-check-to-slot is-size-5-desktop" />
-                                </span>
-                                <span>I want to vote for this suggestion</span>
-                            </button>
-                            ) : (
-                                <button
-                                className="button is-success is-rounded is-size-7-touch fade-in is-loading"
-                            >
-                                <span className="icon is-large pl-1 mr-3">
-                                    <i className="fas fa-check-to-slot is-size-5-desktop" />
-                                </span>
-                                <span>I want to vote for this suggestion</span>
-                            </button>
-                            )
-                        )}
                         {participantInfos.votedForSuggestion_id === suggestion.id && (
                             <div className="container has-text-centered fade-in">
                                 <span className="icon has-text-primary-dark is-size-4 is-size-5-touch mb-1">
@@ -118,38 +95,79 @@ const SuggestionComponent = ({
                                     className="is-size-7-mobile has-text-weight-semibold mx-auto has-text-primary-dark"
                                     style={{ maxWidth: '520px' }}
                                 >
-                                    You voted for this suggestion. You want to vote for a different suggestion?
-                                    No problem, just cast your vote for another suggestion.
+                                    You voted for this suggestion. You want to vote for a different
+                                    suggestion? No problem, just cast your vote for another
+                                    suggestion.
                                 </p>
                             </div>
                         )}
                     </div>
                 )}
-                {!participantInfos.votingAbstention && (
-                    <div className='container has-text-centered'>
-                        <p className="is-size-6 is-size-7-mobile mt-1 mb-1">
-                            Actually, you don't like one suggestion and you'd rather abstain?
-                        </p>
-                        {!declareAbstentionFetching ? (
+
+                <div className="container has-text-centered">
+                    {!participantInfos.votingAbstention &&
+                    participantInfos.votedForSuggestion_id !== suggestion.id ? (
+                        <div className="field has-addons has-addons-centered fade-in">
+                            <p className="control">
+                                {!newVoteFetching ? (
+                                    <button
+                                        className="button is-success is-rounded is-size-7-touch"
+                                        onClick={() => createNewVote(suggestion.id)}
+                                    >
+                                        <span className="icon is-large pl-1 mr-3">
+                                            <i className="fas fa-check-to-slot is-size-5-desktop" />
+                                        </span>
+                                        <span>I want to vote for this suggestion</span>
+                                    </button>
+                                ) : (
+                                    <button className="button is-success is-rounded is-size-7-touch is-loading">
+                                        <span className="icon is-large pl-1 mr-3">
+                                            <i className="fas fa-check-to-slot is-size-5-desktop" />
+                                        </span>
+                                        <span>I want to vote for this suggestion</span>
+                                    </button>
+                                )}
+                            </p>
+                            <p className="control">
+                                {!declareAbstentionFetching ? (
+                                    <button
+                                        className="button is-rounded is-danger is-size-7-touch"
+                                        onClick={() => declareAbstention()}
+                                    >
+                                        <span className="icon">
+                                            <i className="fas fa-heart-crack" />
+                                        </span>
+                                        <span>Declare abstention</span>
+                                    </button>
+                                ) : (
+                                    <button className="button is-rounded is-danger is-small is-loading">
+                                        <span className="icon">
+                                            <i className="fas fa-heart-crack" />
+                                        </span>
+                                        <span>Declare abstention</span>
+                                    </button>
+                                )}
+                            </p>
+                        </div>
+                    ) : (
+                        <>
+                            <p className="label has-text-centered is-size-7-mobile mb-1">
+                                You have stated to abstain
+                            </p>
                             <button
-                                className="button is-rounded is-danger is-small"
+                                className="button is-rounded is-success is-size-7-touch"
                                 onClick={() => declareAbstention()}
                             >
                                 <span className="icon">
-                                    <i className="fas fa-heart-crack" />
+                                    <i className="fas fa-heart" />
                                 </span>
-                                <span>Declare abstention</span>
+                                <span>I no longer want to abstain</span>
                             </button>
-                        ) : (
-                            <button className="button is-rounded is-danger is-small is-loading">
-                                <span className="icon">
-                                    <i className="fas fa-heart-crack" />
-                                </span>
-                                <span>Declare abstention</span>
-                            </button>
-                        )}
-                    </div>
-                )}
+                        </>
+                    )}
+                </div>
+
+                {children}
             </div>
         </div>
     )
