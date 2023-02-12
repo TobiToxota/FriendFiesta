@@ -40,10 +40,6 @@ const NightOutVotingParentComponent = ({ nightOut, refreshNightOut, userData, to
                         <VotesInfoComponent
                             nightOut={nightOut}
                             participantInfos={participantInfos}
-                            loaded={loaded}
-                            token={token}
-                            refreshNightOut={refreshNightOut}
-                            getParticipantInfos={getParticipantInfos}
                         />
                         <VotingInfoComponent />
                     </div>

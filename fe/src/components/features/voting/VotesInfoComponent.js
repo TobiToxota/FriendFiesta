@@ -4,12 +4,7 @@ import { getSuggestionFromNightOut } from '../../../utils/nightOutVotingUtils'
 const VotesInfoComponent = ({
     nightOut,
     participantInfos,
-    loaded,
-    refreshNightOut,
-    getParticipantInfos,
-    token,
 }) => {
-    if (loaded) {
         return (
             <div className="has-text-centered mt-3">
                 <p className="label is-size-6 is-size-7-mobile mb-0">
@@ -32,7 +27,6 @@ const VotesInfoComponent = ({
                 )}
             </div>
         )
-    } else return null
 }
 
 export default VotesInfoComponent

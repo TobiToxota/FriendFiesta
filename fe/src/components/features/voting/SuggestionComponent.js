@@ -1,6 +1,6 @@
 // local imports
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
-import { useDeclareAbstention } from '../../../hooks/api/votingAPI'
+import { useDeclareAbstention, useRemoveAbstention } from '../../../hooks/api/votingAPI'
 import EntryViewHeaderComponent from './EntryViewHeaderComponent'
 import EntryViewComponent from './EntryViewComponent'
 import { useCreateNewVote } from '../../../hooks/api/votingAPI'
@@ -25,9 +25,15 @@ const SuggestionComponent = ({
         getParticipantInfos,
         nightOut.uuid
     )
-
     // get the useDeclareAbstention hook
     const { declareAbstention, declareAbstentionFetching } = useDeclareAbstention(
+        token,
+        nightOut,
+        refreshNightOut,
+        getParticipantInfos
+    )
+    // get the useRemoveAbstention hook
+    const { removeAbstention, removeAbstentionFetching } = useRemoveAbstention(
         token,
         nightOut,
         refreshNightOut,
@@ -114,17 +120,17 @@ const SuggestionComponent = ({
                                         className="button is-success is-rounded is-size-7-touch"
                                         onClick={() => createNewVote(suggestion.id)}
                                     >
-                                        <span className="icon is-large pl-1 mr-3">
-                                            <i className="fas fa-check-to-slot is-size-5-desktop" />
+                                        <span className="icon">
+                                            <i className="fas fa-check-to-slot" />
                                         </span>
-                                        <span>I want to vote for this suggestion</span>
+                                        <span>Vote for this suggestion</span>
                                     </button>
                                 ) : (
                                     <button className="button is-success is-rounded is-size-7-touch is-loading">
-                                        <span className="icon is-large pl-1 mr-3">
-                                            <i className="fas fa-check-to-slot is-size-5-desktop" />
+                                        <span className="icon">
+                                            <i className="fas fa-check-to-slot" />
                                         </span>
-                                        <span>I want to vote for this suggestion</span>
+                                        <span>Vote for this suggestion</span>
                                     </button>
                                 )}
                             </p>
@@ -140,7 +146,7 @@ const SuggestionComponent = ({
                                         <span>Declare abstention</span>
                                     </button>
                                 ) : (
-                                    <button className="button is-rounded is-danger is-small is-loading">
+                                    <button className="button is-rounded is-danger is-small is-loading is-size-7-touch">
                                         <span className="icon">
                                             <i className="fas fa-heart-crack" />
                                         </span>
@@ -156,7 +162,7 @@ const SuggestionComponent = ({
                             </p>
                             <button
                                 className="button is-rounded is-success is-size-7-touch"
-                                onClick={() => declareAbstention()}
+                                onClick={() => removeAbstention()}
                             >
                                 <span className="icon">
                                     <i className="fas fa-heart" />

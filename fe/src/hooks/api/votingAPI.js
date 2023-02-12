@@ -71,4 +71,41 @@ const useDeclareAbstention = (token, nightOut, refreshNightOut, getParticipantIn
     return { declareAbstention, declareAbstentionFetching }
 }
 
-export { useCreateNewVote, useDeclareAbstention }
+/** This custom hook declares that a user declares abstention */
+const useRemoveAbstention = (token, nightOut, refreshNightOut, getParticipantInfos) => {
+    const [removeAbstentionFetching, setRemoveAbstentionFetching] = useState(false)
+
+    const removeAbstention = async () => {
+        setRemoveAbstentionFetching(true)
+
+        let response = await fetch(
+            process.env.REACT_APP_API_URL + 'suggestion/suggestionVote/abstention/',
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    nightOut: nightOut.uuid,
+                }),
+            }
+        )
+        if (response.status === 201) {
+            toast.success('You removed your abstention.')
+            refreshNightOut(nightOut.uuid)
+            getParticipantInfos(nightOut.uuid)
+            setRemoveAbstentionFetching(false)
+        } else if (response.status === 400) {
+            toast.error('You already declared your abstention.')
+            setRemoveAbstentionFetching(false)
+        } else {
+            toast.error('Something went wrong.')
+            setRemoveAbstentionFetching(false)
+        }
+    }
+
+    return { removeAbstention, removeAbstentionFetching }
+}
+
+export { useCreateNewVote, useDeclareAbstention, useRemoveAbstention }
