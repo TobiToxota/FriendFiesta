@@ -112,50 +112,51 @@ const SuggestionComponent = ({
 
                 <div className="container has-text-centered">
                     {!participantInfos.votingAbstention &&
-                    participantInfos.votedForSuggestion_id !== suggestion.id ? (
-                        <div className="field has-addons has-addons-centered fade-in">
-                            <p className="control">
-                                {!newVoteFetching ? (
-                                    <button
-                                        className="button is-success is-rounded is-size-7-touch"
-                                        onClick={() => createNewVote(suggestion.id)}
-                                    >
-                                        <span className="icon">
-                                            <i className="fas fa-check-to-slot" />
-                                        </span>
-                                        <span>Vote for this suggestion</span>
-                                    </button>
-                                ) : (
-                                    <button className="button is-success is-rounded is-size-7-touch is-loading">
-                                        <span className="icon">
-                                            <i className="fas fa-check-to-slot" />
-                                        </span>
-                                        <span>Vote for this suggestion</span>
-                                    </button>
-                                )}
-                            </p>
-                            <p className="control">
-                                {!declareAbstentionFetching ? (
-                                    <button
-                                        className="button is-rounded is-danger is-size-7-touch"
-                                        onClick={() => declareAbstention()}
-                                    >
-                                        <span className="icon">
-                                            <i className="fas fa-heart-crack" />
-                                        </span>
-                                        <span>Declare abstention</span>
-                                    </button>
-                                ) : (
-                                    <button className="button is-rounded is-danger is-small is-loading is-size-7-touch">
-                                        <span className="icon">
-                                            <i className="fas fa-heart-crack" />
-                                        </span>
-                                        <span>Declare abstention</span>
-                                    </button>
-                                )}
-                            </p>
-                        </div>
-                    ) : (
+                        participantInfos.votedForSuggestion_id !== suggestion.id && (
+                            <div className="field has-addons has-addons-centered fade-in">
+                                <p className="control">
+                                    {!newVoteFetching ? (
+                                        <button
+                                            className="button is-success is-rounded is-size-7-touch"
+                                            onClick={() => createNewVote(suggestion.id)}
+                                        >
+                                            <span className="icon">
+                                                <i className="fas fa-check-to-slot" />
+                                            </span>
+                                            <span>Vote for this suggestion</span>
+                                        </button>
+                                    ) : (
+                                        <button className="button is-success is-rounded is-size-7-touch is-loading">
+                                            <span className="icon">
+                                                <i className="fas fa-check-to-slot" />
+                                            </span>
+                                            <span>Vote for this suggestion</span>
+                                        </button>
+                                    )}
+                                </p>
+                                <p className="control">
+                                    {!declareAbstentionFetching ? (
+                                        <button
+                                            className="button is-rounded is-danger is-size-7-touch"
+                                            onClick={() => declareAbstention()}
+                                        >
+                                            <span className="icon">
+                                                <i className="fas fa-heart-crack" />
+                                            </span>
+                                            <span>Declare abstention</span>
+                                        </button>
+                                    ) : (
+                                        <button className="button is-rounded is-danger is-small is-loading is-size-7-touch">
+                                            <span className="icon">
+                                                <i className="fas fa-heart-crack" />
+                                            </span>
+                                            <span>Declare abstention</span>
+                                        </button>
+                                    )}
+                                </p>
+                            </div>
+                        )}
+                    {participantInfos.votingAbstention && (
                         <>
                             <p className="label has-text-centered is-size-7-mobile mb-1">
                                 You have stated to abstain from the voting phase.
