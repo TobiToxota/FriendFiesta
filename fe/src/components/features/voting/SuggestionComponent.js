@@ -1,5 +1,6 @@
 // local imports
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
+import { useDeclareAbstention } from '../../../hooks/api/votingAPI'
 import EntryViewHeaderComponent from './EntryViewHeaderComponent'
 import EntryViewComponent from './EntryViewComponent'
 import { useCreateNewVote } from '../../../hooks/api/votingAPI'
@@ -12,6 +13,7 @@ const SuggestionComponent = ({
     refreshNightOut,
     getParticipantInfos,
     participantInfos,
+    children
 }) => {
     // animation
     useSwipeInFromBottom(SuggestionComponent, '#suggestion-container')
@@ -24,6 +26,15 @@ const SuggestionComponent = ({
         nightOut.uuid
     )
 
+        // get the useDeclareAbstention hook
+        const { declareAbstention, declareAbstentionFetching } = useDeclareAbstention(
+            token,
+            nightOut,
+            refreshNightOut,
+            getParticipantInfos
+        )
+
+        
     return (
         <div className="container is-fluid active is-rounded" id="suggestion-container">
             <div
@@ -111,6 +122,31 @@ const SuggestionComponent = ({
                                     No problem, just cast your vote for another suggestion.
                                 </p>
                             </div>
+                        )}
+                    </div>
+                )}
+                {!participantInfos.votingAbstention && (
+                    <div className='container has-text-centered'>
+                        <p className="is-size-6 is-size-7-mobile mt-1 mb-1">
+                            Actually, you don't like one suggestion and you'd rather abstain?
+                        </p>
+                        {!declareAbstentionFetching ? (
+                            <button
+                                className="button is-rounded is-danger is-small"
+                                onClick={() => declareAbstention()}
+                            >
+                                <span className="icon">
+                                    <i className="fas fa-heart-crack" />
+                                </span>
+                                <span>Declare abstention</span>
+                            </button>
+                        ) : (
+                            <button className="button is-rounded is-danger is-small is-loading">
+                                <span className="icon">
+                                    <i className="fas fa-heart-crack" />
+                                </span>
+                                <span>Declare abstention</span>
+                            </button>
                         )}
                     </div>
                 )}
