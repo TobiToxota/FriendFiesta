@@ -609,7 +609,7 @@ class FindFinalSuggestionForFinish(APIView):
 
         # check if there are votes for the first plan suggestion
         if planSuggestions[0].votes.count() == 0:
-            return Response({'message': 'There are no votes for the first plan suggestion. You cant put this NightOut to the next phase'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'There are not enough votes for at least one plan suggestion. You cant put this Nightout to the next phase.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # check if the nightOut allready has a finafirst and finalsecondSuggestion
         if nightOutObject.finalFirstSuggestion == None:

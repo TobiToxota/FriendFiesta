@@ -128,12 +128,14 @@ const useFinishNightout = (token, nightOut, refreshNightOut) => {
                 nightOut: nightOut.uuid,
             }),
         })
+        let data = await response.json()
         if (response.status === 201) {
             toast.success('You finished the nightout.')
             setFinishNightoutFetching(false)
             refreshNightOut(nightOut.uuid)
         } else {
-            toast.error("Nightout can't be finished")
+            console.log(data.message)
+            toast.error("Nightout can't be finished. " + data.message)
             setFinishNightoutFetching(false)
         }
     }
