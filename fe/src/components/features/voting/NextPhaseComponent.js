@@ -1,7 +1,7 @@
 // package imports
 import { useState } from 'react'
 import SendReminderComponent from '../universal/SendReminderComponent'
-import { usePutNextStage } from '../../../hooks/api/nightOutAPI'
+import { useFinishNightout } from '../../../hooks/api/votingAPI'
 
 // local imports
 import StandardModalComponent from '../../common/StandardModalComponent'
@@ -9,7 +9,7 @@ import StandardModalComponent from '../../common/StandardModalComponent'
 const NextPhaseComponent = ({ nightOut, token, refreshNightOut, userData }) => {
     const [showModal, setShowModal] = useState(false)
 
-    const { putNextStage, putNextStageFetching } = usePutNextStage(token, nightOut, refreshNightOut)
+    const { finishNightout, finishNightoutFetching } = useFinishNightout(token, nightOut, refreshNightOut)
 
     const nextPhasModal = ( 
         <div className='content has-text-centered mb-2'>
@@ -22,10 +22,10 @@ const NextPhaseComponent = ({ nightOut, token, refreshNightOut, userData }) => {
                     voted and {nightOut.numberOfAbstentions} of {nightOut.participants.length} participants indicated that they will abstain.<br/>
                     Accordingly, {nightOut.numberOfVotes + nightOut.numberOfAbstentions} participants have already completed this phase.
             </p>
-            {!putNextStageFetching ? (
+            {!finishNightoutFetching ? (
                 <button
                     className="button is-primary is-rounded mt-2"
-                    onClick={() => putNextStage('finished')}
+                    onClick={() => finishNightout()}
                 >
                     <span className="icon is-small">
                         <i className="fa-solid fa-forward-step"></i>
