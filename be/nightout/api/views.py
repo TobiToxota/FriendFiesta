@@ -495,6 +495,38 @@ class CreateAndDeleteVote(APIView):
         if serializer.is_valid():
             serializer.save()
 
+            # if this vote was the last vote for this nightOut we have to finish the voting phase
+            numberOfVotes = SuggestionVote.objects.filter(
+                nightOut=nightOut).count()
+            numberOfAbstentions = Participant.objects.filter(
+                nightOut=nightOut).filter(abstention=True).count()
+
+            numberOfVotesAndAbstentions = numberOfVotes + numberOfAbstentions
+
+            if numberOfVotesAndAbstentions == nightOut.participants.count():
+
+                # calculate which planSuggestion has the highest number of votes
+                planSuggestions = nightOut.planSuggestions.order_by('votes')
+
+                nightOut.finalFirstSuggestion = planSuggestions[0]
+
+                # check if there are 2 suggestions min and both have the same number of votes
+                if len(planSuggestions) > 1 and planSuggestions[0].votes.count() == planSuggestions[1].votes.count():
+
+                    # if so add the second suggestion to the nightOutModel
+                    nightOut.finalSecondSuggestion = planSuggestions[1]
+
+                nightOut.phase = "finished"
+
+                nightOut.save()
+
+                # when everything worked we have to check if the user declared that he opts out
+                if userAsParticipant.abstention == True:
+                    userAsParticipant.abstention = False
+                    userAsParticipant.save()
+
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
             # when everything worked we have to check if the user declared that he opts out
             if userAsParticipant.abstention == True:
                 userAsParticipant.abstention = False
@@ -531,8 +563,8 @@ class DeclareAbstention(APIView):
         userAsParticipant.abstention = True
         userAsParticipant.save()
         return Response({'message': 'Abstention marked'}, status=status.HTTP_201_CREATED)
-    
-    def delete(self, request, format =None):
+
+    def delete(self, request, format=None):
         # get Nightout from the request
         nightOut = NightOutModel.objects.get(uuid=request.data['nightOut'])
 
@@ -547,7 +579,6 @@ class DeclareAbstention(APIView):
         userAsParticipant.abstention = False
         userAsParticipant.save()
         return Response({'message': 'Abstention deleted'}, status=status.HTTP_201_CREATED)
-
 
 
 @permission_classes((IsAuthenticated,))
@@ -576,10 +607,9 @@ class GetUserParticpantInfos(APIView):
         # get the state if the user created a planSuggestion
         createdSuggestion = nightOutObject.planSuggestions.filter(
             creator=participant).exists()
-        
+
         # get the state if the user declared abstention
         declaredAbstention = participant.abstention
-
 
         if participant == None:
             return Response({'Message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
