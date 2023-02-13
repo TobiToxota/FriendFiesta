@@ -9,9 +9,10 @@ import 'react-toastify/dist/ReactToastify.css'
 import { AuthProvider } from './context/AuthContext'
 import CreateNightOutPage from './pages/nightOut/CreateNightOutPage'
 import NightOutPage from './pages/nightOut/NightOutPage'
+import UserPage from './pages/accounts/UserPage'
+import NightOutListPage from './pages/nightOut/NightOutListPage'
 import Login from './pages/accounts/Login'
 import Register from './pages/accounts/Register'
-import NightOutListPage from './pages/nightOut/NightOutListPage'
 import PrivateRoute from './utils/PrivateRoute'
 
 function App() {
@@ -20,16 +21,17 @@ function App() {
             <AuthProvider>
                 <Routes>
                     <Route path="/" element={<PrivateRoute children={<CreateNightOutPage />} />} />
-                    
-                        <Route
-                            path="/nightout/:uuid"
-                            element={<PrivateRoute children={<NightOutPage />} />}
-                        />
-                    
+
+                    <Route
+                        path="/nightout/:uuid"
+                        element={<PrivateRoute children={<NightOutPage />} />}
+                    />
+
                     <Route
                         path="/nightoutlist"
                         element={<PrivateRoute children={<NightOutListPage />} />}
                     />
+                    <Route path="/user" element={<PrivateRoute children={<UserPage />} />} />
                     <Route element={<Register />} path="/register" />
                     <Route element={<Login />} path="/login" />
                 </Routes>
