@@ -497,7 +497,7 @@ class CreateAndDeleteVote(APIView):
 
             # if this vote was the last vote for this nightOut we have to finish the voting phase
             numberOfVotes = SuggestionVote.objects.filter(
-                nightOut=nightOut).count()
+                planSuggestion__nightOut=nightOut).count()
             numberOfAbstentions = Participant.objects.filter(
                 nightOut=nightOut).filter(abstention=True).count()
 
@@ -562,6 +562,39 @@ class DeclareAbstention(APIView):
 
         userAsParticipant.abstention = True
         userAsParticipant.save()
+
+        # if this vote was the last vote for this nightOut we have to finish the voting phase
+        numberOfVotes = SuggestionVote.objects.filter(
+            nightOut=nightOut).count()
+        numberOfAbstentions = Participant.objects.filter(
+            nightOut=nightOut).filter(abstention=True).count()
+
+        numberOfVotesAndAbstentions = numberOfVotes + numberOfAbstentions
+
+        if numberOfVotesAndAbstentions == nightOut.participants.count():
+
+            # calculate which planSuggestion has the highest number of votes
+            planSuggestions = nightOut.planSuggestions.order_by('votes')
+
+            nightOut.finalFirstSuggestion = planSuggestions[0]
+
+            # check if there are 2 suggestions min and both have the same number of votes
+            if len(planSuggestions) > 1 and planSuggestions[0].votes.count() == planSuggestions[1].votes.count():
+
+                # if so add the second suggestion to the nightOutModel
+                nightOut.finalSecondSuggestion = planSuggestions[1]
+
+            nightOut.phase = "finished"
+
+            nightOut.save()
+
+            # when everything worked we have to check if the user declared that he opts out
+            if userAsParticipant.abstention == True:
+                userAsParticipant.abstention = False
+                userAsParticipant.save()
+
+                return Response('message:' 'Abstention marked and Nightout pushed to next phase.', status=status.HTTP_201_CREATED)
+
         return Response({'message': 'Abstention marked'}, status=status.HTTP_201_CREATED)
 
     def delete(self, request, format=None):
