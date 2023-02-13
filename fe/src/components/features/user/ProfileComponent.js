@@ -16,15 +16,21 @@ const ProfileComponent = ({ userData, token }) => {
                 }}
                 id="nightout-container"
             >
-                <h2 className="label is-size-3 is-size-4-touch has-text-centered mb-0">
-                    Hi {userData.username}!
-                </h2>
-                    <img
-                        className="image mb-2 mx-auto"
-                        src={`https://avatars.dicebear.com/api/${userData.avatarStyle}/${userData.username}+${userData.avatarIteration}.svg`}
-                        alt=""
-                        width={'70px'}
-                    />
+                <div className="ml-5 columns is-vcentered pb-0 mb-0">
+                    <div className="column pr-1 pb-0">
+                        <h2 className="label is-size-3 is-size-4-touch mb-0 is-pulled-right">
+                            Hi {userData.username}!
+                        </h2>
+                    </div>
+                    <div className="column pl-1 pb-0">
+                        <img
+                            className="image mb-2 mx-auto is-pulled-left"
+                            src={`https://avatars.dicebear.com/api/${userData.avatarStyle}/${userData.username}+${userData.avatarIteration}.svg`}
+                            alt=""
+                            width={'50px'}
+                        />
+                    </div>
+                </div>
                 <h3 className="is-size-4 is-size-5-touch has-text-centered mb-2">
                     Here you can edit your user profile.
                 </h3>
