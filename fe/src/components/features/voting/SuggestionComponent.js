@@ -123,14 +123,14 @@ const SuggestionComponent = ({
                                             <span className="icon">
                                                 <i className="fas fa-check-to-slot" />
                                             </span>
-                                            <span>Vote for this suggestion</span>
+                                            <span>Cast vote</span>
                                         </button>
                                     ) : (
                                         <button className="button is-success is-rounded is-size-7-touch is-loading">
                                             <span className="icon">
                                                 <i className="fas fa-check-to-slot" />
                                             </span>
-                                            <span>Vote for this suggestion</span>
+                                            <span>Cast vote</span>
                                         </button>
                                     )}
                                 </p>
@@ -143,14 +143,14 @@ const SuggestionComponent = ({
                                             <span className="icon">
                                                 <i className="fas fa-heart-crack" />
                                             </span>
-                                            <span>Declare abstention</span>
+                                            <span>Abstain from voting phase</span>
                                         </button>
                                     ) : (
                                         <button className="button is-rounded is-danger is-small is-loading is-size-7-touch">
                                             <span className="icon">
                                                 <i className="fas fa-heart-crack" />
                                             </span>
-                                            <span>Declare abstention</span>
+                                            <span>Abstain from voting phase</span>
                                         </button>
                                     )}
                                 </p>

@@ -13,7 +13,7 @@ const NextPhaseComponent = ({ nightOut, token, refreshNightOut, userData }) => {
 
     const nextPhasModal = ( 
         <div className='content has-text-centered mb-2'>
-            <h3>End voting and finish Nightout</h3>
+            <h3>End voting</h3>
             <h4 className="mb-2">
                 Are you really sure that you want to end the voting Phase and want to finish this Nightout?
             </h4>

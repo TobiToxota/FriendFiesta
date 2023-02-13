@@ -105,7 +105,43 @@ const useRemoveAbstention = (token, nightOut, refreshNightOut, getParticipantInf
         }
     }
 
-    return { removeAbstention, removeAbstentionFetching }
+    return {
+        removeAbstention,
+        removeAbstentionFetching,
+    }
 }
 
-export { useCreateNewVote, useDeclareAbstention, useRemoveAbstention }
+/** This custom hook sends a request to the backend to finish the nightout */
+const useFinishNightout = (token, nightOut, refreshNightOut) => {
+    const [finishNightoutFetching, setFinishNightoutFetching] = useState(false)
+
+    const finishNightout = async () => {
+        setFinishNightoutFetching(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'finishNightOut/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightOut: nightOut.uuid,
+            }),
+        })
+        if (response.status === 201) {
+            toast.success('You finished the nightout.')
+            setFinishNightoutFetching(false)
+            refreshNightOut(nightOut.uuid)
+        } else {
+            toast.error("Nightout can't be finished")
+            setFinishNightoutFetching(false)
+        }
+    }
+
+    return {
+        finishNightout,
+        finishNightoutFetching,
+    }
+}
+
+export { useCreateNewVote, useDeclareAbstention, useRemoveAbstention, useFinishNightout }
