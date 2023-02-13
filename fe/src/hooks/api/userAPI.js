@@ -32,12 +32,12 @@ const useChangeAvatarStyle = (token, userData, getUserData) => {
                 Authorization: `token ${token}`,
             },
             body: JSON.stringify({
-                userName: userData.userName,
+                username: userData.username,
                 email: userData.email,
                 avatarStyle: style,
             }),
         })
-        if (response.status === 201) {
+        if (response.status === 200) {
             toast.success('Avatar style changed successfully!')
             getUserData()
         } else {
