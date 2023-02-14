@@ -35,7 +35,7 @@ function App() {
                     <Route element={<Register />} path="/register" />
                     <Route element={<Login />} path="/login" />
                 </Routes>
-                <ToastContainer limit={2} position="top-center" autoClose={4000} />
+                <ToastContainer limit={10} position="top-center" autoClose={3500} />
             </AuthProvider>
         </BrowserRouter>
     )

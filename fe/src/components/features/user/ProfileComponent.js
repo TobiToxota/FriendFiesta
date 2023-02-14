@@ -1,6 +1,6 @@
 // local imports
 import { useSwipeInFromBottomTwo, shakingTwo } from '../../../hooks/animations/animations'
-import { useChangeAvatarStyle } from '../../../hooks/api/userAPI'
+import { useChangeAvatarStyle, useAddAvatarIteration } from '../../../hooks/api/userAPI'
 
 // package imports
 import { useState } from 'react'
@@ -10,7 +10,13 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
     useSwipeInFromBottomTwo(ProfileComponent, '#main-container')
 
     // get the changeAvatarStyle hook
-    const { changeAvatarStyle, avatarStyles } = useChangeAvatarStyle(
+    const { changeAvatarStyle, avatarStyles, changeAvatarFetching } = useChangeAvatarStyle(
+        token,
+        userData,
+        refreshUserData
+    )
+    // get the addAvatarIteration hook
+    const { addAvatarIteration, addIterationFetching } = useAddAvatarIteration(
         token,
         userData,
         refreshUserData
@@ -48,7 +54,11 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                     <p className="control">
                         <span
                             className="is-not-clickable button is-size-7-touch"
-                            style={{ pointerEvents: 'none',  borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px'  }}
+                            style={{
+                                pointerEvents: 'none',
+                                borderTopLeftRadius: '8px',
+                                borderBottomLeftRadius: '8px',
+                            }}
                         >
                             Avatar style:
                         </span>
@@ -69,32 +79,52 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                         </span>
                     </p>
                     <p className="control">
-                        <button
-                            className="button is-link is-rounded is-size-7-touch"
-                            onClick={() => {
-                                changeAvatarStyle(style)
-                                shakingTwo('#avatar')
-                            }}
-                        >
-                            Change
-                        </button>
+                        {!changeAvatarFetching ? (
+                            <button
+                                className="button is-link is-rounded is-size-7-touch"
+                                onClick={() => {
+                                    changeAvatarStyle(style)
+                                    shakingTwo('#avatar')
+                                }}
+                            >
+                                Change
+                            </button>
+                        ) : (
+                            <button className="button is-link is-rounded is-size-7-touch is-loading">
+                                Change
+                            </button>
+                        )}
                     </p>
                 </div>
                 <div className="field has-text-centered">
                     <p className="control is-inline">
                         <span
                             className="is-not-clickable button is-size-7-touch is-light pr-0 pl-0"
-                            style={{ pointerEvents: 'none', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }}
+                            style={{
+                                pointerEvents: 'none',
+                                borderTopLeftRadius: '8px',
+                                borderBottomLeftRadius: '8px',
+                            }}
                         >
                             Get a new avatar based on current style:
                         </span>
                     </p>
                     <p className="control is-inline">
-                        <button
-                            className="button is-link is-rounded is-size-7-touch ml-2"
-                        >
-                            Get
-                        </button>
+                        {!addIterationFetching ? (
+                            <button
+                                className="button is-link is-rounded is-size-7-touch ml-2"
+                                onClick={() => {
+                                    addAvatarIteration()
+                                    shakingTwo('#avatar')
+                                }}
+                            >
+                                Get
+                            </button>
+                        ) : (
+                            <button className="button is-link is-rounded is-size-7-touch ml-2 is-loading">
+                                Get
+                            </button>
+                        )}
                     </p>
                 </div>
             </div>
