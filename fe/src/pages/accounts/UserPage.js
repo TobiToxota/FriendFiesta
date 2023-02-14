@@ -8,7 +8,7 @@ import ProfileComponent from '../../components/features/user/ProfileComponent'
 import { useContext } from 'react'
 
 const UserPage = () => {
-    const { userData, token } = useContext(AuthContext)
+    const { userData, token, getUserData } = useContext(AuthContext)
 
     if (!userData || !token) {
         return <SpinnerComponent />
@@ -16,7 +16,7 @@ const UserPage = () => {
         return (
             <>
                 <HeaderComponent />
-                <ProfileComponent userData={userData} token={token} />
+                <ProfileComponent userData={userData} token={token} getUserData={getUserData}/>
             </>
         )
     }

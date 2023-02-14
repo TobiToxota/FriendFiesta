@@ -1,7 +1,4 @@
 // package imports
-import { useState } from 'react'
-
-// package imports
 import { toast } from 'react-toastify'
 
 const useChangeAvatarStyle = (token, userData, getUserData) => {
