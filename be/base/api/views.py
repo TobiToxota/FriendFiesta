@@ -42,7 +42,7 @@ class UserView(CreateAPIView):
 
         user = User.objects.get(id=request.user.id)
         if user.username!= request.data.get("username") or user.email!= request.data.get("email"):
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'You can\'t change user data for someone else!'}, status=status.HTTP_400_BAD_REQUEST)
         
         serializer = UserSerializer(request.user, data=request.data)
         if serializer.is_valid():

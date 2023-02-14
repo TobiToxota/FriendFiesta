@@ -40,13 +40,23 @@ class MyUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    CHOICES = (('male', 'male'),
+               ('female', 'female'),
+               ('adventurer', 'adventurer'),
+               ('avataaars', 'avataaars'),
+               ('big-ears', 'big-ears'),
+               ('miniavs', 'miniavs'),
+               ('open-peeps', 'open-peeps'),
+               ('pixel-art', 'pixel-art'),
+               ('personas', 'personas'))
+
     username = models.CharField(max_length=40, unique=True)
     name = models.CharField(max_length=40, blank=True)
     email = models.EmailField(max_length=40, unique=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
     avatarStyle = models.CharField(
-        max_length=40, blank=True, default="pixel-art")
+        max_length=40, blank=True, default="pixel-art", choices=CHOICES)
     avatarIteration = models.IntegerField(default=0)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
