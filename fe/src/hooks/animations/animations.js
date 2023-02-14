@@ -113,6 +113,15 @@ const shaking = (target) => {
   })
 }
 
+/* This function lets an target shake */
+const shakingTwo = (target) => {
+  anime({
+    targets: target,
+    rotate: [0, -5, 5, -5, 5, 0],
+    duration: 300,
+  })
+}
+
 /* this function aniamtes a button */
 const buttonPress = (target) => {
   anime({
@@ -154,6 +163,7 @@ export {
   swipeAwayToBottom,
   useFading,
   shaking,
+  shakingTwo,
   buttonPress,
   swipeAwaytoRight
 };

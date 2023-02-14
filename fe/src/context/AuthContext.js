@@ -46,6 +46,24 @@ export const AuthProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, token])
 
+  // get new userData
+  let refreshUserData = () => {
+    getUserData(token).then(data => {
+      if (Object.keys(data.length > 1)) {
+        setUserData(data)
+        if (loading) {
+          setLoading(false)
+        }
+      } else {
+        setMessage(data['message'])
+        logout();
+        if (loading) {
+          setLoading(false)
+        }
+      }
+    })
+  }
+
   // Log a user in
   let LoginUser = async (e) => {
     e.preventDefault();
@@ -97,6 +115,7 @@ export const AuthProvider = ({ children }) => {
     message: message,
     setMessage: setMessage,
     getUserData: getUserData,
+    refreshUserData: refreshUserData
   };
 
   // return the Authcontext with the contextData and the children

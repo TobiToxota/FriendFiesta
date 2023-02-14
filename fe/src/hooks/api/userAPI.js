@@ -1,7 +1,7 @@
 // package imports
 import { toast } from 'react-toastify'
 
-const useChangeAvatarStyle = (token, userData, getUserData) => {
+const useChangeAvatarStyle = (token, userData, refreshUserData) => {
     /** All avatar styles from dicebear */
     const avatarStyles = [
         'male',
@@ -36,7 +36,7 @@ const useChangeAvatarStyle = (token, userData, getUserData) => {
         })
         if (response.status === 200) {
             toast.success('Avatar style changed successfully!')
-            getUserData()
+            refreshUserData(token)
         } else {
             toast.error('Something went wrong!')
         }
