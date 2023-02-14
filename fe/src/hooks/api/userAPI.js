@@ -1,5 +1,6 @@
 // package imports
 import { toast } from 'react-toastify'
+import { useState } from 'react'
 
 const useChangeAvatarStyle = (token, userData, refreshUserData) => {
     /** All avatar styles from dicebear */
@@ -44,5 +45,26 @@ const useChangeAvatarStyle = (token, userData, refreshUserData) => {
 
     return { changeAvatarStyle, avatarStyles }
 }
+
+// const useAddAvatarIteration = (token, userData, refreshUserData) => {
+//     const [addIterationFetching, setAddIterationFetching] = useState(false)
+
+//     const addAvatarIteration = async () => {
+//         setAddIterationFetching(true)
+
+//         let response = await fetch(process.env.REACT_APP_API_URL + 'user/', {
+//             method: 'PUT',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 Authorization: `token ${token}`,
+//             },
+//             body: JSON.stringify({
+//                 username: userData.username,
+//                 email: userData.email,
+//                 avatarIteration: 
+//             }),
+//             )
+
+// }
 
 export { useChangeAvatarStyle } 

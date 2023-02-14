@@ -83,7 +83,7 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                 <div className="field has-text-centered">
                     <p className="control is-inline">
                         <span
-                            className="is-not-clickable button is-size-7-touch is-light"
+                            className="is-not-clickable button is-size-7-touch is-light pr-0 pl-0"
                             style={{ pointerEvents: 'none', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }}
                         >
                             Get a new avatar based on current style:
@@ -91,7 +91,7 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                     </p>
                     <p className="control is-inline">
                         <button
-                            className="button is-link is-rounded is-size-7-touch"
+                            className="button is-link is-rounded is-size-7-touch ml-2"
                         >
                             Get
                         </button>

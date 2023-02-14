@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import CreateAPIView
 from .serializer import RegisterSerializer, UserSerializer, LoginSerializer
 from rest_framework import status
+from ..models import User
 
 from knox.models import AuthToken
 
@@ -38,6 +39,11 @@ class UserView(CreateAPIView):
     # create a put request which changes the user data
 
     def put(self, request):
+
+        user = User.objects.get(id=request.user.id)
+        if user.username!= request.data.get("username") or user.email!= request.data.get("email"):
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
         serializer = UserSerializer(request.user, data=request.data)
         if serializer.is_valid():
             serializer.save()
