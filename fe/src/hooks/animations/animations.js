@@ -153,6 +153,24 @@ const swipeAwaytoRight = (target) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
 };
 
+const useGratulateOne = (component, target) => {
+  useLayoutEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.9.3/tsparticles.confetti.bundle.min.js"
+    script.async = true;
+    document.body.appendChild(script);
+
+    anime({
+      targets: target,
+      opacity: [0, 1],
+      translateY: [-900, 0],
+      delay: 100,
+      duration: 300,
+      easing: 'easeOutQuint'
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [component]);
+}
 
 export {
   useSwipeInFromLeft,
@@ -165,5 +183,6 @@ export {
   shaking,
   shakingTwo,
   buttonPress,
-  swipeAwaytoRight
+  swipeAwaytoRight,
+  useGratulateOne
 };
