@@ -1,4 +1,5 @@
 // local imports
+import ModalCardComponent from '../../common/ModalCardComponent'
 import { useSwipeInFromBottomTwo, shakingTwo } from '../../../hooks/animations/animations'
 import { useChangeAvatarStyle, useAddAvatarIteration } from '../../../hooks/api/userAPI'
 
@@ -23,6 +24,8 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
     )
     // get a state for style
     const [style, setStyle] = useState(userData.avatarStyle)
+    // get a state for modal
+    const [showModal, setShowModal] = useState(false)
 
     return (
         <div className="container is-fluid active is-rounded" id="main-container">
@@ -75,7 +78,8 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                         />
                     </p>
                     <p className="control">
-                        <button className="button is-link is-rounded is-size-7-touch">
+                        <button className="button is-link is-rounded is-size-7-touch"
+                        onClick={() => setShowModal(true)}>
                             Change
                         </button>
                     </p>
@@ -157,8 +161,12 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                         )}
                     </p>
                 </div>
-                <p className='has-text-centered is-size-7 is-family-code mb-0 mt-5 has-text-primary-dark'>Avatars provided by <a href='https://dicebear.com/how-to-use/http-api'>dicebear api</a></p>
+                <p className="has-text-centered is-size-7 is-family-code mb-0 mt-5 has-text-primary-dark">
+                    Avatars provided by{' '}
+                    <a href="https://dicebear.com/how-to-use/http-api">dicebear api</a>
+                </p>
             </div>
+            <ModalCardComponent showModal={showModal} setShowModal={setShowModal} title={'Edit your username'}/>
         </div>
     )
 }

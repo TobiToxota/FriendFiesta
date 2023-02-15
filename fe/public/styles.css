@@ -17,10 +17,22 @@ body,
   src: url("SquarePeg-Regular.ttf") format("truetype");
 }
 
+/* get the dancing-script fontface*/
+@font-face {
+  font-family: "dancing-script";
+  src: url("DancingScript-Regular.ttf") format("truetype");
+}
+
 /* squarepeg font class*/
 .squarepeg {
   font-family: "Square Peg" !important;
   font-size: 60px !important;
+}
+
+.dancing-script-header {
+  font-family: 'dancing-script' !important;
+  color: white;
+  font-size: 28px;
 }
 
 .squarepeg-title {
@@ -29,6 +41,14 @@ body,
   font-weight: 400 !important;
   color: #205581;
 }
+
+.dancing-script-title {
+  font-family: "dancing-script" !important;
+  font-size: 60px !important;
+  font-weight: 400 !important;
+  color: #205581;
+}
+
 
 .squarepeg-onlyfont {
   font-family: "Square Peg" !important;
