@@ -9,7 +9,7 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
     // animation
     useSwipeInFromBottomTwo(ProfileComponent, '#main-container')
 
-    // get the changeAvatarStyle hook
+    // get the changeAvatarStyle hook1
     const { changeAvatarStyle, avatarStyles, changeAvatarFetching } = useChangeAvatarStyle(
         token,
         userData,
