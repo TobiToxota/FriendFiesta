@@ -78,7 +78,7 @@ const useAddAvatarIteration = (token, userData, refreshUserData) => {
             }),
         })
         if (response.status === 200) {
-            toast.success('New avatar created, based on your style!', {autoClose: 400})
+            toast.success('New avatar created, based on your selected style!', {autoClose: 400})
             setAddIterationFetching(false)
             refreshUserData(token)
         } else {

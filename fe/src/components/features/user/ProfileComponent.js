@@ -50,7 +50,37 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                 <h3 className="is-size-4 is-size-5-touch has-text-centered mb-4">
                     Here you can edit your user profile.
                 </h3>
-                <div className="field has-addons has-addons-centered">
+                <div className="field has-addons has-addons-centered mb-4">
+                    <p className="control">
+                        <span
+                            className="is-not-clickable button is-size-7-touch is-light"
+                            style={{
+                                pointerEvents: 'none',
+                                borderTopLeftRadius: '8px',
+                                borderBottomLeftRadius: '8px',
+                            }}
+                        >
+                            Change Username:
+                        </span>
+                    </p>
+                    <p className="control">
+                        <input
+                            className="input is-size-7-touch has-text-centered"
+                            type="text"
+                            defaultValue={userData.username}
+                            style={{
+                                borderTopLeftRadius: '8px',
+                                borderBottomLeftRadius: '8px',
+                            }}
+                        />
+                    </p>
+                    <p className="control">
+                        <button className="button is-link is-rounded is-size-7-touch">
+                            Change
+                        </button>
+                    </p>
+                </div>
+                <div className="field has-addons has-addons-centered mb-4">
                     <p className="control">
                         <span
                             className="is-not-clickable button is-size-7-touch"
