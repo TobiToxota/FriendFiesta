@@ -2,6 +2,7 @@
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 
+/** this custom hook fetches the backend to change the avatarStyle */
 const useChangeAvatarStyle = (token, userData, refreshUserData) => {
     const [changeAvatarFetching, setChangeAvatarFetching] = useState(false)
 
@@ -59,6 +60,7 @@ const useChangeAvatarStyle = (token, userData, refreshUserData) => {
     return { changeAvatarStyle, avatarStyles, changeAvatarFetching }
 }
 
+/** this custom hook fetches the backend to add a avatar Iteration */
 const useAddAvatarIteration = (token, userData, refreshUserData) => {
     const [addIterationFetching, setAddIterationFetching] = useState(false)
 
@@ -78,7 +80,7 @@ const useAddAvatarIteration = (token, userData, refreshUserData) => {
             }),
         })
         if (response.status === 200) {
-            toast.success('New avatar created, based on your selected style!', {autoClose: 400})
+            toast.success('New avatar created, based on your selected style!', { autoClose: 400 })
             setAddIterationFetching(false)
             refreshUserData(token)
         } else {
@@ -90,4 +92,35 @@ const useAddAvatarIteration = (token, userData, refreshUserData) => {
     return { addAvatarIteration, addIterationFetching }
 }
 
-export { useChangeAvatarStyle, useAddAvatarIteration }
+/** this custom hook fetches the backend to change the username of the user */
+const useChangeUserName = (token, userData, refreshUserData) => {
+    const [changeUserNameFetching, setChangeUserNameFetching] = useState(false)
+
+    const changeUserName = async () => {
+        setChangeUserNameFetching(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'user/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                username: userData.username,
+                email: userData.email,
+            }),
+        })
+        if (response.status === 200) {
+            toast.success('Username changed successfully!')
+            setChangeUserNameFetching(false)
+            refreshUserData(token)
+        } else {
+            toast.error('Something went wrong!')
+            setChangeUserNameFetching(false)
+        }
+    }
+
+    return { changeUserName, changeUserNameFetching }
+}
+
+export { useChangeAvatarStyle, useAddAvatarIteration, useChangeUserName }

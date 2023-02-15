@@ -1,5 +1,6 @@
 // local imports
 import ModalCardComponent from '../../common/ModalCardComponent'
+import ChangeUserNameModal from './ChangeUserNameModal'
 import { useSwipeInFromBottomTwo, shakingTwo } from '../../../hooks/animations/animations'
 import { useChangeAvatarStyle, useAddAvatarIteration } from '../../../hooks/api/userAPI'
 
@@ -22,10 +23,13 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
         userData,
         refreshUserData
     )
+    
     // get a state for style
     const [style, setStyle] = useState(userData.avatarStyle)
     // get a state for modal
     const [showModal, setShowModal] = useState(false)
+    // get a state for newUserName
+    const [newUserName, setNewUserName] = useState(userData.userName)
 
     return (
         <div className="container is-fluid active is-rounded" id="main-container">
@@ -71,6 +75,7 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                             className="input is-size-7-touch has-text-centered"
                             type="text"
                             defaultValue={userData.username}
+                            onChange={(e) => setNewUserName(e.target.value)}
                             style={{
                                 borderTopLeftRadius: '8px',
                                 borderBottomLeftRadius: '8px',
@@ -78,8 +83,10 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                         />
                     </p>
                     <p className="control">
-                        <button className="button is-link is-rounded is-size-7-touch"
-                        onClick={() => setShowModal(true)}>
+                        <button
+                            className="button is-link is-rounded is-size-7-touch"
+                            onClick={() => setShowModal(true)}
+                        >
                             Change
                         </button>
                     </p>
@@ -166,7 +173,17 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                     <a href="https://dicebear.com/how-to-use/http-api">dicebear api</a>
                 </p>
             </div>
-            <ModalCardComponent showModal={showModal} setShowModal={setShowModal} title={'Edit your username'}/>
+            <ModalCardComponent
+                showModal={showModal}
+                setShowModal={setShowModal}
+                title={'Edit your username'}
+                children={
+                    <ChangeUserNameModal
+                        oldUserName={userData.username}
+                        newUserName={newUserName}
+                    />
+                }
+            />
         </div>
     )
 }
