@@ -157,6 +157,7 @@ const ProfileComponent = ({ userData, token, refreshUserData }) => {
                         )}
                     </p>
                 </div>
+                <p className='has-text-centered is-size-7 is-family-code mb-0 mt-5 has-text-primary-dark'>Avatars provided by <a href='https://dicebear.com/how-to-use/http-api'>dicebear api</a></p>
             </div>
         </div>
     )
