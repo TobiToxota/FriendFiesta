@@ -39,7 +39,7 @@ const HeaderComponent = () => {
         >
             <div className="navbar-brand">
                 <a className="navbar-item" href="/">
-                   <p className='dancing-script-header'>Friendfiesta</p>
+                   <p className='dancing-script-header'>FriendFiesta</p>
                 </a>
                 {hamburger && (
                     <div className="is-pulled-right fade-in">

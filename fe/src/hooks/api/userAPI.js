@@ -92,35 +92,4 @@ const useAddAvatarIteration = (token, userData, refreshUserData) => {
     return { addAvatarIteration, addIterationFetching }
 }
 
-/** this custom hook fetches the backend to change the username of the user */
-const useChangeUserName = (token, userData, refreshUserData) => {
-    const [changeUserNameFetching, setChangeUserNameFetching] = useState(false)
-
-    const changeUserName = async () => {
-        setChangeUserNameFetching(true)
-
-        let response = await fetch(process.env.REACT_APP_API_URL + 'user/', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `token ${token}`,
-            },
-            body: JSON.stringify({
-                username: userData.username,
-                email: userData.email,
-            }),
-        })
-        if (response.status === 200) {
-            toast.success('Username changed successfully!')
-            setChangeUserNameFetching(false)
-            refreshUserData(token)
-        } else {
-            toast.error('Something went wrong!')
-            setChangeUserNameFetching(false)
-        }
-    }
-
-    return { changeUserName, changeUserNameFetching }
-}
-
-export { useChangeAvatarStyle, useAddAvatarIteration, useChangeUserName }
+export { useChangeAvatarStyle, useAddAvatarIteration }
