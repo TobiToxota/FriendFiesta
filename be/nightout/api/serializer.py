@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, PlanEntry, SuggestionVote
 from base.api.serializer import UserSerializer
+from django.db.models import Count
 
 
 class ParticipantSerializer(serializers.ModelSerializer):
@@ -75,10 +76,19 @@ class PlanSuggestionSerializer(serializers.ModelSerializer):
     planEntries = EntrySuggestionSerializer(many=True, read_only=True)
     votes = SuggestionVoteSerializer(many=True, read_only=True)
     creator = ParticipantSerializer(read_only=True)
+    numberOfVotes = serializers.SerializerMethodField()
 
     class Meta:
         model = PlanSuggestion
         fields = '__all__'
+
+    def get_numberOfVotes(self, obj):
+        # get the count of votes for this suggestion
+        numberOfVotes = SuggestionVote.objects.filter(
+            planSuggestion=obj).count()
+
+        return numberOfVotes
+
 
     def create(self, validated_data):
         return PlanSuggestion.objects.create(**validated_data)
@@ -97,7 +107,7 @@ class PlanSuggestionSerializerCreater(serializers.ModelSerializer):
 
 class NightOutSerializer(serializers.ModelSerializer):
     suggestedDates = DateSuggestionSerializer(many=True, read_only=True)
-    planSuggestions = PlanSuggestionSerializer(many=True, read_only=True)
+    planSuggestions = serializers.SerializerMethodField()
     participants = ParticipantSerializer(many=True, read_only=True)
     participantDates = ParticipantDateSerializer(many=True, read_only=True)
     creator = UserSerializer(read_only=True)
@@ -114,6 +124,16 @@ class NightOutSerializer(serializers.ModelSerializer):
             planSuggestion__nightOut=obj).count()
         
         return numberOfVotes
+    
+    def get_planSuggestions(self, obj):
+        # get all the planSuggestions but ordered by votes
+        planSuggestions = PlanSuggestion.objects.annotate(num_votes=Count('votes')).filter(
+            nightOut=obj).order_by('-num_votes')
+        print(planSuggestions)
+        serializer = PlanSuggestionSerializer(planSuggestions, many=True)
+
+        return serializer.data
+        
 
     def get_numberOfAbstentions(self, obj):
         # get the number of participants that abstained from the voting
