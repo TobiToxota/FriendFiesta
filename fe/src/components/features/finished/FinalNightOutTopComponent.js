@@ -9,19 +9,18 @@ const FinalNightOutTopComponent = ({ nightOut, suggestion, changeSuggestion }) =
                 marginTop: '100px',
             }}
         >
-            {nightOut.planSuggestions[0].numberOfVotes !==
-            nightOut.planSuggestions[1].numberOfVotes ? (
+            {nightOut.numberOfSuggestionsWithMaxVoteCount > 1 ? (
                 <div className="has-text-centered">
                     <p className="subtitle is-4 is-size-5-touch has-text-white has-text-centered mb-3">
-                        Unfortunately, there was no majority for a suggestion. You can see the two
-                        suggestion that collected the most votes with {suggestion.numberOfVotes}{' '}
-                        votes.
+                        Unfortunately, there was no majority for a suggestion. There were{' '}
+                        {nightOut.numberOfSuggestionsWithMaxVoteCount} suggestions that together
+                        achieved the most votes with {suggestion.numberOfVotes} votes each.
                     </p>
                     <button
                         className="button is-light is-rounded"
                         onClick={() => changeSuggestion()}
                     >
-                        Show me the other suggestion
+                        Show me the other suggestions
                     </button>
                 </div>
             ) : (

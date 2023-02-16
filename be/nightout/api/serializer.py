@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from rest_framework import serializers
 from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, PlanEntry, SuggestionVote
 from base.api.serializer import UserSerializer
@@ -135,8 +136,12 @@ class NightOutSerializer(serializers.ModelSerializer):
     
     def get_numberOfSuggestionsWithMaxVoteCount(self, obj):
         # get the number of max votes
-        maxVoteCount = len(PlanSuggestion.objects.annotate(num_votes=Count('votes')).filter(
-            nightOut=obj).order_by('-num_votes').first().votes.all())
+        try: 
+            maxVoteCount = len(PlanSuggestion.objects.annotate(num_votes=Count('votes')).filter(
+                nightOut=obj).order_by('-num_votes').first().votes.all())
+        except AttributeError:
+            return None
+        
         numberOfSuggestionsWithMaxVoteCount = PlanSuggestion.objects.annotate(vote_count=Count('votes')).filter(nightOut=obj).filter(vote_count=maxVoteCount).count()
 
         return numberOfSuggestionsWithMaxVoteCount

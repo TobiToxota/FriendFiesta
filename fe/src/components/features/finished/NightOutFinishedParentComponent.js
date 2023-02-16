@@ -3,7 +3,7 @@ import GratulationComoponent from './GratulationComponent'
 import ParticlesComponent from './ParticlesComponent'
 import FinishedNightOutComponent from './FinishedNightOutComponent'
 import FinalNightOutTopComponent from './FinalNightOutTopComponent'
-import { useTwoFinalSuggestions } from '../../../hooks/utilHooks/twoFinalSuggestionsHook'
+import { useFinalSuggestionsCounter } from '../../../hooks/utilHooks/FinalSuggestionsCounterHook'
 
 // package imports
 import { useState } from 'react'
@@ -15,7 +15,7 @@ const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
         setGratulate(false)
     }, 3810)
     // get useTwoFinalSuggestions Hook
-    const {suggestionCounter, switchCounter} = useTwoFinalSuggestions(nightOut)
+    const {suggestionCounter, switchCounter} = useFinalSuggestionsCounter(nightOut)
 
     return (
         <>
