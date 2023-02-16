@@ -15,6 +15,7 @@ const FinishedNightOutComponent = ({ nightOut }) => {
                     borderRadius: 15,
                     minHeight: '400px',
                 }}
+                id="finished-night-out"
             >
                 
             </div>

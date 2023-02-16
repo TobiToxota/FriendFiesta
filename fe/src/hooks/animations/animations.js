@@ -78,6 +78,17 @@ const swipeAwayToTop = (target) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
 };
 
+/* This function lets an target (id or classname) fly in from the bottom when the component changes or gets rendered*/
+const swipeAwayAndComeBack = (target) => {
+  anime({
+    targets: target,
+    duration: 1000,
+    translateX: [0, -1400, 0],
+    easing: 'easeOutQuint'
+  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+};
+
 /* This function lets two targets (part of progress bar) animate fill in and fade in*/
 const useProgressAnimation = (percentage, targetOne, targetTwo) => {
   useEffect(() => {
@@ -196,5 +207,6 @@ export {
   shakingTwo,
   buttonPress,
   swipeAwaytoRight,
-  useGratulateOne
+  useGratulateOne,
+  swipeAwayAndComeBack
 };

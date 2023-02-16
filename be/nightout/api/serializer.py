@@ -89,7 +89,6 @@ class PlanSuggestionSerializer(serializers.ModelSerializer):
 
         return numberOfVotes
 
-
     def create(self, validated_data):
         return PlanSuggestion.objects.create(**validated_data)
 
@@ -113,6 +112,7 @@ class NightOutSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
     numberOfVotes = serializers.SerializerMethodField()
     numberOfAbstentions = serializers.SerializerMethodField()
+    numberOfSuggestionsWithMaxVoteCount = serializers.SerializerMethodField()
 
     class Meta:
         model = NightOutModel
@@ -122,9 +122,9 @@ class NightOutSerializer(serializers.ModelSerializer):
         # get the number of participants who allready give a vote
         numberOfVotes = SuggestionVote.objects.filter(
             planSuggestion__nightOut=obj).count()
-        
+
         return numberOfVotes
-    
+
     def get_planSuggestions(self, obj):
         # get all the planSuggestions but ordered by votes
         planSuggestions = PlanSuggestion.objects.annotate(num_votes=Count('votes')).filter(
@@ -132,13 +132,20 @@ class NightOutSerializer(serializers.ModelSerializer):
         serializer = PlanSuggestionSerializer(planSuggestions, many=True)
 
         return serializer.data
-        
+    
+    def get_numberOfSuggestionsWithMaxVoteCount(self, obj):
+        # get the number of max votes
+        maxVoteCount = len(PlanSuggestion.objects.annotate(num_votes=Count('votes')).filter(
+            nightOut=obj).order_by('-num_votes').first().votes.all())
+        numberOfSuggestionsWithMaxVoteCount = PlanSuggestion.objects.annotate(vote_count=Count('votes')).filter(nightOut=obj).filter(vote_count=maxVoteCount).count()
+
+        return numberOfSuggestionsWithMaxVoteCount
 
     def get_numberOfAbstentions(self, obj):
         # get the number of participants that abstained from the voting
         numberOfAbstains = Participant.objects.filter(
             nightOut=obj).filter(abstention=True).count()
-        
+
         return numberOfAbstains
 
     def create(self, validated_data):

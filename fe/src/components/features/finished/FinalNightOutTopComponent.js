@@ -1,6 +1,6 @@
 import { useSuggestionCounter } from '../../../hooks/utilHooks/suggestionCounterHook'
 
-const FinalNightOutTopComponent = ({ nightOut, suggestion, setSuggestion }) => {
+const FinalNightOutTopComponent = ({ nightOut, suggestion, changeSuggestion }) => {
     return (
         <div
             className="container"
@@ -9,14 +9,20 @@ const FinalNightOutTopComponent = ({ nightOut, suggestion, setSuggestion }) => {
                 marginTop: '100px',
             }}
         >
-            {nightOut.planSuggestions[0].numberOfVotes ===
+            {nightOut.planSuggestions[0].numberOfVotes !==
             nightOut.planSuggestions[1].numberOfVotes ? (
-                <div className='has-text-centered'>
-                <p className="subtitle is-4 is-size-5-touch has-text-white has-text-centered mb-3">
-                    Unfortunately, there was no majority for a suggestion. You can see the two
-                    suggestion that collected the most votes with {suggestion.numberOfVotes} votes.
-                </p>
-                <button className='button is-light is-rounded'>Show me the other suggestion</button>
+                <div className="has-text-centered">
+                    <p className="subtitle is-4 is-size-5-touch has-text-white has-text-centered mb-3">
+                        Unfortunately, there was no majority for a suggestion. You can see the two
+                        suggestion that collected the most votes with {suggestion.numberOfVotes}{' '}
+                        votes.
+                    </p>
+                    <button
+                        className="button is-light is-rounded"
+                        onClick={() => changeSuggestion()}
+                    >
+                        Show me the other suggestion
+                    </button>
                 </div>
             ) : (
                 <>

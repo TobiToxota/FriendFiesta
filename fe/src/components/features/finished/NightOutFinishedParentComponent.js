@@ -1,11 +1,12 @@
 // local imports
 import GratulationComoponent from './GratulationComponent'
 import ParticlesComponent from './ParticlesComponent'
+import FinishedNightOutComponent from './FinishedNightOutComponent'
+import FinalNightOutTopComponent from './FinalNightOutTopComponent'
+import { useTwoFinalSuggestions } from '../../../hooks/utilHooks/twoFinalSuggestionsHook'
 
 // package imports
 import { useState } from 'react'
-import FinishedNightOutComponent from './FinishedNightOutComponent'
-import FinalNightOutTopComponent from './FinalNightOutTopComponent'
 
 const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
     // get state for gratulate animation
@@ -13,9 +14,8 @@ const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
     setTimeout(() => {
         setGratulate(false)
     }, 3810)
-    
-    // state if there are two suggestions with same votes
-    const [suggestion, setSuggestion] = useState()
+    // get useTwoFinalSuggestions Hook
+    const {suggestionCounter, switchCounter} = useTwoFinalSuggestions(nightOut)
 
     return (
         <>
@@ -23,7 +23,7 @@ const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
             {!gratulate && (
                 <>
                     <FinalNightOutTopComponent
-                        suggestion={nightOut.planSuggestions[0]}
+                        suggestion={nightOut.planSuggestions[suggestionCounter]} changeSuggestion={switchCounter}
                         nightOut={nightOut}
                     />
                     <FinishedNightOutComponent nightOut={nightOut} />{' '}
