@@ -129,7 +129,6 @@ class NightOutSerializer(serializers.ModelSerializer):
         # get all the planSuggestions but ordered by votes
         planSuggestions = PlanSuggestion.objects.annotate(num_votes=Count('votes')).filter(
             nightOut=obj).order_by('-num_votes')
-        print(planSuggestions)
         serializer = PlanSuggestionSerializer(planSuggestions, many=True)
 
         return serializer.data

@@ -10,7 +10,7 @@ const FinishedNightOutComponent = ({ nightOut }) => {
             <div
                 className="notification is-light is-rounded shadow"
                 style={{
-                    marginTop: '10%',
+                    marginTop: '50px',
                     paddingRight: '1.25rem',
                     borderRadius: 15,
                     minHeight: '400px',

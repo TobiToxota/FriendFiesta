@@ -5,7 +5,7 @@ import ParticlesComponent from './ParticlesComponent'
 // package imports
 import { useState } from 'react'
 import FinishedNightOutComponent from './FinishedNightOutComponent'
-import SelectFinalPlanComponent from './SelectFinalPlanComponent'
+import FinalNightOutTopComponent from './FinalNightOutTopComponent'
 
 const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
     // get state for gratulate animation
@@ -13,16 +13,19 @@ const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
     setTimeout(() => {
         setGratulate(false)
     }, 3810)
-    // get state for the current selected plan
-    const [suggestion, setSuggestion] = useState(nightOut.planSuggestions[nightOut.finalFirstSuggestion])
+    
+    // state if there are two suggestions with same votes
+    const [suggestion, setSuggestion] = useState()
 
     return (
         <>
             {gratulate && <GratulationComoponent userData={userData} nightOut={nightOut} />}
             {!gratulate && (
                 <>
-
-                    <SelectFinalPlanComponent suggestion={suggestion} />
+                    <FinalNightOutTopComponent
+                        suggestion={nightOut.planSuggestions[0]}
+                        nightOut={nightOut}
+                    />
                     <FinishedNightOutComponent nightOut={nightOut} />{' '}
                 </>
             )}

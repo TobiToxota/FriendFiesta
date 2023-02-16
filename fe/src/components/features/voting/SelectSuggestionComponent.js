@@ -8,9 +8,7 @@ const SelectSuggestionComponent = ({
     decrementSuggestionCounter,
     suggestionCounter,
 }) => {
-
-    return (
-        
+    return (      
         <div className="container is-fluid active is-rounded mb-1" id="suggestion-container">
         <div
             className="notification is-light is-rounded shadow"
