@@ -104,12 +104,20 @@ class PlanSuggestionSerializerCreater(serializers.ModelSerializer):
     def create(self, validated_data):
         return PlanSuggestion.objects.create(**validated_data)
 
-    
+
 class NightOutSerializerList(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
 
-    class Meta: 
+    class Meta:
         model = NightOutModel
+        fields = '__all__'
+
+
+class PostSerializer(serializers.ModelSerializer):
+    creator = UserSerializer(read_only=True)
+
+    class Meta:
+        model = NotificationModel
         fields = '__all__'
 
 
@@ -141,16 +149,17 @@ class NightOutSerializer(serializers.ModelSerializer):
         serializer = PlanSuggestionSerializer(planSuggestions, many=True)
 
         return serializer.data
-    
+
     def get_numberOfSuggestionsWithMaxVoteCount(self, obj):
         # get the number of max votes
-        try: 
+        try:
             maxVoteCount = len(PlanSuggestion.objects.annotate(num_votes=Count('votes')).filter(
                 nightOut=obj).order_by('-num_votes').first().votes.all())
         except AttributeError:
             return None
-        
-        numberOfSuggestionsWithMaxVoteCount = PlanSuggestion.objects.annotate(vote_count=Count('votes')).filter(nightOut=obj).filter(vote_count=maxVoteCount).count()
+
+        numberOfSuggestionsWithMaxVoteCount = PlanSuggestion.objects.annotate(
+            vote_count=Count('votes')).filter(nightOut=obj).filter(vote_count=maxVoteCount).count()
 
         return numberOfSuggestionsWithMaxVoteCount
 
