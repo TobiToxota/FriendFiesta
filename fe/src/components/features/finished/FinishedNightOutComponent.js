@@ -1,7 +1,9 @@
 // local imports
 import { useSwipeInFromTop } from "../../../hooks/animations/animations"
+import NightOutTopComponent from "../universal/NightOutTopComponent"
+import FinalDateComponent from "./FinalDateComponent"
 
-const FinishedNightOutComponent = ({ nightOut }) => {
+const FinishedNightOutComponent = ({ nightOut, userData }) => {
     // animation
     useSwipeInFromTop(FinishedNightOutComponent, '#main-container')
 
@@ -13,11 +15,12 @@ const FinishedNightOutComponent = ({ nightOut }) => {
                     marginTop: '50px',
                     paddingRight: '1.25rem',
                     borderRadius: 15,
-                    minHeight: '400px',
+                    minHeight: 'auto',
                 }}
                 id="finished-night-out"
-            >
-                
+            >   
+            <NightOutTopComponent nightOut={nightOut} userData={userData} progressPercentage={100}/>
+            <FinalDateComponent finalDate={nightOut.finalDate}/>
             </div>
         </div>
     )

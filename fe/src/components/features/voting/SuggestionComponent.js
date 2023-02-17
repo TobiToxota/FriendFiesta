@@ -1,8 +1,8 @@
 // local imports
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 import { useDeclareAbstention, useRemoveAbstention } from '../../../hooks/api/votingAPI'
-import EntryViewHeaderComponent from './EntryViewHeaderComponent'
-import EntryViewComponent from './EntryViewComponent'
+import EntryViewHeaderComponent from '../universal/EntryViewHeaderComponent'
+import EntryViewComponent from '../universal/EntryViewComponent'
 import { useCreateNewVote } from '../../../hooks/api/votingAPI'
 
 const SuggestionComponent = ({

@@ -13,7 +13,7 @@ const ProgressComponent = ({percentage}) => {
         } else if (percentage === 75) {
             return (<p className="is-inline ml-2 is-size-7-touch">This Nightout is currently in the voting phase</p>)
         } else if (percentage === 100) {
-            return (<p className="is-inline ml-2 is-size-7-touch">You finished the planning of your Nightout! Enjoy it!</p>)
+            return (<p className="is-inline ml-2 is-size-7-touch">You finished the planning of your Nightout! Enjoy it! 🚀</p>)
         }
     }
 

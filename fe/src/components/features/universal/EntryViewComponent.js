@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 // local imports
 import StandardModalComponent from '../../common/StandardModalComponent'
-import EntryDetailsComponent from '../../features/planning/EntryDetailsComponent'
+import EntryDetailsComponent from '../planning/EntryDetailsComponent'
 import { makeDateBeautiful } from '../../../utils/nightOutPlanningUtils'
 
 const EntryViewComponent = ({ entry, index }) => {

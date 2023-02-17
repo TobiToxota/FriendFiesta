@@ -2,9 +2,11 @@ const EntryViewHeaderComponent = ({ suggestion }) => {
 
     return (
         <>
+            {suggestion && (
             <label className="label mb-1 is-size-5 is-size-6-mobile has-text-centered mt-3">
                 This is {suggestion.creator.user.username}'s suggestion for this Nightout:
             </label>
+            )}
             <div
                 className="is-centered columns is-1 is-vcentered is-centered has-text-centered is-multiline mt-1 is-hidden-mobile"
                 style={{ marginBottom: '0px' }}

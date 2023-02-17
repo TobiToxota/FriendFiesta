@@ -4,7 +4,7 @@ const FinalNightOutTopComponent = ({ nightOut, suggestion, changeSuggestion }) =
             className="container"
             id="main-container"
             style={{
-                marginTop: '100px',
+                marginTop: '25px',
             }}
         >
             {nightOut.numberOfSuggestionsWithMaxVoteCount > 1 ? (
@@ -23,13 +23,12 @@ const FinalNightOutTopComponent = ({ nightOut, suggestion, changeSuggestion }) =
                 </div>
             ) : (
                 <>
-                    <p className="subtitle is-3 is-size-4-touch mb-2 has-text-white has-text-centered">
-                        With {suggestion.numberOfVotes} votes, this suggestion has collected the
-                        most votes.
+                 <p className="subtitle is-3 is-size-4-touch mb-2 has-text-white has-text-centered">
+                        This is your final plan.
                     </p>
-                    <p className="subtitle is-4 is-size-5-touch has-text-white has-text-centered">
-                        🚀 Look forward to "{nightOut.title}" with your loved ones, friends or
-                        colleagues.
+                    <p className="subtitle is-4 is-size-5-touch mb-2 has-text-white has-text-centered">
+                        With {suggestion.numberOfVotes} votes, this suggestion has collected the
+                        most votes:
                     </p>
                 </>
             )}
