@@ -19,7 +19,7 @@ const EntryViewComponent = ({ entry, index }) => {
             >
                 <div className="column is-1 label pb-2 mb-0 is-size-5 is-size-6-touch" id="entry-component">
                     <p className="is-hidden-tablet is-inline"># </p>
-                    {index}
+                    {index + 1}
                 </div>
                 <div className="column is-5 label pb-3 mb-0 is-size-5 is-size-6-touch" id="entry-component">
                     {entry.name}

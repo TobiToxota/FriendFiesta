@@ -1,6 +1,7 @@
 // local imports
 import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 import EntryViewHeaderComponent from '../universal/EntryViewHeaderComponent'
+import EntryViewComponent from '../universal/EntryViewComponent'
 
 const FinalSuggestionComponent = ({ suggestion, nightOut }) => {
     // animation
@@ -18,7 +19,7 @@ const FinalSuggestionComponent = ({ suggestion, nightOut }) => {
                 }}
                 id="suggestion-container-box"
             >
-                <p className="mb-0 heading has-text-centered is-size-4 is-size-5-touch">
+                <p className="mb-0 heading has-text-centered is-size-4 is-size-5-touch label">
                     Description:
                 </p>
                 {suggestion.description && (
@@ -33,8 +34,16 @@ const FinalSuggestionComponent = ({ suggestion, nightOut }) => {
                         The creator of this suggestion hasn't added a description
                     </p>
                 )}
-                <p className="mb-0 heading has-text-centered is-size-4 is-size-5-touch mt-5">Entrys:</p>
-                <EntryViewHeaderComponent/>
+                <p className="mb-0 heading has-text-centered is-size-4 is-size-5-touch mt-5 label">
+                    Entrys:
+                </p>
+                <p className="help has-text-centered has-text-primary-dark">
+                    🙋 Just click on an entry to get more information, such as the address.
+                </p>
+                <EntryViewHeaderComponent />
+                {suggestion.planEntries.map((entry, index) => (
+                    <EntryViewComponent entry={entry} index={index} key={index} />
+                ))}
             </div>
         </div>
     )
