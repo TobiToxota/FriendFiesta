@@ -24,7 +24,7 @@ const FinalNightOutTopComponent = ({ nightOut, suggestion, changeSuggestion }) =
             ) : (
                 <>
                  <p className="subtitle is-3 is-size-4-touch mb-2 has-text-white has-text-centered">
-                        This is your final plan.
+                        This is the final plan.
                     </p>
                     <p className="subtitle is-4 is-size-5-touch mb-2 has-text-white has-text-centered">
                         With {suggestion.numberOfVotes} votes, this suggestion has collected the

@@ -23,11 +23,11 @@ const GratulationComoponent = ({ nightOut, userData }) => {
                         style={{ width: '16vh', borderRadius: '40px' }}
                     />
                 </div>
-                <p className="is-size-2 is-size-3-touch">🎉</p>
-                <p className="dancing-script-header is-size-2 is-size-4-touch">
-                    Hey {userData.username}, here is your final plan for:
+                <p className="is-size-3 is-size-3-touch">🎉</p>
+                <p className="is-size-3 is-size-4-touch has-text-white">
+                    Hey {userData.username}, here is the final plan for:
                 </p>
-                <p className="dancing-script-header" style={{ fontSize: '50px' }}>
+                <p className="dancing-script-header" style={{ fontSize: '55px' }}>
                     {nightOut.title}
                 </p>
             </div>

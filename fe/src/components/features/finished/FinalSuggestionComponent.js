@@ -3,7 +3,7 @@ import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 import EntryViewHeaderComponent from '../universal/EntryViewHeaderComponent'
 import EntryViewComponent from '../universal/EntryViewComponent'
 
-const FinalSuggestionComponent = ({ suggestion, nightOut }) => {
+const FinalSuggestionComponent = ({ suggestion }) => {
     // animation
     useSwipeInFromBottom(FinalSuggestionComponent, '#suggestion-container')
 

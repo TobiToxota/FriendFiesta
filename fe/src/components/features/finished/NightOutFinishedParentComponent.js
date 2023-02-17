@@ -31,7 +31,6 @@ const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
                     />
                     <FinalSuggestionComponent
                         suggestion={nightOut.planSuggestions[suggestionCounter]}
-                        nightOut={nightOut}
                     />
                 </>
             )}
