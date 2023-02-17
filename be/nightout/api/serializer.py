@@ -104,6 +104,14 @@ class PlanSuggestionSerializerCreater(serializers.ModelSerializer):
     def create(self, validated_data):
         return PlanSuggestion.objects.create(**validated_data)
 
+    
+class NightOutSerializerList(serializers.ModelSerializer):
+    creator = UserSerializer(read_only=True)
+
+    class Meta: 
+        model = NightOutModel
+        fields = '__all__'
+
 
 class NightOutSerializer(serializers.ModelSerializer):
     suggestedDates = DateSuggestionSerializer(many=True, read_only=True)

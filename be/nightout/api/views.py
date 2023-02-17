@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 
-from .serializer import CreateNotificationSerializer, NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer
+from .serializer import CreateNotificationSerializer, NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer, NightOutSerializerList
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When, Value
@@ -39,7 +39,7 @@ class NightOutList(APIView):
                                             When(phase="planningPhase",
                                                  then=Value(2)),
                                             When(phase="datePhase", then=Value(3))))
-        serializer = NightOutSerializer(nightouts, many=True)
+        serializer = NightOutSerializerList(nightouts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):

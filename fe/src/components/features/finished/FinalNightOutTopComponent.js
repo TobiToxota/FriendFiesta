@@ -1,5 +1,3 @@
-import { useSuggestionCounter } from '../../../hooks/utilHooks/suggestionCounterHook'
-
 const FinalNightOutTopComponent = ({ nightOut, suggestion, changeSuggestion }) => {
     return (
         <div
