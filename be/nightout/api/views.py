@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 
-from .serializer import CreateNotificationSerializer, NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, SuggestionVoteSerializer, NightOutSerializerList
+from .serializer import CreateNotificationSerializer, NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, PostSerializer, SuggestionVoteSerializer, NightOutSerializerList
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When, Value
@@ -768,3 +768,39 @@ class PostPatchNotification(APIView):
             return Response({'message': 'This notification was successfully dismissed'}, status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@permission_classes((IsAuthenticated,))
+class Post(APIView):
+    """create and delete a post"""
+    def post(self, request, format=None):
+
+        # get the Particpant from the User and NightOut
+        participant = Participant.objects.filter(
+            nightOut=request.data['nightout']).filter(user=request.user).first()
+        
+        request.data['particpant'] = participant.id
+
+        serializer = PostSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, format=None):
+
+        # check if the request sender is the creator of this post
+        post = Post.objects.get(pk=request.data['post'])
+
+        # get the participant from the request
+        participant = Participant.objects.filter(
+            nightOut=request.data['nightout']).filter(user=request.user).first()
+
+        # check if the request sender is the creator of this post
+        if post.creator == participant:
+            post.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        
+        return Response(status=status.HTTP_401_UNAUTHORIZED)

@@ -164,3 +164,6 @@ class Post(models.Model):
     content = models.CharField(max_length=300)
     createdAt = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return str(self.creator) + " - " + str(self.nightout) + " - " + str(self.content)
+

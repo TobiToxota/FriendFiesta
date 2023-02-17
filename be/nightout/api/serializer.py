@@ -114,11 +114,12 @@ class NightOutSerializerList(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    creator = UserSerializer(read_only=True)
-
     class Meta:
         model = NotificationModel
         fields = '__all__'
+
+    def create(self, validated_data):
+        return PlanSuggestion.objects.create(**validated_data)
 
 
 class NightOutSerializer(serializers.ModelSerializer):
