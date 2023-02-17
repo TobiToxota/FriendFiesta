@@ -35,7 +35,7 @@ const FinalSuggestionComponent = ({ suggestion }) => {
                     </p>
                 )}
                 <p className="mb-0 heading has-text-centered is-size-4 is-size-5-touch mt-5 label">
-                    Entrys:
+                    Timeline:
                 </p>
                 <p className="help has-text-centered has-text-primary-dark">
                     🙋 Just click on an entry to get more information, such as the address.

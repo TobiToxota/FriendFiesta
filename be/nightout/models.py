@@ -154,3 +154,13 @@ class NotificationModel(models.Model):
 
     def __str__(self):
         return str(self.owner) + " - " + str(self.nightout) + " - " + str(self.dismissed) + " - " + str(self.notificationMessage)
+    
+
+class Post(models.Model):
+    creator = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name="postsFromParticipant")
+    nightout = models.ForeignKey(NightOutModel, on_delete=models.CASCADE,
+                                 related_name="postsOnNightout")
+    content = models.CharField(max_length=300)
+    createdAt = models.DateTimeField(auto_now_add=True)
+
