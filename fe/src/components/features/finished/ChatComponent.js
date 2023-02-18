@@ -31,6 +31,11 @@ const ChatComponent = ({ userData, nightOut }) => {
                                 </p>
                             </div>
                         </div>
+                        <div className="media-right my-auto">
+                            <span className="icon is-clickable has-text-danger is-size-6 mr-4">
+                                <i className="fa-solid fa-trash-can"></i>
+                            </span>
+                        </div>
                     </article>
                 ) : (
                     <article
@@ -38,7 +43,6 @@ const ChatComponent = ({ userData, nightOut }) => {
                         style={{ maxWidth: '1000px', textAlign: 'end' }}
                         key={index}
                     >
-                        
                         <div className="media-content">
                             <div className="content">
                                 <p>
