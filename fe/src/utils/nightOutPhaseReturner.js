@@ -44,6 +44,8 @@ const nightOutPhaseReturner = (nightOut, refreshNightOut, userData, token) => {
             <NightOutFinishedParentComponent
             nightOut={nightOut}
             userData={userData}
+            token={token}
+            refreshNightOut={refreshNightOut}
             />
         )
     }

@@ -11,7 +11,7 @@ import { useFinalSuggestionsCounter } from '../../../hooks/utilHooks/FinalSugges
 // package imports
 import { useState } from 'react'
 
-const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
+const NightOutFinishedParentComponent = ({ nightOut, userData, refreshNightOut, token }) => {
     // get state for gratulate animation
     const [gratulate, setGratulate] = useState(true)
     setTimeout(() => {
@@ -33,7 +33,7 @@ const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
                     />
                     <FinalSuggestionComponent
                         suggestion={nightOut.planSuggestions[suggestionCounter]}
-                        children={<><ChatComponent/><AddToChatComponent userData={userData}/> </>}
+                        children={<><ChatComponent nightOut={nightOut} userData={userData}/><AddToChatComponent userData={userData} token={token} refreshNightOut={refreshNightOut} uuid={nightOut.uuid}/> </>}
                     />
                 </>
             )}

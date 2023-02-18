@@ -164,6 +164,9 @@ class Post(models.Model):
     content = models.CharField(max_length=300)
     createdAt = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-createdAt']
+
     def __str__(self):
-        return str(self.creator) + " - " + str(self.nightout) + " - " + str(self.content)
+        return str(self.creator.username) + " - " + str(self.nightout) + " - " + str(self.content)
 

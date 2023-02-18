@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 
-from .serializer import CreateNotificationSerializer, NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, PostSerializer, SuggestionVoteSerializer, NightOutSerializerList
+from .serializer import CreateNotificationSerializer, NightOutSerializer, NotificationSerializer, ParticipantSerializer, ParticipantDateSerializer, DateSuggestionSerializer, PlanSuggestionSerializer, EntrySuggestionSerializer, PlanSuggestionSerializerCreater, PostSerializer, SuggestionVoteSerializer, NightOutSerializerList, CreatePostSerializer
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Case, When, Value
@@ -800,9 +800,9 @@ class Post(APIView):
         participant = Participant.objects.filter(
             nightOut=request.data['nightout']).filter(user=request.user).first()
         
-        request.data['particpant'] = participant.id
+        request.data['creator'] = participant.id
 
-        serializer = PostSerializer(data=request.data)
+        serializer = CreatePostSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save()

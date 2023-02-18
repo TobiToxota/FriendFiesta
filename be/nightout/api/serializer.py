@@ -1,8 +1,9 @@
 from django.db import IntegrityError
 from rest_framework import serializers
-from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, PlanEntry, SuggestionVote
+from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, PlanEntry, SuggestionVote, Post
 from base.api.serializer import UserSerializer
 from django.db.models import Count
+from django.utils import timesince, timezone
 
 
 class ParticipantSerializer(serializers.ModelSerializer):
@@ -114,12 +115,27 @@ class NightOutSerializerList(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    creator = ParticipantSerializer(read_only=True)
+    timespan = serializers.SerializerMethodField()
+
     class Meta:
-        model = NotificationModel
+        model = Post
+        fields = '__all__'
+
+    def get_timespan(self, obj):
+        return timesince.timesince(obj.createdAt)
+    
+    def create(self, validated_data):
+        return Post.objects.create(**validated_data)
+
+class CreatePostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
         fields = '__all__'
 
     def create(self, validated_data):
-        return PlanSuggestion.objects.create(**validated_data)
+        return Post.objects.create(**validated_data)
 
 
 class NightOutSerializer(serializers.ModelSerializer):
@@ -130,6 +146,7 @@ class NightOutSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
     numberOfVotes = serializers.SerializerMethodField()
     numberOfAbstentions = serializers.SerializerMethodField()
+    postsOnNightout = PostSerializer(many=True, read_only=True)
     numberOfSuggestionsWithMaxVoteCount = serializers.SerializerMethodField()
 
     class Meta:

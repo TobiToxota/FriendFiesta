@@ -2,10 +2,13 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-const useAddChat = (refreshNightOut, token, uuid, animateNewMessage) => {
+// local imports
+
+const useAddChat = (refreshNightOut, token, uuid) => {
     const [addChatFetching, setAddChatFetching] = useState(false)
 
     const addChat = async (e) => {
+        e.preventDefault()
         setAddChatFetching(true)
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'chat/', {
@@ -15,7 +18,7 @@ const useAddChat = (refreshNightOut, token, uuid, animateNewMessage) => {
                 Authorization: `token ${token}`,
             },
             body: JSON.stringify({
-                nightOut: uuid,
+                nightout: uuid,
                 content: e.target.content.value,
             }),
         })
@@ -25,8 +28,8 @@ const useAddChat = (refreshNightOut, token, uuid, animateNewMessage) => {
             toast.success('Your Message was successfully added.', {
                 autoClose: 2000,
             })
-            refreshNightOut()
-            animateNewMessage(thisMessage.id)
+            refreshNightOut(uuid)
+            // animateNewMessage(thisMessage.id)
             setAddChatFetching(false)
         } else {
             toast.error('Something went wrong')
