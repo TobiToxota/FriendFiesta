@@ -688,6 +688,17 @@ class FindFinalSuggestionForFinish(APIView):
             # NightOut has to be put into next Phase
             nightOutObject.phase = "finished"
 
+            # create notifications for all participants that the nightout is finished
+            for participant in nightOutObject.participants.all():
+                NotificationModel.objects.create(
+                    owner=participant.user,
+                    nightout=nightOutObject,
+                    notificationMessage='nightout_finished',
+                    dismissed=False
+                )
+
+            # create notifications for all participants that the nightout is finished
+
         nightOutObject.save()
 
         serializer = serializers.serialize('json', planSuggestions)
