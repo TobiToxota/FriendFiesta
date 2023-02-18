@@ -520,6 +520,16 @@ class CreateAndDeleteVote(APIView):
 
                 nightOut.save()
 
+                # create notifications for all participants that the nightout is finished
+                for participant in nightOut.participants.all():
+                    NotificationModel.objects.create(
+                        owner=participant.user,
+                        nightout=nightOut,
+                        notificationMessage='nightout_finished',
+                        dismissed=False
+                    )
+
+
                 # when everything worked we have to check if the user declared that he opts out
                 if userAsParticipant.abstention == True:
                     userAsParticipant.abstention = False
@@ -697,13 +707,13 @@ class FindFinalSuggestionForFinish(APIView):
                     dismissed=False
                 )
 
-            # create notifications for all participants that the nightout is finished
+            nightOutObject.save()
 
-        nightOutObject.save()
+            serializer = serializers.serialize('json', planSuggestions)
 
-        serializer = serializers.serialize('json', planSuggestions)
-
-        return HttpResponse(serializer, content_type='application/json', status=status.HTTP_201_CREATED)
+            return HttpResponse(serializer, content_type='application/json', status=status.HTTP_201_CREATED)
+            
+        return Response({'message': 'Something went wrong'}, status=status.HTTP_400_)
 
 
 @permission_classes((IsAuthenticated,))
