@@ -4,6 +4,7 @@ import ParticlesComponent from './ParticlesComponent'
 import FinishedNightOutComponent from './FinishedNightOutComponent'
 import FinalNightOutTopComponent from './FinalNightOutTopComponent'
 import FinalSuggestionComponent from './FinalSuggestionComponent'
+import ChatComponent from './ChatComponent'
 import { useFinalSuggestionsCounter } from '../../../hooks/utilHooks/FinalSuggestionsCounterHook'
 
 // package imports
@@ -31,6 +32,7 @@ const NightOutFinishedParentComponent = ({ nightOut, userData }) => {
                     />
                     <FinalSuggestionComponent
                         suggestion={nightOut.planSuggestions[suggestionCounter]}
+                        children={<ChatComponent/>}
                     />
                 </>
             )}

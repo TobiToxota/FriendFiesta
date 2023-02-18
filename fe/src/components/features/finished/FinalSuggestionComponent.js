@@ -3,7 +3,7 @@ import { useSwipeInFromBottom } from '../../../hooks/animations/animations'
 import EntryViewHeaderComponent from '../universal/EntryViewHeaderComponent'
 import EntryViewComponent from '../universal/EntryViewComponent'
 
-const FinalSuggestionComponent = ({ suggestion }) => {
+const FinalSuggestionComponent = ({ suggestion, children }) => {
     // animation
     useSwipeInFromBottom(FinalSuggestionComponent, '#suggestion-container')
 
@@ -44,6 +44,7 @@ const FinalSuggestionComponent = ({ suggestion }) => {
                 {suggestion.planEntries.map((entry, index) => (
                     <EntryViewComponent entry={entry} index={index} key={index} />
                 ))}
+                {children}
             </div>
         </div>
     )
