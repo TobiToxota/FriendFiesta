@@ -287,6 +287,22 @@ body,
   border-color: #46464688;
 }
 
+/* animate new chat */
+.new-chat {
+	animation: append-animate .3s linear;
+}
+
+@keyframes append-animate {
+	from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;	
+	}
+}
+
 /* styles for datefind table */
 .datefinder-table {
   background-color: #f5f5f5 !important;

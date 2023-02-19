@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 import os
 import googlemaps
 
-from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, SuggestionVote, PlanEntry
+from nightout.models import NightOutModel, NotificationModel, Participant, ParticipantDate, DateSuggestion, PlanSuggestion, Post, SuggestionVote, PlanEntry
 
 User = get_user_model()
 
@@ -792,7 +792,7 @@ class PostPatchNotification(APIView):
     
 
 @permission_classes((IsAuthenticated,))
-class Post(APIView):
+class PostView(APIView):
     """create and delete a post"""
     def post(self, request, format=None):
 
@@ -813,7 +813,7 @@ class Post(APIView):
     def delete(self, request, format=None):
 
         # check if the request sender is the creator of this post
-        post = Post.objects.get(pk=request.data['post'])
+        post = Post.objects.get(pk=request.data['id'])
 
         # get the participant from the request
         participant = Participant.objects.filter(

@@ -2,8 +2,6 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-// local imports
-
 const useAddChat = (refreshNightOut, token, uuid) => {
     const [addChatFetching, setAddChatFetching] = useState(false)
 
@@ -29,10 +27,10 @@ const useAddChat = (refreshNightOut, token, uuid) => {
                 autoClose: 2000,
             })
             refreshNightOut(uuid)
-            // animateNewMessage(thisMessage.id)
             setAddChatFetching(false)
         } else {
             toast.error('Something went wrong')
+            setAddChatFetching(false)
         }
     }
 
@@ -40,10 +38,8 @@ const useAddChat = (refreshNightOut, token, uuid) => {
 }
 
 const useDeleteChat = (refreshNightOut, token, uuid) => {
-    const [deleteChatFetching, setDeleteChatFetching] = useState(false)
 
     const deleteChat = async (id) => {
-        setDeleteChatFetching(true)
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'chat/', {
             method: 'DELETE',
@@ -53,17 +49,19 @@ const useDeleteChat = (refreshNightOut, token, uuid) => {
             },
             body: JSON.stringify({
                 id: id,
+                nightout: uuid,
             }),
         })
-        if (response.status === 200) {
+        if (response.status === 204) {
             toast.success('Your Message was successfully deleted.', {
                 autoClose: 2000,
             })
+            refreshNightOut(uuid)
         } else {
             toast.error('Something went wrong')
         }
     }
-    return { deleteChat, deleteChatFetching }
+    return { deleteChat }
 }
 
 export { useAddChat, useDeleteChat }

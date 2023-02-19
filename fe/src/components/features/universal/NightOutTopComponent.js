@@ -34,10 +34,12 @@ const NightOutTopComponent = ({ nightOut, userData, children, progressPercentage
                     <></>
                 )}
             </div>
-            {finalDate && (
+            {finalDate ? (
                 <p className="label is-size-5 is-size-7-touch mb-0" style={{ textAlign: 'right' }}>
                     Final Date: {nightOutDateToDate(finalDate)}
                 </p>
+            ) : (
+                <div className='container' style={{height: '15px'}}></div>
             )}
             <div className="container is-inline-flex" style={{ transform: 'translateY(-8px)' }}>
                 {nightOut.phase !== 'datePhase' && (

@@ -33,7 +33,16 @@ const NightOutFinishedParentComponent = ({ nightOut, userData, refreshNightOut, 
                     />
                     <FinalSuggestionComponent
                         suggestion={nightOut.planSuggestions[suggestionCounter]}
-                        children={<><ChatComponent nightOut={nightOut} userData={userData}/><AddToChatComponent userData={userData} token={token} refreshNightOut={refreshNightOut} uuid={nightOut.uuid}/> </>}
+                        children={
+                            <>
+                                <ChatComponent
+                                    nightOut={nightOut}
+                                    userData={userData}
+                                    token={token}
+                                    refreshNightOut={refreshNightOut}
+                                />
+                            </>
+                        }
                     />
                 </>
             )}
