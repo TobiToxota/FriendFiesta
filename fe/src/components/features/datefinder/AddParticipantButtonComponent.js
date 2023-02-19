@@ -15,7 +15,7 @@ const AddParticipantButtonComponent = ({ nightOut, refreshNightOut, token }) => 
         refreshNightOut
     )
     // get the createJoinLinkHook
-    const { createJoinLink, createJoinLinkFetching } = useCreateJoinLink(
+    const { createJoinLink } = useCreateJoinLink(
         token,
         nightOut,
         refreshNightOut

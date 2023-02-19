@@ -47,7 +47,7 @@ const JoinNightOutPage = ({}) => {
                             className="subtitle mb-5 has-text-centered is-size-6-touch"
                             style={{ color: 'white' }}
                         >
-                            Thats nice, just put it into the form and join that Nightout.
+                            Thats nice, just put the password it into the form and join that Nightout.
                         </h2>
                     </div>
                     <div className="container is-flex is-vcentered is-justify-content-center">

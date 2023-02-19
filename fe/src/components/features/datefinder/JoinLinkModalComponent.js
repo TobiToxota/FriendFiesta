@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 
 // local imports
 import { shaking } from "../../../hooks/animations/animations";
-import { nightOutDateToDate } from "../../../utils/nightOutDateToDate";
 
 const JoinLinkModalComponent = ({joinLinkCreated, setJoinLinkPassword, uuid, joinLinkPassword}) => {
     const putIntoClipBoard = (link) => {
@@ -40,7 +39,7 @@ const JoinLinkModalComponent = ({joinLinkCreated, setJoinLinkPassword, uuid, joi
                 <div className="control">
                     <div className="tags has-addons is-justify-content-center">
                         <span className="tag is-size-6 is-dark">Link:</span>
-                        <a className="tag is-size-6">{'https://www.FriendFiesta.net/[...]' + '[...]' + '/join'}</a>
+                        <span className="tag is-size-6">{'https://www.FriendFiesta.net/[...][...]/join'}</span>
                         <span className="tag is-size-6 is-clickable" id='cutter' onClick={() => putIntoClipBoard('https://www.friendfiesta.net/nightout/' + uuid + '/join')} >✂️</span>
                     </div>
                 </div>

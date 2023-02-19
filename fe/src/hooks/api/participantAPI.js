@@ -3,6 +3,7 @@
 // package imports
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 /** this custom hook fetches the backend to add an user to a nightout as a participant*/
 const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
@@ -54,6 +55,41 @@ const useAddParticipantToNightOut = (token, uuid, refreshNightOut) => {
         setError,
         setSuccess,
     }
+}
+
+/** This custom hook fetches the backend to add a participant to a nightout via join link */
+const useAddParticipantToNightOutViaJoinLink = (token, uuid) => {
+    const [joinFetching, setJoinFetching] = useState(false)
+    const navigate = useNavigate()
+
+    const addParticipantDateToNightOut = async (password) => {
+        setJoinFetching(true)
+
+        let response = await fetch(process.env.REACT_APP_API_URL + 'participantjoinlink/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `token ${token}`,
+            },
+            body: JSON.stringify({
+                nightOut: uuid,
+                joinLinkPassword: password,
+            }),
+        })
+        if (response.status === 201) {
+            toast.success('You successfully joined that Nightout')
+            setJoinFetching(false)
+            setTimeout(() => {
+                navigate('/nightout/' + uuid)
+            }, 3000)
+        } else if (response.status === 409) {
+            toast.error('That password is incorrect. Try again or ask your friend.')
+        } else {
+            toast.error('Something went wrong.')
+        }
+    }
+
+    return { addParticipantDateToNightOut, joinFetching }
 }
 
 /** this custom hook fetches the backend to delete a participant on a nightout */
@@ -336,6 +372,7 @@ const useGetParticipantInfos = (token, nightOut) => {
 
 export {
     useAddParticipantToNightOut,
+    useAddParticipantToNightOutViaJoinLink,
     useAddDateSuggestionToNightOut,
     useAddParticipantDateToNightOut,
     useDeleteParticipantFromNightOut,
