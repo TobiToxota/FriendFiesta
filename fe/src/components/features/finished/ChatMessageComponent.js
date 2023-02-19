@@ -1,11 +1,8 @@
 // local imports
 import { shaking } from "../../../hooks/animations/animations"
-import { useAnimateChatMessage } from "../../../hooks/animations/animations"
 
-const ChatMessageComponent = ({ userData, message, deleteChat, index }) => {
-    // animationhook
-    
-
+const ChatMessageComponent = ({ userData, message, deleteChat, index, nightOut }) => {
+  
     return message.creator.user.username === userData.username ? (
         <article className="media mt-3 mx-auto pb-2" style={{ maxWidth: '1000px' }} key={index} id={'chat-message'}>
             <figure className="media-left my-auto">

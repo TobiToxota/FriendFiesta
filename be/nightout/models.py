@@ -26,6 +26,8 @@ class NightOutModel(models.Model):
         'PlanSuggestion', on_delete=models.CASCADE, null=True, related_name="thisNightOutFirst")
     finalSecondSuggestion = models.OneToOneField(
         'PlanSuggestion', on_delete=models.CASCADE, null=True, related_name="thisNightOutSecond")
+    joinLinkCreated = models.BooleanField(default=False)
+    joinLinkPassword = models.CharField(max_length=200, blank=True)
 
     class Meta:
         ordering = ['-createdAt']

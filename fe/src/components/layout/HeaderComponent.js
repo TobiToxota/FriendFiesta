@@ -39,7 +39,7 @@ const HeaderComponent = () => {
         >
             <div className="navbar-brand">
                 <a className="navbar-item" href="/">
-                   <p className='dancing-script-header'>FriendFiesta</p>
+                    <p className="dancing-script-header">FriendFiesta</p>
                 </a>
                 {hamburger && (
                     <div className="is-pulled-right fade-in">
@@ -194,21 +194,50 @@ const HeaderComponent = () => {
                                                                     )}
                                                                     {notification.sender ===
                                                                         null && (
-                                                                        <Link
-                                                                            to={
-                                                                                '/nightout/' +
-                                                                                notification
-                                                                                    .nightout.uuid
-                                                                            }
-                                                                        >
-                                                                            {
-                                                                                notification
-                                                                                    .nightout.title
-                                                                            }{' '}
-                                                                            {
-                                                                                notification.notificationMessage
-                                                                            }
-                                                                        </Link>
+                                                                        <>
+                                                                            <Link
+                                                                                to={
+                                                                                    '/nightout/' +
+                                                                                    notification
+                                                                                        .nightout
+                                                                                        .uuid
+                                                                                }
+                                                                            >
+                                                                                {
+                                                                                    notification
+                                                                                        .nightout
+                                                                                        .title
+                                                                                }
+                                                                                {
+                                                                                    <>
+                                                                                        .<br />
+                                                                                    </>
+                                                                                }
+                                                                                {
+                                                                                    notification.notificationMessage
+                                                                                }
+                                                                            </Link>
+                                                                            <span
+                                                                                className="icon has-text-centered is-clickable is-inline"
+                                                                                onClick={() => {
+                                                                                    patchNotification(
+                                                                                        notification.id
+                                                                                    )
+                                                                                    shaking(
+                                                                                        '#trash-can' +
+                                                                                            notification.id
+                                                                                    )
+                                                                                }}
+                                                                            >
+                                                                                <i
+                                                                                    className="fa-regular fa-trash-can"
+                                                                                    id={
+                                                                                        'trash-can' +
+                                                                                        notification.id
+                                                                                    }
+                                                                                />
+                                                                            </span>
+                                                                        </>
                                                                     )}
                                                                 </div>
                                                             )

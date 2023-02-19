@@ -194,12 +194,12 @@ const useAnimateChatMessage = (nightOut, target) => {
         anime({
             targets: target,
             delay: anime.stagger(60, {direction: 'reverse'}),
-            height: [0, 58],
-            opacity: [0.8, 1],
-            duration: 1000,
+            opacity: [0.5, 1],
+            duration: 700,
             easing: 'easeOutQuint',
             
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [nightOut, target])
 }
 
