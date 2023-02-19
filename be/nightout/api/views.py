@@ -95,6 +95,9 @@ class NightOut(APIView):
         if request.data['joinLinkCreated'] == True and request.user.id != nightOut.creator.id:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        if nightOut.joinLinkCreated == True:
+            return Response({"message": 'A join link is allready created'}, status=status.HTTP_404_NOT_FOUND)
+
         # check if a NightOut is brought by the creator to the next phase, if so put in a notification for every particpant except for the creator.
         if request.data['finalDate'] != None:
 
@@ -112,7 +115,6 @@ class NightOut(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
 
     def delete(self, request, pk, format=None):
         nightout = self.get_object(pk, request)
@@ -161,7 +163,8 @@ class AddParticipant(APIView):
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
 @permission_classes((IsAuthenticated,))
 class AddParticipantViaJoinLink(APIView):
     """sumary_line: Add a participant to a nightout via Join Link"""
@@ -171,14 +174,14 @@ class AddParticipantViaJoinLink(APIView):
         user = User.objects.get(id=request.user.id)
         nightoutObject = NightOutModel.objects.filter(
             pk=request.data['nightOut']).last()
-        
+
         # check if the participant to be added is already a participant
         if Participant.objects.filter(nightOut=request.data['nightOut'], user=user).exists():
             return Response({"message": "This User is allready a participant in this Nightout."}, status=status.HTTP_409_CONFLICT)
 
         # check if the provided join password is correct
         if request.data['joinLinkPassword'] == nightoutObject.joinLinkPassword:
-            
+
             # add the participant
             serializer = ParticipantSerializer(data=request.data)
 
@@ -188,15 +191,15 @@ class AddParticipantViaJoinLink(APIView):
                 # if the Participant is added we need to add all current datesuggestions as participantdates
                 dateSuggestions = DateSuggestion.objects.filter(
                     nightOut=request.data['nightOut'])
-                
+
                 for date in dateSuggestions:
                     ParticipantDate.objects.create(
                         participant=serializer.instance, suggestedDate=date, nightOut=nightoutObject)
-                    
+
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
+
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
         return Response({"message": "The join link password is wrong"}, status=status.HTTP_409_CONFLICT)
 
 
@@ -570,7 +573,6 @@ class CreateAndDeleteVote(APIView):
                         dismissed=False
                     )
 
-
                 # when everything worked we have to check if the user declared that he opts out
                 if userAsParticipant.abstention == True:
                     userAsParticipant.abstention = False
@@ -753,7 +755,7 @@ class FindFinalSuggestionForFinish(APIView):
             serializer = serializers.serialize('json', planSuggestions)
 
             return HttpResponse(serializer, content_type='application/json', status=status.HTTP_201_CREATED)
-            
+
         return Response({'message': 'Something went wrong'}, status=status.HTTP_400_)
 
 
@@ -830,17 +832,18 @@ class PostPatchNotification(APIView):
             return Response({'message': 'This notification was successfully dismissed'}, status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 @permission_classes((IsAuthenticated,))
 class PostView(APIView):
     """create and delete a post"""
+
     def post(self, request, format=None):
 
         # get the Particpant from the User and NightOut
         participant = Participant.objects.filter(
             nightOut=request.data['nightout']).filter(user=request.user).first()
-        
+
         request.data['creator'] = participant.id
 
         serializer = CreatePostSerializer(data=request.data)
@@ -848,9 +851,9 @@ class PostView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def delete(self, request, format=None):
 
         # check if the request sender is the creator of this post
@@ -864,5 +867,5 @@ class PostView(APIView):
         if post.creator == participant:
             post.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        
+
         return Response(status=status.HTTP_401_UNAUTHORIZED)

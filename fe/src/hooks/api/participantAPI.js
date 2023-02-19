@@ -62,7 +62,7 @@ const useAddParticipantToNightOutViaJoinLink = (token, uuid) => {
     const [joinFetching, setJoinFetching] = useState(false)
     const navigate = useNavigate()
 
-    const addParticipantDateToNightOut = async (password) => {
+    const addParticipantToNightOutViaJoinLink = async (password) => {
         setJoinFetching(true)
 
         let response = await fetch(process.env.REACT_APP_API_URL + 'participantjoinlink/', {
@@ -89,7 +89,7 @@ const useAddParticipantToNightOutViaJoinLink = (token, uuid) => {
         }
     }
 
-    return { addParticipantDateToNightOut, joinFetching }
+    return { addParticipantToNightOutViaJoinLink, joinFetching }
 }
 
 /** this custom hook fetches the backend to delete a participant on a nightout */

@@ -2,17 +2,22 @@
 import AuthContext from '../../context/AuthContext'
 import HeaderComponent from '../../components/layout/HeaderComponent'
 import { useSwipeInFromTop } from '../../hooks/animations/animations'
+import { useAddParticipantToNightOutViaJoinLink } from '../../hooks/api/participantAPI'
 
 // package imports
 import { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const JoinNightOutPage = ({}) => {
     const { userData, token } = useContext(AuthContext)
     const [password, setPassword] = useState('')
+    const { uuid } = useParams()
 
     // animation
     useSwipeInFromTop(JoinNightOutPage, '#join-nightout')
+
+    // join link hook
+    const {addParticipantToNightOutViaJoinLink , joinFetching} = useAddParticipantToNightOutViaJoinLink(token, uuid)
 
     if (userData) {
         return (
@@ -61,7 +66,8 @@ const JoinNightOutPage = ({}) => {
                                 />
                             </div>
                             <div className="control">
-                                <button className="button is-success is-rounded is-size-7-touch">
+                                <button className="button is-success is-rounded is-size-7-touch"
+                                onClick={() => addParticipantToNightOutViaJoinLink(password)}>
                                     Join that Nightout
                                 </button>
                             </div>

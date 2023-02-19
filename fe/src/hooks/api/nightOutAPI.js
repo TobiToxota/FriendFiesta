@@ -202,7 +202,10 @@ const useCreateJoinLink = (token, nightOut, refreshNightOut) => {
             )
             setCreateJoinLinkFetching(false)
             refreshNightOut(nightOut.uuid)
-        } else {
+        }  else if (response.status === 404) {
+            toast.error('Join Link allready created')
+        }
+        else {
             toast.error('Something went wrong')
             setCreateJoinLinkFetching(false)
             refreshNightOut(nightOut.uuid)

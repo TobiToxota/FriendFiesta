@@ -5,7 +5,7 @@ urlpatterns = [
     path('nightoutlist/', views.NightOutList.as_view()),
     path('nightout/<uuid:uuid>/', views.NightOut.as_view()),
     path('participant/', views.AddParticipant.as_view()),
-    path('participantjoinlink/', views.ParticipantJoinLink.as_view()),
+    path('participantjoinlink/', views.AddParticipantViaJoinLink.as_view()),
     path('participantdelete/', views.DeleteParticipant.as_view()),
     path('participantcommitdate', views.PutParticipantDatePhase.as_view()),
     path('participantcommitplanning', views.PutParticipantPlanningPhase.as_view()),
