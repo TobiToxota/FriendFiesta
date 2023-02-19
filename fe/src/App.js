@@ -14,6 +14,7 @@ import NightOutListPage from './pages/nightOut/NightOutListPage'
 import Login from './pages/accounts/Login'
 import Register from './pages/accounts/Register'
 import PrivateRoute from './utils/PrivateRoute'
+import JoinNightOutPage from './pages/nightOut/JoinNightOutPage'
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/user" element={<PrivateRoute children={<UserPage />} />} />
                     <Route element={<Register />} path="/register" />
                     <Route element={<Login />} path="/login" />
+                    <Route element={<JoinNightOutPage/>} path="/nightout/:uuid/join" />
                 </Routes>
                 <ToastContainer limit={10} position="top-center" autoClose={3500} />
             </AuthProvider>

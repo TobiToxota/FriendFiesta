@@ -4,16 +4,11 @@ import ChatMessageComponent from './ChatMessageComponent'
 import { useAnimateChatMessage } from '../../../hooks/animations/animations'
 import AddToChatComponent from './AddToChatComponent'
 
-// package imports
-import { useState } from 'react'
-
 const ChatComponent = ({ userData, nightOut, refreshNightOut, token }) => {
     // get the UseDeleteChatHook
     const { deleteChat } = useDeleteChat(refreshNightOut, token, nightOut.uuid)
 
-    
     useAnimateChatMessage(nightOut, '#chat-message')
-
 
     return (
         <div className="container">
@@ -22,8 +17,8 @@ const ChatComponent = ({ userData, nightOut, refreshNightOut, token }) => {
             </p>
             {nightOut.postsOnNightout.length === 0 && (
                 <p className="mb-0 has-text-centered is-size-6 is-size-7-touch mt-3">
-                There are no messages on this chat yet. Go and write something 🚀.
-            </p>
+                    There are no messages on this chat yet. Go and write something 🚀.
+                </p>
             )}
             {nightOut.postsOnNightout.map((post, index) => (
                 <ChatMessageComponent

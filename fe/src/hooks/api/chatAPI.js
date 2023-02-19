@@ -20,7 +20,6 @@ const useAddChat = (refreshNightOut, token, uuid) => {
                 content: e.target.content.value,
             }),
         })
-        let thisMessage = await response.json()
 
         if (response.status === 201) {
             toast.success('Your Message was successfully added.', {

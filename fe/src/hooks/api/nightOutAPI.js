@@ -191,6 +191,7 @@ const useCreateJoinLink = (token, nightOut, refreshNightOut) => {
                     title: nightOut.title,
                     joinLinkCreated: true,
                     joinLinkPassword: password,
+                    finalDate: null,
                 }),
             }
         )

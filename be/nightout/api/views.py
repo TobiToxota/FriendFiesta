@@ -161,6 +161,43 @@ class AddParticipant(APIView):
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@permission_classes((IsAuthenticated,))
+class AddParticipantViaJoinLink(APIView):
+    """sumary_line: Add a participant to a nightout via Join Link"""
+
+    def post(self, request, format=None):
+
+        user = User.objects.get(id=request.user.id)
+        nightoutObject = NightOutModel.objects.filter(
+            pk=request.data['nightOut']).last()
+        
+        # check if the participant to be added is already a participant
+        if Participant.objects.filter(nightOut=request.data['nightOut'], user=user).exists():
+            return Response({"message": "This User is allready a participant in this Nightout."}, status=status.HTTP_409_CONFLICT)
+
+        # check if the provided join password is correct
+        if request.data['joinLinkPassword'] == nightoutObject.joinLinkPassword:
+            
+            # add the participant
+            serializer = ParticipantSerializer(data=request.data)
+
+            if serializer.is_valid():
+                serializer.save(user=user, nightOut=nightoutObject)
+
+                # if the Participant is added we need to add all current datesuggestions as participantdates
+                dateSuggestions = DateSuggestion.objects.filter(
+                    nightOut=request.data['nightOut'])
+                
+                for date in dateSuggestions:
+                    ParticipantDate.objects.create(
+                        participant=serializer.instance, suggestedDate=date, nightOut=nightoutObject)
+                    
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({"message": "The join link password is wrong"}, status=status.HTTP_409_CONFLICT)
 
 
 @permission_classes((IsAuthenticated,))
