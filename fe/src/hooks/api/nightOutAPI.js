@@ -170,6 +170,50 @@ const usePutNextStage = (token, nightOut, refreshNightOut) => {
     }
 }
 
+
+/** This custom hook fetches the backend to bring the nightout to create a join link */
+const useCreateJoinLink = (token, nightOut, refreshNightOut) => {
+    const [createJoinLinkFetching, setCreateJoinLinkFetching] = useState(false)
+
+    const createJoinLink = async (password) => {
+        setCreateJoinLinkFetching(true)
+
+        let response = await fetch(
+            process.env.REACT_APP_API_URL + 'nightout/' + nightOut.uuid + '/',
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${token}`,
+                },
+                body: JSON.stringify({
+                    nightOut: nightOut.uuid,
+                    title: nightOut.title,
+                    joinLinkCreated: true,
+                    joinLinkPassword: password,
+                }),
+            }
+        )
+
+        if (response.status === 200) {
+            toast.success(
+                'The join link was successfully created.'
+            )
+            setCreateJoinLinkFetching(false)
+            refreshNightOut(nightOut.uuid)
+        } else {
+            toast.error('Something went wrong')
+            setCreateJoinLinkFetching(false)
+            refreshNightOut(nightOut.uuid)
+        }
+    }
+
+    return {
+        createJoinLink,
+        createJoinLinkFetching
+    }
+}
+
 /** This custom hook fetches the backend to set a finaldate to a nightout and bring it to the next phase */
 const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoading) => {
     const [finalDateError, setFinalDateError] = useState(null)
@@ -250,4 +294,4 @@ const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoadin
     }
 }
 
-export { useCreateNightOut, useGetNightOut, useGetNightOutList, usePutNextStage, useAddFinalDate }
+export { useCreateNightOut, useGetNightOut, useGetNightOutList, usePutNextStage, useAddFinalDate, useCreateJoinLink }

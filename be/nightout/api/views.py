@@ -91,6 +91,10 @@ class NightOut(APIView):
         nightOut = self.get_object(uuid, request)
         serializer = NightOutSerializer(nightOut, data=request.data)
 
+        # check if the creator wants to create a join link for the nightout
+        if request.data['joinLinkCreated'] == True and request.user.id != nightOut.creator.id:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         # check if a NightOut is brought by the creator to the next phase, if so put in a notification for every particpant except for the creator.
         if request.data['finalDate'] != None:
 
@@ -108,7 +112,7 @@ class NightOut(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 
     def delete(self, request, pk, format=None):
         nightout = self.get_object(pk, request)
