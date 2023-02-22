@@ -95,7 +95,7 @@ class NightOut(APIView):
         if request.data['joinLinkCreated'] == True and request.user.id != nightOut.creator.id:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        if nightOut.joinLinkCreated == True:
+        if nightOut.joinLinkCreated == True and request.data['finalDate'] == None:
             return Response({"message": 'A join link is allready created'}, status=status.HTTP_404_NOT_FOUND)
 
         # check if a NightOut is brought by the creator to the next phase, if so put in a notification for every particpant except for the creator.
