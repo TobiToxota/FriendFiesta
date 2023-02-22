@@ -147,6 +147,7 @@ const usePutNextStage = (token, nightOut, refreshNightOut) => {
                     nightOut: nightOut.uuid,
                     finalDate: nightOut.finalDate,
                     title: nightOut.title,
+                    joinLinkCreated: nightOut.joinLinkCreated,
                 }),
             }
         )
@@ -256,6 +257,7 @@ const useAddFinalDate = (token, nightout, refreshNightOut, setAddFinalDateLoadin
                     nightOut: nightout.uuid,
                     finalDate: e.target.dateselecter.value,
                     phase: 'planningPhase',
+                    joinLinkCreated: nightout.joinLinkCreated
                 }),
             }
         )
